@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35728.132 d17.12
+VisualStudioVersion = 17.12.35728.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucGolfklubb", "TucGolfklubb\TucGolfklubb.csproj", "{1A6CE136-063A-4B17-B9DE-CAAC2176F6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucGolfklubb.DataContext.SqlServer", "TucGolfklubbDataContext\TucGolfklubb.DataContext.SqlServer.csproj", "{E8F8E15F-8806-4B84-9403-8274F41515FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1A6CE136-063A-4B17-B9DE-CAAC2176F6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A6CE136-063A-4B17-B9DE-CAAC2176F6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A6CE136-063A-4B17-B9DE-CAAC2176F6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F8E15F-8806-4B84-9403-8274F41515FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F8E15F-8806-4B84-9403-8274F41515FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F8E15F-8806-4B84-9403-8274F41515FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F8E15F-8806-4B84-9403-8274F41515FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

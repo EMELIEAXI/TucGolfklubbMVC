@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
+using TucGolfklubb.DataContext.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+string? sqlServerConnection = builder.Configuration
+    .GetConnectionString("TucGolfConnection");
+if (sqlServerConnection is null)
+{
+    Console.WriteLine("SQL Server database connection string is missing!");
+}
+else
+{
+    builder.Services.AddTucGolfDatabase(sqlServerConnection);
+}
 
 var app = builder.Build();
 

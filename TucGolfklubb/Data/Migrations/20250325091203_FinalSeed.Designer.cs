@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325091203_FinalSeed")]
+    partial class FinalSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +24,6 @@ namespace TucGolfklubb.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ForumPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ForumId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PostedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForumId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ForumPosts");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -344,6 +317,45 @@ namespace TucGolfklubb.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ForumId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("PostedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ForumId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ForumPosts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Content = "Vad är den bästa golfbanan i Sverige?",
+                            ForumId = 1,
+                            PostedAt = new DateTime(2024, 3, 1, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
             modelBuilder.Entity("TucGolfklubb.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -476,23 +488,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("ForumPost", b =>
-                {
-                    b.HasOne("TucGolfklubb.Models.Forum", "Forum")
-                        .WithMany("Posts")
-                        .HasForeignKey("ForumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Forum");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -551,6 +546,23 @@ namespace TucGolfklubb.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
+                {
+                    b.HasOne("TucGolfklubb.Models.Forum", "Forum")
+                        .WithMany("Posts")
+                        .HasForeignKey("ForumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Forum");
 
                     b.Navigation("User");
                 });

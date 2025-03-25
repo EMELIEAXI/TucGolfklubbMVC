@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace TucGolfklubb.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -25,17 +24,18 @@ namespace TucGolfklubb.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<ForumPost>()
+                .HasOne(fp => fp.User)
+                .WithMany()
+                .HasForeignKey(fp => fp.UserId)
+                .IsRequired(false); // Gör relationen valfri!
+
             // Seeda kategorier
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Klubbor" },
                 new Category { Id = 2, Name = "Bollar" },
                 new Category { Id = 3, Name = "Kläder" }
             );
-
-            // Specificera datatyp för Price
-            modelBuilder.Entity<Product>()
-                .Property(p => p.Price)
-                .HasColumnType("decimal(18,2)");
 
             // Seeda produkter
             modelBuilder.Entity<Product>().HasData(
@@ -65,7 +65,7 @@ namespace TucGolfklubb.Data
                 }
             );
 
-            // Seeding för Forum
+            // Seeda forum
             modelBuilder.Entity<Forum>().HasData(
                 new Forum
                 {
@@ -75,19 +75,17 @@ namespace TucGolfklubb.Data
                 }
             );
 
-            // Seeding för ForumPost 
-            modelBuilder.Entity<ForumPost>().HasData(
-     new ForumPost
-     {
-         Id = 1,
-         ForumId = 1,
-         UserId = "system", // se till att detta är tillåtet i din modell
-         Content = "Vad är den bästa golfbanan i Sverige?",
-         PostedAt = new DateTime(2024, 01, 01, 12, 0, 0)
-     }
-            );
+            // ForumPost-seeding kommenterad till senare (kräver verkligt UserId)
+            // modelBuilder.Entity<ForumPost>().HasData(
+            //     new ForumPost
+            //     {
+            //         Id = 1,
+            //         ForumId = 1,
+            //         UserId = null,
+            //         Content = "Vad är den bästa golfbanan i Sverige?",
+            //         PostedAt = new DateTime(2024, 03, 01, 12, 0, 0)
+            //     }
+            // );
         }
-
     }
-    
 }

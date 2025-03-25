@@ -110,10 +110,7 @@ namespace TucGolfklubb.Data.Migrations
                 columns: new[] { "Id", "Description", "Title" },
                 values: new object[] { 1, "Diskussioner om allt möjligt relaterat till golf", "Allmänt om golf" });
 
-            migrationBuilder.InsertData(
-                table: "ForumPosts",
-                columns: new[] { "Id", "Content", "ForumId", "PostedAt", "UserId" },
-                values: new object[] { 1, "Vad är den bästa golfbanan i Sverige?", 1, new DateTime(2025, 3, 25, 9, 11, 57, 623, DateTimeKind.Local).AddTicks(5340), "seed-user-id" });
+          
 
             migrationBuilder.InsertData(
                 table: "Products",

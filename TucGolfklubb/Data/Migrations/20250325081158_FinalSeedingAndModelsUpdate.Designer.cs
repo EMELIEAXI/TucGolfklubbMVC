@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325081158_FinalSeedingAndModelsUpdate")]
+    partial class FinalSeedingAndModelsUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,8 +353,8 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 1,
                             Content = "Vad är den bästa golfbanan i Sverige?",
                             ForumId = 1,
-                            PostedAt = new DateTime(2024, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "system"
+                            PostedAt = new DateTime(2025, 3, 25, 9, 11, 57, 623, DateTimeKind.Local).AddTicks(5340),
+                            UserId = "seed-user-id"
                         });
                 });
 

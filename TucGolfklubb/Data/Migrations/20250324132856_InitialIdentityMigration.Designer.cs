@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324132856_InitialIdentityMigration")]
+    partial class InitialIdentityMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,134 +230,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("TucGolfklubb.Models.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("BookingDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Klubbor"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Bollar"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Kläder"
-                        });
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.Forum", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Forums");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Diskussioner om allt möjligt relaterat till golf",
-                            Title = "Allmänt om golf"
-                        });
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ForumId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("PostedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ForumId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ForumPosts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "Vad är den bästa golfbanan i Sverige?",
-                            ForumId = 1,
-                            PostedAt = new DateTime(2024, 1, 1, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "system"
-                        });
-                });
-
             modelBuilder.Entity("TucGolfklubb.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -409,9 +284,6 @@ namespace TucGolfklubb.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -425,35 +297,7 @@ namespace TucGolfklubb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "Komplett set med järnklubbor för nybörjare och proffs.",
-                            Name = "Callaway Järnset",
-                            Price = 5999.00m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            Description = "Tourklassad golfboll med maximal kontroll och känsla.",
-                            Name = "Titleist Pro V1",
-                            Price = 549.00m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 3,
-                            Description = "Andningsaktiv piké perfekt för varma golfrundor.",
-                            Name = "Puma Golf Pikétröja",
-                            Price = 399.00m
-                        });
                 });
 
             modelBuilder.Entity("TucGolfklubb.Models.Review", b =>
@@ -538,36 +382,6 @@ namespace TucGolfklubb.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TucGolfklubb.Models.Booking", b =>
-                {
-                    b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
-                {
-                    b.HasOne("TucGolfklubb.Models.Forum", "Forum")
-                        .WithMany("Posts")
-                        .HasForeignKey("ForumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Forum");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TucGolfklubb.Models.OrderItem", b =>
                 {
                     b.HasOne("TucGolfklubb.Models.Order", "Order")
@@ -587,15 +401,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("TucGolfklubb.Models.Product", b =>
-                {
-                    b.HasOne("TucGolfklubb.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId");
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("TucGolfklubb.Models.Review", b =>
                 {
                     b.HasOne("TucGolfklubb.Models.Product", "Product")
@@ -605,16 +410,6 @@ namespace TucGolfklubb.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.Category", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.Forum", b =>
-                {
-                    b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("TucGolfklubb.Models.Order", b =>

@@ -1,4 +1,5 @@
 ﻿using TucGolfklubb.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,68 +25,58 @@ namespace TucGolfklubb.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Flytta Identity-tabeller till schema "TucUserMngt"
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.ToTable("Users", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityRole>(entity =>
+            {
+                entity.ToTable("Roles", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.ToTable("UserRoles", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity =>
+            {
+                entity.ToTable("UserClaims", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
+            {
+                entity.ToTable("UserLogins", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity =>
+            {
+                entity.ToTable("RoleClaims", "TucUserMngt");
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.ToTable("UserTokens", "TucUserMngt");
+            });
+
+            // Lämna dina egna modeller i standardschemat (dbo)
             modelBuilder.Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany()
                 .HasForeignKey(fp => fp.UserId)
-                .IsRequired(false); // Gör relationen valfri!
+                .IsRequired(false);
 
-            // Seeda kategorier
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Klubbor" },
                 new Category { Id = 2, Name = "Bollar" },
                 new Category { Id = 3, Name = "Kläder" }
             );
 
-            // Seeda produkter
             modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    Id = 1,
-                    Name = "Callaway Järnset",
-                    Description = "Komplett set med järnklubbor för nybörjare och proffs.",
-                    Price = 5999.00m,
-                    CategoryId = 1
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "Titleist Pro V1",
-                    Description = "Tourklassad golfboll med maximal kontroll och känsla.",
-                    Price = 549.00m,
-                    CategoryId = 2
-                },
-                new Product
-                {
-                    Id = 3,
-                    Name = "Puma Golf Pikétröja",
-                    Description = "Andningsaktiv piké perfekt för varma golfrundor.",
-                    Price = 399.00m,
-                    CategoryId = 3
-                }
+                new Product { Id = 1, Name = "Callaway Järnset", Description = "Komplett set...", Price = 5999.00m, CategoryId = 1 },
+                new Product { Id = 2, Name = "Titleist Pro V1", Description = "Tourklassad golfboll...", Price = 549.00m, CategoryId = 2 },
+                new Product { Id = 3, Name = "Puma Golf Pikétröja", Description = "Andningsaktiv piké...", Price = 399.00m, CategoryId = 3 }
             );
 
-            // Seeda forum
             modelBuilder.Entity<Forum>().HasData(
-                new Forum
-                {
-                    Id = 1,
-                    Title = "Allmänt om golf",
-                    Description = "Diskussioner om allt möjligt relaterat till golf"
-                }
-            );
-
-            // ForumPost-seeding kommenterad till senare (kräver verkligt UserId)
-            // modelBuilder.Entity<ForumPost>().HasData(
-            //     new ForumPost
-            //     {
-            //         Id = 1,
-            //         ForumId = 1,
-            //         UserId = null,
-            //         Content = "Vad är den bästa golfbanan i Sverige?",
-            //         PostedAt = new DateTime(2024, 03, 01, 12, 0, 0)
-            //     }
-            // );
+                new Forum { Id = 1, Title = "Allmänt om golf", Description = "Diskussioner om allt möjligt relaterat till golf" }
+                    );
         }
     }
 }

@@ -1,43 +1,480 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-a {
-  color: #0077cc;
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.container {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    width: 100vw;
+    min-height:100vh;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.top-nav {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    position: fixed;
+    background-color: rgba(9, 20, 46, 0.7);
+    color: white;
+    padding: 1em;
+    width: 100%;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    .menu li {
+        margin: 0 3em;
+        position: relative;
+    }
+
+        .menu li a::after {
+            content: none;
+        }
+
+
+        .menu li:has(ul) > a::after {
+            content: "";
+            border: solid transparent;
+            border-width: 5px 5px 0 5px;
+            border-top-color: white;
+            position: absolute;
+            top: 50%;
+            right: -15px;
+            transform: translateY(-50%);
+            display: none;
+        }
+
+        .menu li:hover:has(ul) > a::after {
+            display: inline;
+        }
+
+/* Gemensam stil för alla dropdown-menyer */
+.dropdown-spela,
+.dropdown,
+.dropdown-medlem {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(9, 20, 46, 0.7);
+    list-style-type: none;
+    padding: 1px 0;
+    margin: 0;
+    width: 200px;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    /* Länkar i dropdown-menyer */
+    .dropdown-spela li,
+    .dropdown li,
+    .dropdown-medlem li {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        text-align: left;
+    }
+
+        .dropdown-spela li a,
+        .dropdown li a,
+        .dropdown-medlem li a {
+            padding: 0;
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+
+        .dropdown-medlem li a {
+            padding: 0px 0;
+        }
+
+            .dropdown-spela li a::after,
+            .dropdown li a::after,
+            .dropdown-medlem li a::after {
+                content: none;
+            }
+
+.menu li:hover .dropdown-spela,
+.menu li:hover .dropdown,
+.menu li:hover .dropdown-medlem {
+    display: block;
+    color: rgb(153, 147, 147);
 }
+/* Menyinställningar */
+.menu a {
+    display: block;
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+}
+
+    .menu a::after {
+        content: "";
+        border: solid transparent;
+        border-width: 5px 5px 0 5px;
+        border-top-color: white;
+        position: absolute;
+        top: 50%;
+        right: -15px;
+        transform: translateY(-50%);
+        display: none;
+    }
+
+.menu li a {
+    display: block;
+    color: rgb(248, 245, 245);
+    text-decoration: none;
+    padding: 0.5em;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.menu li:hover > a::after {
+    display: inline;
+}
+
+.menu li a:hover {
+    color: grey;
+}
+
+.menu li:hover > .dropdown {
+    display: block;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(9, 20, 46, 0.7);
+    list-style-type: none;
+    padding: 10px 0 0;
+    margin: 0;
+    width: 200px;
+}
+
+    .dropdown li {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
+        .dropdown li a {
+            padding: 10px;
+            text-align: left;
+            color: white;
+            text-decoration: none;
+        }
+
+
+            .dropdown li a:hover {
+                background-color: rgba(9, 20, 46, 0.7);
+            }
+
+/* Medlems dropdown */
+.dropdown-medlem {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(9, 20, 46, 0.7);
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+    width: 200px;
+}
+
+    .dropdown-medlem li {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
+        .dropdown-medlem li a {
+            padding: 10px;
+            text-align: left;
+            color: white;
+            text-decoration: none;
+        }
+
+            .dropdown-medlem li a:hover {
+                background-color: rgba(9, 20, 46, 0.7);
+            }
+
+
+.menu li:hover .dropdown-medlem {
+    display: block;
+}
+
+/*Spela dropdown*/
+.dropdown-spela {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgba(9, 20, 46, 0.7);
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+    width: 200px;
+}
+
+    .dropdown-spela li {
+        margin-bottom: 30px;
+        margin-top: 20px;
+    }
+
+        .dropdown-spela li a {
+            padding: 10px;
+            text-align: left;
+            color: white;
+            text-decoration: none;
+        }
+
+            .dropdown-spela li a:hover {
+                background-color: rgba(9, 20, 46, 0.7);
+            }
+
+
+.menu li:hover .dropdown-spela {
+    display: block;
+}
+
+/*Hamburgermeny*/
+
+.hamburger-menu {
+    display: none;
+    position: relative;
+    z-index: 1001;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.hamburger-icon {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    color: white;
+    background-color: rgba(9, 20, 46, 0.7);
+    border: none;
+    display: block;
+}
+
+/* Dropdown-listan för hamburgermenyn */
+.hamburger-dropdown {
+    display: none;
+    background-color: rgba(9, 20, 46, 0.9);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+}
+
+    .hamburger-dropdown li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+    }
+
+        .hamburger-dropdown li a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+            .hamburger-dropdown li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+/*ADINA - Visa hamburgermenyn och dölj den horisontella menyn i mobilvy */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .top-nav .menu {
+        display: none;
+    }
+
+    .hamburger-icon {
+        font-size: 30px;
+        cursor: pointer;
+        padding: 10px;
+        color: white;
+        background-color: transparent;
+        border: none;
+        display: block;
+        transition: background-color 0.3s ease;
+    }
+
+    .hamburger-dropdown {
+        width: 50vw;
+    }
+
+        .hamburger-dropdown li {
+            position: relative;
+        }
+
+            .hamburger-dropdown li a {
+                width: 100%;
+            }
+
+
+        /*Submeny*/
+
+        .hamburger-dropdown .dropdown-spela {
+            width: 250px;
+        }
+
+        .hamburger-dropdown .dropdown li,
+        .dropdown-spela li,
+        .dropdown-medlem li {
+            margin: 0;
+            padding: 0;
+        }
+
+            .dropdown-spela li a,
+            .dropdown li a,
+            .dropdown-medlem li a {
+                padding: 10px 15px;
+                color: white;
+                background-color: rgba(9, 20, 46, 0.9);
+                text-decoration: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+                .dropdown-spela li a:hover,
+                .dropdown li a:hover,
+                .dropdown-medlem li a:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+
+
+        .hamburger-dropdown .dropdown,
+        .dropdown-spela,
+        .dropdown-medlem {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: rgba(9, 20, 46, 0.9);
+            padding: 0;
+            border: none;
+            list-style: none;
+            width: 200px;
+        }
+
+
+        .hamburger-dropdown li:hover > .dropdown,
+        .hamburger-dropdown li:hover > .dropdown-spela,
+        .hamburger-dropdown li:hover > .dropdown-medlem {
+            display: block;
+        }
+
+
+        .hamburger-dropdown li a,
+        .hamburger-dropdown .dropdown li a,
+        .dropdown-spela li a,
+        .dropdown-medlem li a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            background-color: rgba(9, 20, 46, 0.9);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            text-align: left;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+
+            .hamburger-dropdown li a:hover,
+            .hamburger-dropdown .dropdown li a:hover,
+            .dropdown-spela li a:hover,
+            .dropdown-medlem li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+
+    .menu-toggle:checked + .hamburger-icon {
+        background-color: rgba(9, 20, 46, 0.7);
+    }
+
+        .menu-toggle:checked + .hamburger-icon + .hamburger-dropdown {
+            display: block;
+        }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1300px) {
+    .top-nav {
+        padding: 0.5em;
+    }
+
+    .menu li {
+        margin: 0 0.5em;
+    }
+
+        .menu li a {
+            font-size: 0.85em;
+            padding: 8px 12px;
+        }
+
+    .top-nav .menu {
+        flex-wrap: wrap;
+    }
+}
+
+/* Välkommen media */
+
+@media (max-width: 1024px) {
+    .video-container {
+        max-height: 800px;
+    }
+
+    .title-content {
+        padding-top: 300px;
+    }
+}
+
+@media (max-width: 590px) {
+    .title-content {
+        padding-top: 300px;
+    }
+
+        .title-content .title {
+            font-size: 3em;
+        }
+
+        .title-content .info {
+            font-size: 1em;
+        }
+}
+
+/* Välkommen media slut */
 
 .footer {
   position: absolute;
@@ -45,4 +482,120 @@ button.accept-policy {
   width: 100%;
   white-space: nowrap;
   line-height: 60px;
+}
+
+footer {
+    background-color: rgba(9, 20, 46, 0.7);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-logo img {
+    width: 100%;
+}
+
+.footer-hours, .footer-links, .footer-social {
+    text-align: left;
+}
+
+    .footer-hours h3, .footer-links h3, .footer-social h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .footer-hours p, .footer-links a {
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+    }
+
+    .footer-links a {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+        .footer-links a:hover {
+            color: #ccc;
+        }
+
+    .footer-social a {
+        margin-right: 10px;
+        width:30px;
+    }
+
+    .footer-social img {
+        width: 30px;
+    }
+
+    .footer-social a:hover img {
+        opacity: 0.8;
+    }
+
+/*Start of Geneskod: Copyright*/
+hr.line {
+    width: 90%;
+    border: 0.5px solid #555;
+    margin: 20px auto;
+}
+
+.footer-container-legal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 0.8em;
+    margin-top: 20px;
+}
+
+    .footer-container-legal a {
+        color: rgb(248, 245, 245);
+        text-decoration: none;
+    }
+
+        .footer-container-legal a:hover {
+            color: rgb(128, 128, 128);
+        }
+/*End of Geneskod: Copyright*/
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footer-logo img, .footer-social img {
+        margin-bottom: 20px;
+    }
+
+    .footer-hours, .footer-links, .footer-social {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    /*Start of Geneskod: @media Copyright*/
+    .footer-container-legal {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    hr.line {
+        width: 100%;
+    }
+    /*End of Geneskod: @media Copyright*/
 }

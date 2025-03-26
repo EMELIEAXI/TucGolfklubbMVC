@@ -10,36 +10,147 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TucGolfklubb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+        <div class="top-nav">
+            <ul class="menu">
+                <li><a href="/Grupprojekt-Golfklubb/Index.html">Hem</a></li>
+
+                <li>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/gast.html">Spela golf</a>
+                    <ul class="dropdown-spela">
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/foretag.html">Företag</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/gast.html">Gäst</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/greenfee-regler.html">Greenfee & Regler</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/tavlingar-evenemang/tavlingar-evenemang.html">Tävlingar/<br>Evenemang</a></li>
                     </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+                </li>
+
+                <li>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/omoss.html">Om oss</a>
+                    <ul class="dropdown">
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/visiontest2.html">Historia och vision</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/banorna.html">Våra banor</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/faciliteter.html">Faciliteter</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Nyheter</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a>
+                    <ul class="dropdown-medlem">
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Logga in</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html">Bli medlem</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Förmåner</a></li>
+                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
+
+
+                    </ul>
+                </li>
+
+                <li><a href="/Grupprojekt-Golfklubb/kod-html/kontakt/kontakt.html">Kontakt</a></li>
+
+                <li><a href="/Grupprojekt-Golfklubb/kod-html/restaurang.html" target="_blank">Restaurang</a></li>
+
+
+
+                <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
+            </ul>
+
+            <!-- Hamburgermeny för mindre skärmar -->
+            <div class="hamburger-menu">
+                <input type="checkbox" id="menu-toggle" class="menu-toggle">
+                <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
+                <ul class="hamburger-dropdown">
+                    <li><a href="/Grupprojekt-Golfklubb/Index.html">Hem</a></li>
+                    <li>
+                        <a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/gast.html">Spela golf</a>
+                        <ul class="dropdown-spela">
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/foretag.html">Företag</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/gast.html">Gäst</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/greenfee-regler.html">Greenfee & Regler</a></li>
+                            <li id="four"><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/tavlingar-evenemang/tavlingar-evenemang.html">Tävlingar/Evenemang</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/omoss.html">Om oss</a>
+                        <ul class="dropdown">
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/visiontest2.html">Historia och vision</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/banorna.html">Våra banor</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/faciliteter.html">Faciliteter</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Nyheter</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a>
+                        <ul class="dropdown-medlem">
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Logga in</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html">Bli medlem</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Förmåner</a></li>
+                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/Grupprojekt-Golfklubb/kod-html/kontakt/kontakt.html">Kontakt</a></li>
+                    <li><a href="/Grupprojekt-Golfklubb/kod-html/restaurang.html" target="_blank">Restaurang</a></li>
+                    <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
     </header>
-    <div class="container">
+    <div class="container-fluid p-0">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - TucGolfklubb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer>
+        <div class="footer-container">
+
+            <div class="footer-logo">
+                <img src="~/images/logo-footer.png" alt="Golfklubbens logotyp">
+            </div>
+
+
+            <div class="footer-hours">
+                <h3>Öppettider</h3>
+                <p>Måndag - Fredag: 09:00 - 18:00</p>
+                <p>Lördag - Söndag: 10:00 - 18:00</p>
+            </div>
+
+
+            <div class="footer-links">
+                <h3>Länkar</h3>
+                <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/omoss.html">Om oss</a>
+                <a href="/Grupprojekt-Golfklubb/kod-html/kontakt/kontakt.html">Kontakt</a>
+
+            </div>
+
+
+        @*     <div class="footer-social">
+                <h3>Följ oss</h3>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="~/images/insta-loga.png" alt="Instagram">
+                </a>
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="~/images/facebook-loga.png" alt="Facebook">
+                </a>
+            </div> *@
+        </div>
+        <!--Start of Geneskod Upphövsrätt-->
+        <hr class="line">
+        <div class="footer-container-legal">
+            <div class="footer-cookies">
+                <p>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/legal/legal.html">Kakor</a> &VerticalLine;
+                    <a href="/Grupprojekt-Golfklubb/kod-html/legal/legal.html">Integritetspolicy</a>
+                </p>
+            </div>
+            <div class="footer-copyright">
+                <p><a href="/Grupprojekt-Golfklubb/kod-html/legal/legal.html">Copyright &copy; 2004-2024</a></p>
+            </div>
+        </div>
+        <!--End of Geneskod Upphövsrätt-->
+    </footer>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

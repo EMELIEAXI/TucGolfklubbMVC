@@ -1,8 +1,94 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TucGolfklubb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main class="container-fluid p-0">
+    <div class="video-container">
+        <video id="background-video" autoplay loop muted>
+            <source src="~/filmer/golf2.mp4" type="video/mp4">
+        </video>
+        <div class="title-content">
+            <h1 class="title">Välkommen till <br> TUC Golfklubb</h1>
+            <p class="info">För mer information om klubben, klicka <a href="#">här</a></p>
+        </div>
+    </div>
+
+    <section>
+        <div class="section-button">
+            <div class="three-buttons">
+                <a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html" class="button"><strong>Bli medlem nu! </strong></a>
+
+                <a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html" class="button"><strong>Boka här</strong></a>
+
+                <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html" class="button"><strong>Logga in</strong></a>
+            </div>
+        </div>
+
+        <div class="newssite">
+            <h1>Aktuellt</h1>
+            <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Mer nyheter..</a>
+        </div>
+
+        <div class="image-links">
+            <div class="picture-boxes">
+                <figure>
+                    <figcaption>Våra nya golfbilar...</figcaption>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html#article1"><img src="~/images/golf-cart-756048_640.jpg" alt="Golfbil" title="våra nya golfbilar"></a>
+                </figure>
+
+                <figure>
+                    <figcaption>Publikrekord under sommarens golftävling...</figcaption>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html#article2"><img src="~/images/bernhard-longer-1501038_640.jpg" alt="man spelar golf" title="golftävling"></a>
+                </figure>
+
+                <figure>
+                    <figcaption>Anmäl dig till höstens golfkurser...</figcaption>
+                    <a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html#article3"><img src="~/images/golf-1909115_640.jpg" alt="Golfklubbor" title="golfkurs"></a>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!--Start Geneskod: Tävlingar och Evenemang -->
+    <div class="tav">
+        <h4>Tävlingar och Evenemang</h4>
+    </div>
+    <div class="tavlingar">
+        <video autoplay muted loop id="tavvideo">
+            <source src="~/filmer/tavgolf3.mp4" type="video/mp4">
+        </video>
+        <p class="callout">
+            Svinga mot stjärnorna... låt varje putt bli en seger! ⛳️✨
+            <br>
+            Klicka på bilden för att tävla!
+        </p>
+        <figure>
+            <a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/tavlingar-evenemang/tavlingar-evenemang.html">
+                <img class="goldencup" alt="A gold cup"
+                     src="~/images/tavlingar_evenemang.png">
+            </a>
+        </figure>
+    </div>
+    <!--End Geneskod: Tävlingar och Evenemang -->
+
+    <div class="newsletter-container">
+        <h2>Prenumerera på vårt nyhetsbrev</h2>
+        <p>Fyll i din e-postadress för att få uppdateringar om våra senaste nyheter och erbjudanden.</p>
+
+        <form action="/submit-newsletter" method="POST">
+            <label for="email">E-postadress:</label>
+            <input type="email" id="email" name="email" required placeholder="Din e-postadress">
+
+            <button type="submit">Prenumerera</button>
+        </form>
+    </div>
+
+
+</main>

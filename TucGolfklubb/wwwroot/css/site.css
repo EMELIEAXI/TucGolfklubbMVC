@@ -1,22 +1,318 @@
-html {
-  font-size: 14px;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.29);
+    height: 100vh;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+#background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.title-content {
+    position: relative;
+    z-index: 1;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding-top: 40vh;
+    margin: 0;
+    font-family: "Josefin Sans";
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.title {
+    font-size: 5em;
+    font-weight: 700;
 }
 
-body {
-  margin-bottom: 60px;
+.info {
+    font-size: 1.6em;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 12px;
 }
+
+a:visited {
+    text-decoration: underline;
+    color: white;
+}
+
+a:active {
+    text-decoration: none;
+    color: rgb(191, 191, 191);
+}
+
+.section-button {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+}
+
+.three-buttons {
+    margin: 0 4rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+    .three-buttons .button {
+        background-color: #006400;
+        color: white;
+        font-size: 1em;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        box-shadow: 5px 5px 7px #adb2b9, -5px -5px 7px white;
+        cursor: pointer;
+        width: 10rem;
+        padding: 0.5em;
+        text-align: center;
+    }
+
+        .three-buttons .button:hover {
+            background-color: #004d00;
+            box-shadow: none;
+        }
+
+.newssite {
+    margin-left: 10%;
+    padding: 2em;
+}
+
+    .newssite a {
+        color: black;
+    }
+
+.image-links {
+    width: 100%;
+}
+
+.picture-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+    .picture-boxes figure {
+        margin: 3em;
+        flex: 1 1 300px;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .picture-boxes figcaption {
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-align: center;
+    }
+
+    .picture-boxes img {
+        border-radius: 10px;
+        box-shadow: 5px 5px 7px #7b7d80, -5px -5px 7px white;
+        width: 350px;
+        height: 250px;
+        object-fit: cover;
+    }
+
+        .picture-boxes img:hover {
+            box-shadow: none;
+        }
+
+@media (max-width: 768px) {
+    .picture-boxes figure {
+        flex: 1 1 100%;
+    }
+
+    .three-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        margin-inline: 30%;
+    }
+
+    .button {
+        margin: 0.5rem 0 0.5rem 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .picture-boxes a img {
+        margin: 1rem 0;
+        width: 250px;
+        height: 200px;
+    }
+
+    .figure img {
+        display: flex;
+        justify-content: center;
+    }
+
+    .picture-boxes figure {
+        margin: 2rem 0;
+        padding: 0;
+        max-width: 250px;
+    }
+
+    .three-buttons {
+        margin: 0;
+        padding: 0;
+    }
+
+    .button {
+        margin: 0.5rem 0 0.5rem 0;
+        margin-inline: 30%;
+    }
+
+    .newssite {
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+
+    .newsletter-container {
+        padding: 0;
+        margin: 0;
+    }
+
+        .newsletter-container input[type="email"] {
+            padding: 10px 0;
+        }
+}
+
+/*Start of Geneskod: Tävlingar och Evenemang*/
+.tav {
+    text-align: center;
+    font-family: 'Times New Roman';
+    font-size: 1.4em;
+}
+
+.tavlingar {
+    position: relative;
+    height: 40%;
+    overflow: hidden;
+}
+
+#tavvideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+p.callout {
+    font-size: 1.2rem;
+    color: rgb(255, 226, 7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+    margin-left: 55%;
+    width: 40%;
+    text-align: center;
+    background-color: #042e04c6;
+}
+
+.goldencup {
+    float: right;
+    margin-right: 10%;
+    padding-bottom: 10%;
+    width: 35%;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .goldencup {
+        margin-right: 3%;
+        padding-bottom: 10%;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+
+    .goldencup {
+        margin-right: 3%;
+        padding-bottom: 10%;
+        width: 100%;
+    }
+
+    p.callout {
+        width: 100%;
+        margin-left: 2%;
+    }
+}
+
+@media only screen and (max-width: 376px) {
+    .goldencup {
+        float: right;
+        margin-right: 3%;
+        padding-bottom: 1%;
+        width: 100%;
+    }
+
+    p.callout {
+        width: 100%;
+        margin: 0;
+        margin-top: 15%;
+    }
+}
+/*End of Geneskod: Tävlingar och Evenemang*/
+
+
+.newsletter-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+    .newsletter-container h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .newsletter-container p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .newsletter-container label {
+        font-size: 14px;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .newsletter-container input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .newsletter-container button {
+        background-color: #006400;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .newsletter-container button:hover {
+            background-color: #004d00;
+        }

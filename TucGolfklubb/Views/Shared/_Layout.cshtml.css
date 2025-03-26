@@ -448,33 +448,6 @@ body, html {
     }
 }
 
-/* Välkommen media */
-
-@media (max-width: 1024px) {
-    .video-container {
-        max-height: 800px;
-    }
-
-    .title-content {
-        padding-top: 300px;
-    }
-}
-
-@media (max-width: 590px) {
-    .title-content {
-        padding-top: 300px;
-    }
-
-        .title-content .title {
-            font-size: 3em;
-        }
-
-        .title-content .info {
-            font-size: 1em;
-        }
-}
-
-/* Välkommen media slut */
 
 .footer {
   position: absolute;
@@ -580,6 +553,7 @@ hr.line {
 
     .footer-logo img, .footer-social img {
         margin-bottom: 20px;
+
     }
 
     .footer-hours, .footer-links, .footer-social {

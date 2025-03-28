@@ -77,6 +77,12 @@ namespace TucGolfklubb.Data
             modelBuilder.Entity<Forum>().HasData(
                 new Forum { Id = 1, Title = "Allmänt om golf", Description = "Diskussioner om allt möjligt relaterat till golf" }
                     );
+
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.User)
+                .WithMany()
+                .HasForeignKey(r => r.UserId)
+                .IsRequired(false);
         }
     }
 }

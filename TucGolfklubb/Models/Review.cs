@@ -9,5 +9,6 @@
         public string Comment { get; set; } = "";
         public int Rating { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
+        public ApplicationUser? User { get; set; }
     }
 }

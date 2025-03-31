@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250331142619_Added ShoppingCart")]
+    partial class AddedShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -411,16 +414,11 @@ namespace TucGolfklubb.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShoppingCartId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("OrderItems");
                 });
@@ -511,22 +509,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -639,10 +621,6 @@ namespace TucGolfklubb.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TucGolfklubb.Models.ShoppingCart", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ShoppingCartId");
-
                     b.Navigation("Order");
 
                     b.Navigation("Product");
@@ -699,11 +677,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Navigation("OrderItems");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.ShoppingCart", b =>
-                {
-                    b.Navigation("OrderItems");
                 });
 #pragma warning restore 612, 618
         }

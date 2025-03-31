@@ -20,6 +20,15 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddDefaultUI() // Lägg till för att använda inbyggt Identity UI (Login, Register etc.)
     .AddDefaultTokenProviders(); // Viktigt för återställning, bekräftelse m.m.
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+    options.LogoutPath = "/Identity/Account/Logout";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Hur länge man är inloggad
+    options.SlidingExpiration = true; // Förnyas vid aktivitet
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

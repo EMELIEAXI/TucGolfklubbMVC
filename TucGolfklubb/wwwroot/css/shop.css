@@ -1,0 +1,276 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    width: 100%;
+    font-size: 1.8em;
+}
+
+header {
+    background: #222;
+    color: white;
+    padding: 1em 0;
+    text-align: center;
+    width: 100%;
+}
+
+    header h1 {
+        font-size: 2em;
+        margin: 0;
+    }
+
+    header nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+        header nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            header nav a:hover {
+                color: #87CEFA;
+            }
+
+.banner {
+    background-image: linear-gradient(to bottom, rgba(135, 206, 250, 0.7), rgba(135, 206, 250, 0.3)), linear-gradient(to top, rgba(135, 206, 250, 0.7), rgba(135, 206, 250, 0.3)), url('https://cdn.pixabay.com/photo/2019/12/14/08/36/shopping-4694470_1280.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+    .banner h1 {
+        font-size: 3em;
+        font-weight: 700;
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+    }
+
+.welcome-text {
+    margin: 0 auto 20px;
+    font-size: 1.9em;
+    line-height: 1.6;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+}
+
+    .welcome-text strong {
+        font-weight: 700;
+    }
+
+    .welcome-text a {
+        color: #87CEFA;
+        text-decoration: underline;
+    }
+
+.current-offers {
+    background-color: rgba(255, 0, 0, 0.1); /* Svag röd bakgrund för att lyfta fram erbjudandena */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 90%;
+    font-size: 1.2em;
+}
+
+    .current-offers h2 {
+        color: #B22222; /* Mörkröd färg för rubriken */
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .current-offers ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .current-offers li {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
+
+.offer-price {
+    background-color: #FF6347; /* Röd färg för prislappar */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+span {
+    font-size: 1.8em;
+}
+
+    span a {
+        color: rgb(139, 106, 139);
+        font-weight: bolder;
+    }
+
+        span a:hover {
+            color: green;
+        }
+
+.shop-now-button {
+    background-color: #005f00;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1.8em;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+}
+
+    .shop-now-button:hover {
+        background-color: #007000;
+    }
+
+footer {
+    color: white;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: black !important;
+    font-size: 0.8em;
+}
+
+    footer p {
+        margin: 0;
+        font-size: 0.9em;
+    }
+
+
+.betalning {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.shop-footer {
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.betalning ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .betalning ul li {
+        display: inline-block;
+        margin: 0 15px;
+    }
+
+        .betalning ul li img {
+            width: 60px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+
+@media (max-width: 600px) {
+
+    body {
+        width: 100% !important;
+        margin-left: 0;
+        font-size: 10px;
+        flex-wrap: wrap;
+        word-break: break-word;
+        align-items: center;
+        text-align: center;
+    }
+
+    h1, h2, p {
+        text-align: center;
+    }
+
+    .banner {
+        width: 100%;
+        flex-wrap: wrap;
+        word-break: break-word;
+        margin-left: -20px;
+    }
+
+    .shop-footer {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        width: 100% !important;
+        margin-left: 0;
+        font-size: 10px;
+        flex-wrap: wrap;
+        word-break: break-word;
+        align-items: center;
+        text-align: center;
+    }
+
+    h1, h2, p {
+        text-align: center;
+    }
+
+    .banner {
+        width: 100%;
+        flex-wrap: wrap;
+        word-break: break-word;
+        margin-left: -20px;
+    }
+}
+
+@media (min-width: 769px) {
+    body {
+        width: 100% !important;
+        margin-left: 0;
+        font-size: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    h1, h2, p {
+        text-align: center;
+    }
+
+    .banner {
+        width: 100%;
+        flex-wrap: wrap;
+        word-break: break-word;
+        margin-left: -20px;
+    }
+}
+ 

@@ -1,0 +1,1019 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Shopping";
+}
+
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>produkt</title>
+    <link rel="stylesheet" href="~/css/productshop.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div class="top">
+        <h1 id="toppen">TUC Golfklubb Shop</h1>
+    </div>
+
+    <!--Header-->
+    <div class="header">
+        <h1>Välkommen till våra produkter</h1>
+        <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
+    </div>
+
+    <!--Navigation-->
+
+    <div class="navbar">
+        <a href="/kod-html/shop-index.html">Hem</a>
+        <a href="#golfklubbor">Golfklubbor</a>
+        <a href="#bollar">Bollar</a>
+        <a href="#golfkläder">Golfkläder</a>
+        <a href="#skor">Skor</a>
+        <a href="#golfväskor">Golfväskor</a>
+        <a href="#tillbehör">Tillbehör</a>
+        <a href="#träningsutrustning">Träningsutrustning</a>
+        <a href="#elektronik">Elektronik</a>
+    </div>
+
+    <!--Flex content-->
+    <div class="main">
+
+        <div class="products">
+            <h2 id="golfklubbor">Golfklubbor</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfklubbor.jpg" alt="Driver" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Driver</h3>
+                    <p>
+                        En driver är den klubba som används för att slå ut bollen från tee. Den har en stor klubbhuvud
+                        med en stor träffyta, vilket ger längre avstånd. Loftet (vinkeln på klubbhuvudet) varierar,
+                        vanligtvis mellan 8-12 grader, för att anpassa sig efter spelstil. En justerbar driver låter
+                        spelaren ändra loft och vinklar för optimal prestanda. Material som titan och kolfiber gör att
+                        klubban är lätt och stark.
+                    </p>
+                    <ul>
+                        <li>Specifikationer: Längd: 43-46 tum, Vikt: 300-320 gram, Loft: 8-12 grader.</li>
+                        <li>
+                            Aspekter: Stora träffytor för längre avstånd, justerbara loft- och vinkelfunktioner för
+                            anpassning. Material: kolfiber eller titan för lätthet och styrka.
+                        </li>
+                    </ul>
+
+                    <p class="text_right">Pris: <del>3000kr</del><ins class="erbjud">2500kr</ins></p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="~/images/Golfklubbor.jpg" alt="Järnklubbor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Järnklubbor</h3>
+                    <p>Järnklubbor används för en mängd olika slag från fairway och rough. De finns i set som vanligtvis sträcker sig från 3-9 järn. Klubborna kan ha cavity back-design för extra förlåtelse på missade träffar eller blade-design för mer kontroll. Loft och lie-vinklar varierar för att hjälpa spelaren att få den önskade bollbanan. De är ofta tillverkade av stål eller kolfiber.</p>
+                    <ul>
+                        <li>Specifikationer: Vanliga loft: 3-9 järn, Vikt: 250-300 gram beroende på modell.</li>
+                        <li>Aspekter: Förbättrad träffyta för ökad precision, olika typer som cavity back (förlåtande) och blade (traditionell). Material: stål eller kolfiber.</li>
+                    </ul>
+                    <p class="text_right">Pris: 6000kr</p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfklubbor.jpg" alt="Wedges" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Wedges</h3>
+                    <p>Wedges är specialiserade klubbor för korta slag, chippningar och bunker-slag. Vanligtvis har de loft mellan 50-60 grader och kommer i olika varianter som pitching wedge, sand wedge och lob wedge. Bounce-vinklar (hur mycket klubbans botten lyfter från marken) är viktiga för att hantera olika underlag. De är gjorda av stål för hållbarhet och precision.</p>
+                    <ul>
+                        <li>Specifikationer: Loft: 50-60 grader, Vikt: 300-320 gram.</li>
+                        <li>Aspekter: Används för korta slag och chippar, olika bounce-vinklar för olika underlag. Material: stål för hållbarhet.</li>
+                    </ul>
+                    <p class="text_right">Pris: 1500kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfklubbor.jpg" alt="Putters" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Putters</h3>
+                    <p>Putters används på greener för att rulla bollen i hålet. De finns i olika former, inklusive mallet och blade, för att ge olika känslor och kontroller. Längden på puttern sträcker sig vanligen mellan 32-36 tum. Justerbar vikt och olika greppalternativ låter spelare anpassa puttern för bättre precision och komfort.</p>
+                    <ul>
+                        <li>Specifikationer: Längd: 32-36 tum, Vikt: 300-350 gram.</li>
+                        <li>Aspekter: Olika former (mallet, blade) för känsla och kontroll. Justerbar vikt och grip för personlig anpassning.</li>
+                    </ul>
+                    <p class="text_right">Pris: <del>2500kr</del><ins class="erbjud">2000kr</ins></p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="golfkläder">Golfkläder</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfkläder.jpg" alt="Tröjor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Tröjor</h3>
+                    <p>Tillverkade av fukttransporterande material med UV-skydd för att hålla spelaren sval och skyddad.</p>
+                    <ul>
+                        <li>Fukttransporterande material, UV-skydd, stretchiga tyger för rörelse.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 800kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfkläder.jpg" alt="Byxor och Shorts" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Byxor och Shorts</h3>
+                    <p>Lätta och stretchiga för maximal rörelsefrihet.</p>
+                    <ul>
+                        <li> Lätta och andningsbara material, oftast med elastisk midja för komfort.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1200kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfkläder.jpg" alt="Jackor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Jackor</h3>
+                    <p>Vattentåliga och vindtåliga, med andningsfunktion för att hålla spelaren torr och bekväm under alla väderförhållanden.</p>
+                    <ul>
+                        <li>Vattentåliga och vindtåliga, med andningsfunktion för att hålla spelaren torr och bekväm.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1500kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfkläder.jpg" alt="Kepsar" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Kepsar</h3>
+                    <p>Ger skydd mot solen och ofta med ventiler för ökad komfort.</p>
+                    <ul>
+                        <li>Solskydd och ventilation, ofta med justerbar passform.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 300kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="skor">Skor</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Skor.jpg" alt="Spikade skor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Spikade skor</h3>
+                    <p>Ger maximalt grepp på olika underlag.</p>
+                    <ul>
+                        <li>Specifikationer: Bra grepp med spik- eller spikfria sulor, vattentåliga material.</li>
+                        <li>Aspekter: Stöd för fotvalv, dämpning för komfort under långa rundor, lättviktsdesign för rörlighet.</li>
+                    </ul>
+                    <p class="text_right">Pris: 1800kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Skor.jpg" alt="Spikfria skor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Spikade skor</h3>
+                    <p>Har gummisulor för bekvämare gång och bra grepp utan spikar.</p>
+                    <ul>
+                        <li>Specifikationer: Bra grepp med spik- eller spikfria sulor, vattentåliga material.</li>
+                        <li>Aspekter: Stöd för fotvalv, dämpning för komfort under långa rundor, lättviktsdesign för rörlighet.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1800kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Skor.jpg" alt="Spikfria skor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Stöd och dämpning</h3>
+                    <p>Många skor erbjuder anpassad dämpning och stöd för fotvalvet för att minska trötthet under långa rundor.</p>
+                    <ul>
+                        <li>Specifikationer: Bra grepp med spik- eller spikfria sulor, vattentåliga material.</li>
+                        <li>Aspekter: Stöd för fotvalv, dämpning för komfort under långa rundor, lättviktsdesign för rörlighet.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1800kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="golfväskor">Golfväskor</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfväska.jpg" alt="Caddyväskor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Caddyväskor</h3>
+                    <p>Caddyväskor är stora och har plats för upp till 14 klubbor samt flera fickor för tillbehör. De är designade för att stå stabilt på golfbanan och har ofta vadderade remmar för bekväm bärning.</p>
+                    <ul>
+                        <li>Specifikationer: Utrymme för upp till 14 klubbor, många fickor för tillbehör.</li>
+                        <li>Aspekter: Bra bärhandtag och ergonomiska remmar för komfort.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 2500kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Golfväska.jpg" alt="Bärväskor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Bärväskor</h3>
+                    <p>Bärväskor är lättare och mer kompakta, vilket gör dem idealiska för korta rundor eller träning. De har färre fickor och är utformade för att enkelt kunna bäras på axeln.</p>
+                    <ul>
+                        <li>Specifikationer: Lättare, designade för att bära på axeln, mindre fickor.</li>
+                        <li>Aspekter: Kompakta och lätta att hantera, perfekta för kortare rundor eller träningspass.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1200kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="tillbehör">Tillbehör</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Tillbehör.jpg" alt="Tee" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Tee</h3>
+                    <p>Används för att hålla bollen i en optimal höjd vid utslag.</p>
+                    <ul>
+                        <li>Olika höjder och material (plast eller trä) för olika klubbor.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 100kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Tillbehör.jpg" alt="Handskar" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Handskar</h3>
+                    <p>Förbättrar greppet och skyddar händerna.</p>
+                    <ul>
+                        <li>Förbättrad grepp och komfort, olika storlekar och material.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: <del>299kr</del><ins class="erbjud">199kr</ins></p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Tillbehör.jpg" alt="Paraplyer" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Paraplyer</h3>
+                    <p>Stora och hållbara, skyddar mot regn och sol</p>
+                    <ul>
+                        <li>Stora och robusta, ofta vindresistenta.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 500kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Tillbehör.jpg" alt="Golfhanddukar" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Golfhanddukar</h3>
+                    <p>Håller klubbor och bollar rena, ofta med upphängningsöglor.</p>
+                    <ul>
+                        <li>Fuktabsorberande material för rengöring av klubbor och bollar</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 200kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="bollar">Bollar</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Bollar.jpg" alt="Bollar" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Bollar</h3>
+                    <p>Olika egenskaper (hårdhet, material) för specifika spelsituationer, som att slå från tee eller putta.</p>
+                    <ul>
+                        <li>Kompression: 40-90</li>
+                        <li>Egenskaper: Bra avstånd och kontroll. Designad för att ge mer spinn på korta slag, passar både medel- och avancerade spelare.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 400kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="träningsutrustning">Träningsutrustning</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Träningsutrustning.jpg" alt="Puttingmattor" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Puttingmattor</h3>
+                    <p>För inomhusträning, ofta med olika lutningar och mål för att öva precision.</p>
+                    <ul>
+                        <li>För inomhusträning, ofta med olika lutningar och mål för att öva precision.</li>
+                    </ul>
+                    <p class="text_right">Pris: 1000kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Träningsutrustning.jpg" alt="Träningsredskap" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Träningsredskap</h3>
+                    <p>Verktyg som hjälper till att analysera och förbättra svingteknik, som svinganalysatorer och motståndsband.</p>
+                    <ul>
+                        <li>Swing-tränare, motståndsband och svinganalysatorer för teknikförbättring.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1000kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+            <hr>
+            <h2 id="elektronik">Elektronik</h2>
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Elektronik.jpg" alt="GPS-enheter" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>GPS-enheter</h3>
+                    <p>Ger avstånd till greener, hinder och analyserar spelprestanda.</p>
+                    <ul>
+                        <li>Ger avstånd till greener och hinder, ofta med prestandaanalys.</li>
+                    </ul>
+                    <p class="text_right">Pris: <del>2500kr</del><ins class="erbjud">1500kr</ins></p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Elektronik.jpg" alt="Avståndsmätare" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Avståndsmätare</h3>
+                    <p>Laserbaserade verktyg för att exakt mäta avstånd till mål.</p>
+                    <ul>
+                        <li>Laserbaserade för exakta avståndsmätningar.</li>
+                    </ul>
+
+                    <p class="text_right">Pris: 1500kr </p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item_image">
+                    <figure>
+                        <img src="/bilder/Elektronik.jpg" alt="Appar" class="p-img">
+                        <figcaption></figcaption>
+                    </figure>
+                </div>
+                <div class="item_info">
+                    <h3>Appar</h3>
+                    <p>För att spåra statistik, analyser och förbättra spelförmåga.</p>
+                    <ul>
+                        <li>För spårning av statistik och förbättring av spel.</li>
+                    </ul>
+                    <p class="text_right">Pris: premium 1000kr</p>
+                    <p class="text_right">Pris: medlem gratis</p>
+
+                    <div class="form">
+                        <form action="/action_page.php">
+                            <select name="antal" class="antal-select">
+                                <option value="#">--välj antal--</option>
+                                <option value="antal1">1</option>
+                                <option value="antal2">2</option>
+                                <option value="antal3">3</option>
+                                <option value="antal4">4</option>
+                                <option value="antal5">5</option>
+                                <option value="antal6">6</option>
+                            </select>
+                            <button class="button">lägg i varukorgen</button>
+                            <button class="button">till kassan</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="back">
+                <a href="#toppen">tillbaka till toppen</a>
+            </div>
+        </div>
+
+
+        <div class="side">
+
+
+
+            <div class="regform">
+                <fieldset>
+                    <legend>Kassan</legend>
+                    <form action="/submit-registration" method="POST">
+                        <div class="typetext">
+                            <label for="rabattkod">Ange rabattkod:</label>
+                            <input type="text" id="rabattkod" placeholder="MEC123456" name="rabattkod">
+                        </div>
+
+                        <div class="typeradio">
+                            <label class="typerb">VÄLJ LEVERANS:</label>
+                            <br>
+                            <label class="container">
+                                Hem leverans
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="rcheckmark"></span>
+                            </label>
+                            <label class="container">
+                                Post paket
+                                <input type="radio" name="radio">
+                                <span class="rcheckmark"></span>
+                            </label>
+                            <label class="container">
+                                Hämta i golfklubb butiken
+                                <input type="radio" name="radio">
+                                <span class="rcheckmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="typetext">
+                            <label class="typerb">ANGE LEVERANS ADRESS:</label>
+                            <br>
+                            <label for="namn">NAMN:</label>
+                            <input type="text" id="namn" placeholder="förstanamn efternamn" name="namn" required>
+
+                            <label for="address">GATA:</label>
+                            <input type="text" id="address" placeholder="gata" name="address" required>
+
+                            <label for="postalcode">POST NUMMER:</label>
+                            <input type="text" id="postalcode" placeholder="12345" name="postalcode" required>
+
+                            <label for="city">ORT:</label>
+                            <input type="text" id="city" placeholder="ort namn" name="city" required>
+
+                            <label for="telefon">TELEFON:</label>
+                            <input type="text" id="telefon" placeholder="10-12 siffror" name="telefon" required>
+
+                            <label for="epost">E-POST:</label>
+                            <input type="text" id="epost" placeholder="text@exempel.com" name="epost" required>
+
+                        </div>
+                        <div class="typeselect">
+                            <label for="intresse">VÄLJ BETALNINGSMETOD:</label>
+                            <select id="intresse" name="intresse">
+                                <option value="intresse1">
+                                    Kort
+                                </option>
+                                <option value="intresse2">
+                                    Swish
+                                </option>
+                                <option value="intresse3">
+                                    Faktura
+                                </option>
+                                <option value="intresse4">
+                                    Andra
+                                </option>
+                            </select>
+                        </div>
+                        <div class="checkboxradio">
+
+
+
+
+                            <div class="typecheckbox">
+                                <label class="typecb">FÅ INFORMATIOM OM:</label>
+                                <br>
+                                <label class="container">
+                                    Nya produkter
+                                    <input type="checkbox" checked="checked">
+                                    <span class="ccheckmark"></span>
+                                </label>
+                                <label class="container">
+                                    Erbjudanden
+                                    <input type="checkbox">
+                                    <span class="ccheckmark"></span>
+                                </label>
+                                <label class="container">
+                                    Utförsäljningar
+                                    <input type="checkbox">
+                                    <span class="ccheckmark"></span>
+                                </label>
+                            </div>
+
+
+                        </div>
+
+                        <div>
+                            <button type="submit">Fortsätt till betalning</button>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="shop-footer">
+        <div class="betalning">
+            <h2>Betalningsmetoder</h2>
+            <ul>
+                <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
+                <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
+                <li><img src="~/images/swish-logo.png" alt="Swish"></li>
+                <li><img src="~/images/visa.png" alt="Visa"></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+

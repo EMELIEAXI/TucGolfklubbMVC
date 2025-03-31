@@ -7,9 +7,9 @@
 <h1>@Model.Title</h1>
 <p>@Model.Description</p>
 
-<h3>Posts</h3>
+<h3>Inlägg</h3>
 @if (Model.Posts != null && Model.Posts.Any())
-{
+@*{
     foreach (var post in Model.Posts)
     {
         <div class="post">
@@ -29,6 +29,25 @@
 else
 {
     <p>No posts yet.</p>
+}*@
+
+{
+    <ul>
+        @foreach (var post in Model.Posts)
+        {
+            <li>
+                <strong>@post.Content</strong><br />
+                <small>
+                    av @(post.User?.UserName ?? "Okänd användare")
+                    | <span class="text-muted">(@post.PostedAt.ToString("yyyy-MM-dd HH:mm"))</span>
+                </small>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Inga inlägg ännu.</p>
 }
 
 <!-- Link to create a new post for this forum -->

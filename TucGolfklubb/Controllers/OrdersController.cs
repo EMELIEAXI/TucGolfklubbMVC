@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +10,22 @@ using TucGolfklubb.Models;
 
 namespace TucGolfklubb.Controllers
 {
-    [Authorize]
-    public class ForumController : Controller
+    public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ForumController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Forum
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Forums.ToListAsync());
+            return View(await _context.Orders.ToListAsync());
         }
 
-        // GET: Forum/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,45 +33,39 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums
-            .Include(f => f.Posts)
-                .ThenInclude(p => p.Replies)
-                    .ThenInclude(r => r.User) // Load reply user info if needed
-            .Include(f => f.Posts)
-                .ThenInclude(p => p.User)  // Load the user info for each post
-            .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (forum == null)
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(forum);
+            return View(order);
         }
 
-        // GET: Forum/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Forum/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description")] Forum forum)
+        public async Task<IActionResult> Create([Bind("Id,UserId,OrderDate")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(forum);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(forum);
+            return View(order);
         }
 
-        // GET: Forum/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,22 +73,22 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums.FindAsync(id);
-            if (forum == null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(forum);
+            return View(order);
         }
 
-        // POST: Forum/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] Forum forum)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,OrderDate")] Order order)
         {
-            if (id != forum.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -105,12 +97,12 @@ namespace TucGolfklubb.Controllers
             {
                 try
                 {
-                    _context.Update(forum);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ForumExists(forum.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -121,10 +113,10 @@ namespace TucGolfklubb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(forum);
+            return View(order);
         }
 
-        // GET: Forum/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,34 +124,34 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums
+            var order = await _context.Orders
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (forum == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(forum);
+            return View(order);
         }
 
-        // POST: Forum/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var forum = await _context.Forums.FindAsync(id);
-            if (forum != null)
+            var order = await _context.Orders.FindAsync(id);
+            if (order != null)
             {
-                _context.Forums.Remove(forum);
+                _context.Orders.Remove(order);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ForumExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.Forums.Any(e => e.Id == id);
+            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }

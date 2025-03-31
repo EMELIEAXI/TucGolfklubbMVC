@@ -21,6 +21,7 @@ namespace TucGolfklubb.Data
         public DbSet<ForumReply> Replies { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -40,6 +40,8 @@ namespace TucGolfklubb.Controllers
             var forumPost = await _context.ForumPosts
                 .Include(f => f.Forum)
                 .Include(f => f.User)
+                .Include(fp => fp.Replies)           // Include the Replies collection
+                    .ThenInclude(r => r.User)         // Optionally, include the User for each reply
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (forumPost == null)
             {
@@ -50,10 +52,18 @@ namespace TucGolfklubb.Controllers
         }
 
         // GET: ForumPosts/Create
-        public IActionResult Create()
+        public IActionResult Create(int? forumId)
         {
-            ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Id");
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            if (forumId.HasValue)
+            {
+                // If a forumId is passed, use it directly
+                ViewData["ForumId"] = forumId.Value;
+            }
+            else
+            {
+                // Otherwise, provide a dropdown list
+                ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Title");
+            }
             return View();
         }
 
@@ -66,15 +76,21 @@ namespace TucGolfklubb.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Set the UserId to the currently logged-in user's ID
                 forumPost.UserId = _userManager.GetUserId(User);
-
                 _context.Add(forumPost);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Redirect to the Forum details page after successful creation
+                return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });
             }
-            ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Id", forumPost.ForumId);
-            //ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", forumPost.UserId);
+            // If validation fails, check if ForumId is provided or need to show a dropdown
+            if (forumPost.ForumId != 0)
+            {
+                ViewData["ForumId"] = forumPost.ForumId;
+            }
+            else
+            {
+                ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Title", forumPost.ForumId);
+            }
             return View(forumPost);
         }
 
@@ -92,7 +108,7 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
             ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Id", forumPost.ForumId);
-           
+
             return View(forumPost);
         }
 
@@ -172,5 +188,32 @@ namespace TucGolfklubb.Controllers
         {
             return _context.ForumPosts.Any(e => e.Id == id);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateReply(int forumPostId, string replyContent)
+        {
+            if (string.IsNullOrWhiteSpace(replyContent))
+            {
+                // If the reply content is empty, redirect back to the details page.
+                return RedirectToAction("Details", new { id = forumPostId });
+            }
+
+            var reply = new ForumReply
+            {
+                ForumPostId = forumPostId,
+                Content = replyContent,
+                UserId = _userManager.GetUserId(User),
+                PostedAt = DateTime.Now
+            };
+
+            _context.Replies.Add(reply);
+            await _context.SaveChangesAsync();
+
+            // Redirect back to the details page so the new reply will be displayed.
+            return RedirectToAction("Details", new { id = forumPostId });
+        }
+
     }
 }

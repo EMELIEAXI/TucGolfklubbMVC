@@ -12,10 +12,23 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ForumId" class="control-label"></label>
-                <select asp-for="ForumId" class ="form-control" asp-items="ViewBag.ForumId"></select>
-            </div>
+            @{
+                // Try to get the pre-set ForumId value from ViewData.
+                var forumIdValue = ViewData["ForumId"] as int?;
+            }
+            @if (forumIdValue.HasValue)
+            {
+                @* If a forum ID is provided, render a hidden field and optionally show the ID as read-only *@
+                <input type="hidden" asp-for="ForumId" value="@forumIdValue.Value" />
+                <p>Forum ID: @forumIdValue.Value</p>
+            }
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="ForumId" class="control-label"></label>
+                    <select asp-for="ForumId" class="form-control" asp-items="ViewBag.ForumId"></select>
+                </div>
+            }
             
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>

@@ -4,39 +4,70 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+@if (Model == null)
+{
+    <p>No data available.</p>
+}
+else
+{
+    // We know Model is not null; assign it to a local variable using the null-forgiving operator
+    var forumPost = Model!;
 
-<div>
-    <h4>ForumPost</h4>
+    <h1>Details</h1>
+    <div>
+        <h4>ForumPost</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => forumPost.Content)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => forumPost.Content)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => forumPost.PostedAt)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => forumPost.PostedAt)
+            </dd>
+        </dl>
+    </div>
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Forum)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Forum.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PostedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PostedAt)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <h3>Svar</h3>
+    @if (forumPost.Replies != null && forumPost.Replies.Any())
+    {
+        foreach (var reply in forumPost.Replies)
+        {
+            <div class="reply">
+                <p>@reply.Content</p>
+                <p>
+                    <small>
+                        Av: @(reply.User?.UserName ?? "Okänd"), publicerat: @reply.PostedAt
+                    </small>
+                </p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Inga svar än.</p>
+    }
+
+    <hr />
+    <h3>Lägg till ditt svar</h3>
+    @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("forumPostId", forumPost.Id)
+        <div class="form-group">
+            <textarea name="replyContent" class="form-control" rows="3" placeholder="Skriv ditt svar här"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Skicka svar</button>
+    }
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@forumPost.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+}

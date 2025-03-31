@@ -34,7 +34,13 @@ namespace TucGolfklubb.Controllers
             }
 
             var forum = await _context.Forums
-                .FirstOrDefaultAsync(m => m.Id == id);
+            .Include(f => f.Posts)
+                .ThenInclude(p => p.Replies)
+                    .ThenInclude(r => r.User) // Load reply user info if needed
+            .Include(f => f.Posts)
+                .ThenInclude(p => p.User)  // Load the user info for each post
+            .FirstOrDefaultAsync(m => m.Id == id);
+
             if (forum == null)
             {
                 return NotFound();

@@ -4,27 +4,42 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Model.Title</h1>
+<p>@Model.Description</p>
+
+<h3>Posts</h3>
+@if (Model.Posts != null && Model.Posts.Any())
+{
+    foreach (var post in Model.Posts)
+    {
+        <div class="post">
+            <h4>
+                Posted by: @(post.User?.UserName ?? "Unknown")
+            </h4>
+            <p>@post.Content</p>
+            <p>
+                Posted on: @post.PostedAt
+            </p>
+            <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id">
+                View &amp; Reply
+            </a>
+        </div>
+    }
+}
+else
+{
+    <p>No posts yet.</p>
+}
+
+<!-- Link to create a new post for this forum -->
+<a asp-controller="ForumPosts"
+   asp-action="Create"
+   asp-route-forumId="@Model.Id"
+   class="btn btn-primary">
+    Create New Post
+</a>
 
 <div>
-    <h4>Forum</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit Forum</a> |
+    <a asp-action="Index">Back to Forums</a>
 </div>

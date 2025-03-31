@@ -12,29 +12,36 @@
 <table class="table">
     <thead>
         <tr>
+            @*<th>
+                Forum ID
+            </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Forum)
+                Forum Title
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayName("User")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Content)
+                @Html.DisplayNameFor(model => model.First().Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostedAt)
+                @Html.DisplayNameFor(model => model.First().PostedAt)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+
 @foreach (var item in Model) {
         <tr>
+            @*<td>
+                @(item.Forum?.Id ?? 0)
+            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Forum.Id)
+                @(item.Forum?.Title ?? "No Title")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @(item.User?.Id ?? "No User")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)

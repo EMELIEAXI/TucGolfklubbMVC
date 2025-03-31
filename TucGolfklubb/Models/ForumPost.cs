@@ -12,5 +12,8 @@
 
         public string Content { get; set; } = "";
         public DateTime PostedAt { get; set; } = DateTime.Now;
+
+        // Added navigation property for replies
+        public ICollection<ForumReply> Replies { get; set; } = new List<ForumReply>();
     }
 }

@@ -18,6 +18,7 @@ namespace TucGolfklubb.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Forum> Forums { get; set; }
         public DbSet<ForumPost> ForumPosts { get; set; }
+        public DbSet<ForumReply> Replies { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Booking> Bookings { get; set; }
 

@@ -351,7 +351,7 @@ p.callout {
     background-color: #eef3f9;
     padding: 1.5rem;
     border-radius: 10px;
-    padding-top: 80px; /* pushes content down below navbar */
+    padding-top: 120px; /* pushes content down below navbar */
 }
 
 /* Button Styles */
@@ -362,29 +362,34 @@ p.callout {
     transition: background-color 0.3s ease;
 }
 
-    .custom-dark-button:hover {
-        background-color: #537692;
-        color: #ffffff;
-    }
+.custom-dark-button {
+    background-color: #6c8fa8;
+    color: #001b2e; /* darker text for better contrast */
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+}
+
+.custom-dark-button:hover {
+    background-color: #537692;
+    color: #ffffff;
+}
 
 .custom-secondary-button {
-    background-color: #537692;
+    background-color: #537692; /* steel blue */
     color: #ffffff;
     border: none;
     transition: background-color 0.3s ease;
 }
 
 .custom-secondary-button:hover {
-    background-color: #1d3f58;
+    background-color: #1d3f58; /* darker blue */
+    color: #ffffff;
 }
 
 /* Prevent layout shift caused by scrollbar */
 html {
     overflow-y: scroll;
-}
-
-.forum-page a:visited {
-    color: lightgray;
 }
 
 .forum-title-link,
@@ -397,4 +402,37 @@ html {
 
 .forum-title-link:hover {
     color: #537692 !important;
+}
+
+.custom-view-button {
+    background-color: #6c8fa8;
+    color: #001b2e;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+}
+
+.custom-view-button:hover {
+    background-color: #537692;
+    color: #ffffff;
+}
+
+.btn-link-style {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1d3f58;
+    font-weight: 500;
+    font-style: italic;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-link-style:hover {
+    color: #537692;
+}
+
+.forum-page a:visited {
+    color: black;
 }

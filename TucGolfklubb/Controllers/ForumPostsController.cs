@@ -79,10 +79,10 @@ namespace TucGolfklubb.Controllers
                 forumPost.UserId = _userManager.GetUserId(User);
                 _context.Add(forumPost);
                 await _context.SaveChangesAsync();
-                // Redirect to the Forum details page after successful creation
-                return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });
+                // ✅ Redirect to ForumPost details (where reply form is available)
+                return RedirectToAction("Details", "ForumPosts", new { id = forumPost.Id });
             }
-            // If validation fails, check if ForumId is provided or need to show a dropdown
+            // Handle model validation errors: If validation fails, check if ForumId is provided or need to show a dropdown
             if (forumPost.ForumId != 0)
             {
                 ViewData["ForumId"] = forumPost.ForumId;

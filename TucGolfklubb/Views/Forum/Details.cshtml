@@ -9,34 +9,15 @@
 
 <h3>Inlägg</h3>
 @if (Model.Posts != null && Model.Posts.Any())
-@*{
-    foreach (var post in Model.Posts)
-    {
-        <div class="post">
-            <h4>
-                Posted by: @(post.User?.UserName ?? "Unknown")
-            </h4>
-            <p>@post.Content</p>
-            <p>
-                Posted on: @post.PostedAt
-            </p>
-            <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id">
-                View &amp; Reply
-            </a>
-        </div>
-    }
-}
-else
-{
-    <p>No posts yet.</p>
-}*@
 
 {
     <ul>
         @foreach (var post in Model.Posts)
         {
             <li>
-                <strong>@post.Content</strong><br />
+                <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id">
+                    @post.Content
+                </a>
                 <small>
                     av @(post.User?.UserName ?? "Okänd användare")
                     | <span class="text-muted">(@post.PostedAt.ToString("yyyy-MM-dd HH:mm"))</span>
@@ -54,8 +35,8 @@ else
 <a asp-controller="ForumPosts"
    asp-action="Create"
    asp-route-forumId="@Model.Id"
-   class="btn btn-primary">
-    Create New Post
+   class="btn btn-success">
+    Skapa nytt inlägg
 </a>
 
 <div>

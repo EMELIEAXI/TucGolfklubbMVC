@@ -10,27 +10,28 @@
 }
 else
 {
-    // We know Model is not null; assign it to a local variable using the null-forgiving operator
     var forumPost = Model!;
 
-    <h1>Details</h1>
+    <h1>Forumdiskussion</h1>
+
+    <!-- Forum Info Group -->
     <div>
-        <h4>ForumPost</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(m => forumPost.Content)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(m => forumPost.Content)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(m => forumPost.PostedAt)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(m => forumPost.PostedAt)
-            </dd>
-        </dl>
+        <p style="margin-bottom: 0;">
+            <strong>Forum:</strong> @forumPost.Forum?.Title
+        </p>
+        <p class="text-muted" style="margin-top: 0.1rem; margin-left: 1rem;">
+            <em>av: @(forumPost.User?.UserName ?? "Okänd") | publicerat: @forumPost.PostedAt.ToString("yyyy-MM-dd HH:mm")</em>
+        </p>
+    </div>
+
+    <!-- Inlägg Info Group -->
+    <div>
+        <p style="margin-bottom: 0;">
+            <strong>Inlägg:</strong> @forumPost.Content
+        </p>
+        <p class="text-muted" style="margin-top: 0.1rem; margin-left: 1rem;">
+            <em>av: @(forumPost.User?.UserName ?? "Okänd") | publicerat: @forumPost.PostedAt.ToString("yyyy-MM-dd HH:mm")</em>
+        </p>
     </div>
 
     <hr />
@@ -39,12 +40,10 @@ else
     {
         foreach (var reply in forumPost.Replies)
         {
-            <div class="reply">
+            <div class="border p-2 mb-2 rounded">
                 <p>@reply.Content</p>
-                <p>
-                    <small>
-                        Av: @(reply.User?.UserName ?? "Okänd"), publicerat: @reply.PostedAt
-                    </small>
+                <p class="text-muted">
+                    Av: @(reply.User?.UserName ?? "Okänd") | @reply.PostedAt
                 </p>
             </div>
         }
@@ -55,19 +54,29 @@ else
     }
 
     <hr />
-    <h3>Lägg till ditt svar</h3>
-    @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
+    <h3>Lämna ett svar</h3>
+    @if (User?.Identity != null && User.Identity.IsAuthenticated)
     {
-        @Html.AntiForgeryToken()
-        @Html.Hidden("forumPostId", forumPost.Id)
-        <div class="form-group">
-            <textarea name="replyContent" class="form-control" rows="3" placeholder="Skriv ditt svar här"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Skicka svar</button>
+        @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("forumPostId", forumPost.Id)
+
+            <div class="form-group">
+                <textarea name="replyContent" class="form-control" rows="3" placeholder="Skriv ditt svar här..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Skicka svar</button>
+        }
+    }
+    else
+    {
+        <p class="text-muted">Du måste vara inloggad för att svara.</p>
     }
 
-    <div>
-        <a asp-action="Edit" asp-route-id="@forumPost.Id">Edit</a> |
-        <a asp-action="Index">Back to List</a>
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@forumPost.Id">Ändra</a> |
+        <a asp-controller="Forum" asp-action="Details" asp-route-id="@forumPost.ForumId" class="btn btn-secondary mt-3">
+            Back to Inlägg
+        </a>
     </div>
 }

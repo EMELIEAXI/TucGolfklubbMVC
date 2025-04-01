@@ -13,19 +13,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @{
-                // Try to get the pre-set ForumId value from ViewData.
                 var forumIdValue = ViewData["ForumId"] as int?;
             }
             @if (forumIdValue.HasValue)
             {
-                @* If a forum ID is provided, render a hidden field and optionally show the ID as read-only *@
+                <!-- Hidden input if coming from a specific forum -->
                 <input type="hidden" asp-for="ForumId" value="@forumIdValue.Value" />
                 <p>Forum ID: @forumIdValue.Value</p>
             }
             else
             {
+                <!-- Dropdown if no forum pre-selected -->
                 <div class="form-group">
-                    <label asp-for="ForumId" class="control-label"></label>
+                    <label asp-for="ForumId" class="control-label">Välj forum</label>
                     <select asp-for="ForumId" class="form-control" asp-items="ViewBag.ForumId"></select>
                 </div>
             }
@@ -37,7 +37,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="PostedAt" class="control-label"></label>
-                <input asp-for="PostedAt" class="form-control" />
+                <!-- Hide the PostedAt field, let the controller set it -->
+                <input type="hidden" asp-for="PostedAt" value="@DateTime.Now" />
                 <span asp-validation-for="PostedAt" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,9 +48,24 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@{
+    var forumId = ViewData["ForumId"] as int?;
+}
+
+@if (forumId.HasValue)
+{
+    <div>
+        <a asp-controller="Forum" asp-action="Details" asp-route-id="@forumId.Value" class="btn btn-secondary">
+            Back to Inlägg
+        </a>
+    </div>
+}
+else
+{
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -9,7 +9,7 @@ body, html {
 }
 
 .background-div-omoss {
-    background-image: url(~/images/bakgrund.omoss.jpg);
+    background-image: url('/images/bakgrund.omoss.jpg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

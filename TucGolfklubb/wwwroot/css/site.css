@@ -43,12 +43,12 @@
 
 a:visited {
     text-decoration: underline;
-    color: #9400D3;
+    color: #4b0082;
 }
 
 a:active {
     text-decoration: none;
-    color: rgb(191, 191, 191);
+    color: #537692;
 }
 
 /* Välkommen media */
@@ -344,3 +344,57 @@ p.callout {
         .newsletter-container button:hover {
             background-color: #004d00;
         }
+
+
+/* Forum Page Wrapper */
+.forum-page {
+    background-color: #eef3f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    padding-top: 80px; /* pushes content down below navbar */
+}
+
+/* Button Styles */
+.custom-dark-button {
+    background-color: #1d3f58;
+    color: #eef3f9;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+    .custom-dark-button:hover {
+        background-color: #537692;
+        color: #ffffff;
+    }
+
+.custom-secondary-button {
+    background-color: #537692;
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-secondary-button:hover {
+    background-color: #1d3f58;
+}
+
+/* Prevent layout shift caused by scrollbar */
+html {
+    overflow-y: scroll;
+}
+
+.forum-page a:visited {
+    color: lightgray;
+}
+
+.forum-title-link,
+.forum-title-link:visited {
+    color: #001b2e !important;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.forum-title-link:hover {
+    color: #537692 !important;
+}

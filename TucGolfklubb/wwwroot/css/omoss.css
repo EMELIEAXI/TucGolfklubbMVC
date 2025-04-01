@@ -1,0 +1,591 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.background-div-omoss {
+    background-image: url(~/images/bakgrund.omoss.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* min-height: (calc100vh-100px); */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-attachment: fixed;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+/* Text rutan på om oss*/
+.text-container-omoss {
+    height: 90%;
+    width: 90%;
+    color: black;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    margin: 3%;
+    background-image: linear-gradient(to right, rgb(255,255,255,1 ), rgb(255, 255, 255,0));
+    border-radius: 20px;
+    flex-wrap: wrap;
+}
+
+.omoss {
+    font-size: medium;
+    letter-spacing: 2px;
+    margin: 10px;
+}
+
+.meny-höger-sida-omoss {
+    font-family: "Josefin Sans";
+    line-height: 50px;
+    margin-top: 10%;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding-left: 0;
+}
+
+    .meny-höger-sida-omoss .link-omoss {
+        display: inline;
+        padding: 0 30px;
+    }
+
+
+.link-omoss a {
+    color: rgb(9, 20, 46);
+    justify-content: space-around;
+}
+
+    .link-omoss a:visited {
+        color: rgb(9, 20, 46);
+    }
+
+    /* .meny-höger-sida-omoss  */
+
+
+    .link-omoss a:hover {
+        background-color: rgba(9, 20, 46, 0.7);
+        color: #fff;
+        border-radius: 3%;
+        padding: 10px 10px;
+        margin: 2%;
+        animation: fade 1s;
+    }
+
+@keyframes fade {
+    from {
+        padding: 0;
+    }
+
+    to {
+        padding: 10px 10px;
+    }
+}
+
+.helasidan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100vh;
+    /* flex-wrap: wrap; */
+}
+
+.historia {
+    display: block;
+    border: solid 1px #7b7d80;
+    padding: 2px;
+    margin: auto;
+    margin-top: 3%;
+    width: 50%;
+    text-align: center;
+    background-color: rgb(128, 128, 128, 0.3);
+    padding: 5%;
+}
+
+.anchor-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+    font-family: "Josefin Sans";
+}
+
+    .anchor-links li {
+        display: inline;
+        letter-spacing: 3px;
+        margin-left: 20px;
+    }
+
+        .anchor-links li a {
+            color: #000;
+        }
+
+.faciliteter {
+    /* padding: 20px; */
+    /* overflow-y: auto; */
+    /* align-items: center; */
+    /* height: 100vh; */
+    margin-top: 2%;
+    margin-bottom: 0;
+}
+
+.bild-fac {
+    max-width: 25%;
+}
+
+.facilitet1 {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    max-height: 40vh;
+    margin: 5%;
+}
+
+    .facilitet1 .text1 {
+        margin: 0 0 0 30px;
+        background-color: rgba(85, 85, 85, 0.3);
+        border: dotted black;
+        padding: 0.5rem;
+    }
+
+.facilitet2 {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 70%;
+    height: auto;
+    margin: 5%;
+}
+
+    .facilitet2 .text2 {
+        margin: 0 30px 0 0;
+        background-color: rgba(85, 85, 85, 0.3);
+        border: dotted black;
+        padding: 0.5rem;
+    }
+
+.sidorubrik {
+    font-family: "Josefin Sans";
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 5% 50% 5% 5%;
+    border: solid 1px black;
+    padding: 1rem;
+}
+/* UNDERMENYN OMOSS------------------------*/
+
+@media screen and (max-width:768px) {
+
+    .meny-höger-sida-omoss {
+        font-family: "Josefin Sans";
+        line-height: 25px;
+        margin-top: 40%;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        list-style: none;
+        align-items: start;
+    }
+
+
+    .link-omoss a {
+        color: rgb(9, 20, 46);
+    }
+
+        .link-omoss a:visited {
+            color: rgb(9, 20, 46);
+        }
+
+        /* .meny-höger-sida-omoss  */
+        .link-omoss a:hover {
+            margin: 2%;
+            text-decoration: none;
+        }
+}
+
+/* SLUT ---------------------------------------*/
+
+/* MEDIA FÖR FACILITETER --------------------------*/
+@media screen and (max-width: 768px) {
+    .faciliteter {
+        margin: auto;
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+    }
+
+    .bild-fac {
+        width: 100%;
+        margin: auto;
+    }
+
+    .facilitet1, .facilitet2 {
+        display: flex;
+        flex-direction: column-reverse; /* Gör så att innehållet staplas vertikalt */
+        width: 90%; /* Se till att de tar upp hela bredden */
+        margin: 50px 0; /* Lite marginal för att hålla isär sektionerna */
+        height: auto; /* Anpassar höjden efter innehållet */
+        max-height: fit-content;
+    }
+
+        .facilitet1 .text1, .facilitet2 .text2 {
+            margin: 10px 0 0 0; /* Justera marginaler */
+            background-color: rgba(85, 85, 85, 0.3);
+            border: dotted black;
+            padding: 0.5rem;
+        }
+
+
+    .sidorubrik {
+        float: left;
+        margin: auto;
+        width: 90%;
+        padding: 0%;
+    }
+
+    #bild1-fac {
+        margin-top: 100px;
+    }
+}
+/* SLUT PÅ MEDIA FACILITETER --------------------*/
+
+#facili {
+    /* background-color: rgba(9, 20, 46); */
+    background-color: rgb(75, 82, 95);
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.background-div2 {
+    background-image: url(/Grupprojekt-Golfklubb/bilder/golf-2217600_1280.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*  min-height:calc(100vh-100px); */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-attachment: fixed;
+    flex-direction: column;
+    flex: 1;
+}
+
+.meny-höger-sida-omoss {
+    font-family: "Josefin Sans";
+    line-height: 50px;
+    margin-top: 10%;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding-left: 0;
+}
+
+    .meny-höger-sida-omoss .link-omoss {
+        display: inline;
+        padding: 0 30px;
+    }
+
+.link-omoss a {
+    color: rgb(9, 20, 46);
+    justify-content: space-around;
+}
+
+    .link-omoss a:visited {
+        color: rgb(9, 20, 46);
+    }
+
+    /* .meny-höger-sida-omoss  */
+
+    .link-omoss a:hover {
+        background-color: rgba(9, 20, 46, 0.7);
+        color: #fff;
+        border-radius: 3%;
+        padding: 10px 10px;
+        margin: 2%;
+        animation: fade 1s;
+    }
+
+@keyframes fade {
+    from {
+        padding: 0;
+    }
+
+    to {
+        padding: 10px 10px;
+    }
+}
+
+.banorna {
+    margin: 5%;
+    flex-wrap: wrap;
+    background-color: rgb(128, 128, 128, 0.3);
+    font-size: large;
+}
+
+.banan1, .banan2, .banan3 {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10%;
+}
+
+.img-bana {
+    width: 25%;
+    height: 100%;
+    margin: 2%;
+    border-radius: 50%;
+}
+
+.text-bana {
+    width: 50%;
+    float: right;
+    margin-left: 15%;
+    line-height: 2rem;
+}
+/* MEDIA FÖR BANORNA ------------------*/
+@media screen and (max-width:768px) {
+
+    .meny-höger-sida-omoss {
+        font-family: "Josefin Sans";
+        line-height: 25px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        list-style: none;
+        float: left;
+        margin-top: 40%;
+    }
+
+
+    .link-omoss a {
+        color: rgb(9, 20, 46);
+    }
+
+        .link-omoss a:visited {
+            color: rgb(9, 20, 46);
+        }
+
+        /* .meny-höger-sida-omoss  */
+        .link-omoss a:hover {
+            margin: 2%;
+            text-decoration: none;
+        }
+
+    .banorna {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .banan1 {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 25%;
+    }
+
+    .banan2 {
+        margin-top: 150px;
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .banan3 {
+        margin-top: 150px;
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+        .banan1 img, .banan2 img, .banan3 img {
+            margin: auto;
+            width: 70%;
+            height: auto;
+        }
+
+    .text-bana {
+        margin: auto;
+        width: 90%;
+    }
+}
+/* MEDIA FÖR BANORNA ------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.background-div2 {
+    background-image: url(/Grupprojekt-Golfklubb/bilder/golf-2217600_1280.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* min-height: calc(100vh-100px);*/
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-attachment: fixed;
+    flex-direction: column;
+    flex: 1;
+}
+
+.meny-höger-sida-omoss {
+    font-family: "Josefin Sans";
+    line-height: 50px;
+    margin-top: 10%;
+    margin-bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding-left: 0;
+}
+
+    .meny-höger-sida-omoss .link-omoss {
+        display: inline;
+        padding: 0 30px;
+    }
+
+.link-omoss a {
+    color: rgb(9, 20, 46);
+    justify-content: space-around;
+}
+
+    .link-omoss a:visited {
+        color: rgb(9, 20, 46);
+    }
+
+    /* .meny-höger-sida-omoss  */
+
+    .link-omoss a:hover {
+        background-color: rgba(9, 20, 46, 0.7);
+        color: #fff;
+        border-radius: 3%;
+        padding: 10px 10px;
+        margin: 2%;
+        animation: fade 1s;
+    }
+
+@keyframes fade {
+    from {
+        padding: 0;
+    }
+
+    to {
+        padding: 10px 10px;
+    }
+}
+
+.helasidan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* height: (calc100vh-100px);*/
+    flex: 1;
+    /* flex-wrap: wrap; */
+}
+
+.historia {
+    display: block;
+    border: solid 1px #7b7d80;
+    padding: 2px;
+    margin: auto;
+    margin-top: 3%;
+    width: 50%;
+    text-align: center;
+    background-color: rgb(128, 128, 128, 0.3);
+    padding: 5%;
+}
+
+.anchor-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+    font-family: "Josefin Sans";
+}
+
+    .anchor-links li {
+        display: inline;
+        letter-spacing: 3px;
+        margin-left: 20px;
+    }
+
+        .anchor-links li a {
+            color: #000;
+        }
+
+.sidorubrik {
+    font-family: "Josefin Sans";
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    width:50%;
+    margin: 15% 5%;
+    border: solid 1px black;
+    padding: 1rem;
+}
+
+@media screen and (max-width:768px) {
+
+    .meny-höger-sida-omoss {
+        font-family: "Josefin Sans";
+        line-height: 25px;
+        margin-top: 10%;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        color: #fff;
+        list-style: none;
+        float: left;
+        margin-top: 40%;
+    }
+    .sidorubrik {
+        width:100%;
+    }
+
+
+    .link-omoss a {
+        color: rgb(9, 20, 46);
+    }
+
+        .link-omoss a:visited {
+            color: rgb(9, 20, 46);
+        }
+
+        /* .meny-höger-sida-omoss  */
+        .link-omoss a:hover {
+            margin: 2%;
+            text-decoration: none;
+        }
+
+    .anchor-links-vision-ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        line-height: 20px;
+    }
+
+    .historia {
+        width: 80%;
+    }
+}

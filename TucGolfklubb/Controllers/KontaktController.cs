@@ -4,7 +4,7 @@ namespace TucGolfklubb.Controllers
 {
     public class KontaktController : Controller
     {
-        public IActionResult Kontakt()
+        public IActionResult Index()
         {
             return View();
         }

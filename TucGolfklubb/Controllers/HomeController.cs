@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TucGolfklubb.Models;
 
@@ -19,6 +20,12 @@ namespace TucGolfklubb.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult MemberHome()
         {
             return View();
         }

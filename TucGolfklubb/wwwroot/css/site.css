@@ -356,20 +356,15 @@ p.callout {
 
 /* Button Styles */
 .custom-dark-button {
-    background-color: #1d3f58;
-    color: #eef3f9;
-    border: none;
-    transition: background-color 0.3s ease;
-}
-
-.custom-dark-button {
     background-color: #6c8fa8;
-    color: #001b2e; /* darker text for better contrast */
+    color: #001b2e;
     border: none;
     transition: background-color 0.3s ease, color 0.3s ease;
     font-weight: 600;
 }
 
+    /* background-color: #1d3f58;*/
+    /*color: #eef3f9;*/
 .custom-dark-button:hover {
     background-color: #537692;
     color: #ffffff;

@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Kontakt";
+}
+<link rel="stylesheet" href="~/css/Kontakt.css" />
+<body class="kontakt">
+    <div class="header-image">
+        <img src="~/images/kontakt-header.jpg" alt="Golfklubb Header Image">
+    </div>
+
+
+<div class="contact-container">
+    <div class="contact-info">
+        <h1>Kontaktinformation</h1>
+        <p>Vänligen kontakta oss för eventuella frågor eller för att boka tid.</p>
+
+        <h2>Öppettider</h2>
+        <p>Måndag - Fredag: 09:00 - 18:00</p>
+        <p>Lördag - Söndag: 10:00 - 18:00</p>
+
+        <h2>Kontakta oss</h2>
+        <p>E-post: <a href="mailto:info@golfklubb.se">info@golfklubb.se</a></p>
+        <p>Telefon: +46 123 456 789</p>
+
+        <h2>Besök oss</h2>
+        <p>Adress: Golfvägen 1, 123 45 Stockholm</p>
+    </div>
+
+    <div class="map-info">
+        <h2>Karta och Vägbeskrivning</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2031.1858588453745!2d18.030514777066706!3d59.39661157464691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9c46c80c92ad%3A0xd344c8724a917a8e!2sGolfv%C3%A4gen%2C%20Danderyd!5e0!3m2!1ssv!2sse!4v1728460846387!5m2!1ssv!2sse"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+        <p>
+            Se vår <a href="https://www.google.com/maps" target="_blank">Google-karta här</a> för att hitta till
+            klubben.
+        </p>
+    </div>
+</div>
+
+
+<div class="container-question">
+
+    <div class="contact-form">
+        <form action="/" method="POST" class="message-box">
+            <h1>Kontakta oss</h1>
+            <h5>
+                Tveka inte att höra av dig om du har några frågor eller funderingar eller bara vill ge oss feedback
+            </h5>
+            <label>Kontakta oss:</label>
+            <textarea id="message" cols="50" rows="10" placeholder="Skriv ditt meddelande här..."></textarea> <br>
+
+            <p>Vilket datum gäller ärendet? (valfritt)</p>
+            <input type="date" name="when" id="date">
+
+            <div>
+                <p>Vill du att vi återkopplar till dig?</p>
+                <label for="ja">Ja</label>
+                <input type="radio" name="återkoppling" id="ja" value="Ja">
+                <label for="nej">Nej</label>
+                <input type="radio" name="återkoppling" id="nej" value="nej">
+            </div>
+
+            <p>Om ja var vänlig fyll i din e-postadress:</p>
+            <input type="email" required placeholder="Fyll i e-post..." name="mail" id="mail-back"><br>
+            <input type="button" class="submit-button" value="skicka">
+        </form>
+    </div>
+
+
+</div>
+</body>

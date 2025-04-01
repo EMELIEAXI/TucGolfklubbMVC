@@ -4,81 +4,77 @@
 @{
     ViewData["Title"] = "Log in";
 }
+<link rel="stylesheet" href="~/css/Medlem.css" />
+<style>
+    body {
+        background-image: src('/images/medlem.jpg');
+    }
+</style>
+    <!-- Medlemssektion -->
+    <div class="background-div-medlem">
+        <div class="medlems-container">
 
-<h1>@ViewData["Title"]</h1>
 
-<div class="body-login" style="margin:50px; padding:50px;">
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email" class="form-label">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
+            <!-- Text och inloggningssektion -->
+            <div class="inlogning-medlem">
+                <h2>Medlemsinloggning</h2>
+                <p>Logga in på ditt konto för att få tillgång till medlemsforum och nyhetsbrev.</p>
+
+                <!-- Inloggningsformulär -->
+                <form id="account" method="post">
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="form-label">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password" class="form-label">Password</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <div>
+                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Logga in</button>
+                    </div>
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            <a id="forgot-password" asp-page="./ForgotPassword">Glömt lösenord?</a>
+                        </p>
+                        <p>
+                          Har du inget konto? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registera dig här!</a>
                         </p>
                     </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
+                </form>
+
+            </div>
+        </div>
+        <!-- Medlemsförmåner -->
+        <div class="medlems-container">
+            <div class="text-medlem">
+                <h2>Medlemsförmåner</h2>
+                <p>Som medlem i vår golfklubb erbjuder vi en rad exklusiva förmåner som förbättrar din golfupplevelse och ger dig tillgång till våra bästa tjänster. Nedan finner du några av de förmåner du får som medlem hos oss:</p>
+
+                <p><strong>Exklusiva bokningstider:</strong> Få prioritet vid bokningar och tillgång till exklusiva starttider under helger och helgdagar.</p>
+                <p><strong>Medlemsrabatter:</strong> Njut av rabatter på greenfee, lektioner, och utrustning i vår golfshop.</p>
+                <p><strong>Tävlingar och event:</strong> Få inbjudningar till medlemmars tävlingar, sociala event och turneringar som hålls under hela året.</p>
+                <p><strong>Nyhetsbrev:</strong> Håll dig uppdaterad med vårt exklusiva nyhetsbrev som ger dig de senaste nyheterna, erbjudanden och tips om banan.</p>
+                <p><strong>Träningsmöjligheter:</strong> Som medlem får du tillgång till våra träningsfaciliteter såsom driving range och putting green utan extra kostnad.</p>
+                <p><strong>Gästinbjudningar:</strong> Ta med vänner och familj till rabatterade priser när de spelar med dig på vår bana.</p>
+                <p><strong>Personlig utveckling:</strong> Delta i regelbundna träningspass och golflektioner med våra professionella tränare som hjälper dig förbättra ditt spel.</p>
+                <p><strong>Medlemsforum:</strong> Få tillgång till vårt exklusiva medlemsforum där du kan diskutera golfstrategier, dela erfarenheter och planera rundor med andra medlemmar.</p>
+
+
+                <p>Med våra medlemsförmåner strävar vi efter att ge dig en förstklassig upplevelse både på och utanför golfbanan. Oavsett om du är nybörjare eller erfaren spelare finns det något för alla i vår golfklubb!</p>
+            </div>
+        </div>
     </div>
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

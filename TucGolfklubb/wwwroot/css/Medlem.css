@@ -1,0 +1,102 @@
+﻿
+.background-div-medlem, .register-background {
+    background-image: url('~/images/medlem.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 120px;
+    min-height: 100vh;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .background-div-medlem, .register-background {
+        background-position: top;
+        padding-top: 60px;
+    }
+}
+
+
+.medlems-container, .register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+.inlogning-medlem {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.login-form input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.login-form button {
+    background-color: #006400;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+    .login-form button:hover {
+        background-color: #004d00;
+    }
+
+
+.register-section {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding-bottom: 10px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.register-form input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.register-form button {
+    background-color: #006400;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 90%;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+    .register-form button:hover {
+        background-color: #004d00;
+    }

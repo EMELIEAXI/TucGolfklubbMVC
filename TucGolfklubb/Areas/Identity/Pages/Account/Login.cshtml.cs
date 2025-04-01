@@ -49,7 +49,7 @@ namespace TucGolfklubb.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
-            ReturnUrl ??= Url.Action("MemberHome", "Home");
+            ReturnUrl ??= Url.Action("Index", "Home");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 

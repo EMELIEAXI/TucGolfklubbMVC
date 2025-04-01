@@ -1,72 +1,79 @@
 ﻿@model TucGolfklubb.Models.ForumPost
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa nytt inlägg";
+    var forumIdValue = ViewData["ForumId"] as int?;
 }
 
-<h1>Create</h1>
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">Skapa nytt inlägg</h2>
 
-<h4>ForumPost</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @{
-                var forumIdValue = ViewData["ForumId"] as int?;
-            }
-            @if (forumIdValue.HasValue)
-            {
-                <!-- Hidden input if coming from a specific forum -->
-                <input type="hidden" asp-for="ForumId" value="@forumIdValue.Value" />
-                <p>Forum ID: @forumIdValue.Value</p>
-            }
-            else
-            {
-                <!-- Dropdown if no forum pre-selected -->
-                <div class="form-group">
-                    <label asp-for="ForumId" class="control-label">Välj forum</label>
-                    <select asp-for="ForumId" class="form-control" asp-items="ViewBag.ForumId"></select>
+    <div class="card shadow-sm border-0">
+        <div class="card-body" style="background-color: #eef3f9;">
+            <form asp-action="Create">
+                @if (forumIdValue.HasValue && ViewData["ForumTitle"] is string forumTitle)
+                {
+                    <input type="hidden" asp-for="ForumId" value="@forumIdValue.Value" />
+
+                    <div class="mb-3">
+                        <p class="mb-1">
+                            <strong>Forum:</strong> @forumTitle
+                        </p>
+                        <p class="text-muted" style="font-size: 0.9rem;">
+                            @{
+                                var authorName = User.Identity?.Name ?? "Okänd användare";
+                            }
+
+                            <em>
+                                av @authorName |
+                                @DateTime.Now.ToString("yyyy-MM-dd HH:mm")
+                            </em>
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <!-- Show forum selector -->
+                    <div class="mb-3">
+                        <label asp-for="ForumId" class="form-label" style="color: #1d3f58;">Välj forum</label>
+                        <select asp-for="ForumId" class="form-control" asp-items="ViewBag.ForumId"></select>
+                    </div>
+                }
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Content" class="form-label" style="color: #1d3f58;"></label>
+                    <input asp-for="Content" class="form-control" />
+                    <span asp-validation-for="Content" class="text-danger"></span>
                 </div>
-            }
-            
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostedAt" class="control-label"></label>
-                <!-- Hide the PostedAt field, let the controller set it -->
+
                 <input type="hidden" asp-for="PostedAt" value="@DateTime.Now" />
-                <span asp-validation-for="PostedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <input type="submit" value="Skicka inlägg" class="btn custom-secondary-button" />
+
+                    @if (forumIdValue.HasValue)
+                    {
+                        <a asp-controller="Forum" asp-action="Details" asp-route-id="@forumIdValue.Value"
+                           class="btn custom-secondary-button">
+                            ← Tillbaka till inlägg
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="Index" class="btn custom-secondary-button">
+                            ← Tillbaka till lista
+                        </a>
+                    }
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-@{
-    var forumId = ViewData["ForumId"] as int?;
-}
-
-@if (forumId.HasValue)
-{
-    <div>
-        <a asp-controller="Forum" asp-action="Details" asp-route-id="@forumId.Value" class="btn btn-secondary">
-            Back to Inlägg
-        </a>
-    </div>
-}
-else
-{
-    <div>
-        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-    </div>
-}
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

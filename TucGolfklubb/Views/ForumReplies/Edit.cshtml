@@ -1,13 +1,44 @@
 ﻿@model TucGolfklubb.Models.ForumReply
 
-<h2>Edit Reply</h2>
+@{
+    ViewData["Title"] = "Redigera svar";
+}
 
-<form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
-    <div class="form-group">
-        <label asp-for="Content" class="control-label"></label>
-        <textarea asp-for="Content" class="form-control"></textarea>
-        <span asp-validation-for="Content" class="text-danger"></span>
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">Redigera svar</h2>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body" style="background-color: #eef3f9;">
+            <form asp-action="Edit">
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="mb-3">
+                    <label asp-for="Content" class="form-label" style="color: #1d3f58;"></label>
+                    <textarea asp-for="Content" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <button type="submit" class="btn custom-secondary-button">Spara</button>
+
+                    <a asp-controller="ForumPosts" asp-action="Details"
+                       asp-route-id="@Model.ForumPostId"
+                       class="btn custom-secondary-button">
+                        ← Tillbaka till inlägg
+                    </a>
+                </div>
+            </form>
+
+            <div class="d-flex justify-content-end mt-3">
+                <a asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-danger">
+                   Radera svar
+                </a>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

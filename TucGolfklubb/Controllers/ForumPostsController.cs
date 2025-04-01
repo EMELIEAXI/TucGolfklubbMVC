@@ -58,14 +58,17 @@ namespace TucGolfklubb.Controllers
         {
             if (forumId.HasValue)
             {
-                // If a forumId is passed, use it directly
+                var forum = _context.Forums.FirstOrDefault(f => f.Id == forumId.Value);
+                if (forum == null) return NotFound();
+
                 ViewData["ForumId"] = forumId.Value;
+                ViewData["ForumTitle"] = forum.Title; // This enables display in the form
             }
             else
             {
-                // Otherwise, provide a dropdown list
                 ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Title");
             }
+
             return View();
         }
 

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TucGolfklubb.Controllers
 {
+    [Authorize]
     public class ForumPostsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -117,36 +119,39 @@ namespace TucGolfklubb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ForumId,Content,PostedAt")] ForumPost forumPost)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ForumId,Content")] ForumPost formModel)
         {
-            if (id != forumPost.Id)
+            if (id != formModel.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var postToUpdate = await _context.ForumPosts.FindAsync(id);
+                if (postToUpdate == null)
+                {
+                    return NotFound();
+                }
+
                 try
                 {
-                    _context.Update(forumPost);
+                    postToUpdate.Content = formModel.Content;
+                    postToUpdate.PostedAt = DateTime.Now;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ForumPostExists(forumPost.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    // Just rethrow — we're not doing custom concurrency handling
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
+
+                // ✅ Go back to the forum page
+                return RedirectToAction("Details", "Forum", new { id = formModel.ForumId });
             }
-            ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Id", forumPost.ForumId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", forumPost.UserId);
-            return View(forumPost);
+
+            return View(formModel);
         }
 
         // GET: ForumPosts/Delete/5

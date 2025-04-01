@@ -9,19 +9,27 @@
 
 <h3>Inlägg</h3>
 @if (Model.Posts != null && Model.Posts.Any())
-
 {
     <ul>
         @foreach (var post in Model.Posts)
         {
-            <li>
+            <li style="margin-bottom: 1rem;">
                 <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id">
                     @post.Content
-                </a>
-                <small>
-                    av @(post.User?.UserName ?? "Okänd användare")
-                    | <span class="text-muted">(@post.PostedAt.ToString("yyyy-MM-dd HH:mm"))</span>
-                </small>
+                </a><br />
+
+                <span style="margin-left: 1rem;">
+                    av @(post.User?.UserName ?? "Okänd användare") |
+                    @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
+
+                    @if (User.Identity?.IsAuthenticated == true && User.Identity.Name == post.User?.UserName)
+                    {
+                        <span style="font-style: italic; margin-left: 2rem;">
+                            <a asp-controller="ForumPosts" asp-action="Edit" asp-route-id="@post.Id">edit</a> |
+                            <a asp-controller="ForumPosts" asp-action="Delete" asp-route-id="@post.Id">delete</a>
+                        </span>
+                    }
+                </span>
             </li>
         }
     </ul>

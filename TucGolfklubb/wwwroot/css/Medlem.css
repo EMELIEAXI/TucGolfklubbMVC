@@ -1,6 +1,6 @@
 ﻿
 .background-div-medlem, .register-background {
-    background-image: url('~/images/medlem.jpg');
+    background-image: url('/Images/medlem.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

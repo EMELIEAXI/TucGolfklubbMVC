@@ -66,14 +66,39 @@ namespace TucGolfklubb.Data
 
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Klubbor" },
-                new Category { Id = 2, Name = "Bollar" },
-                new Category { Id = 3, Name = "Kläder" }
+                new Category { Id = 2, Name = "Kläder" },
+                new Category { Id = 3, Name = "Skor" },
+                new Category { Id = 4, Name = "Väskor" },
+                new Category { Id = 5, Name = "Tillbehör" },
+                new Category { Id = 6, Name = "Bollar" },
+                new Category { Id = 7, Name = "Träningsutrustning" },
+                new Category { Id = 8, Name = "Elektronik" }
             );
 
             modelBuilder.Entity<Product>().HasData(
-                new Product { Id = 1, Name = "Callaway Järnset", Description = "Komplett set...", Price = 5999.00m, CategoryId = 1 },
-                new Product { Id = 2, Name = "Titleist Pro V1", Description = "Tourklassad golfboll...", Price = 549.00m, CategoryId = 2 },
-                new Product { Id = 3, Name = "Puma Golf Pikétröja", Description = "Andningsaktiv piké...", Price = 399.00m, CategoryId = 3 }
+                new Product { Id = 1, Name = "Drivers", Description = "", Price = 3000.00m, CategoryId = 1 },
+                new Product { Id = 2, Name = "Järnklubbor", Description = "", Price = 6000.00m, CategoryId = 1 },
+                new Product { Id = 3, Name = "Wedges", Description = "", Price = 1500.00m, CategoryId = 1 },
+                new Product { Id = 4, Name = "Putters", Description = "", Price = 2500.00m, CategoryId = 1 },
+                new Product { Id = 5, Name = "Tröjor", Description = "", Price = 800.00m, CategoryId = 2 },
+                new Product { Id = 6, Name = "Byxor och shorts", Description = "", Price = 1200.00m, CategoryId = 2 },
+                new Product { Id = 7, Name = "Jackor", Description = "", Price = 1500.00m, CategoryId = 2 },
+                new Product { Id = 8, Name = "Kepsar", Description = "", Price = 300.00m, CategoryId = 2 },
+                new Product { Id = 9, Name = "Spikade skor", Description = "", Price = 1800.00m, CategoryId = 3 },
+                new Product { Id = 10, Name = "Spikfria skor", Description = "", Price = 1800.00m, CategoryId = 3 },
+                new Product { Id = 11, Name = "Stöd och dämpning", Description = "", Price = 1800.00m, CategoryId = 3 },
+                new Product { Id = 12, Name = "Caddyväskor", Description = "", Price = 2500.00m, CategoryId = 4 },
+                new Product { Id = 13, Name = "Bärväskor", Description = "", Price = 1200.00m, CategoryId = 4 },
+                new Product { Id = 14, Name = "Tee", Description = "", Price = 100.00m, CategoryId = 5 },
+                new Product { Id = 15, Name = "Handskar", Description = "", Price = 299.00m, CategoryId = 5 },
+                new Product { Id = 16, Name = "Paraplyer", Description = "", Price = 500.00m, CategoryId = 5 },
+                new Product { Id = 17, Name = "Handdukar", Description = "", Price = 200.00m, CategoryId = 5 },
+                new Product { Id = 18, Name = "Bollar", Description = "", Price = 400.00m, CategoryId = 6 },
+                new Product { Id = 19, Name = "Puttingmattor", Description = "", Price = 1000.00m, CategoryId = 7 },
+                new Product { Id = 20, Name = "Träningsredskap", Description = "", Price = 1000.00m, CategoryId = 7 },
+                new Product { Id = 21, Name = "GPS-enheter", Description = "", Price = 2500.00m, CategoryId = 8 },
+                new Product { Id = 22, Name = "Avståndsmätare", Description = "", Price = 1500.00m, CategoryId = 8 },
+                new Product { Id = 23, Name = "Appar", Description = "", Price = 1000.00m, CategoryId = 8 }
             );
 
             modelBuilder.Entity<Forum>().HasData(

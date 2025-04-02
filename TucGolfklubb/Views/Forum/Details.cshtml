@@ -1,4 +1,6 @@
 ﻿@model TucGolfklubb.Models.Forum
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     ViewData["Title"] = "Forumdetaljer";
@@ -6,6 +8,14 @@
 
 <div class="container forum-page">
     <h2 class="mb-4 text-dark">@Model.Title</h2>
+
+    @if (UserManager.GetUserId(User) == Model.UserId)
+    {
+        <div class="mb-3">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Redigera forum</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger btn-sm">Ta bort forum</a>
+        </div>
+    }
 
     <p style="color: #1d3f58;">@Model.Description</p>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,10 +16,12 @@ namespace TucGolfklubb.Controllers
     public class ForumController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ForumController(ApplicationDbContext context)
+        public ForumController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Forum
@@ -36,6 +39,7 @@ namespace TucGolfklubb.Controllers
             }
 
             var forum = await _context.Forums
+            .Include(f => f.User)
             .Include(f => f.Posts)
                 .ThenInclude(p => p.Replies)
                     .ThenInclude(r => r.User) // Load reply user info if needed
@@ -66,6 +70,7 @@ namespace TucGolfklubb.Controllers
         {
             if (ModelState.IsValid)
             {
+                forum.UserId = _userManager.GetUserId(User);
                 _context.Add(forum);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

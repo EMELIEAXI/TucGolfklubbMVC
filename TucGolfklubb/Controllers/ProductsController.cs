@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,25 +10,23 @@ using TucGolfklubb.Models;
 
 namespace TucGolfklubb.Controllers
 {
-    [Authorize]
-    public class ForumController : Controller
+    public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ForumController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProductsController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
-        // GET: Forum
+        // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Forums.ToListAsync());
+            var applicationDbContext = _context.Products.Include(p => p.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Forum/Details/5
+        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,47 +34,42 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums
-            .Include(f => f.User)
-            .Include(f => f.Posts)
-                .ThenInclude(p => p.Replies)
-                    .ThenInclude(r => r.User) // Load reply user info if needed
-            .Include(f => f.Posts)
-                .ThenInclude(p => p.User)  // Load the user info for each post
-            .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (forum == null)
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(forum);
+            return View(product);
         }
 
-        // GET: Forum/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
             return View();
         }
 
-        // POST: Forum/Create
+        // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description")] Forum forum)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,Image,Stock,CategoryId")] Product product)
         {
             if (ModelState.IsValid)
             {
-                forum.UserId = _userManager.GetUserId(User);
-                _context.Add(forum);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(forum);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Forum/Edit/5
+        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,22 +77,23 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums.FindAsync(id);
-            if (forum == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            return View(forum);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            return View(product);
         }
 
-        // POST: Forum/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description")] Forum forum)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,Image,Stock,CategoryId")] Product product)
         {
-            if (id != forum.Id)
+            if (id != product.Id)
             {
                 return NotFound();
             }
@@ -110,12 +102,12 @@ namespace TucGolfklubb.Controllers
             {
                 try
                 {
-                    _context.Update(forum);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ForumExists(forum.Id))
+                    if (!ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -126,10 +118,11 @@ namespace TucGolfklubb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(forum);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", product.CategoryId);
+            return View(product);
         }
 
-        // GET: Forum/Delete/5
+        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,34 +130,35 @@ namespace TucGolfklubb.Controllers
                 return NotFound();
             }
 
-            var forum = await _context.Forums
+            var product = await _context.Products
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (forum == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(forum);
+            return View(product);
         }
 
-        // POST: Forum/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var forum = await _context.Forums.FindAsync(id);
-            if (forum != null)
+            var product = await _context.Products.FindAsync(id);
+            if (product != null)
             {
-                _context.Forums.Remove(forum);
+                _context.Products.Remove(product);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ForumExists(int id)
+        private bool ProductExists(int id)
         {
-            return _context.Forums.Any(e => e.Id == id);
+            return _context.Products.Any(e => e.Id == id);
         }
     }
 }

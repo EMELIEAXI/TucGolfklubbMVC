@@ -4,15 +4,6 @@
     ViewData["Title"] = "Forumdiskussion";
 }
 
-@if (Model == null)
-{
-    <p>No data available.</p>
-}
-else
-{
-    var forumPost = Model!;
-}
-
 <div class="container forum-page">
     <h2 class="mb-3" style="color: #001b2e;">@Model.Forum?.Title</h2>
 
@@ -30,25 +21,15 @@ else
     <h4 class="mt-4 mb-3" style="color: #001b2e;">Svar</h4>
     @if (Model.Replies != null && Model.Replies.Any())
     {
-        @foreach (var reply in Model.Replies)
-        {
-            <div class="card mb-3 border-0 shadow-sm">
-                <div class="card-body" style="background-color: #eef3f9;">
-                    <p class="card-text" style="color: #1d3f58;">@reply.Content</p>
-                    <p class="text-muted mb-0" style="font-size: 0.85rem;">
-                        av @(reply.User?.UserName ?? "Okänd") | @reply.PostedAt.ToString("yyyy-MM-dd HH:mm")
+        var rootReplies = Model.Replies.Where(r => r.ParentReplyId == null).ToList();
 
-                        @if (reply.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
-                        {
-                            <span class="ms-2">
-                                <a asp-controller="ForumReplies" asp-action="Edit" asp-route-id="@reply.Id" class="btn-link-style">Ändra</a>
-                                <span class="mx-1">|</span>
-                                <a asp-controller="ForumReplies" asp-action="Delete" asp-route-id="@reply.Id" class="btn-link-style">Radera</a>
-                            </span>
-                        }
-                    </p>
-                </div>
-            </div>
+        foreach (var reply in rootReplies)
+        {
+            @await Html.PartialAsync("_ReplyThread", reply, new ViewDataDictionary(ViewData)
+            {
+                { "AllReplies", Model.Replies.ToList() },
+                { "Level", 0 }
+            })
         }
     }
     else

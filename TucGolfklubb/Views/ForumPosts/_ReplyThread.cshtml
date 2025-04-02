@@ -1,0 +1,48 @@
+﻿@model TucGolfklubb.Models.ForumReply
+
+@{
+    int level = ViewBag.Level != null ? (int)ViewBag.Level : 0;
+    var allReplies = ViewBag.AllReplies as List<TucGolfklubb.Models.ForumReply>;
+    var children = allReplies?.Where(r => r.ParentReplyId == Model.Id).OrderBy(r => r.PostedAt).ToList();
+}
+
+<div class="card mb-2 border-0 shadow-sm" style="margin-left:@(level * 30)px;">
+    <div class="card-body" style="background-color: #eef3f9;">
+        <p class="card-text" style="color: #1d3f58;">@Model.Content</p>
+        <p class="text-muted mb-1" style="font-size: 0.85rem;">
+            av @(Model.User?.UserName ?? "Okänd") | @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+
+            @if (Model.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+            {
+                <span class="ms-2">
+                    <a asp-controller="ForumReplies" asp-action="Edit" asp-route-id="@Model.Id" class="btn-link-style">Ändra</a>
+                    <span class="mx-1">|</span>
+                    <a asp-controller="ForumReplies" asp-action="Delete" asp-route-id="@Model.Id" class="btn-link-style">Radera</a>
+                </span>
+            }
+        </p>
+
+        <a asp-controller="ForumReplies"
+           asp-action="Create"
+           asp-route-forumPostId="@Model.ForumPostId"
+           asp-route-parentReplyId="@Model.Id"
+           class="btn btn-sm btn-outline-primary mt-1">
+            Svara
+        </a>
+    </div>
+</div>
+
+@if (children != null && children.Any())
+{
+    foreach (var child in children)
+    {
+        var nestedLevel = level + 1;
+        var nestedViewData = new ViewDataDictionary(ViewData)
+        {
+            { "AllReplies", allReplies },
+            { "Level", nestedLevel }
+        };
+
+        <partial name="_ReplyThread" model="child" view-data="nestedViewData" />
+    }
+}

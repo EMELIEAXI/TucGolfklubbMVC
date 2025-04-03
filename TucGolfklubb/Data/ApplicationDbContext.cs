@@ -57,7 +57,7 @@ namespace TucGolfklubb.Data
                 entity.ToTable("UserTokens", "TucUserMngt");
             });
 
-            // Lämna dina egna modeller i standardschemat (dbo)
+            // Lämna egna modeller i standardschemat (dbo)
             modelBuilder.Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany()

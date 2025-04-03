@@ -9,7 +9,7 @@
 
 <form asp-action="Create">
     <input type="hidden" asp-for="ForumPostId" />
-    <input type="hidden" name="ParentReplyId" value="@ViewBag.ParentReplyId" />
+    <input type="hidden" asp-for="ParentReplyId" />
 
     <div class="form-group">
         <label asp-for="Content" class="control-label">Meddelande</label>

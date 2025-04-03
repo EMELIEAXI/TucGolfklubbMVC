@@ -34,7 +34,7 @@ namespace TucGolfklubb.Controllers
         // POST: ForumReplies/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ForumReply reply)
+        public async Task<IActionResult> Create([Bind("ForumPostId,ParentReplyId,Content")] ForumReply reply)
         {
             if (ModelState.IsValid)
             {

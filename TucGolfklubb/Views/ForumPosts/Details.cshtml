@@ -5,20 +5,27 @@
 }
 
 <div class="container forum-page">
-    <h2 class="mb-3" style="color: #001b2e;">@Model.Forum?.Title</h2>
-
+    <!-- Forum Title -->
+    <h2 class="mb-1" style="color: #001b2e;">@Model.Forum?.Title</h2>
     <p class="text-muted mb-4">
-        <em>av: @(Model.User?.UserName ?? "Okänd") | publicerat: @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")</em>
+        <em>
+            av <strong>@(Model.User?.UserName ?? "Okänd")</strong> |
+            publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+        </em>
     </p>
 
-    <div class="card shadow-sm mb-4 border-0">
+    <!-- Main Post Card -->
+    <div class="card shadow-sm mb-5 border-0">
         <div class="card-body" style="background-color: #b3cde4;">
             <h5 class="card-title" style="color: #001b2e;">Inlägg</h5>
-            <p class="card-text" style="color: #1d3f58;">@Model.Content</p>
+            <p class="card-text" style="color: #1d3f58; font-size: 1.1rem; line-height: 1.6;">
+                @Model.Content
+            </p>
         </div>
     </div>
 
-    <h4 class="mt-4 mb-3" style="color: #001b2e;">Svar</h4>
+    <!-- Replies Section -->
+    <h4 class="mb-3" style="color: #001b2e;">Svar</h4>
     @if (Model.Replies != null && Model.Replies.Any())
     {
         var rootReplies = Model.Replies.Where(r => r.ParentReplyId == null).ToList();
@@ -26,19 +33,23 @@
         foreach (var reply in rootReplies)
         {
             @await Html.PartialAsync("_ReplyThread", reply, new ViewDataDictionary(ViewData)
-            {
-                { "AllReplies", Model.Replies.ToList() },
-                { "Level", 0 }
-            })
+    {
+    { "AllReplies", Model.Replies.ToList() },
+    { "Level", 0 }
+    })
         }
     }
     else
     {
-        <p class="text-muted">Inga svar än.</p>
+        <div class="alert alert-info rounded-3">
+            Inga svar än.
+        </div>
     }
 
-    <hr />
-    <h4 class="mt-4" style="color: #001b2e;">Lämna ett svar</h4>
+    <!-- Reply Form -->
+    <hr class="my-4" />
+    <h4 class="mb-3" style="color: #001b2e;">Lämna ett svar</h4>
+
     @if (User?.Identity != null && User.Identity.IsAuthenticated)
     {
         @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
@@ -46,10 +57,13 @@
             @Html.AntiForgeryToken()
             @Html.Hidden("forumPostId", Model.Id)
 
-            <div class="form-group">
-                <textarea name="replyContent" class="form-control" rows="3" placeholder="Skriv ditt svar här..."></textarea>
+            <div class="mb-3">
+                <textarea name="replyContent"
+                          class="form-control rounded-3 shadow-sm"
+                          rows="4"
+                          placeholder="Skriv ditt svar här..."></textarea>
             </div>
-            <button type="submit" class="btn custom-secondary-button mt-2">Skicka svar</button>
+            <button type="submit" class="btn custom-secondary-button shadow-sm">Skicka svar</button>
         }
     }
     else
@@ -57,9 +71,10 @@
         <p class="text-muted">Du måste vara inloggad för att svara.</p>
     }
 
-    <div class="mt-4">
+    <!-- Back Button -->
+    <div class="mt-5">
         <a asp-controller="Forum" asp-action="Details" asp-route-id="@Model.ForumId"
-           class="btn custom-secondary-button">← Tillbaka till inlägg</a>
+           class="btn custom-secondary-button shadow-sm">← Tillbaka till inlägg</a>
     </div>
 </div>
 

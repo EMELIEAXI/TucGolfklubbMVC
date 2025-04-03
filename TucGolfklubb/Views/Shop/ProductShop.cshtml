@@ -19,13 +19,11 @@
         <h1 id="toppen">TUC Golfklubb Shop</h1>
     </div>
 
-    <!-- Header -->
     <div class="header">
         <h1>Välkommen till våra produkter</h1>
         <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
     </div>
 
-    <!-- Navigation -->
     <div class="navbar">
         @foreach (var category in Model.Categories)
         {
@@ -33,9 +31,7 @@
         }
     </div>
 
-    <!-- Flex content -->
     <div class="main">
-        <!-- Endast visa produkter för den valda kategorin -->
         @if (Model.SelectedCategoryId != null)
         {
             var selectedCategory = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
@@ -69,6 +65,7 @@
                                     <button class="button">lägg i varukorgen</button>
                                 </form>
                             </div>
+                            <partial name="_ReviewsPartial" model='new ProductShopViewModel { SelectedProduct = product, Reviews = product.Reviews.ToList() }' />
                         </div>
                     </div>
                 }

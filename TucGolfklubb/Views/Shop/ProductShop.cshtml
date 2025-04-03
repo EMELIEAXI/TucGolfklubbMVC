@@ -56,7 +56,7 @@
                             <p>@product.Description</p>
                             <p class="text_right">Pris: <del>@product.Price.ToString("C")</del></p>
                             <div class="form">
-                                <form action="/action_page.php">
+                                <form action="#">
                                     <select name="antal" class="antal-select">
                                         <option value="#">--välj antal--</option>
                                         <option value="antal1">1</option>
@@ -78,6 +78,12 @@
         {
             <p>Vänligen välj en kategori för att visa produkter.</p>
         }
+        <div class="regform">
+            <fieldset>
+                <partial name="_Ordersummary" />
+
+            </fieldset>
+        </div>
     </div>
 
 </body>

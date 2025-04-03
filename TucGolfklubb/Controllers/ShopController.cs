@@ -36,5 +36,7 @@ namespace TucGolfklubb.Controllers
 
             return View(viewModel);
         }
+
+
     }
 }

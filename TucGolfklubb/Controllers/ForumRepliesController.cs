@@ -19,7 +19,9 @@ namespace TucGolfklubb.Controllers
             _userManager = userManager;
         }
 
+        // This GET is no longer needed because reply form is inline
         // GET: ForumReplies/Create
+        /*
         public IActionResult Create(int forumPostId, int? parentReplyId)
         {
             var reply = new ForumReply
@@ -30,6 +32,7 @@ namespace TucGolfklubb.Controllers
 
             return View(reply);
         }
+        */
 
         // POST: ForumReplies/Create
         [HttpPost]
@@ -47,9 +50,12 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });
             }
 
-            ViewBag.ForumPostId = reply.ForumPostId;
-            ViewBag.ParentReplyId = reply.ParentReplyId;
-            return View(reply);
+            //ViewBag.ForumPostId = reply.ForumPostId;
+            //ViewBag.ParentReplyId = reply.ParentReplyId;
+            //return View(reply);
+
+            // If validation fails, go back to the forum post page
+            return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });
         }
 
         // GET: ForumReplies/Edit/5

@@ -29,3 +29,4 @@ namespace TucGolfklubb.Models
         public decimal Price { get; set; }
     }
 }
+//hej

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250401161150_Uppdaterad Review-modell")]
+    partial class UppdateradReviewmodell
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,12 +329,7 @@ namespace TucGolfklubb.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Forums");
 
@@ -389,9 +387,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Property<int>("ForumPostId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentReplyId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("PostedAt")
                         .HasColumnType("datetime2");
 
@@ -401,8 +396,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ForumPostId");
-
-                    b.HasIndex("ParentReplyId");
 
                     b.HasIndex("UserId");
 
@@ -530,7 +523,7 @@ namespace TucGolfklubb.Data.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            Description = "En putter är en golfklubba som används för att rulla bollen på greenen mot hålet. Den har ett platt klubbhuvud och en kortare shaft än andra klubbor, vilket ger mer kontroll och precision vid kortare slag. Putterklubbor är designade för att ge spelaren maximal stabilitet och precision när bollen ska rulla över kortare avstånd, och det är den klubba man använder för att avsluta ett hål. Det finns olika typer av putters, såsom bladputters och malletputters, som skiljer sig åt i både form och design för att passa olika spelares behov och spelstil.",
+                            Description = "",
                             Image = "default.jpg",
                             Name = "Putters",
                             Price = 2500.00m,
@@ -737,7 +730,6 @@ namespace TucGolfklubb.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
@@ -839,15 +831,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TucGolfklubb.Models.Forum", b =>
-                {
-                    b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
                 {
                     b.HasOne("TucGolfklubb.Models.Forum", "Forum")
@@ -873,18 +856,11 @@ namespace TucGolfklubb.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TucGolfklubb.Models.ForumReply", "ParentReply")
-                        .WithMany("ChildReplies")
-                        .HasForeignKey("ParentReplyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("TucGolfklubb.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("ForumPost");
-
-                    b.Navigation("ParentReply");
 
                     b.Navigation("User");
                 });
@@ -953,11 +929,6 @@ namespace TucGolfklubb.Data.Migrations
             modelBuilder.Entity("TucGolfklubb.Models.ForumPost", b =>
                 {
                     b.Navigation("Replies");
-                });
-
-            modelBuilder.Entity("TucGolfklubb.Models.ForumReply", b =>
-                {
-                    b.Navigation("ChildReplies");
                 });
 
             modelBuilder.Entity("TucGolfklubb.Models.Order", b =>

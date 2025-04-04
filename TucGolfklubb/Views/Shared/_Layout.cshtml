@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TucGolfklubb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TucGolfklubb.styles.css" asp-append-version="true" />
 </head>
@@ -31,7 +32,7 @@
                         <li><a href="/Omoss/Historia">Historia och vision</a></li>
                         <li><a href="/Omoss/Banorna">Våra banor</a></li>
                         <li><a href="/Omoss/Faciliteter">Faciliteter</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a></li>
+                        <li><a href="#">Medlem</a></li>
                         <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Nyheter</a></li>
                     </ul>
                 </li>
@@ -54,9 +55,10 @@
 
 
 
-                <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
+                <li><a href="/Shop" target="_blank">Shop</a></li>
                 
                 <li><a href="/Forum">Forum</a></li>
+                <li><partial name="_LoginPartial" /></li>
 
             </ul>
 
@@ -133,15 +135,16 @@
             </div>
 
 
-        @*     <div class="footer-social">
+            <div class="footer-social">
                 <h3>Följ oss</h3>
                 <a href="https://www.instagram.com" target="_blank">
-                    <img src="~/images/insta-loga.png" alt="Instagram">
+                    <img src="~/images/insta-loga.png" alt="Instagram" style="width: 30px; margin-right: 10px;">
                 </a>
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="~/images/facebook-loga.png" alt="Facebook">
+                    <img src="~/images/facebook-loga.png" alt="Facebook" style="width: 30px;">
                 </a>
-            </div> *@
+            </div>
+
         </div>
         <!--Start of Geneskod Upphövsrätt-->
         <hr class="line">

@@ -1,46 +1,54 @@
 ﻿@model IEnumerable<TucGolfklubb.Models.Forum>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Forum";
 }
 
+<div class="container forum-page">
+    <h2 class="mb-4 text-dark" style="color: #001b2e;">Forum</h2>
 
-<h1>Index</h1>
+    <div class="mb-3 text-end">
+        <a asp-action="Create" class="btn custom-secondary-button shadow-sm">+ Skapa nytt forum</a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info rounded-3">
+            Det finns inga forum ännu.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-3">
+                        <div class="card-body" style="background-color: #b3cde4;">
+                            <h5 class="card-title mb-2">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="forum-title-link">
+                                    @item.Title
+                                </a>
+                            </h5>
+                            <p class="card-text" style="color: #1d3f58;">@item.Description</p>
+                        </div>
+                        @if (UserManager.GetUserId(User) == item.UserId)
+                        {
+                            <div class="card-footer bg-white text-end border-top-0">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-link-style">Ändra</a>
+                                <span class="mx-1 text-muted">|</span>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-link-style text-danger">Radera</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
 
-<div class="mt-4">
-    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">← Back to Hem</a>
+    <div class="mt-5">
+        <a asp-controller="Home" asp-action="Index" class="btn custom-secondary-button shadow-sm">← Tillbaka till hem</a>
+    </div>
 </div>

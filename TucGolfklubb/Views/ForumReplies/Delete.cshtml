@@ -1,11 +1,34 @@
 ﻿@model TucGolfklubb.Models.ForumReply
 
-<h2>Are you sure you want to delete this reply?</h2>
+@{
+    ViewData["Title"] = "Radera svar";
+}
 
-<p>@Model.Content</p>
+<div class="container forum-page">
+    <h2 class="mb-4 text-danger">Radera svar</h2>
 
-<form asp-action="Delete">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <a asp-action="Details" asp-controller="ForumPosts" asp-route-id="@Model.ForumPostId">Cancel</a>
-</form>
+    <div class="card shadow-sm border-0">
+        <div class="card-body" style="background-color: #f8d7da;">
+            <p class="fw-bold mb-3" style="color: #721c24;">
+                Är du säker på att du vill ta bort detta svar?
+                Denna åtgärd kan inte ångras.
+            </p>
+
+            <p style="color: #001b2e;">@Model.Content</p>
+
+            <form asp-action="Delete">
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="d-flex flex-column flex-md-row gap-2 mt-4">
+                    <button type="submit" class="btn btn-danger">Ja, radera</button>
+
+                    <a asp-controller="ForumPosts" asp-action="Details"
+                       asp-route-id="@Model.ForumPostId"
+                       class="btn custom-secondary-button">
+                        ← Avbryt
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

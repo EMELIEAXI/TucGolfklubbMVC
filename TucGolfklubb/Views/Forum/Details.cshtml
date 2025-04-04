@@ -1,53 +1,85 @@
 ﻿@model TucGolfklubb.Models.Forum
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Forumdetaljer";
 }
 
-<h1>@Model.Title</h1>
-<p>@Model.Description</p>
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">@Model.Title</h2>
 
-<h3>Inlägg</h3>
-@if (Model.Posts != null && Model.Posts.Any())
-{
-    <ul>
-        @foreach (var post in Model.Posts)
-        {
-            <li style="margin-bottom: 1rem;">
-                <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id">
-                    @post.Content
-                </a><br />
+    @if (UserManager.GetUserId(User) == Model.UserId)
+    {
+        <div class="mb-4 d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm custom-dark-button">Redigera forum</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Ta bort forum</a>
+        </div>
+    }
 
-                <span style="margin-left: 1rem;">
-                    av @(post.User?.UserName ?? "Okänd användare") |
-                    @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
+    <p class="mb-4" style="color: #1d3f58;">@Model.Description</p>
 
-                    @if (User.Identity?.IsAuthenticated == true && User.Identity.Name == post.User?.UserName)
-                    {
-                        <span style="font-style: italic; margin-left: 2rem;">
-                            <a asp-controller="ForumPosts" asp-action="Edit" asp-route-id="@post.Id">edit</a> |
-                            <a asp-controller="ForumPosts" asp-action="Delete" asp-route-id="@post.Id">delete</a>
-                        </span>
-                    }
-                </span>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>Inga inlägg ännu.</p>
-}
+    <hr class="mb-4" />
 
-<!-- Link to create a new post for this forum -->
-<a asp-controller="ForumPosts"
-   asp-action="Create"
-   asp-route-forumId="@Model.Id"
-   class="btn btn-success">
-    Skapa nytt inlägg
-</a>
+    <h4 class="mb-3" style="color: #001b2e;">Inlägg</h4>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit Forum</a> |
-    <a asp-action="Index">Back to Forums</a>
+    @if (Model.Posts != null && Model.Posts.Any())
+    {
+        <div class="row row-cols-1 g-3">
+            @foreach (var post in Model.Posts)
+            {
+                <div class="col">
+                    <div class="card shadow-sm border-0 rounded-3">
+                        <div class="card-body" style="background-color: #b3cde4;">
+
+                            <!-- Clickable content -->
+                            <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id"
+                               class="d-block mb-3 forum-post-content-link">
+                                @post.Content
+                            </a>
+
+                            <p class="text-muted small mb-3">
+                                av <strong>@(post.User?.UserName ?? "Okänd användare")</strong> |
+                                @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                @if (User.Identity?.IsAuthenticated == true && User.Identity.Name == post.User?.UserName)
+                                {
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <a asp-controller="ForumPosts" asp-action="Edit" asp-route-id="@post.Id"
+                                           class="btn btn-sm btn-link-style">Ändra</a>
+                                        <span class="mx-1 text-muted">|</span>
+                                        <a asp-controller="ForumPosts" asp-action="Delete" asp-route-id="@post.Id"
+                                           class="btn btn-sm btn-link-style text-danger">Radera</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info rounded-3">
+            Inga inlägg ännu.
+        </div>
+    }
+
+    <div class="mt-5 d-flex gap-3 flex-wrap">
+        <a asp-controller="ForumPosts"
+           asp-action="Create"
+           asp-route-forumId="@Model.Id"
+           class="btn custom-secondary-button shadow-sm">
+            + Skapa nytt inlägg
+        </a>
+
+        <a asp-action="Index" class="btn custom-secondary-button shadow-sm">← Tillbaka till forum</a>
+    </div>
 </div>
+
+

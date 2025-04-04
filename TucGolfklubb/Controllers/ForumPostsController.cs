@@ -58,14 +58,17 @@ namespace TucGolfklubb.Controllers
         {
             if (forumId.HasValue)
             {
-                // If a forumId is passed, use it directly
+                var forum = _context.Forums.FirstOrDefault(f => f.Id == forumId.Value);
+                if (forum == null) return NotFound();
+
                 ViewData["ForumId"] = forumId.Value;
+                ViewData["ForumTitle"] = forum.Title; // This enables display in the form
             }
             else
             {
-                // Otherwise, provide a dropdown list
                 ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Title");
             }
+
             return View();
         }
 
@@ -82,9 +85,9 @@ namespace TucGolfklubb.Controllers
                 _context.Add(forumPost);
                 await _context.SaveChangesAsync();
                 // ✅ Redirect to ForumPost details (where reply form is available)
-                return RedirectToAction("Details", "ForumPosts", new { id = forumPost.Id });
+                return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });
             }
-            // Handle model validation errors: If validation fails, check if ForumId is provided or need to show a dropdown
+            // Handle model validation errors: If validation fails, check if ForumId is provided or need to show a dropdown, re-display the form
             if (forumPost.ForumId != 0)
             {
                 ViewData["ForumId"] = forumPost.ForumId;

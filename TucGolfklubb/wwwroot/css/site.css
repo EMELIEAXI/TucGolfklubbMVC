@@ -43,12 +43,12 @@
 
 a:visited {
     text-decoration: underline;
-    color: #9400D3;
+    color: #4b0082;
 }
 
 a:active {
     text-decoration: none;
-    color: rgb(191, 191, 191);
+    color: #537692;
 }
 
 /* Välkommen media */
@@ -344,3 +344,209 @@ p.callout {
         .newsletter-container button:hover {
             background-color: #004d00;
         }
+
+
+/* Forum Page Wrapper */
+.forum-page {
+    /*background-color: #eef3f9;*/
+    background-color: #f3f7fb; /* slightly lighter than before */
+    padding: 1.5rem;
+    border-radius: 10px;
+    padding-top: 120px; /* pushes content down below navbar */
+}
+
+/* Button Styles */
+.custom-dark-button {
+    background-color: #6c8fa8;
+    color: #001b2e;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+}
+
+    /* background-color: #1d3f58;*/
+    /*color: #eef3f9;*/
+.custom-dark-button:hover {
+    background-color: #537692;
+    color: #ffffff;
+}
+
+.custom-secondary-button {
+    background-color: #537692; /* steel blue */
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.custom-secondary-button:hover {
+    background-color: #1d3f58; /* darker blue */
+    color: #ffffff;
+}
+
+/* Prevent layout shift caused by scrollbar */
+html {
+    overflow-y: scroll;
+}
+
+.forum-title-link,
+.forum-title-link:visited {
+    color: #001b2e !important;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.forum-title-link:hover {
+    color: #537692 !important;
+}
+
+.custom-view-button {
+    background-color: #6c8fa8;
+    color: #001b2e;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+}
+
+.custom-view-button:hover {
+    background-color: #537692;
+    color: #ffffff;
+}
+
+.btn-link-style {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1d3f58;
+    font-weight: 500;
+    font-style: italic;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-link-style:hover {
+    color: #537692;
+}
+
+.forum-page a:visited {
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .forum-page {
+        padding-inline: 1rem;
+    }
+}
+
+.btn-link-style.text-danger {
+    color: #dc3545 !important;
+    padding: 0;
+    margin: 0;
+}
+
+.card-body h5:hover {
+    color: #537692;
+    transition: color 0.3s ease;
+    cursor: default;
+}
+
+.forum-post-content-link {
+    color: #001b2e !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+    padding: 1rem 1rem;
+    border-radius: 0.75rem;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.forum-post-content-link:hover {
+    /* color: #537692 !important;*/
+    color: #537692 !important;
+    background-color: #c9d9e3 !important;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reply-even {
+    background-color: #eef3f9;
+}
+
+.reply-odd {
+    background-color: #dce7f0;
+}
+
+.reply-thread {
+    border-left: 2px solid #b3cde4;
+    padding-left: 1rem;
+    margin-left: 1rem;
+}
+
+/*.reply-thread-wrapper {
+    position: relative;
+    border-left: 4px solid #b3cde4;
+    padding-left: 1rem;
+    margin-left: 0.5rem;
+}*/
+
+.reply-card {
+    background-color: rgba(193, 212, 232, 0.5); /* #c1d4e8 with 70% opacity */
+    border-radius: 0.75rem;
+    border: 1px solid #8ba9c4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* slight shadow for separation */
+    transition: background-color 0.2s ease;
+}
+
+.reply-thread-connector {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+/*
+.reply-thread-connector::before {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: 0;
+    width: 12px;
+    height: calc(100% - 0.75rem);
+    border-left: 3px solid #537692;
+    border-bottom: 3px solid #537692;
+    border-radius: 0 0 0 10px;
+     top: 1.3rem; 
+}
+    */
+
+/* Align icon with vertical thread line */
+.connector-icon-wrapper {
+    position: relative;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+
+/* Icon sits over the thread line */
+.user-icon-threaded {
+    font-size: 1.6rem;
+    color: #1d3f58;
+    z-index: 1;
+    background-color: #f3f7fb; /* match your page background to cut through the line */
+    padding: 0.2rem;
+    border-radius: 50%;
+}
+
+/* Line extends downward from icon */
+.thread-line-downward {
+    width: 2px;
+    background-color: #537692;
+    flex-grow: 1;
+    margin-top: 0.3rem;
+}

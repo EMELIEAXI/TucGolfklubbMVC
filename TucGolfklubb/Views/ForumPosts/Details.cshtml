@@ -1,81 +1,69 @@
 ﻿@model TucGolfklubb.Models.ForumPost
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Forumdiskussion";
 }
 
-@if (Model == null)
-{
-    <p>No data available.</p>
-}
-else
-{
-    var forumPost = Model!;
+<div class="container forum-page">
+    <!-- Forum Title -->
+    <h2 class="mb-1" style="color: #001b2e;">@Model.Forum?.Title</h2>
+    <p class="text-muted mb-4">
+        <em>
+            av <strong>@(Model.User?.UserName ?? "Okänd")</strong> |
+            publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+        </em>
+    </p>
 
-    <h1>Forumdiskussion</h1>
-
-    <!-- Forum Info Group -->
-    <div>
-        <p style="margin-bottom: 0;">
-            <strong>Forum:</strong> @forumPost.Forum?.Title
-        </p>
-        <p class="text-muted" style="margin-top: 0.1rem; margin-left: 1rem;">
-            <em>av: @(forumPost.User?.UserName ?? "Okänd") | publicerat: @forumPost.PostedAt.ToString("yyyy-MM-dd HH:mm")</em>
-        </p>
+    <!-- Main Post Card -->
+    <div class="card shadow-sm mb-5 border-0">
+        <div class="card-body" style="background-color: #b3cde4;">
+            <h5 class="card-title" style="color: #001b2e;">Inlägg</h5>
+            <p class="card-text" style="color: #1d3f58; font-size: 1.1rem; line-height: 1.6;">
+                @Model.Content
+            </p>
+        </div>
     </div>
 
-    <!-- Inlägg Info Group -->
-    <div>
-        <p style="margin-bottom: 0;">
-            <strong>Inlägg:</strong> @forumPost.Content
-        </p>
-        <p class="text-muted" style="margin-top: 0.1rem; margin-left: 1rem;">
-            <em>av: @(forumPost.User?.UserName ?? "Okänd") | publicerat: @forumPost.PostedAt.ToString("yyyy-MM-dd HH:mm")</em>
-        </p>
-    </div>
-
-    <hr />
-    <h3>Svar</h3>
-    @if (forumPost.Replies != null && forumPost.Replies.Any())
+    <!-- Replies Section -->
+    <h4 class="mb-3" style="color: #001b2e;">Svar</h4>
+    @if (Model.Replies != null && Model.Replies.Any())
     {
-        @foreach (var reply in forumPost.Replies)
+        var rootReplies = Model.Replies.Where(r => r.ParentReplyId == null).ToList();
+
+        foreach (var reply in rootReplies)
         {
-            <div class="mb-4">
-                <p>@reply.Content</p>
-
-                <p class="text-muted mb-0">
-                    Av: @(reply.User?.UserName ?? "Okänd") | @reply.PostedAt.ToString("yyyy-MM-dd HH:mm:ss")
-
-                    @if (reply.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
-                    {
-                        <span class="ms-2">
-                            <a asp-controller="ForumReplies" asp-action="Edit" asp-route-id="@reply.Id"><em>edit</em></a> |
-                            <a asp-controller="ForumReplies" asp-action="Delete" asp-route-id="@reply.Id"><em>delete</em></a>
-                        </span>
-                    }
-                </p>
-            </div>
+            @await Html.PartialAsync("_ReplyThread", reply, new ViewDataDictionary(ViewData)
+    {
+    { "AllReplies", Model.Replies.ToList() },
+    { "Level", 0 }
+    })
         }
     }
     else
     {
-        <p>Inga svar än.</p>
+        <div class="alert alert-info rounded-3">
+            Inga svar än.
+        </div>
     }
 
+    <!-- Reply Form -->
+    <hr class="my-4" />
+    <h4 class="mb-3" style="color: #001b2e;">Lämna ett svar</h4>
 
-    <hr />
-    <h3>Lämna ett svar</h3>
     @if (User?.Identity != null && User.Identity.IsAuthenticated)
     {
         @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.Hidden("forumPostId", forumPost.Id)
+            @Html.Hidden("forumPostId", Model.Id)
 
-            <div class="form-group">
-                <textarea name="replyContent" class="form-control" rows="3" placeholder="Skriv ditt svar här..."></textarea>
+            <div class="mb-3">
+                <textarea name="replyContent"
+                          class="form-control rounded-3 shadow-sm"
+                          rows="4"
+                          placeholder="Skriv ditt svar här..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Skicka svar</button>
+            <button type="submit" class="btn custom-secondary-button shadow-sm">Skicka svar</button>
         }
     }
     else
@@ -83,13 +71,12 @@ else
         <p class="text-muted">Du måste vara inloggad för att svara.</p>
     }
 
-    <div class="mt-4">
-        <a asp-action="Edit" asp-route-id="@forumPost.Id">Ändra</a> |
-        <a asp-controller="Forum" asp-action="Details" asp-route-id="@forumPost.ForumId" class="btn btn-secondary mt-3">
-            Back to Inlägg
-        </a>
+    <!-- Back Button -->
+    <div class="mt-5">
+        <a asp-controller="Forum" asp-action="Details" asp-route-id="@Model.ForumId"
+           class="btn custom-secondary-button shadow-sm">← Tillbaka till inlägg</a>
     </div>
-}
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -1,0 +1,30 @@
+﻿@model TucGolfklubb.Models.ForumReply
+
+@{
+    ViewData["Title"] = "Svara";
+}
+
+<h4>Skriv ett svar</h4>
+<hr />
+
+<form asp-action="Create">
+    <input type="hidden" asp-for="ForumPostId" />
+    <input type="hidden" asp-for="ParentReplyId" />
+
+    <div class="form-group">
+        <label asp-for="Content" class="control-label">Meddelande</label>
+        <textarea asp-for="Content" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Skicka svar</button>
+        <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@Model.ForumPostId" class="btn btn-secondary">Tillbaka</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,39 +1,48 @@
 ﻿@model TucGolfklubb.Models.Forum
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Redigera forum";
 }
 
-<h1>Edit</h1>
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">Redigera forum</h2>
 
-<h4>Forum</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+    <div class="card shadow-sm border-0">
+        <div class="card-body" style="background-color: #eef3f9;">
+            <form asp-action="Edit">
+                @Html.HiddenFor(model => model.Id)
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label" style="color: #1d3f58;"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label" style="color: #1d3f58;"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <input type="submit" value="Spara" class="btn custom-secondary-button" />
+                    <a asp-action="Index" class="btn custom-secondary-button">← Tillbaka till Forumlista</a>
+                </div>
+            </form>
+            <div class="d-flex justify-content-end mt-3">
+                <a asp-action="Delete" asp-route-id="@Model.Id"
+                   class="btn btn-danger">
+                   Radera forum
+                </a>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

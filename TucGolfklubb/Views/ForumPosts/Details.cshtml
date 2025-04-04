@@ -25,7 +25,7 @@
     </div>
 
     <!-- Replies Section -->
-    <h4 class="mb-3" style="color: #001b2e;">Svar</h4>
+    <!-- <h4 class="mb-3" style="color: #001b2e;">Svar</h4> -->
     @if (Model.Replies != null && Model.Replies.Any())
     {
         var rootReplies = Model.Replies.Where(r => r.ParentReplyId == null).ToList();
@@ -48,23 +48,31 @@
 
     <!-- Reply Form -->
     <hr class="my-4" />
-    <h4 class="mb-3" style="color: #001b2e;">Lämna ett svar</h4>
+    <h4 class="mb-3" style="color: #001b2e;">Lämna en kommentar till detta inlägg</h4>
 
     @if (User?.Identity != null && User.Identity.IsAuthenticated)
     {
-        @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Hidden("forumPostId", Model.Id)
+        <div class="reply-form-box bg-light px-4 py-4 rounded-3 shadow-sm mb-5" style="background-color: #eef3f9;">
+            @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("forumPostId", Model.Id)
 
-            <div class="mb-3">
-                <textarea name="replyContent"
-                          class="form-control rounded-3 shadow-sm"
-                          rows="4"
-                          placeholder="Skriv ditt svar här..."></textarea>
-            </div>
-            <button type="submit" class="btn custom-secondary-button shadow-sm">Skicka svar</button>
-        }
+                <div class="mb-3">
+                    <textarea name="replyContent"
+                              class="form-control border border-2 border-light rounded-3 shadow-sm"
+                              style="resize: vertical; color: #001b2e; background-color: white;"
+                              rows="5"
+                              placeholder="Skriv din kommentar här..."></textarea>
+                </div>
+
+                <button type="submit"
+                        class="btn px-4 py-2 rounded-3 shadow-sm"
+                        style="background-color: #1d3f58; color: white;">
+                    Skicka kommentar
+                </button>
+            }
+        </div>
     }
     else
     {

@@ -37,10 +37,10 @@
                 </li>
 
                 <li>
-                    <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a>
+                    <a href="~/Identity/Account/Login">Medlem</a>
                     <ul class="dropdown-medlem">
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Logga in</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html">Bli medlem</a></li>
+                        <li><a href="~/Identity/Account/Login">Logga in</a></li>
+                        <li><a href="/Identity/Account/Register?returnUrl=%2F">Bli medlem</a></li>
                         <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Förmåner</a></li>
                         <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
 
@@ -106,7 +106,7 @@
         </div>
     </header>
     <div class="container-fluid p-0">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>

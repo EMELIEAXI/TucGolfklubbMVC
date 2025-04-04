@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace TucGolfklubb.Models
 {
-    public class OrderItemViewModel
-    {
-        public decimal OrderTotalPrice { get; set; }
-        public List<OrderItemViewModel>? OrderItems { get; set; }
-        public string? ProductName { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
+    //public class OrderItemViewModel
+    //{
+    //    public decimal OrderTotalPrice { get; set; }
+    //    public List<OrderItemViewModel>? OrderItems { get; set; }
+    //    public string? ProductName { get; set; }
+    //    public int Quantity { get; set; }
+    //    public decimal Price { get; set; }
 
-    }
+    //}
     public class ProductShopViewModel
     {
         public List<Category> Categories { get; set; }
@@ -21,7 +21,7 @@ namespace TucGolfklubb.Models
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
-        public List<OrderItemViewModel>? OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
 
         public decimal OrderTotalPrice { get; set; }
         public string? ProductName { get; set; }

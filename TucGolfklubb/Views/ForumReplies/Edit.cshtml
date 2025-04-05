@@ -1,11 +1,14 @@
 ﻿@model TucGolfklubb.Models.ForumReply
 
 @{
-    ViewData["Title"] = "Redigera svar";
+    bool isKommentar = Model.ParentReplyId == null;
+    string editTitle = isKommentar ? "Redigera kommentar" : "Redigera svar";
+    string deleteTitle = isKommentar ? "Radera kommentar" : "Radera svar";
+    ViewData["Title"] = editTitle;
 }
 
 <div class="container forum-page">
-    <h2 class="mb-4" style="color: #001b2e;">Redigera svar</h2>
+    <h2 class="mb-4" style="color: #001b2e;">@editTitle</h2>
 
     <div class="card shadow-sm border-0">
         <div class="card-body" style="background-color: #eef3f9;">
@@ -32,7 +35,7 @@
             <div class="d-flex justify-content-end mt-3">
                 <a asp-action="Delete" asp-route-id="@Model.Id"
                    class="btn btn-danger">
-                   Radera svar
+                    @deleteTitle
                 </a>
             </div>
         </div>

@@ -10,7 +10,9 @@
     string marginLeft = $"margin-left: {indent}px;";
 }
 
-<div id="reply-@Model.Id" class="reply-thread-connector d-flex" style="@marginLeft">
+<div id="reply-@Model.Id"
+     class="reply-thread-connector d-flex mb-3"
+     style="margin-left:@marginLeft; scroll-margin-top: 90px;">
     <!-- Left side: thread line + icon aligned -->
     <div class="connector-icon-wrapper d-flex flex-column align-items-center me-3">
         <i class="bi bi-person-circle user-icon-threaded"></i>

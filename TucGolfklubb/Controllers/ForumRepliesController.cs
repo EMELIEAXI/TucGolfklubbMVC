@@ -47,7 +47,7 @@ namespace TucGolfklubb.Controllers
                 _context.Replies.Add(reply);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });
+                return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId }, fragment: $"reply-{reply.Id}");
             }
 
             //ViewBag.ForumPostId = reply.ForumPostId;

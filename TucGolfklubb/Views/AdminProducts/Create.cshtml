@@ -1,0 +1,33 @@
+﻿@model TucGolfklubb.Models.Product
+
+@{
+    ViewData["Title"] = "Lägg till produkt";
+}
+
+<h2>Ny produkt</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Stock"></label>
+        <input asp-for="Stock" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId">Kategori</label>
+        <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))" class="form-control"></select>
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Spara</button>
+    <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+</form>

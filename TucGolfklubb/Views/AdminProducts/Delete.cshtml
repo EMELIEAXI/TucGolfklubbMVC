@@ -1,0 +1,20 @@
+﻿@model TucGolfklubb.Models.Product
+
+@{
+    ViewData["Title"] = "Radera produkt";
+}
+
+<h2>Är du säker på att du vill radera denna produkt?</h2>
+
+<div class="alert alert-warning">
+    <strong>@Model.Name</strong><br />
+    Pris: @Model.Price kr<br />
+    Lager: @Model.Stock<br />
+    Kategori: @Model.Category?.Name
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">🗑️ Radera</button>
+    <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+</form>

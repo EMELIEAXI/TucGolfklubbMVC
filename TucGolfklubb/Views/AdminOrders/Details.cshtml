@@ -1,0 +1,33 @@
+﻿@model TucGolfklubb.Models.Order
+@{
+    ViewData["Title"] = "Orderdetaljer";
+}
+
+<h2>Order #@Model.Id</h2>
+
+<p><strong>Kund:</strong> @Model.User?.UserName</p>
+<p><strong>Datum:</strong> @Model.OrderDate.ToShortDateString()</p>
+<p><strong>Totalt:</strong> @Model.TotalAmount.ToString("0.00") kr</p>
+
+<h4>Produkter:</h4>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Produkt</th>
+            <th>Antal</th>
+            <th>Pris</th>
+            <th>Summa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product?.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("0.00") kr</td>
+                <td>@(item.Quantity * item.UnitPrice).ToString("0.00") kr</td>
+            </tr>
+        }
+    </tbody>
+</table>

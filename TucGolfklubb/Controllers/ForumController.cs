@@ -110,7 +110,18 @@ namespace TucGolfklubb.Controllers
             {
                 try
                 {
-                    _context.Update(forum);
+                    var existingForum = await _context.Forums.FindAsync(id);
+                    if (existingForum == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Only update editable fields
+                    existingForum.Title = forum.Title;
+                    existingForum.Description = forum.Description;
+
+                    // Keep original UserId
+                    _context.Update(existingForum);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

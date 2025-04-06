@@ -183,13 +183,18 @@ namespace TucGolfklubb.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var forumPost = await _context.ForumPosts.FindAsync(id);
-            if (forumPost != null)
+            if (forumPost == null)
             {
-                _context.ForumPosts.Remove(forumPost);
+                return NotFound();
             }
 
+            int forumId = forumPost.ForumId; // Save this before deleting
+
+            _context.ForumPosts.Remove(forumPost);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            // ✅ Redirect back to the inlägg list for that forum
+            return RedirectToAction("Details", "Forum", new { id = forumId });
         }
 
         private bool ForumPostExists(int id)

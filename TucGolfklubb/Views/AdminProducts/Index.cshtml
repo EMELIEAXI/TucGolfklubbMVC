@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>Namn</th>
+                <th>Beskrivning</th>
                 <th>Pris</th>
                 <th>Lager</th>
                 <th>Kategori</th>
@@ -24,6 +25,7 @@
             {
                 <tr>
                     <td>@item.Name</td>
+                    <td>@(item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)</td>
                     <td>@item.Price.ToString("0.00") kr</td>
                     <td>@item.Stock</td>
                     <td>@item.Category?.Name</td>

@@ -81,6 +81,12 @@ namespace TucGolfklubb.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound(); // Prevent Remove(null)
+            }
+
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

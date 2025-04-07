@@ -66,7 +66,7 @@ namespace TucGolfklubb.Controllers
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
-                return NotFound(); // Om produkten inte finns, visa 404
+                return NotFound();
             }
 
             // Kontrollera om användaren redan har en shopping cart
@@ -104,7 +104,7 @@ namespace TucGolfklubb.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Skapa en uppdaterad modell
+            // Skapa en uppdaterad modell att skicka till vy
             var updatedModel = new ProductShopViewModel
             {
                 OrderItems = cart.OrderItems.Select(oi => new OrderItem
@@ -116,7 +116,7 @@ namespace TucGolfklubb.Controllers
                 OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
             };
 
-            return PartialView("_OrderSummary", updatedModel); // Skicka tillbaka rätt modell
+            return View("_OrderSummary", updatedModel); 
         }
 
         [HttpPost]
@@ -126,6 +126,7 @@ namespace TucGolfklubb.Controllers
 
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
+                .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart != null)
@@ -135,30 +136,31 @@ namespace TucGolfklubb.Controllers
                 {
                     existingItem.Quantity--;
 
-                    // Om Quantity är 0 eller mindre, ta bort produkten helt
                     if (existingItem.Quantity <= 0)
-                    {
                         cart.OrderItems.Remove(existingItem);
-                    }
 
                     await _context.SaveChangesAsync();
-
-                    var updatedModel = new ProductShopViewModel
-                    {
-                        OrderItems = cart.OrderItems.Select(oi => new OrderItem
-                        {
-                            ProductName = oi.Product?.Name,
-                            Quantity = oi.Quantity,
-                            Price = oi.Price
-                        }).ToList() ?? new List<OrderItem>(),
-                        OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
-                    };
-                    return RedirectToAction("OrderSummary", updatedModel); // eller annan vy du vill tillbaka till
                 }
-            }
-            return RedirectToAction("OrderSummary");
 
+                var updatedModel = new ProductShopViewModel
+                {
+                    OrderItems = cart.OrderItems.Select(oi => new OrderItem
+                    {
+                        ProductId = oi.ProductId,
+                        ProductName = oi.Product?.Name,
+                        Quantity = oi.Quantity,
+                        Price = oi.Price
+                    }).ToList(),
+                    OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Price * oi.Quantity)
+                };
+
+                return PartialView("_OrderSummary", updatedModel); 
+            }
+
+            return BadRequest(); // Eller något lämpligt fallback
         }
+
     }
+    
 }
 //hej

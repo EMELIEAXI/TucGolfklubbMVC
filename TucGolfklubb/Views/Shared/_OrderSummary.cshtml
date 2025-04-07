@@ -3,7 +3,7 @@
 
     <h1>Produkter:</h1>
     <ul>
-    @foreach (var item in Model.OrderItems)
+        @foreach (var item in Model.OrderItems)
         {
             <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
             <form asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post" style="display:inline;">
@@ -20,6 +20,7 @@
 }
 
 <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
-    @* <input type="hidden" name="productId" value="@product.Id" /> *@
+   @*  <input type="hidden" name="productId" value="@product.Id" /> *@
     <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
 </form>
+ 

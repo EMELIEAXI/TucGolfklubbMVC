@@ -204,6 +204,7 @@ namespace TucGolfklubb.Controllers
 
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
+                .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null || !cart.OrderItems.Any())
@@ -221,7 +222,8 @@ namespace TucGolfklubb.Controllers
                 {
                     ProductId = oi.ProductId,
                     Quantity = oi.Quantity,
-                    Price = oi.Price
+                    Price = oi.Price,
+                    Product = oi.Product,
                 }).ToList(),
             };
 
@@ -229,8 +231,8 @@ namespace TucGolfklubb.Controllers
             _context.ShoppingCart.Remove(cart);
             await _context.SaveChangesAsync();
 
-            return View(order);
-        
+            return View("Receipt", order);
+
         }
     }
 }

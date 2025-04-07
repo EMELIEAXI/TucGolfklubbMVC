@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Administratörspanel";
+}
+
+<!-- ✅ Only apply padding to content, not whole layout -->
+<div style="padding-top: 120px;">
+    <h2>Välkommen till adminpanelen!</h2>
+
+    <div class="list-group mt-4">
+        <a asp-controller="AdminProducts" asp-action="Index" class="list-group-item list-group-item-action">
+            🛍️ Hantera produkter
+        </a>
+        <a asp-controller="AdminOrders" asp-action="Index" class="list-group-item list-group-item-action">
+            📋 Hantera ordrar
+        </a>
+    </div>
+</div>

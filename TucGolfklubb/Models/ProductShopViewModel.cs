@@ -21,12 +21,14 @@ namespace TucGolfklubb.Models
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal TotalPrice { get; set; }
-        public List<OrderItem>? OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         public decimal OrderTotalPrice { get; set; }
         public string? ProductName { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+        public List<string>? PaymentMethods { get; set; }
+        public string? SelectedPaymentMethod { get; set; }
     }
 }
 //hej

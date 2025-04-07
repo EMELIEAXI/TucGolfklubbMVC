@@ -1,52 +1,25 @@
 ﻿@model TucGolfklubb.Models.ProductShopViewModel
-@{
-    ViewData["Title"] = "Checkout";
-}
-@if (Model == null)
+
+
+    <h1>Produkter:</h1>
+    <ul>
+    @foreach (var item in Model.OrderItems)
+        {
+            <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
+            <form asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post" style="display:inline;">
+            <input type="hidden" name="productId" value="@item.ProductId" />
+            <button type="submit" class="btn btn-danger btn-sm">Ta bort</button>
+            </form>
+        }
+    </ul>
+    <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
+@if (Model == null || Model.OrderItems == null || !Model.OrderItems.Any())
 {
     <h1>Varukorg</h1>
     <p>Ingen orderdata tillgänglig.</p>
-    return; // Stoppar renderingen av resten av partial-vyn
 }
 
-<div class="order-summary">
-
-    <h1>Produkter:</h1>
-    @if (Model != null)
-    {
-        <div class="order-summary">
-
-            @if (Model.OrderItems != null && Model.OrderItems.Any())
-            {
-                <ul>
-                    @foreach (var item in Model.OrderItems)
-                    {
-                        <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
-                    }
-                </ul>
-            }
-            else
-            {
-                <p>Det finns inga produkter i denna beställning.</p>
-            }
-        </div>
-        <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
-    }
-    else
-    {
-        <p>Ingen orderdata tillgänglig.</p>
-    }
-
-    <form asp-action="PlaceOrder" method="post">
-        <button type="submit" class="btn btn-success">Bekräfta order</button>
-    </form>
-</div>
-<div id="orderSummaryContainer"></div>
-
-<script>
-    $(document).ready(function() {
-        $("#orderSummaryContainer").load("/Order/GetOrderSummary");
-    });
-</script>
-
-@* Hej *@
+<form asp-controller="Orders" asp-action="PlaceOrder" method="post">
+    @* <input type="hidden" name="productId" value="@product.Id" /> *@
+    <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
+</form>

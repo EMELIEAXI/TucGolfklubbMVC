@@ -177,6 +177,41 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("Index", "ShoppingCart");
             }
 
+            var viewModel = new ProductShopViewModel
+            {
+                OrderItems = cart.OrderItems.ToList() ?? new List<OrderItem>(),
+                TotalPrice = cart.OrderItems.Sum(oi => oi.Price * oi.Quantity),
+                PaymentMethods = new List<string> { "Kort", "Swish", "Faktura", "Klarna", "SMS-lån" } // Lägg till betalningsalternativ
+            };
+            if(cart == null || cart.OrderItems == null || !cart.OrderItems.Any())
+            {
+                Console.WriteLine("Cart är tom eller saknar OrderItems!");
+                return RedirectToAction("Index", "ShoppingCart");
+            }
+
+                return View(viewModel);
+            }
+
+        // Gå igenom Order och Visa produkterna där i
+        [HttpPost]
+        public async Task<IActionResult> Receipt(string selectedPaymentMethod)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null || !cart.OrderItems.Any())
+            {
+                return RedirectToAction("Index", "ShoppingCart");
+            }
+
+            // Skapa en order
             var order = new Order
             {
                 UserId = userId,
@@ -187,45 +222,15 @@ namespace TucGolfklubb.Controllers
                     ProductId = oi.ProductId,
                     Quantity = oi.Quantity,
                     Price = oi.Price
-                }).ToList()
+                }).ToList(),
             };
 
             _context.Orders.Add(order);
             _context.ShoppingCart.Remove(cart);
             await _context.SaveChangesAsync();
 
-            return View();
-
-            //return RedirectToAction("Receipt", new { orderId = order.Id });
-        }
-        // Gå igenom Order och Visa produkterna där i
-        public async Task<IActionResult> Receipt(int orderId, decimal v)
-        {
-            var order = await _context.Orders
-                .Include(o => o.OrderItems!)
-                .ThenInclude(oi => oi.Product)
-                .FirstOrDefaultAsync(o => o.Id == orderId); // Filtrera på orderId
-
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            //Skapa en ny modell att visa?
-            //var viewModel = new ReceiptViewModel
-            //{
-            //    OrderId = order.Id,
-            //    OrderDate = order.OrderDate,
-            //    TotalPrice = order.TotalPrice,
-            //    OrderItems = order.OrderItems?.Select(oi => new Models.OrderItemViewModel
-            //    {
-            //        ProductName = oi.Product?.Name,
-            //        Quantity = oi.Quantity,
-            //        Price= oi.
-            //    }).ToList()
-            //};
-
-            return View();
+            return View(order);
+        
         }
     }
 }

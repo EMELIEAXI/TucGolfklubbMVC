@@ -1,0 +1,27 @@
+﻿@model ProductShopViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "PlaceOrder";
+}
+
+<h2>Fortsätt till betalning</h2>
+
+<ul>
+    @foreach (var item in Model.OrderItems)
+    {
+        <li>@item.Product.Name - @item.Quantity st - @item.Price kr</li>
+    }
+</ul>
+
+<h4>Total: @Model.TotalPrice.ToString("C")</h4>
+
+<form asp-controller="Orders" asp-action="Receipt" method="post">
+    <p>Välj betalningsmetod:</p>
+    @foreach (var method in Model.PaymentMethods)
+    {
+        <div>
+            <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method
+        </div>
+    }
+    <button type="submit" class="btn btn-success">Bekräfta order</button>
+ </form>

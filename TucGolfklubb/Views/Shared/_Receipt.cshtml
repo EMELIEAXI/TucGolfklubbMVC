@@ -1,5 +1,8 @@
 ﻿@model TucGolfklubb.Models.ProductShopViewModel
-
+@{
+    Layout = null;
+    ViewData["Title"] = "Receipt";
+}
 <h2>Kvitto</h2>
 <p>Ordernummer: @Model.OrderId</p>
 <p>Datum: @Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>

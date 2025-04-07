@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
+
 
 namespace TucGolfklubb.Controllers
 {
@@ -14,7 +16,28 @@ namespace TucGolfklubb.Controllers
             {
                 _context = context;
             }
-            public async Task<IActionResult> Index()
+        public async Task<ShoppingCart> GetShoppingCart()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return null; // Hantera fallet om användaren inte är inloggad
+            }
+
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                cart = new ShoppingCart { UserId = userId, OrderItems = new List<OrderItem>() };
+                _context.ShoppingCart.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            return cart;
+        }
+        public async Task<IActionResult> Index()
             {
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 if (userId == null)
@@ -30,7 +53,7 @@ namespace TucGolfklubb.Controllers
                 return View(cart); // <---- Skickar varukorgen till vyn!
             }
 
-            [HttpPost]
+        [HttpPost]
         [Route("ShoppingCart/AddToCart")]
         public async Task<IActionResult> AddToCart(int productId)
         {
@@ -47,8 +70,10 @@ namespace TucGolfklubb.Controllers
             }
 
             // Kontrollera om användaren redan har en shopping cart
+            await GetShoppingCart();
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
+                .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
@@ -79,7 +104,60 @@ namespace TucGolfklubb.Controllers
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(); // Skicka användaren till varukorgen
+            // Skapa en uppdaterad modell
+            var updatedModel = new ProductShopViewModel
+            {
+                OrderItems = cart.OrderItems.Select(oi => new OrderItem
+                {
+                    ProductName = oi.Product?.Name,
+                    Quantity = oi.Quantity,
+                    Price = oi.Price
+                }).ToList() ?? new List<OrderItem>(),
+                OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
+            };
+
+            return PartialView("_OrderSummary", updatedModel); // Skicka tillbaka rätt modell
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromCart(int productId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart != null)
+            {
+                var existingItem = cart.OrderItems.FirstOrDefault(oi => oi.ProductId == productId);
+                if (existingItem != null)
+                {
+                    existingItem.Quantity--;
+
+                    // Om Quantity är 0 eller mindre, ta bort produkten helt
+                    if (existingItem.Quantity <= 0)
+                    {
+                        cart.OrderItems.Remove(existingItem);
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    var updatedModel = new ProductShopViewModel
+                    {
+                        OrderItems = cart.OrderItems.Select(oi => new OrderItem
+                        {
+                            ProductName = oi.Product?.Name,
+                            Quantity = oi.Quantity,
+                            Price = oi.Price
+                        }).ToList() ?? new List<OrderItem>(),
+                        OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
+                    };
+                    return RedirectToAction("OrderSummary", updatedModel); // eller annan vy du vill tillbaka till
+                }
+            }
+            return RedirectToAction("OrderSummary");
+
         }
     }
 }

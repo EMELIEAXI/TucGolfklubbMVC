@@ -43,7 +43,7 @@
                     <div class="item">
                         <div class="item_image">
                             <figure>
-                                <img src="~/images/@product.Name" alt="@product.Name" class="p-img">
+                                <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
                                 <figcaption></figcaption>
                             </figure>
                         </div>
@@ -65,7 +65,7 @@
                                     <button class="button">lägg i varukorgen</button>
                                 </form>
                             </div>
-                            <partial name="_ReviewsPartial" model='new ProductShopViewModel { SelectedProduct = product, Reviews = product.Reviews.ToList() }' />
+                            <partial name="_ReviewsPartial" model="new ProductShopViewModel { SelectedProduct = product, Reviews = product.Reviews.ToList(), NewReview = new Review() }" />
                         </div>
                     </div>
                 }

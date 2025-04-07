@@ -21,6 +21,12 @@ namespace TucGolfklubb.Data.Migrations
              table: "OrderItems",
              type: "decimal",
              nullable: true);
+
+            migrationBuilder.AddColumn<decimal>(
+            name: "Price",
+            table: "Orders",
+            type: "decimal",
+            nullable: true);
         }
 
         /// <inheritdoc />

@@ -23,7 +23,7 @@ namespace TucGolfklubb.Data.Migrations
              nullable: true);
 
             migrationBuilder.AddColumn<decimal>(
-            name: "Price",
+            name: "TotalPrice",
             table: "Orders",
             type: "decimal",
             nullable: true);

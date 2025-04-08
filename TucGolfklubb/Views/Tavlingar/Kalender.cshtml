@@ -1,0 +1,270 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Kalender";
+}
+<link rel="stylesheet" href="~/css/Tavlingar-Evenemang.css" />
+
+<!--Start Geneskod: Tävlingar och Evenemang -->
+<!--Header-->
+<div class="header">
+    <h1>Tävlingar och Evenemang</h1>
+    <h2 class="h2head">KALENDER 2024</h2>
+</div>
+
+<!--Flex content-->
+<div class="row">
+    <div class="side">
+        <div class="tavdropdown">
+            <button class="tavdropbtn">MENY</button>
+            <div class="tavdropdown-content">
+                <a href="/Tavlingar/Index">Tävlingar och Evenemang</a>
+                <a href="/Tavlingar/Kalender">Kalendar</a>
+                <a href="/Tavlingar/resultat">Resultat</a>
+                <a href="/Tavlingar/Anmalan">Anmälan</a>
+            </div>
+        </div>
+
+        <hgroup>
+            <h3 class="haside1">Senaste månads tävlingresultat</h3>
+            <p class="pinfo">Se nedan senaste månadens tävlingsresultaten nedan:</p>
+        </hgroup>
+
+        <div class="latest">
+            <table>
+                <tr>
+                    <th colspan="5">September</th>
+                </tr>
+                <tr>
+                    <th>Tävling</th>
+                    <th>Datum</th>
+                    <th>Priset</th>
+                    <th>Namn</th>
+                    <th>Slag/Poäng</th>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>68 slag</td>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Anna Johansson</td>
+                    <td>72 slag</td>
+                </tr>
+                <tr>
+                    <td>Klubbens öppna dag</td>
+                    <td>10 Sep</td>
+                    <td>Bästa nybörjare</td>
+                    <td>Julia Eriksson</td>
+                    <td>41 slag</td>
+                </tr>
+                <tr>
+                    <td>Herrseriens final </td>
+                    <td>15 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Mats Andersson</td>
+                    <td>75 slag</td>
+                </tr>
+                <tr>
+                    <td>Träningstävling</td>
+                    <td>20 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Lars Olsson</td>
+                    <td>71 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>65 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Maria Karlsson</td>
+                    <td>69 slag</td>
+                </tr>
+            </table>
+        </div>
+
+        <hgroup>
+            <h3 class="haside1">Kommande månads tävlings- och evenemangskalender</h3>
+            <p class="pinfo">Se nedan kommande tävlingar och evenemang:</p>
+        </hgroup>
+
+        <div class="ongoing">
+            <table>
+                <tr>
+                    <th colspan="3">November</th>
+                </tr>
+                <tr>
+                    <th>Datum</th>
+                    <th>Tid</th>
+                    <th>Tävlingar / Evenemang</th>
+                </tr>
+                <tr>
+                    <td>Nov 10</td>
+                    <td>09:00 - 17:00</td>
+                    <td>Klubbens 20-årsjubileum – Stort evenemang</td>
+                </tr>
+                <tr>
+                    <td>Nov 16</td>
+                    <td>10:00 - 14:00</td>
+                    <td>Inomhusgolftävling – Simulatorcup</td>
+                </tr>
+                <tr>
+                    <td>Nov 21</td>
+                    <td>10:00 - 15:00</td>
+                    <td>Julklappsgolf – Samla in klappar till behövande</td>
+                </tr>
+                <tr>
+                    <td>Nov 26</td>
+                    <td>12:00 - 15:00</td>
+                    <td>Träningstävling – Fokus på puttning</td>
+                </tr>
+                <tr>
+                    <td>Nov 30</td>
+                    <td>09:00 - 14:00</td>
+                    <td>Månadens bästa spelare – 18 hål</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="kalenderpdf">
+            <hgroup>
+                <h3 class="haside2">Kalender 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingar och evenemang <a href="/images/pdfkalender.pdf">
+                        2024
+                        Kalender
+                    </a>.
+                </p>
+            </hgroup>
+        </div>
+
+        <div class="resultspdf">
+            <hgroup>
+                <h3 class="haside2">Tävlingars Resultat 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingars resultat <a href="/images/pdfresults.pdf">
+                        2024
+                        Resultat
+                    </a>.
+                </p>
+            </hgroup>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <div>
+            <h2 class="uh2">Kommande</h2>
+            <h4>
+                Vi är glada att meddela att vår kalender och schema för kommande
+                tävlingar och evenemang nu finns tillgängliga!
+            </h4>
+            <p class="pinfo">
+                Förbered er på en spännande tid med tävlingar som utmanar både teknik
+                och strategi. Vi ser fram emot att se er på banan, heja på varandra och
+                njuta av den härliga gemenskapen som golfen erbjuder. Vi hörs!
+            </p>
+
+            <h3 class="kh3">Kalenderscheman (November - December 2024)</h3>
+        </div>
+
+        <div class="row-container">
+            <img class="schedulefoto" src="/images/kommande.jpg" alt="nov-dec schemat">
+            <div class="col-container">
+                <table class="kommande">
+                    <tr>
+                        <th colspan="3">November</th>
+                    </tr>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Tid</th>
+                        <th>Tävlingar / Evenemang</th>
+                    </tr>
+                    <tr>
+                        <td>Nov 10</td>
+                        <td>09:00 - 17:00</td>
+                        <td>Klubbens 20-årsjubileum - Stort evenemang</td>
+                    </tr>
+                    <tr>
+                        <td>Nov 16</td>
+                        <td>10:00 - 14:00</td>
+                        <td>Inomhusgolftävling - Simulatorcup</td>
+                    </tr>
+                    <tr>
+                        <td>Nov 21</td>
+                        <td>10:00 - 15:00</td>
+                        <td>Julklappsgolf - Samla in klappar till behövande</td>
+                    </tr>
+                    <tr>
+                        <td>Nov 26</td>
+                        <td>12:00 - 15:00</td>
+                        <td>Träningstävling - Fokus på puttning</td>
+                    </tr>
+                    <tr>
+                        <td>Nov 30</td>
+                        <td>09:00 - 14:00</td>
+                        <td>Månadens bästa spelare - 18 hål</td>
+                    </tr>
+                </table>
+
+                <table class="kommande">
+                    <tr>
+                        <th colspan="3">December</th>
+                    </tr>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Tid</th>
+                        <th>Tävlingar / Evenemang</th>
+                    </tr>
+                    <tr>
+                        <td>Dec 1</td>
+                        <td>11:00 - 14:00</td>
+                        <td>Julgolf – 9 hål, glögg och pepparkakor </td>
+                    </tr>
+                    <tr>
+                        <td>Dec 7</td>
+                        <td>18:00 - 20:00</td>
+                        <td>Årets spelare – Utdelning av priser</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 14</td>
+                        <td>18:00 - 22:00</td>
+                        <td>Klubbens julfest med tävling</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 18</td>
+                        <td>12:00 - 15:00</td>
+                        <td>Träningstävling – Fokus på kortspel</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 28</td>
+                        <td>09:00 - 14:00</td>
+                        <td>Nyårsprolog – 9 hål för att fira året som gått</td>
+                    </tr>
+                </table>
+
+                <div class="note">
+                    <p class="pinfo">
+                        <strong>Obs:</strong>
+                        Schemat för kommande golfklubbstävlingar och evenemang kan komma att ändras. Vi rekommenderar att ni
+                        regelbundet kontrollerar vår hemsida eller kontaktar oss för de senaste uppdateringarna.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End Genes kod: Tävlingar och Evenemang -->

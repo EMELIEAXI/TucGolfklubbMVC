@@ -19,11 +19,20 @@
         <h1 id="toppen">TUC Golfklubb Shop</h1>
     </div>
 
+    <!-- Header -->
     <div class="header">
+        <a asp-controller="ShoppingCart" asp-action="Index">
+            <img src="~/images/shopping-cart-728409_1280.webp" style="float:right; width:70px; align-items:center; margin-top:10px;" />
+            <span id="cartCount" style="position:absolute; top:40px; right:60px; background-color:royalblue; color:white; border-radius:50%; padding:5px 10px;">
+                0
+            </span>
+        </a>
         <h1>Välkommen till våra produkter</h1>
         <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
+   
     </div>
 
+    <!-- Navigation -->
     <div class="navbar">
         @foreach (var category in Model.Categories)
         {
@@ -31,7 +40,9 @@
         }
     </div>
 
+    <!-- Flex content -->
     <div class="main">
+        <!-- Endast visa produkter för den valda kategorin -->
         @if (Model.SelectedCategoryId != null)
         {
             var selectedCategory = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
@@ -43,29 +54,20 @@
                     <div class="item">
                         <div class="item_image">
                             <figure>
-                                <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
+                                <img src="~/images/@product.Name" alt="@product.Name" class="p-img">
                                 <figcaption></figcaption>
                             </figure>
                         </div>
                         <div class="item_info">
                             <h3>@product.Name</h3>
                             <p>@product.Description</p>
-                            <p class="text_right">Pris: <span>@product.Price.ToString("C")</span></p>
+                            <p class="text_right">Pris: <del>@product.Price.ToString("C")</del></p>
                             <div class="form">
-                                <form action="/action_page.php">
-                                    <select name="antal" class="antal-select">
-                                        <option value="#">--välj antal--</option>
-                                        <option value="antal1">1</option>
-                                        <option value="antal2">2</option>
-                                        <option value="antal3">3</option>
-                                        <option value="antal4">4</option>
-                                        <option value="antal5">5</option>
-                                        <option value="antal6">6</option>
-                                    </select>
-                                    <button class="button">lägg i varukorgen</button>
+                                <form class="add-to-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <button type="submit" class="btn btn-primary">Lägg till i varukorg</button>
                                 </form>
                             </div>
-                            <partial name="_ReviewsPartial" model="new ProductShopViewModel { SelectedProduct = product, Reviews = product.Reviews.ToList(), NewReview = new Review() }" />
                         </div>
                     </div>
                 }
@@ -75,7 +77,11 @@
         {
             <p>Vänligen välj en kategori för att visa produkter.</p>
         }
+           <div class="regform">
+            <fieldset id="orderSummaryContainer">
+                <partial name="_OrderSummary" model="Model" />
+            </fieldset>
+            </div> 
     </div>
-
 </body>
 </html>

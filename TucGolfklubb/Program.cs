@@ -8,14 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Databasanslutning
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Identity + Roller
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+//
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-.AddRoles<IdentityRole>() //  Aktiverar roller!
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultUI()
+.AddDefaultTokenProviders();
+
 
 // Razor Pages + MVC
 builder.Services.AddControllersWithViews();
@@ -29,6 +30,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

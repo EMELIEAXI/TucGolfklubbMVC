@@ -21,7 +21,7 @@
                         <li><a href="/Spela/foretag">Företag</a></li>
                         <li><a href="/Spela">Gäst</a></li>
                         <li><a href="/Spela/Greenfee">Greenfee & Regler</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/tavlingar-evenemang/tavlingar-evenemang.html">Tävlingar/<br>Evenemang</a></li>
+                        <li><a href="/Tavlingar">Tävlingar/<br>Evenemang</a></li>
                     </ul>
                 </li>
 
@@ -32,17 +32,17 @@
                         <li><a href="/Omoss/Historia">Historia och vision</a></li>
                         <li><a href="/Omoss/Banorna">Våra banor</a></li>
                         <li><a href="/Omoss/Faciliteter">Faciliteter</a></li>
-                        <li><a href="#">Medlem</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Nyheter</a></li>
+                        <li><a href="~/Identity/Account/Login">Medlem</a></li>
+                        <li><a href="/Nyheter">Nyheter</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a>
+                    <a href="~/Identity/Account/Login">Medlem</a>
                     <ul class="dropdown-medlem">
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Logga in</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html">Bli medlem</a></li>
-                        <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Förmåner</a></li>
+                        <li><a href="~/Identity/Account/Login">Logga in</a></li>
+                        <li><a href="/Identity/Account/Register?returnUrl=%2F">Bli medlem</a></li>
+                        <li><a href="~/Identity/Account/Login">Förmåner</a></li>
                         <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
 
 
@@ -73,7 +73,7 @@
                 <input type="checkbox" id="menu-toggle" class="menu-toggle">
                 <label for="menu-toggle" class="hamburger-icon">&#9776;</label>
                 <ul class="hamburger-dropdown">
-                    <li><a href="/Grupprojekt-Golfklubb/Index.html">Hem</a></li>
+                    <li><a href="/Home">Hem</a></li>
                     <li>
                         <a href="/Spela">Spela golf</a>
                         <ul class="dropdown-spela">
@@ -89,16 +89,16 @@
                             <li><a href="/Omoss/Historia">Historia och vision</a></li>
                             <li><a href="/Omoss/Banorna">Våra banor</a></li>
                             <li><a href="/Omoss/Faciliteter">Faciliteter</a></li>
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a></li>
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/Omoss/nyheter.html">Nyheter</a></li>
+                            <li><a href="~/Identity/Account/Login">Medlem</a></li>
+                            <li><a href="/Nyheter">Nyheter</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Medlem</a>
+                        <a href="~/Identity/Account/Login">Medlem</a>
                         <ul class="dropdown-medlem">
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Logga in</a></li>
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/createnewmember.html">Bli medlem</a></li>
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/medlem.html">Förmåner</a></li>
+                            <li><a href="~/Identity/Account/Login">Logga in</a></li>
+                            <li><a href="/Identity/Account/Register?returnUrl=%2F">Bli medlem</a></li>
+                            <li><a href="~/Identity/Account/Login">Förmåner</a></li>
                             <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
                         </ul>
                     </li>
@@ -118,7 +118,7 @@
         </div>
     </header>
     <div class="container-fluid p-0">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
@@ -141,7 +141,7 @@
             <div class="footer-links">
                 <h3>Länkar</h3>
                 <a href="/Omoss">Om oss</a>
-                <a href="/Grupprojekt-Golfklubb/kod-html/kontakt/kontakt.html">Kontakt</a>
+                <a href="/Kontakt">Kontakt</a>
 
             </div>
 

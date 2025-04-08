@@ -1,0 +1,247 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Anmälan";
+}
+<link rel="stylesheet" href="~/css/Tavlingar-Evenemang.css" />
+
+<!--Start Geneskod: Tävlingar och Evenemang -->
+<!--Header-->
+<div class="header">
+    <h1>Tävlingar och Evenemang</h1>
+    <h2 class="h2head">ANMÄLAN</h2>
+</div>
+
+<!--Flex content-->
+<div class="row">
+    <div class="side">
+        <div class="tavdropdown">
+            <button class="tavdropbtn">MENY</button>
+            <div class="tavdropdown-content">
+                <a href="/Tavlingar/Index">Tävlingar och Evenemang</a>
+                <a href="/Tavlingar/Kalender">Kalendar</a>
+                <a href="/Tavlingar/resultat">Resultat</a>
+                <a href="/Tavlingar/Anmalan">Anmälan</a>
+            </div>
+        </div>
+
+        <hgroup>
+            <h3 class="haside1">Senaste månads tävlingresultat</h3>
+            <p class="pinfo">Se nedan senaste månadens tävlingsresultaten nedan:</p>
+        </hgroup>
+
+        <div class="latest">
+            <table>
+                <tr>
+                    <th colspan="5">September</th>
+                </tr>
+                <tr>
+                    <th>Tävling</th>
+                    <th>Datum</th>
+                    <th>Priset</th>
+                    <th>Namn</th>
+                    <th>Slag/Poäng</th>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>68 slag</td>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Anna Johansson</td>
+                    <td>72 slag</td>
+                </tr>
+                <tr>
+                    <td>Klubbens öppna dag</td>
+                    <td>10 Sep</td>
+                    <td>Bästa nybörjare</td>
+                    <td>Julia Eriksson</td>
+                    <td>41 slag</td>
+                </tr>
+                <tr>
+                    <td>Herrseriens final </td>
+                    <td>15 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Mats Andersson</td>
+                    <td>75 slag</td>
+                </tr>
+                <tr>
+                    <td>Träningstävling</td>
+                    <td>20 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Lars Olsson</td>
+                    <td>71 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>65 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Maria Karlsson</td>
+                    <td>69 slag</td>
+                </tr>
+            </table>
+        </div>
+
+        <hgroup>
+            <h3 class="haside1">Kommande månads tävlings- och evenemangskalender</h3>
+            <p class="pinfo">Se nedan kommande tävlingar och evenemang:</p>
+        </hgroup>
+
+        <div class="ongoing">
+            <table>
+                <tr>
+                    <th colspan="3">November</th>
+                </tr>
+                <tr>
+                    <th>Datum</th>
+                    <th>Tid</th>
+                    <th>Tävlingar / Evenemang</th>
+                </tr>
+                <tr>
+                    <td>Nov 10</td>
+                    <td>09:00 - 17:00</td>
+                    <td>Klubbens 20-årsjubileum – Stort evenemang</td>
+                </tr>
+                <tr>
+                    <td>Nov 16</td>
+                    <td>10:00 - 14:00</td>
+                    <td>Inomhusgolftävling – Simulatorcup</td>
+                </tr>
+                <tr>
+                    <td>Nov 21</td>
+                    <td>10:00 - 15:00</td>
+                    <td>Julklappsgolf – Samla in klappar till behövande</td>
+                </tr>
+                <tr>
+                    <td>Nov 26</td>
+                    <td>12:00 - 15:00</td>
+                    <td>Träningstävling – Fokus på puttning</td>
+                </tr>
+                <tr>
+                    <td>Nov 30</td>
+                    <td>09:00 - 14:00</td>
+                    <td>Månadens bästa spelare – 18 hål</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="kalenderpdf">
+            <hgroup>
+                <h3 class="haside2">Kalender 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingar och evenemang <a href="/images/pdfkalender.pdf">2024 Kalender</a>.
+                </p>
+            </hgroup>
+        </div>
+
+        <div class="resultspdf">
+            <hgroup>
+                <h3 class="haside2">Tävlingars Resultat 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingars resultat <a href="/images/pdfresults.pdf">2024 Resultat</a>.
+                </p>
+            </hgroup>
+        </div>
+    </div>
+
+
+    <div class="main">
+        <h2 class="uh2">Anmäl dig idag och bli en del av gemenskapen!</h2>
+        <h4>
+            Vi vill uppmuntra dig att registrera dig och delta i våra golftävlingar och evenemang!
+            Det är ett utmärkt tillfälle att träffa likasinnade, förbättra ditt spel och ha kul.
+        </h4>
+
+        <div class="regform">
+            <fieldset>
+                <legend>Anmälningsformulär</legend>
+                <h2 class="h2form">Registrering för tävlingar och aktiviteter</h2>
+                <form action="/submit-registration" method="POST">
+                    <div class="typetext">
+                        <label for="namn">NAMN:</label>
+                        <input type="text" id="namn" placeholder="Förnamn och efternamn" name="namn" required>
+
+                        <label for="age">ÅLDER:</label>
+                        <input type="text" id="age" placeholder="inmatningsnummer tex: 16" name="age" required>
+
+                        <label for="email">E-POST:</label>
+                        <input type="email" id="email" placeholder="exempel@test.com" name="email" required>
+
+                        <label for="telefon">KONTAKTNUMMER:</label>
+                        <input type="tel" id="telefon" placeholder="10-12 siffror" name="telefon" required>
+                    </div>
+                    <div class="typeselect">
+                        <label for="tavling">VÄLJ TÄVLING/AKTIVITET:</label>
+                        <select id="tavling" name="tavling">
+                            <option value="tavling1">Halloween-golf – Tematävling med kostymer</option>
+                            <option value="tavling2">Inomhusträning och teori</option>
+                            <option value="tavling3">Prova-på-golf för nybörjare</option>
+                            <option value="tavling4">Oktober: Månadens bästa spelare – 18 hål</option>
+                            <option value="tavling5">Klubbens 20-årsjubileum – Stort evenemang</option>
+                            <option value="tavling6">Inomhusgolftävling – Simulatorcup</option>
+                            <option value="tavling7">Julklappsgolf – Samla in klappar till behövande</option>
+                            <option value="tavling8">Träningstävling – Fokus på puttning</option>
+                            <option value="tavling9">November: Månadens bästa spelare – 18 hå</option>
+                            <option value="tavling10">Julgolf – 9 hål, glögg och pepparkakor</option>
+                            <option value="tavling11">Årets spelare – Utdelning av prise</option>
+                            <option value="tavling12">Klubbens julfest med tävling</option>
+                            <option value="tavling13">Träningstävling – Fokus på kortspel</option>
+                            <option value="tavling14">Nyårsprolog – 9 hål för att fira året som gått</option>
+                        </select>
+                    </div>
+                    <div class="checkboxradio">
+                        <div class="typecheckbox">
+                            <label class="typecb">VÄLJ TÄVLINGSFORM:</label><br>
+                            <label class="container">
+                                Singel
+                                <input type="checkbox" checked="checked">
+                                <span class="ccheckmark"></span>
+                            </label>
+                            <label class="container">
+                                Par
+                                <input type="checkbox">
+                                <span class="ccheckmark"></span>
+                            </label>
+                            <label class="container">
+                                Lag
+                                <input type="checkbox">
+                                <span class="ccheckmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="typeradio">
+                            <label class="typerb">KÖN:</label><br>
+                            <label class="container">
+                                Man
+                                <input type="radio" checked="checked" name="radio">
+                                <span class="rcheckmark"></span>
+                            </label>
+                            <label class="container">
+                                Kvinna
+                                <input type="radio" name="radio">
+                                <span class="rcheckmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit">Skicka in</button>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+    </div>
+</div>
+<!--End Geneskod: Tävlingar och Evenemang -->

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TucGolfklubb.Models;
 
+using Microsoft.Build.Framework;
+
 namespace TucGolfklubb.Models
 {
     public class Order
@@ -12,6 +14,7 @@ namespace TucGolfklubb.Models
         public ApplicationUser? User { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
+        public decimal TotalPrice { get; set; }
 
         //Gene: Make order items non-nullable
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

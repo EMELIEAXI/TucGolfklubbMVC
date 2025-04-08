@@ -2,7 +2,10 @@
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -130,23 +133,24 @@ h1 {
     color: rgb(255, 0, 0);
 }
 
-
 /*side förmular*/
 .regform {
-    width: 100%;
-    margin: auto;
+    width:25%;
     margin-top: 1em;
     padding-bottom: 0;
+    margin-right: 1em;
+    margin-left: 1em;
 }
 
 fieldset,
 dl {
     position: relative;
     border-radius: 3em;
-    padding: 5% 12% 5% 12%;
+    padding: 5%;
     background: #ecf0f3;
     list-style-type: none;
     box-shadow: 14px 14px 20px #01366b;
+    width:100%;
 }
 
 .h2form {

@@ -6,70 +6,48 @@
     padding: 0;
 }
 
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    background-color: #222;
-}
-
-#toppen {
-    color: white;
-    height: 1em;
     font-family: 'Montserrat';
-    font-size: 1.2em;
 }
 
-/*header*/
-.header {
-    padding: 0.02% 3% 0.02% 3%;
-    background-color: #1c386f;
+.top {
+    padding: 10px;
+    background-color: #222;
+    color: #fff;
+    font-size: 10px;
     text-align: center;
-    color: rgb(255, 255, 255);
-    font-family: Arial;
 }
 
-/*navigering*/
+.header {
+    padding: 18px;
+    background-color: #1c386f;
+    color: #fff;
+    text-align: center;
+}
+
 .navbar {
     display: flex;
-    background-color: #4781c6;
     justify-content: space-around;
-    font-size: 1em;
-    color: rgb(255, 255, 255);
+    background-color: #4781c6;
+    color: #fff;
+    font-size: 18px;
 }
 
     .navbar a {
-        color: #fff;
         padding: 14px 20px;
+        color: #fff;
         text-decoration: none;
-        text-align: center;
     }
 
         .navbar a:hover {
-            background-color: #ddd;
-            color: black;
+            background-color: #7a9ec8;
+            transition: 0.5s ease;
         }
 
-/*content*/
+
 .main {
     display: flex;
-    flex-direction: row;
-}
-
-h2 {
-    padding-bottom: 0;
-    padding-top: 2%;
-}
-
-h1 {
-    text-align: center;
-}
-
-.side {
-    flex-direction: column;
-    flex: 30%;
-    background-color: #739ccedc;
-    padding: 20px;
+    justify-content: space-around;
 }
 
 .products {
@@ -79,10 +57,15 @@ h1 {
     padding: 1em;
 }
 
+h2 {
+    font-size: 40px;
+    text-align: center;
+}
+
 .item {
     display: flex;
     flex-direction: row;
-    padding: 2% 0 2% 0;
+    padding: 30px;
 }
 
 .item_image {
@@ -93,10 +76,9 @@ h1 {
 }
 
     .item_image img {
-        min-width: 100%;
-        min-height: 100%;
-        max-width: 100%;
-        max-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
 .item_info {
@@ -105,37 +87,21 @@ h1 {
     min-width: 70%;
 }
 
-.text_right, .back {
+.text_right {
     text-align: right;
-    padding: 0 3% 0 0;
+    font-weight: bold;
+    color: #1c386f;
+    font-size: 1.2em;
 }
 
 .form {
     float: right;
 }
 
-    .form select,
-    .form button {
-        width: 15rem;
-    }
-
-    .form select {
-        margin-bottom: 1rem;
-    }
-
-.text_right {
-    font-weight: bold;
-    color: #1c386f;
-    font-size: 1.2em;
-}
-
-.erbjud {
-    color: rgb(255, 0, 0);
-}
-
-/*side förmular*/
 .regform {
-    width:25%;
+    width: 100%;
+    margin: auto;
+    width: 25%;
     margin-top: 1em;
     padding-bottom: 0;
     margin-right: 1em;
@@ -146,16 +112,37 @@ fieldset,
 dl {
     position: relative;
     border-radius: 3em;
+    padding: 5% 12% 5% 12%;
     padding: 5%;
     background: #ecf0f3;
     list-style-type: none;
     box-shadow: 14px 14px 20px #01366b;
-    width:100%;
+    width: 100%;
 }
 
-.h2form {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
+.form select,
+.form button {
+    width: 15rem;
+}
+
+.form select, button {
+    margin-bottom: 1rem;
+    background: #ecf0f3;
+    color: #06487d;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 50px;
+    font-size: 14px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(210, 206, 206, 0.2) 0px -3px 0px inset;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 5%;
 }
 
 .typetext label,
@@ -172,47 +159,6 @@ select {
     margin-bottom: 5%;
 }
 
-legend {
-    font-size: 1.5em;
-    text-align: initial;
-    background-color: #11456ffa;
-    border-radius: 5px;
-    color: #ffffff
-}
-
-.typetext label,
-.typeselect label,
-.typecb,
-.typerb {
-    margin-bottom: 4px;
-    text-align: center;
-    font-weight: 700;
-    color: #1c386f;
-}
-
-.typeradio label.container,
-.typecheckbox label.container {
-    text-align: left;
-}
-
-label:nth-of-type(2) {
-    margin-top: 5px;
-}
-
-input::placeholder {
-    color: gray;
-}
-
-.typetext input {
-    background: #ecf0f3;
-    padding: 10px;
-    padding-left: 20px;
-    height: 50px;
-    font-size: 14px;
-    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
-    border-radius: 20px;
-}
-
 select {
     background: #ecf0f3;
     color: #06487d;
@@ -225,100 +171,6 @@ select {
     border-radius: 5px;
 }
 
-.container {
-    /* The checkboxcontainer */
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-    .container input {
-        /* Hide the browser's default checkbox */
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
-
-.ccheckmark {
-    /* Create a custom checkbox */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    color: #1c386f;
-}
-
-.rcheckmark {
-    /* Create a custom radio button */
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-    color: #1c386f;
-}
-
-.container:hover input ~ .ccheckmark,
-.container:hover input ~ .rcheckmark {
-    /* On mouse-over, add a grey background color */
-    background-color: #ccc;
-}
-
-.container input:checked ~ .ccheckmark,
-.container input:checked ~ .rcheckmark {
-    /* When the checkbox is checked, add a blue background */
-    background-color: #06487d;
-}
-
-.ccheckmark:after,
-.rcheckmark:after {
-    /* Create the checkmark/indicator (hidden when not checked) */
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.container input:checked ~ .ccheckmark:after,
-.container input:checked ~ .rcheckmark:after {
-    /* Show the checkmark when checked */
-    display: block;
-}
-
-.container .ccheckmark:after {
-    /* Style the checkmark/indicator */
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-}
-
-.container .rcheckmark:after {
-    /* Style the radio/indicator */
-    left: 6.5px;
-    top: 6.5px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: solid white;
-}
-
-.checkboxradio {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-left: auto;
-}
-
 button {
     color: white;
     margin-top: 0.5em;
@@ -327,79 +179,38 @@ button {
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
-    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    box-shadow: 6px 6px 6px #cbced1;
     transition: 0.5s;
     font-size: 1em;
 }
 
     button:hover {
-        box-shadow: none;
-        background: #4781c6;
+        background-color: #4781c6;
     }
 
 footer {
-    color: white;
-    text-align: center;
-    padding: 0;
-    position: relative;
-    bottom: 0;
+    padding: 20px;
     width: 100%;
-    background-color: black !important;
-    font-size: 0.55em;
-    font-family: 'Montserrat';
-}
-
-
-.betalning {
-    margin: 0;
-    padding: 10px;
+    background-color: #222 !important;
+    color: #fff;
     text-align: center;
 }
 
-.shop-footer {
-    background-color: gray;
-    display: flex;
-    justify-content: center;
-    padding: 33px 0 33px 0;
+.betalning h2 {
+    font-size: 30px;
 }
 
 .betalning ul {
-    list-style-type: none;
     padding: 0;
 }
 
     .betalning ul li {
         display: inline-block;
-        margin: 0 15px;
+        padding: 15px;
     }
 
-        .betalning ul li img {
-            width: 60px;
-            height: 40px;
-            object-fit: contain;
-        }
-
-@media screen and (max-width: 1024px) {
-
-    .navbar,
-    .main,
-    .product,
-    .item {
-        flex-direction: column;
-    }
-}
-
-
-@media screen and (max-width: 700px) {
-
-    .navbar,
-    .main,
-    .product,
-    .item {
-        flex-direction: column;
-    }
-
-    footer {
-        width: 100%;
-    }
+.betalning img {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
 }

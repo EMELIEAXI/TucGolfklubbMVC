@@ -12,14 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produkt Shop</title>
     <link rel="stylesheet" href="~/css/productshop.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/productshop-partials.css" asp-append-version="true" />
 </head>
 
 <body>
+
     <div class="top">
-        <h1 id="toppen">TUC Golfklubb Shop</h1>
+        <h1>TUC Golfklubb Shop</h1>
     </div>
 
-    <!-- Header -->
     <div class="header">
         <a asp-controller="ShoppingCart" asp-action="Index">
             <img src="~/images/shopping-cart-728409_1280.webp" style="float:right; width:70px; align-items:center; margin-top:10px;" />
@@ -29,10 +30,8 @@
         </a>
         <h1>Välkommen till våra produkter</h1>
         <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
-   
     </div>
 
-    <!-- Navigation -->
     <div class="navbar">
         @foreach (var category in Model.Categories)
         {
@@ -40,33 +39,54 @@
         }
     </div>
 
-    <!-- Flex content -->
     <div class="main">
-        <!-- Endast visa produkter för den valda kategorin -->
-        @if (Model.SelectedCategoryId != null)
-        {
-            var selectedCategory = Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId);
-            <h2>@selectedCategory?.Name</h2>
+        @{
+            var selectedCategory = Model.SelectedCategoryId != null
+            ? Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId)
+            : Model.Categories.FirstOrDefault();
+        }
 
+        @if (selectedCategory != null)
+        {
             <div class="products">
-                @foreach (var product in Model.Products.Where(p => p.CategoryId == Model.SelectedCategoryId))
+                <h2>@selectedCategory.Name</h2>
+                @foreach (var product in Model.Products.Where(p => p.CategoryId == selectedCategory.Id))
                 {
                     <div class="item">
                         <div class="item_image">
                             <figure>
-                                <img src="~/images/@product.Name" alt="@product.Name" class="p-img">
+                                <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
                                 <figcaption></figcaption>
                             </figure>
                         </div>
+
                         <div class="item_info">
                             <h3>@product.Name</h3>
                             <p>@product.Description</p>
-                            <p class="text_right">Pris: <del>@product.Price.ToString("C")</del></p>
+                            <p class="text_right">Pris: <span>@product.Price.ToString("C")</span></p>
                             <div class="form">
                                 <form class="add-to-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
                                     <input type="hidden" name="productId" value="@product.Id" />
                                     <button type="submit" class="btn btn-primary">Lägg till i varukorg</button>
                                 </form>
+                            </div>
+
+                            <div class="reviews-container">
+                                <div class="reviews-form">
+                                    <partial name="_ReviewsPartial" model="new ProductShopViewModel
+                                { SelectedProduct = product }" />
+                                </div>
+
+                                <div class="reviews-list">
+                                    <button class="toggle-reviews" type="button" onclick="toggleReview('@product.Id')">
+                                        Visa recensioner (@(product.Reviews?.Count() ?? 0))
+                                    </button>
+
+                                    <div id="reviews-@product.Id" class="review-box collapsed">
+                                        <partial name="_ReviewListPartial" model="new ProductShopViewModel
+                                { SelectedProduct = product, Reviews = product.Reviews?.ToList() ?? new List<Review>() }" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,7 +95,7 @@
         }
         else
         {
-            <p>Vänligen välj en kategori för att visa produkter.</p>
+            <p>Inga kategorier tillgängliga.</p>
         }
            <div class="regform">
             <fieldset id="orderSummaryContainer">
@@ -83,5 +103,26 @@
             </fieldset>
             </div> 
     </div>
+
+    <footer class="shop-footer">
+        <div class="betalning">
+            <h2>Betalningsmetoder</h2>
+            <ul>
+                <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
+                <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
+                <li><img src="~/images/swish-logo.png" alt="Swish"></li>
+                <li><img src="~/images/visa.png" alt="Visa"></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        function toggleReview(productId) {
+            var element = document.getElementById("reviews-" + productId);
+            element.classList.toggle("expanded");
+            element.classList.toggle("collapsed");
+        }
+    </script>
+
 </body>
 </html>

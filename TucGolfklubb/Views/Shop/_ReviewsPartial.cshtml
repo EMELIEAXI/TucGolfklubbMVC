@@ -1,31 +1,14 @@
 ﻿@model ProductShopViewModel
+@using System.Linq
 
 <div>
-    <h3>Recensioner</h3>
-    @if (Model.Reviews != null && Model.Reviews.Any())
-    {
-        @foreach (var review in Model.Reviews)
-        {
-            <div>
-                <strong>@(review.User != null ? review.User.FullName : "Anonym")</strong> - @review.Date.ToShortDateString()
-                <p>Betyg: @review.Rating/5</p>
-                <p>@review.Comment</p>
-                <hr />
-            </div>
-        }
-    }
-    else
-    {
-        <p>Inga recensioner ännu.</p>
-    }
-
-    @if (User.Identity.IsAuthenticated)
+    @if (Model.SelectedProduct != null && User.Identity.IsAuthenticated)
     {
         <h4>Lämna en recension</h4>
         <form asp-controller="Review" asp-action="AddReview" method="post">
-            <input type="hidden" asp-for="SelectedProduct.Id" />
-            <textarea asp-for="NewReview.Comment" placeholder="Skriv din recension här..." required></textarea>
-            <select asp-for="NewReview.Rating">
+            <input type="hidden" name="productId" value="@Model.SelectedProduct.Id" />
+            <textarea name="comment" placeholder="Skriv din recension här..." required></textarea>
+            <select name="rating">
                 <option value="1">1 Stjärna</option>
                 <option value="2">2 Stjärnor</option>
                 <option value="3">3 Stjärnor</option>

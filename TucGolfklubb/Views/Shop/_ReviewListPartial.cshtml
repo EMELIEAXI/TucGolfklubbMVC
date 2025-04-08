@@ -1,0 +1,22 @@
+﻿@model ProductShopViewModel
+@using System.Linq
+
+<div>
+    <h3>Recensioner</h3>
+    @if (Model.Reviews != null && Model.Reviews.Any())
+    {
+        @foreach (var review in Model.Reviews)
+        {
+            <div>
+                <strong>@(review.User != null ? review.User.FullName : "Anonym")</strong> - @review.Date.ToShortDateString()
+                <p>Betyg: @review.Rating/5</p>
+                <p>@review.Comment</p>
+                <hr />
+            </div>
+        }
+    }
+    else
+    {
+        <p>Inga recensioner ännu.</p>
+    }
+</div>

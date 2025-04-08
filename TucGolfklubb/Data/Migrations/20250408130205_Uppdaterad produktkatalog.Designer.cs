@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250408130205_Uppdaterad produktkatalog")]
+    partial class Uppdateradproduktkatalog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -506,7 +509,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "En kraftfull driver med låg spinn och stor sweetspot som förlåter snedträffar. Den aerodynamiska formen ger dig extra fart i svingen utan att du behöver ta i för kung och fosterland. Justerbart loft gör det enkelt att finjustera till just din sving.",
-                            Image = "shop-klubbor.jpg",
+                            Image = "/images/shop-klubbor",
                             Name = "Driver – PowerDrive X",
                             Price = 2999.00m,
                             Stock = 7
@@ -516,7 +519,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 2,
                             CategoryId = 1,
                             Description = "Cavity-back-designen ger dig en bra kombination av kontroll och förlåtelse. Lång järn? Distans. Kort järn? Precision. Det är klubbor som växer med dig – oavsett om du är stabil 15 i handicap eller på väg ner mot singel.",
-                            Image = "shop-klubbor.jpg",
+                            Image = "/images/shop-klubbor",
                             Name = "Järnklubba – Precision 7",
                             Price = 1299.00m,
                             Stock = 10
@@ -526,7 +529,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 3,
                             CategoryId = 1,
                             Description = "Den frästa träffytan ger maximalt grepp och kontroll på korta slag. SpinMaster Pro är din bästa vän från bunkern, ruffen eller fairway 80 meter in. Med flera loft att välja mellan kan du bygga ett närspel som passar just ditt spel.",
-                            Image = "shop-klubbor.jpg",
+                            Image = "/images/shop-klubbor",
                             Name = "Wedge – SpinMaster Pro",
                             Price = 1199.00m,
                             Stock = 5
@@ -536,7 +539,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 4,
                             CategoryId = 1,
                             Description = "Klassisk bladputter med face-milled träffyta för mjuk bollstart och jämnt rull. Den är lätt att rikta, ger stabil feedback och hjälper dig hålla nerverna i schack på de där svettiga parputtarna. En favorit bland både traditionsälskare och resultatinriktade golfare.",
-                            Image = "shop-klubbor.jpg",
+                            Image = "/images/shop-klubbor",
                             Name = "Putter – TrueRoll Classic",
                             Price = 1499.00m,
                             Stock = 8
@@ -546,7 +549,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 5,
                             CategoryId = 2,
                             Description = "Den här mjuka fleecetröjan är framtagen för att ge dig full rörelsefrihet i svingen, samtidigt som den håller dig varm. Perfekt lager att ha under jackan eller över en piké. Diskret klubbmärke på ärmen för en snygg och stilren look.",
-                            Image = "shop-kläder.jpg",
+                            Image = "/images/shop-kläder",
                             Name = "Tröja - Fairway Fleece",
                             Price = 499.00m,
                             Stock = 23
@@ -556,7 +559,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 6,
                             CategoryId = 2,
                             Description = "Våra golfbyxor är tillverkade i ett följsamt, stretchigt material som anpassar sig efter ditt spel. Lika sköna att bära som de ser bra ut. Andas väl under varma dagar och har en ren, klassisk look. Självklart med subtil klubbbranding – för dig som spelar med stil.",
-                            Image = "shop-kläder.jpg",
+                            Image = "/images/shop-kläder",
                             Name = "Byxor - Greenline Flex",
                             Price = 649.00m,
                             Stock = 18
@@ -566,7 +569,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 7,
                             CategoryId = 2,
                             Description = "Vår klassiska klubbjacka är perfekt för kyliga morgonrundor eller blåsiga eftermiddagar. Lätt, vindtät och vattenavvisande – samtidigt som den andas. Med klubbens broderade logotyp på bröstet visar du stolt var du hör hemma. Passar lika bra på banan som på uteserveringen efter 18 hål.",
-                            Image = "shop-kläder.jpg",
+                            Image = "/images/shop-kläder",
                             Name = "Jacka - Windbreaker Classic",
                             Price = 699.00m,
                             Stock = 12
@@ -576,7 +579,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 8,
                             CategoryId = 2,
                             Description = "En keps är inte bara praktisk – den är en del av looken. Vår Club Cap skyddar mot sol och ger ett skönt avslappnat intryck. Justerbar passform, slitstarkt tyg och broderad klubbemblem framtill. En självklarhet i varje golfbags utrustning.",
-                            Image = "shop-kläder.jpg",
+                            Image = "/images/shop-kläder",
                             Name = "Keps - Club Cap",
                             Price = 249.00m,
                             Stock = 42
@@ -586,7 +589,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 9,
                             CategoryId = 3,
                             Description = "GripTech Tour ger dig stabilitet i varje sving tack vare sina utbytbara softspikes. Skon är vattentät men andas, vilket gör den perfekt för heldagar på banan i alla väder. Ett måste för dig som prioriterar fäste, särskilt på blöta eller kuperade banor.",
-                            Image = "shop-skor.jpg",
+                            Image = "/images/shop-skor",
                             Name = "Spikade skor – GripTech Tour",
                             Price = 1299.00m,
                             Stock = 8
@@ -596,7 +599,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 10,
                             CategoryId = 3,
                             Description = "FlexWalk Pro är en stilren spikfri golfsko som funkar lika bra på banan som i klubbhuset. Greppig undersula i gummi ger stabilitet utan att du känner dig stel i steget. En favorit bland golfare som vill ha funktion och stil i ett.",
-                            Image = "shop-skor.jpg",
+                            Image = "/images/shop-skor",
                             Name = "Spikfria skor – FlexWalk Pro",
                             Price = 1099.00m,
                             Stock = 5
@@ -606,7 +609,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 11,
                             CategoryId = 3,
                             Description = "Med extra dämpning i häl och framfot ger ComfortDrive Max överlägsen komfort hela rundan. Mjuk innestruktur och stötdämpande sula minskar tröttheten i fötterna rejält. Idealisk för dig som går mycket på banan.",
-                            Image = "shop-skor.jpg",
+                            Image = "/images/shop-skor",
                             Name = "Dämpade skor – ComfortDrive Max",
                             Price = 1199.00m,
                             Stock = 12
@@ -616,7 +619,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 12,
                             CategoryId = 4,
                             Description = "Stadig och rymlig vagnväska med 14-delad topp och gott om smarta fack. ProTour 14 är perfekt för dig som spelar med vagn eller elvagn och vill ha full översikt. Vattentåliga fickor och integrerat regnskydd ingår.",
-                            Image = "shop-väskor.jpg",
+                            Image = "/images/shop-väskor",
                             Name = "Caddyväska – ProTour 14",
                             Price = 2199.00m,
                             Stock = 3
@@ -626,7 +629,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 13,
                             CategoryId = 4,
                             Description = "CarryLite 6 är en praktisk bärbag med dubbelbärsele, lättviktsmaterial och stabila ben. Trots sin lätta vikt får du plats med klubbor, kläder och tillbehör för en hel runda. Perfekt för snabbrundor och sommarspel.",
-                            Image = "shop-väskor.jpg",
+                            Image = "/images/shop-väskor",
                             Name = "Bärväska – CarryLite 6",
                             Price = 1499.00m,
                             Stock = 5
@@ -636,7 +639,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 14,
                             CategoryId = 5,
                             Description = "Miljövänliga trätees i klassisk modell – hållbara, snygga och skonsamma mot miljön. Kommer i 50-pack så att du klarar dig över många rundor. Finns i flera längder.",
-                            Image = "shop-tillbehör.jpg",
+                            Image = "/images/shop-tillbehör",
                             Name = "Tee – EcoTee 50-pack",
                             Price = 69.00m,
                             Stock = 71
@@ -646,7 +649,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 15,
                             CategoryId = 5,
                             Description = "GripFit-handsken är tillverkad i mjukt cabrettaläder för maximal känsla mot greppet. Den sitter tajt men ventilerar väl, även under varma rundor. En favorit bland både singelhandicapare och nybörjare.",
-                            Image = "shop-tillbehör.jpg",
+                            Image = "/images/shop-tillbehör",
                             Name = "Handskar – GripFit Tour Glove",
                             Price = 179.00m,
                             Stock = 16
@@ -656,7 +659,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 16,
                             CategoryId = 5,
                             Description = "StormShield XL är ett stort, dubbelventilerat paraply som står emot vind och regn. Bekvämt handtag och snabböppning gör det lätt att använda även med en hand. Passar i de flesta vagnhållare.",
-                            Image = "shop-tillbehör.jpg",
+                            Image = "/images/shop-tillbehör",
                             Name = "Paraply – StormShield XL",
                             Price = 349.00m,
                             Stock = 37
@@ -666,7 +669,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 17,
                             CategoryId = 5,
                             Description = "Mjuk men slitstark mikrofiberhandduk med klubbens logga. Lätt att fästa med karbinhake och torkar snabbt efter rengöring. En självklarhet i varje bag.",
-                            Image = "shop-tillbehör.jpg",
+                            Image = "/images/shop-tillbehör",
                             Name = "Handduk – ClubTowel Pro",
                             Price = 129.00m,
                             Stock = 33
@@ -676,7 +679,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 18,
                             CategoryId = 6,
                             Description = "Tourklassad boll med mjuk kärna och hög spinnkontroll runt green. Passar både låg- och medelhandicapare som vill ha det bästa av två världar. Säljs i 12-pack.",
-                            Image = "shop-bollar.jpg",
+                            Image = "/images/shop-bollar",
                             Name = "Bollar – SoftSpin Tour 12-pack",
                             Price = 289.00m,
                             Stock = 55
@@ -686,7 +689,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 19,
                             CategoryId = 7,
                             Description = "En slitstark, hoprullbar puttingmatta med markerade avstånd och hål. Perfekt för träning hemma eller på kontoret. Ger en jämn och realistisk rull för bättre känsla.",
-                            Image = "shop-träningsutrustning.jpg",
+                            Image = "/images/shop-träningsutrustning",
                             Name = "Puttingmatta – HomeGreen Roll-Up",
                             Price = 699.00m,
                             Stock = 4
@@ -696,7 +699,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 20,
                             CategoryId = 7,
                             Description = "SwingTrainer Pro hjälper dig bygga upp rytm, timing och styrka i svingen. Fungerar både som uppvärmning före runda och träning hemma. Lätt att använda, men svår att släppa.",
-                            Image = "shop-träningsutrustning.jpg",
+                            Image = "/images/shop-träningsutrustning",
                             Name = "Träningsredskap – SwingTrainer Pro",
                             Price = 499.00m,
                             Stock = 14
@@ -706,7 +709,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 21,
                             CategoryId = 8,
                             Description = "GolfNav Mini är en smidig GPS-klocka med tusentals banor förladdade. Visar avstånd till greenens framkant, mitten och bakkant, samt hinder. Batteritid för flera rundor.",
-                            Image = "shop-elektronik.jpg",
+                            Image = "/images/shop-elektronik",
                             Name = "GPS-enhet – GolfNav Mini",
                             Price = 1499.00m,
                             Stock = 4
@@ -716,7 +719,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 22,
                             CategoryId = 8,
                             Description = "Snabb och exakt avståndsmätare med flaggsökning och vibrationsfeedback. Räckvidd upp till 600 meter och tydlig display. Kommer med skyddsfodral och batteri.",
-                            Image = "shop-elektronik.jpg",
+                            Image = "/images/shop-elektronik",
                             Name = "Avståndsmätare – PinPoint Laser 600",
                             Price = 1799.00m,
                             Stock = 7
@@ -726,7 +729,7 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 23,
                             CategoryId = 8,
                             Description = "ShotSync är en smart sensorsnäppa som fästs på klubban och analyserar din sving i realtid. Kopplas till app där du kan se tempo, plan och vinkel. Perfekt för tekniknörden som vill utvecklas på riktigt.",
-                            Image = "shop-elektronik.jpg",
+                            Image = "/images/shop-elektronik",
                             Name = "Extra elektronik – ShotSync SwingSensor",
                             Price = 1099.00m,
                             Stock = 3

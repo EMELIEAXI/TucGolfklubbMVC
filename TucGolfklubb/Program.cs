@@ -8,20 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Databasanslutning
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Identity + Roller
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-    options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultUI() // Lägg till för att använda inbyggt Identity UI (Login, Register etc.)
-    .AddDefaultTokenProviders(); // Viktigt för återställning, bekräftelse m.m.
-
-builder.Services.ConfigureApplicationCookie(options =>
+//
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
 })
-.AddRoles<IdentityRole>() //  Aktiverar roller!
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultUI()
+.AddDefaultTokenProviders();
+
 
 // Razor Pages + MVC
 builder.Services.AddControllersWithViews();

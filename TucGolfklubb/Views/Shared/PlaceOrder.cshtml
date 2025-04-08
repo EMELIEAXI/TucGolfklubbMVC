@@ -38,15 +38,26 @@ else
     </ul>
 
     <h4>Total: @Model.TotalPrice.ToString("C")</h4>
+    
+    <form class="adress">
+        <label><strong>För och Efternamn:</strong></label><br />
+        <input type="text" required/><br />
+            <label><strong>Adress:</strong></label><br />
+        <input type="text" required/><br />
+            <label><strong>PostNummer:</strong></label><br />
+        <input type="text" required/><br />
+            <label><strong>Ort:</strong></label><br />
+        <input type="text" required/><br />
+    </form>
     <div class="column-pay">
         <form class="PaymentMethod" asp-controller="Orders" asp-action="Receipt" method="post">
-            <p style="float:left">Välj betalningsmetod:</p>
+            <p style="float:left">Välj betalningsmetod:</p><br /><br /><br />
             @if (Model.PaymentMethods != null && Model.PaymentMethods.Any())
             {
                 @foreach (var method in Model.PaymentMethods)
                 {
                 <div class="PaymentMethod">
-                    <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method
+                    <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method<br />
                 </div>
                 }
             }

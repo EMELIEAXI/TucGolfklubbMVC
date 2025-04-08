@@ -18,30 +18,35 @@ namespace TucGolfklubb.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ProductShop(int? categoryId)
+        public async Task<IActionResult> ProductShop(int? categoryId, int? productId)
         {
             var categories = await _context.Categories.ToListAsync();
 
-            //Hämta produkter baserat på kategori-Id
-            var products = categoryId.HasValue
-                ? await _context.Products
-                        .Where(p => p.CategoryId == categoryId.Value)
-                        .Include(p => p.Reviews)
-                        .ThenInclude(r => r.User)      
-                        .ToListAsync()
-                : await _context.Products
-                        .Include(p => p.Reviews)
-                        .ThenInclude(r => r.User)
-                        .ToListAsync();
+            var productsQuery = _context.Products
+                .Where(p => !categoryId.HasValue || p.CategoryId == categoryId.Value)
+                .Include(p => p.Reviews)
+                .ThenInclude(r => r.User);
+
+            var products = await productsQuery.ToListAsync();
+
+            Product? selectedProduct = null;
+
+            if (productId.HasValue)
+            {
+                selectedProduct = products.FirstOrDefault(p => p.Id == productId.Value);
+            }
 
             var viewModel = new ProductShopViewModel
             {
                 Categories = categories,
                 Products = products,
-                SelectedCategoryId = categoryId
+                SelectedCategoryId = categoryId,
+                SelectedProduct = selectedProduct,
+                Reviews = selectedProduct?.Reviews.ToList() ?? new List<Review>()
             };
 
             return View(viewModel);
         }
+
     }
 }

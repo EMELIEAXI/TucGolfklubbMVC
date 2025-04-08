@@ -1,0 +1,32 @@
+﻿@model TucGolfklubb.Models.Product
+@{
+    ViewData["Title"] = "Radera produkt";
+}
+
+<div style="padding-top: 120px;">
+    <h2>Är du säker på att du vill radera denna produkt?</h2>
+
+    <div>
+        <h4>@Model.Name</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">Beskrivning</dt>
+            <dd class="col-sm-10">@Model.Description</dd>
+
+            <dt class="col-sm-2">Pris</dt>
+            <dd class="col-sm-10">@Model.Price.ToString("0.00") kr</dd>
+
+            <dt class="col-sm-2">Lager</dt>
+            <dd class="col-sm-10">@Model.Stock</dd>
+
+            <dt class="col-sm-2">Kategori</dt>
+            <dd class="col-sm-10">@Model.Category?.Name</dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">🗑️ Radera</button>
+            <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+        </form>
+    </div>
+</div>

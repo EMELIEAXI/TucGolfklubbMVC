@@ -1,0 +1,150 @@
+﻿@model TucGolfklubb.Models.ForumReply
+
+@{
+    int level = ViewBag.Level != null ? (int)ViewBag.Level : 0;
+    var allReplies = ViewBag.AllReplies as List<TucGolfklubb.Models.ForumReply>;
+    var children = allReplies?.Where(r => r.ParentReplyId == Model.Id).OrderBy(r => r.PostedAt).ToList();
+
+    // Cap indent to avoid drifting too far
+    int indent = Math.Min(level, 4) * 20;
+    string marginLeft = $"margin-left: {indent}px;";
+}
+
+<div id="reply-@Model.Id"
+     class="reply-thread-connector d-flex mb-3"
+     style="margin-left:@marginLeft; scroll-margin-top: 90px;">
+    <!-- Left side: thread line + icon aligned -->
+    <div class="connector-icon-wrapper d-flex flex-column align-items-center me-3">
+        <i class="bi bi-person-circle user-icon-threaded"></i>
+        <div class="thread-line-downward flex-grow-1"></div>
+    </div>
+
+    <!-- Right side: reply box -->
+    <div class="flex-grow-1">
+        <div class="reply-card card mb-2 border-0 shadow-sm position-relative">
+            <div class="card-body pt-3 pe-3 ps-3 pb-2 rounded-3 reply-card">
+
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <strong style="color: #001b2e;">
+                        @(Model.User?.UserName ?? "Okänd")
+                        @if (Model.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+                        {
+                            <span class="text-muted small ms-1">(du)</span>
+                        }
+                    </strong>
+                    <div class="text-muted small">
+                        <i class="bi bi-clock"></i> @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+                    </div>
+                </div>
+
+                <p class="mb-0" style="color: #1d3f58;">@Model.Content</p>
+            </div>
+        </div>
+
+        <!-- Buttons (unchanged position) -->
+        <div class="d-flex justify-content-between align-items-center mt-0 mb-3 px-2">
+            <div class="d-flex gap-3">
+                @if (Model.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+                {
+                    <a asp-controller="ForumReplies" asp-action="Edit" asp-route-id="@Model.Id" class="btn-link-style">
+                        Ändra
+                    </a>
+                    <span class="text-muted">|</span>
+                    <a asp-controller="ForumReplies" asp-action="Delete" asp-route-id="@Model.Id" class="btn-link-style text-danger">
+                        Radera
+                    </a>
+                }
+            </div>
+
+            @if (User?.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <button type="button" class="btn-link-style" onclick="document.getElementById('reply-form-@Model.Id').classList.toggle('d-none')">
+                    ↳ Svara
+                </button>
+            }
+        </div>
+
+        <!-- Inline Reply Form -->
+        <div id="reply-form-@Model.Id" class="d-none mt-2 ms-2">
+            <div class="reply-form-box bg-light px-3 py-3 rounded-3 shadow-sm" style="background-color: #eef3f9;">
+
+                @{
+                    var replyToName = Model.User?.UserName ?? "en medlem";
+                    var currentUser = User?.Identity?.Name ?? "";
+                    var replyingToSelf = replyToName == currentUser;
+                }
+
+                <div class="mb-2 text-muted small">
+                    Du svarar <strong>@(replyingToSelf ? "dig själv" : replyToName)</strong>
+                </div>
+
+                <form asp-controller="ForumReplies" asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="ForumPostId" value="@Model.ForumPostId" />
+                    <input type="hidden" name="ParentReplyId" value="@(Model.Id!.ToString())" />
+
+                    <div class="mb-2">
+                        <textarea name="Content"
+                                  class="form-control rounded-3 shadow-sm"
+                                  rows="3"
+                                  placeholder="Skriv ditt svar här..."></textarea>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-sm custom-dark-button shadow-sm">Skicka</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary shadow-sm"
+                                onclick="document.getElementById('reply-form-@Model.Id').classList.add('d-none')">
+                            Avbryt
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        @if (children != null && children.Any())
+        {
+            var maxVisible = 1; // Show only the first reply by default
+            var visibleChildren = children.Take(maxVisible).ToList();
+            var hiddenChildren = children.Skip(maxVisible).ToList();
+            var replyGroupId = $"reply-group-{Model.Id}";
+            var remainingCount = hiddenChildren.Count;
+
+            // Render first N replies normally
+            foreach (var child in visibleChildren)
+            {
+                var nestedLevel = level + 1;
+                var nestedViewData = new ViewDataDictionary(ViewData)
+                    {
+                        ["Level"] = nestedLevel
+                    };
+
+                <partial name="_ReplyThread" model="child" view-data="nestedViewData" />
+            }
+
+            if (remainingCount > 0)
+            {
+                <button type="button"
+                        class="btn-link-style ps-2"
+                        onclick="document.getElementById('@replyGroupId').classList.toggle('d-none'); this.classList.add('d-none');">
+                        <i class="bi bi-plus-circle me-1"></i>
+                        Se @remainingCount fler svar...
+                </button>
+
+                <div id="@replyGroupId" class="d-none">
+                    @foreach (var child in hiddenChildren)
+                    {
+                        var nestedLevel = level + 1;
+                        var nestedViewData = new ViewDataDictionary(ViewData)
+                        {
+                            ["Level"] = nestedLevel
+                        };
+
+                        <partial name="_ReplyThread" model="child" view-data="nestedViewData" />
+                    }
+                </div>
+            }
+        }
+
+
+    </div>
+</div>

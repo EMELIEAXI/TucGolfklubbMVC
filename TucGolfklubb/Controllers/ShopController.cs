@@ -24,8 +24,15 @@ namespace TucGolfklubb.Controllers
 
             //Hämta produkter baserat på kategori-Id
             var products = categoryId.HasValue
-                ? await _context.Products.Where(p => p.CategoryId == categoryId.Value).ToListAsync()
-                : await _context.Products.ToListAsync();
+                ? await _context.Products
+                        .Where(p => p.CategoryId == categoryId.Value)
+                        .Include(p => p.Reviews)
+                        .ThenInclude(r => r.User)      
+                        .ToListAsync()
+                : await _context.Products
+                        .Include(p => p.Reviews)
+                        .ThenInclude(r => r.User)
+                        .ToListAsync();
 
             var viewModel = new ProductShopViewModel
             {

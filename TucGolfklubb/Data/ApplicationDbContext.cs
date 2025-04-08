@@ -57,7 +57,7 @@ namespace TucGolfklubb.Data
                 entity.ToTable("UserTokens", "TucUserMngt");
             });
 
-            // Lämna dina egna modeller i standardschemat (dbo)
+            // Lämna egna modeller i standardschemat (dbo)
             modelBuilder.Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany()
@@ -79,7 +79,7 @@ namespace TucGolfklubb.Data
                 new Product { Id = 1, Name = "Drivers", Description = "", Price = 3000.00m, CategoryId = 1 },
                 new Product { Id = 2, Name = "Järnklubbor", Description = "", Price = 6000.00m, CategoryId = 1 },
                 new Product { Id = 3, Name = "Wedges", Description = "", Price = 1500.00m, CategoryId = 1 },
-                new Product { Id = 4, Name = "Putters", Description = "", Price = 2500.00m, CategoryId = 1 },
+                new Product { Id = 4, Name = "Putters", Description = "En putter är en golfklubba som används för att rulla bollen på greenen mot hålet. Den har ett platt klubbhuvud och en kortare shaft än andra klubbor, vilket ger mer kontroll och precision vid kortare slag. Putterklubbor är designade för att ge spelaren maximal stabilitet och precision när bollen ska rulla över kortare avstånd, och det är den klubba man använder för att avsluta ett hål. Det finns olika typer av putters, såsom bladputters och malletputters, som skiljer sig åt i både form och design för att passa olika spelares behov och spelstil.", Price = 2500.00m, CategoryId = 1 },
                 new Product { Id = 5, Name = "Tröjor", Description = "", Price = 800.00m, CategoryId = 2 },
                 new Product { Id = 6, Name = "Byxor och shorts", Description = "", Price = 1200.00m, CategoryId = 2 },
                 new Product { Id = 7, Name = "Jackor", Description = "", Price = 1500.00m, CategoryId = 2 },
@@ -103,13 +103,19 @@ namespace TucGolfklubb.Data
 
             modelBuilder.Entity<Forum>().HasData(
                 new Forum { Id = 1, Title = "Allmänt om golf", Description = "Diskussioner om allt möjligt relaterat till golf" }
-                    );
+            );
 
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
                 .WithMany()
                 .HasForeignKey(r => r.UserId)
                 .IsRequired(false);
+
+            modelBuilder.Entity<ForumReply>()
+                .HasOne(r => r.ParentReply)
+                .WithMany(r => r.ChildReplies)
+                .HasForeignKey(r => r.ParentReplyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

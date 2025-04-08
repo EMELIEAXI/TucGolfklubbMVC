@@ -1,16 +1,21 @@
 ﻿@model TucGolfklubb.Models.ForumReply
 
 @{
-    ViewData["Title"] = "Radera svar";
+    bool isKommentar = Model.ParentReplyId == null;
+    string title = isKommentar ? "Radera kommentar" : "Radera svar";
+    string message = isKommentar
+        ? "Är du säker på att du vill ta bort detta kommentar?"
+        : "Är du säker på att du vill ta bort detta svar?";
+    ViewData["Title"] = title;
 }
 
 <div class="container forum-page">
-    <h2 class="mb-4 text-danger">Radera svar</h2>
+    <h2 class="mb-4 text-danger">@title</h2>
 
     <div class="card shadow-sm border-0">
         <div class="card-body" style="background-color: #f8d7da;">
             <p class="fw-bold mb-3" style="color: #721c24;">
-                Är du säker på att du vill ta bort detta svar?
+                @message<br />
                 Denna åtgärd kan inte ångras.
             </p>
 

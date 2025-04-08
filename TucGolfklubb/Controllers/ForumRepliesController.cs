@@ -19,6 +19,45 @@ namespace TucGolfklubb.Controllers
             _userManager = userManager;
         }
 
+        // This GET is no longer needed because reply form is inline
+        // GET: ForumReplies/Create
+        /*
+        public IActionResult Create(int forumPostId, int? parentReplyId)
+        {
+            var reply = new ForumReply
+            {
+                ForumPostId = forumPostId,
+                ParentReplyId = parentReplyId
+            };
+
+            return View(reply);
+        }
+        */
+
+        // POST: ForumReplies/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ForumPostId,ParentReplyId,Content")] ForumReply reply)
+        {
+            if (ModelState.IsValid)
+            {
+                reply.UserId = _userManager.GetUserId(User);
+                reply.PostedAt = DateTime.Now;
+
+                _context.Replies.Add(reply);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId }, fragment: $"reply-{reply.Id}");
+            }
+
+            //ViewBag.ForumPostId = reply.ForumPostId;
+            //ViewBag.ParentReplyId = reply.ParentReplyId;
+            //return View(reply);
+
+            // If validation fails, go back to the forum post page
+            return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });
+        }
+
         // GET: ForumReplies/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

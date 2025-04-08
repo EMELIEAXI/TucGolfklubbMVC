@@ -1,44 +1,36 @@
-using Microsoft.AspNetCore.Identity;
+Ôªøusing Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
+// Databasanslutning
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+// Identity + Roller
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultUI() // L‰gg till fˆr att anv‰nda inbyggt Identity UI (Login, Register etc.)
-    .AddDefaultTokenProviders(); // Viktigt fˆr Âterst‰llning, bekr‰ftelse m.m.
+    .AddDefaultUI() // L√§gg till f√∂r att anv√§nda inbyggt Identity UI (Login, Register etc.)
+    .AddDefaultTokenProviders(); // Viktigt f√∂r √•terst√§llning, bekr√§ftelse m.m.
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Identity/Account/Login";
-    options.LogoutPath = "/Identity/Account/Logout";
-    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // Hur l‰nge man ‰r inloggad
-    options.SlidingExpiration = true; // Fˆrnyas vid aktivitet
-});
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddRoles<IdentityRole>() //  Aktiverar roller!
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
+// Razor Pages + MVC
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages(); //  Viktigt f√∂r Identity sidor
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseMigrationsEndPoint();
-}
-else
+// Middleware
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
@@ -49,12 +41,50 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication(); // Glˆm inte denna n‰r Identity anv‰nds!
+app.UseAuthentication();
 app.UseAuthorization();
 
+// Routing
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+
+app.MapRazorPages(); //  Kr√§vs f√∂r Identity Razor Pages
+
+// Seed adminroll och anv√§ndare
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+    // Skapa Admin-roll om den inte finns
+    var roleExists = await roleManager.RoleExistsAsync("Admin");
+    if (!roleExists)
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+    // Skapa default adminanv√§ndare
+    string adminEmail = "admin@golfklubb.se";
+    string adminPassword = "Admin123!";
+
+    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    if (adminUser == null)
+    {
+        var newAdmin = new ApplicationUser
+        {
+            UserName = adminEmail,
+            Email = adminEmail,
+            EmailConfirmed = true
+        };
+
+        var result = await userManager.CreateAsync(newAdmin, adminPassword);
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(newAdmin, "Admin");
+        }
+    }
+}
 
 app.Run();

@@ -1,0 +1,48 @@
+﻿@model TucGolfklubb.Models.ForumReply
+
+@{
+    ViewData["Title"] = "Svara";
+}
+
+<div class="reply-create-wrapper" style="padding-top: 120px;">
+    <div class="reply-form-box bg-light px-4 py-4 rounded-3 shadow-sm mb-5" style="background-color: #eef3f9;">
+        <h4 class="text-[#001b2e] mb-4">Svara på ett svar</h4>
+
+        <form asp-action="Create">
+            <input type="hidden" asp-for="ForumPostId" />
+            <input type="hidden" asp-for="ParentReplyId" />
+
+            <div class="mb-3">
+                <label asp-for="Content" class="form-label fw-semibold" style="color: #1d3f58;">Meddelande</label>
+                <textarea asp-for="Content"
+                          class="form-control border border-2 border-light rounded-3 shadow-sm"
+                          style="resize: vertical; color: #001b2e; background-color: white;"
+                          rows="5"
+                          placeholder="Skriv ditt svar här..."></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit"
+                        class="btn px-4 py-2 rounded-3 shadow-sm"
+                        style="background-color: #1d3f58; color: white;">
+                    Skicka svar
+                </button>
+
+                <a asp-controller="ForumPosts"
+                   asp-action="Details"
+                   asp-route-id="@Model.ForumPostId"
+                   class="btn btn-outline-secondary rounded-3 shadow-sm">
+                    Tillbaka
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

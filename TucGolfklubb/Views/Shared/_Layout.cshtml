@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TucGolfklubb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TucGolfklubb.styles.css" asp-append-version="true" />
 </head>
@@ -54,9 +55,15 @@
 
 
 
-                <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
+                <li><a href="/Shop" target="_blank">Shop</a></li>
                 
                 <li><a href="/Forum">Forum</a></li>
+                
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a class="nav-link text-warning" href="/Admin">Adminpanel</a></li>
+                }
+
                 <li><partial name="_LoginPartial" /></li>
 
             </ul>
@@ -100,6 +107,11 @@
                     <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
 
                     <li><a href="/Forum">Forum</a></li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a class="text-warning" href="/Admin">Adminpanel</a></li>
+                    }
 
                 </ul>
             </div>

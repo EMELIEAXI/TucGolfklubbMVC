@@ -1,0 +1,387 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Resultat";
+}
+<link rel="stylesheet" href="~/css/Tavlingar-Evenemang.css" />
+<!--Start Geneskod: Tävlingar och Evenemang -->
+<!--Header-->
+<div class="header">
+    <h1>Tävlingar och Evenemang</h1>
+    <h2 class="h2head">TÄVLINGARS RESULTAT</h2>
+</div>
+
+<!--Flex content-->
+<div class="row">
+    <div class="side">
+        <div class="tavdropdown">
+            <button class="tavdropbtn">MENY</button>
+            <div class="tavdropdown-content">
+                <a href="/Tavlingar/Index">Tävlingar och Evenemang</a>
+                <a href="/Tavlingar/Kalender">Kalendar</a>
+                <a href="/Tavlingar/resultat">Resultat</a>
+                <a href="/Tavlingar/Anmalan">Anmälan</a>
+            </div>
+        </div>
+
+        <hgroup>
+            <h3>Förra månadens resultat:</h3>
+            <p class="pinfo">Se nedan förra månadens tävlingsresultaten nedan</p>
+        </hgroup>
+
+        <div class="latest">
+            <table>
+                <tr>
+                    <th colspan="5">September</th>
+                </tr>
+                <tr>
+                    <th>Tävling</th>
+                    <th>Datum</th>
+                    <th>Priset</th>
+                    <th>Namn</th>
+                    <th>Slag/Poäng</th>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>68 slag</td>
+                </tr>
+                <tr>
+                    <td>Höstcup</td>
+                    <td>5 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Anna Johansson</td>
+                    <td>72 slag</td>
+                </tr>
+                <tr>
+                    <td>Klubbens öppna dag</td>
+                    <td>10 Sep</td>
+                    <td>Bästa nybörjare</td>
+                    <td>Julia Eriksson</td>
+                    <td>41 slag</td>
+                </tr>
+                <tr>
+                    <td>Herrseriens final </td>
+                    <td>15 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Mats Andersson</td>
+                    <td>75 slag</td>
+                </tr>
+                <tr>
+                    <td>Träningstävling</td>
+                    <td>20 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Lars Olsson</td>
+                    <td>71 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Vinnare</td>
+                    <td>Erik Svensson</td>
+                    <td>65 slag</td>
+                </tr>
+                <tr>
+                    <td>Månadens bästa spelare</td>
+                    <td>30 Sep</td>
+                    <td>Andra plats</td>
+                    <td>Maria Karlsson</td>
+                    <td>69 slag</td>
+                </tr>
+            </table>
+        </div>
+
+        <hgroup>
+            <h3>Pågående månads kalender:</h3>
+            <p class="pinfo">Se nedan pågående tävlingar och evenemang:</p>
+        </hgroup>
+
+        <div class="ongoing">
+            <table>
+                <tr>
+                    <th colspan="3">Oktober</th>
+                </tr>
+                <tr>
+                    <th>Datum</th>
+                    <th>Tid</th>
+                    <th>Tävlingar / Evenemang</th>
+                </tr>
+                <tr>
+                    <td>Okt 6</td>
+                    <td>10:00 - 15:00</td>
+                    <td>Säsongsavslutning – Grillfest</td>
+                </tr>
+                <tr>
+                    <td>Okt 12</td>
+                    <td>11:00 - 15:00</td>
+                    <td>Halloween-golf – Tematävling med kostymer</td>
+                </tr>
+                <tr>
+                    <td>Okt 19</td>
+                    <td>18:00 - 20:00</td>
+                    <td>Inomhusträning och teori</td>
+                </tr>
+                <tr>
+                    <td>Okt 25</td>
+                    <td>14:00 - 16:00</td>
+                    <td>Prova-på-golf för nybörjare</td>
+                </tr>
+                <tr>
+                    <td>Okt 30</td>
+                    <td>09:00 - 14:00</td>
+                    <td>Månadens bästa spelare – 18 hål</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="kalenderpdf">
+            <hgroup>
+                <h3>Kalender 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingar och evenemang <a href="/images/pdfkalender.pdf">
+                        2024
+                        Kalender
+                    </a>.
+                </p>
+            </hgroup>
+        </div>
+
+        <div class="resultspdf">
+            <hgroup>
+                <h3>Kalender 2024:</h3>
+                <p class="pinfo">
+                    Öppna PDF-filen för hela årets tävlingars resultat <a href="/images/pdfresults.pdf">
+                        2024
+                        Resultat
+                    </a>.
+                </p>
+            </hgroup>
+        </div>
+    </div>
+
+
+    <div class="main">
+
+        <div class="resultat">
+            <h2 class="uh2">Vinnaren Avslöjad: Golfens Stjärna Strålar!</h2>
+            <h4>
+                Vi är glada att meddela att vår kalender och schema för kommande tävlingar och evenemang nu finns
+                tillgängliga!
+            </h4>
+            <p class="presult">
+                Efter en fantastisk helg med svettiga handflator, nervkittlande puttar och skratt som ekade över banan, är det nu dags att avslöja vår mästare!<br>
+                Med en sving som skulle göra även den mest rutinerade golfaren grön av avund, är det med stor glädje vi presenterar vinnaren av vår spännande golftävling!
+            </p>
+        </div>
+
+        <p class="presult">Hovra över bilderna och klicka för att se vem som vann!</p>
+        <div class="resultatimages">
+            <div class="overlaycontainer">
+                <a href="#juli"><img src="/images/res1.jpg" alt="Avatar" class="image"></a>
+                <div class="overlay">juli vinnare</div>
+            </div>
+
+            <div class="overlaycontainer">
+                <a href="#augusti"><img src="/images/res2.jpg" alt="Avatar" class="image"></a>
+                <div class="overlay">augusti vinnare</div>
+            </div>
+
+            <div class="overlaycontainer">
+                <a href="#september"><img src="/images/res3.jpg" alt="Avatar" class="image"></a>
+                <div class="overlay">september vinnare</div>
+            </div>
+
+            <div class="overlaycontainer">
+                <img src="/images/res4.jpg" alt="Avatar" class="image">
+                <div class="overlay"><em>Är det din tur att vinna?!</em><br><br>oktober vinnare</div>
+            </div>
+        </div>
+
+
+        <a id="juli"></a>
+        <table class="resultstable">
+            <tr>
+                <th colspan="5">Juli</th>
+            </tr>
+            <tr>
+                <th>Tävling</th>
+                <th>Datum</th>
+                <th>Priset</th>
+                <th>Namn</th>
+                <th>Slag/Poäng</th>
+            </tr>
+            <tr>
+                <td>Sommarserien</td>
+                <td>5 Juli</td>
+                <td>Vinnare</td>
+                <td>Erik Svensson</td>
+                <td>36 poäng</td>
+            </tr>
+            <tr>
+                <td>Sommarserien</td>
+                <td>5 Juli</td>
+                <td>Andra plats</td>
+                <td>Anna Johansson</td>
+                <td>34 poäng</td>
+            </tr>
+            <tr>
+                <td>Par-tävling</td>
+                <td>10 Juli</td>
+                <td>Vinnande par</td>
+                <td>Lars och Sofia</td>
+                <td>69 slag</td>
+            </tr>
+            <tr>
+                <td>Familjegolf</td>
+                <td>15 Juli</td>
+                <td>Bästa familj</td>
+                <td>Team Larsson</td>
+                <td>138 slag</td>
+            </tr>
+            <tr>
+                <td>Klubbens sommarfest</td>
+                <td>20 Juli</td>
+                <td>Vinnare</td>
+                <td>Mats Andersson</td>
+                <td>70 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 Juli</td>
+                <td>Vinnare</td>
+                <td>Erik Svensson</td>
+                <td>67 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 Juli</td>
+                <td>Andra plats</td>
+                <td>Maria Karlsson</td>
+                <td>71 slag</td>
+            </tr>
+        </table>
+
+        <a id="augusti"></a>
+        <table class="resultstable">
+            <tr>
+                <th colspan="5">Augusti</th>
+            </tr>
+            <tr>
+                <th>Tävling</th>
+                <th>Datum</th>
+                <th>Priset</th>
+                <th>Namn</th>
+                <th>Slag/Poäng</th>
+            </tr>
+            <tr>
+                <td>Damseriens final</td>
+                <td>1 Augusti</td>
+                <td>Vinnare</td>
+                <td>Sofia Lindgren</td>
+                <td>76 slag</td>
+            </tr>
+            <tr>
+                <td>Herr- och damgolf</td>
+                <td>8 Augusti</td>
+                <td>Vinnare</td>
+                <td>Anna Johansson</td>
+                <td>74 slag</td>
+            </tr>
+            <tr>
+                <td>Juniorernas avslutning</td>
+                <td>15 Augusti</td>
+                <td>Bästa junior</td>
+                <td>Emil Larsson</td>
+                <td>45 slag</td>
+            </tr>
+            <tr>
+                <td>Vänskapsturnering</td>
+                <td>12 Augusti</td>
+                <td>Vinnade par</td>
+                <td>Erik och Anna</td>
+                <td>68 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 Augusti</td>
+                <td>Vinnare</td>
+                <td>Mats Andersson</td>
+                <td>66 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 Augusti</td>
+                <td>Andra plats</td>
+                <td>Lars Olsson</td>
+                <td>70 slag</td>
+            </tr>
+        </table>
+
+        <a id="september"></a>
+        <table class="resultstable">
+            <tr>
+                <th colspan="5">September</th>
+            </tr>
+            <tr>
+                <th>Tävling</th>
+                <th>Datum</th>
+                <th>Priset</th>
+                <th>Namn</th>
+                <th>Slag/Poäng</th>
+            </tr>
+            <tr>
+                <td>Höstcup</td>
+                <td>5 September</td>
+                <td>Vinnare</td>
+                <td>Erik Svensson</td>
+                <td>68 slag</td>
+            </tr>
+            <tr>
+                <td>Höstcup</td>
+                <td>5 September</td>
+                <td>Andra plats</td>
+                <td>Anna Johansson</td>
+                <td>72 slag</td>
+            </tr>
+            <tr>
+                <td>Klubbens öppna dag</td>
+                <td>10 September</td>
+                <td>Bästa nybörjare</td>
+                <td>Julia Eriksson</td>
+                <td>41 slag</td>
+            </tr>
+            <tr>
+                <td>Herrseriens final </td>
+                <td>15 September</td>
+                <td>Vinnare</td>
+                <td>Mats Andersson</td>
+                <td>75 slag</td>
+            </tr>
+            <tr>
+                <td>Träningstävling</td>
+                <td>20 September</td>
+                <td>Vinnare</td>
+                <td>Lars Olsson</td>
+                <td>71 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 September</td>
+                <td>Vinnare</td>
+                <td>Erik Svensson</td>
+                <td>65 slag</td>
+            </tr>
+            <tr>
+                <td>Månadens bästa spelare</td>
+                <td>30 September</td>
+                <td>Andra plats</td>
+                <td>Maria Karlsson</td>
+                <td>69 slag</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--End Genes kod: Tävlingar och Evenemang -->

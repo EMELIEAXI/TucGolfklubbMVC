@@ -1,0 +1,626 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.header {
+    padding: 60px 10px 10px 10px;
+    background-color: #1c386f;
+    text-align: center;
+    color: rgba(27, 81, 231, 0.982);
+    height: 25%;
+    width: 100%;
+    height: auto;
+}
+
+h1 {
+    color: rgba(152, 171, 222, 0.982);
+    text-shadow: 2px 2px 4px #000000;
+    margin-top: 1.25em;
+    margin-bottom: 1em;
+}
+
+h2.h2head {
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 25px #6b8da5, 0 0 5px #4781c6;
+    margin-top: 0;
+}
+
+h3.haside1 {
+    text-align: center;
+    margin-top: 3em;
+    background-color: #808344;
+    color: #0b1708;
+    padding: 0.5%;
+}
+
+h3.haside2 {
+    text-align: left;
+    margin-top: 3em;
+    background-color: #959678;
+    color: #0b1708;
+    padding: 0.5%;
+}
+
+h2.uh2 {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+h3.kh3 {
+    margin-top: 3em;
+    margin-bottom: 1.5em;
+    text-align: center;
+}
+
+h2,
+h4 {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 0.2em;
+    color: #1c386f;
+    text-shadow: 2px 2px 4px rgb(255, 255, 255, 1);
+}
+
+p.pinfo {
+    text-align: justify;
+    font-size: 1em;
+    color: #1c386f;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.side {
+    flex: 30%;
+    background-color: #aeb8aa;
+    padding: 20px;
+    height: auto;
+}
+
+
+/*start of dropdown box*/
+.tavdropbtn {
+    background-color: #0b1708;
+    color: rgb(255, 255, 255);
+    font-size: 1.5em;
+    font-weight: 100;
+    border: none;
+    border-radius: 5em;
+    width: 100%;
+}
+
+.tavdropdown-content {
+    display: none;
+    background-color: #4781c6;
+    min-width: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: center;
+}
+
+    .tavdropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .tavdropdown-content a:hover {
+            background-color: #86b7d9;
+            color: white;
+        }
+
+.tavdropdown:hover .tavdropdown-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tavdropdown:hover .tavdropbtn {
+    background-color: rgb(13, 55, 126);
+    color: #c7d9d7;
+}
+
+
+/*start of kalender ongoing*/
+.ongoing table,
+.latest table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.ongoing th,
+.ongoing td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.latest th,
+.latest td {
+    padding: 4px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.ongoing tr:hover,
+.latest tr:hover {
+    background-color: #526a0d;
+    color: white;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 70%;
+    background-color: #d4dad9;
+    padding: 20px;
+}
+
+.mainwelcome {
+    display: flex;
+    flex-direction: column;
+    flex: 70%;
+    background-color: #d4dad9;
+    padding: 20px;
+    padding-bottom: 0;
+    z-index: -1;
+}
+
+.welcomevid {
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    z-index: -1;
+}
+
+#tevideo {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    max-width: 500px;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+p.tavcallout {
+    font-size: 1em;
+    color: #1c386f;
+    margin-left: 40%;
+    text-align: justify;
+    background-color: white;
+    height: auto;
+    z-index: 50;
+    margin-top: 0;
+    padding-top: 2em;
+    padding-right: 2em;
+}
+
+/*start of kalender kommande and resultstable*/
+
+.kommande,
+.resultstable {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 4em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+    .kommande td,
+    .kommande th,
+    .resultstable td,
+    .resultstable th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .kommande tr:nth-child(even),
+    .resultstable tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .kommande tr:hover,
+    .resultstable tr:hover {
+        background-color: #86b7d9;
+    }
+
+    .kommande th,
+    .resultstable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        box-shadow: inset 5px 5px 5px #1c386f;
+        text-align: center;
+        background-color: rgba(13, 54, 126, 0.735);
+        color: white;
+    }
+
+.schedulefoto {
+    width: 30%;
+    height: 90%;
+    padding: 2em;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: 5em;
+}
+
+.col-container {
+    flex-direction: column;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+.note {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 1.5em;
+}
+
+strong {
+    color: red
+}
+
+/*end of kalender*/
+
+
+/*start of resultat*/
+.resultat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3em;
+    margin-top: 0;
+}
+
+.resultatimages {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100px;
+    width: auto;
+    margin-bottom: 6em;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+#juli,
+#augusti,
+#september {
+    padding: 2.5%;
+}
+
+p.presult {
+    text-align: center;
+    font-size: 1em;
+    color: #1c386f;
+    margin-bottom: 0.5%;
+}
+
+.overlaycontainer {
+    position: relative;
+    width: 50%;
+    height: auto;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 1em;
+    padding: 20px;
+    text-align: center;
+}
+
+.overlaycontainer:hover .overlay {
+    opacity: 1;
+}
+
+/*end of resulat*/
+
+/*start of anmälningsformulär*/
+.regform {
+    width: 40%;
+    height: 2%;
+    margin: auto;
+    margin-top: 1em;
+    padding-bottom: 0;
+}
+
+fieldset {
+    position: relative;
+    border-radius: 30px;
+    padding: 20px;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #01366b;
+}
+
+.h2form {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+.typetext label,
+.typetext input,
+button,
+.typeselect label,
+select {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 5%;
+}
+
+legend {
+    font-size: 1.5em;
+    text-align: initial;
+    background-color: #11456ffa;
+    border-radius: 5px;
+    color: #ffffff
+}
+
+.typetext label,
+.typeselect label,
+.typecb,
+.typerb {
+    margin-bottom: 4px;
+    text-align: center;
+    font-weight: 700;
+    color: #1c386f;
+}
+
+label:nth-of-type(2) {
+    margin-top: 5px;
+}
+
+input::placeholder {
+    color: gray;
+}
+
+.typetext input {
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
+    height: 50px;
+    font-size: 1em;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    border-radius: 20px;
+}
+
+select {
+    background: #ecf0f3;
+    color: #06487d;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 50px;
+    font-size: 1em;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(210, 206, 206, 0.2) 0px -3px 0px inset;
+    border-radius: 5px;
+}
+
+.container {
+    /* The checkboxcontainer */
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+    .container input {
+        /* Hide the browser's default checkbox */
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+.ccheckmark {
+    /* Create a custom checkbox */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    color: #1c386f;
+}
+
+.rcheckmark {
+    /* Create a custom radio button */
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    color: #1c386f;
+}
+
+.container:hover input ~ .ccheckmark,
+.container:hover input ~ .rcheckmark {
+    /* On mouse-over, add a grey background color */
+    background-color: #ccc;
+}
+
+.container input:checked ~ .ccheckmark,
+.container input:checked ~ .rcheckmark {
+    /* When the checkbox is checked, add a blue background */
+    background-color: #06487d;
+}
+
+.ccheckmark:after,
+.rcheckmark:after {
+    /* Create the checkmark/indicator (hidden when not checked) */
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.container input:checked ~ .ccheckmark:after,
+.container input:checked ~ .rcheckmark:after {
+    /* Show the checkmark when checked */
+    display: block;
+}
+
+.container .ccheckmark:after {
+    /* Style the checkmark/indicator */
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    /*-webkit-transform: rotate(45deg);*/
+    /*-ms-transform: rotate(45deg);*/
+    transform: rotate(45deg);
+}
+
+.container .rcheckmark:after {
+    /* Style the radio/indicator */
+    left: 6.5px;
+    top: 6.5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: solid white;
+}
+
+.checkboxradio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-left: auto;
+}
+
+button {
+    color: white;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    background: #1c386f;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    transition: 0.5s;
+    font-size: 1em;
+}
+
+    button:hover {
+        box-shadow: none;
+        background: #4781c6;
+    }
+
+/*end of anmälningsformulär*/
+
+/******************** Responsive ******************/
+/******************** < 1024px ********************/
+
+@media only screen and (max-width: 1024px) {
+
+    .navbar,
+    .row {
+        flex-direction: column;
+    }
+}
+
+/********************  < 700px ********************/
+
+@media screen and (max-width: 700px) {
+
+    .main,
+    .side,
+    .navbar,
+    .row,
+    .row-container,
+    .col-container,
+    .resultat {
+        flex-direction: column;
+    }
+
+    .resultatimages {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .overlaycontainer {
+        width: 100%;
+        max-width: 165px;
+    }
+
+    .row-container,
+    .col-container,
+    .regform,
+    .resultat,
+    .kommande {
+        padding: 0.2rem;
+        margin-left: unset;
+    }
+
+        .latest th,
+        .latest td,
+        .ongoing th,
+        .ongoing td,
+        .kommande th,
+        .kommande td,
+        .resultstable th,
+        .resultstable td {
+            font-size: 0.6rem;
+        }
+
+    .schedulefoto {
+        margin: auto;
+        margin-bottom: 1.5em;
+        width: 70%;
+        padding: 1em;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    }
+
+    .regform {
+        width: 100%;
+    }
+}
+
+/********************  < 374px ********************/
+
+@media only screen and (max-width: 374px) {
+
+    .latest th,
+    .latest td,
+    .ongoing th,
+    .ongoing td,
+    .kommande th,
+    .kommande td,
+    .resultstable th,
+    .resultstable td {
+        font-size: 0.5rem;
+    }
+}

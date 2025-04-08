@@ -1,0 +1,185 @@
+﻿/*CSS kod för innehållet i nyhetssidan*/
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/*HEADER BILDEN PÅ GOLFBOLLAR I EN HÖG*/
+.header-picture {
+    width: 100%;
+    height: 30em;
+    background-image: url('/images/golf-1938932_1920.jpg');
+    background-size: cover;
+    background-position-y: 70%;
+}
+
+/*RUBRIKEN HÖGST UPP PÅ SIDAN*/
+.news h1 {
+    text-align: center;
+    margin-top: 2em;
+    font-size: xx-large;
+}
+
+/*BILDERNA I ARTIKLARNA*/
+.wrapper img {
+    width: 400px;
+    height: 300px;
+    border-radius: 4px;
+}
+
+/*RAMEN RUNT ARTIKLARNA*/
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+/*NYHETS BOXARNA*/
+.news article {
+    margin: 20px 0px 30px 0px;
+    overflow: auto;
+    width: 100%;
+    border-bottom: 1px solid rgb(14, 176, 16);
+}
+
+.news p {
+    padding: 1rem;
+    font-size: large;
+}
+
+.news h3 {
+    padding: 1rem;
+}
+
+/*BILDERNA HÅLLS TILL HÖGER*/
+figure {
+    float: right;
+}
+
+/* NYHETSLISTAN TILL HÖGER*/
+.side-menu {
+    background-color: rgba(9, 20, 46, 0.7);
+    width: 20%;
+    color: white;
+    margin: 2em;
+    padding: 2em;
+}
+
+    /*LISTAN MED NYHETSRUBRIKERNA TILL HÖGER*/
+    .side-menu a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        margin-left: 1em;
+        padding: 1em;
+        border-bottom: 1px solid white;
+    }
+
+/*GRÅ HOVER ÖVER RADEN*/
+aside a:hover {
+    background-color: #989898;
+}
+
+/*SIGNUP-FORMULÄRET I NYHETSLISTAN TILL HÖGER*/
+.signup-news {
+    padding: 20px;
+    max-width: 100%;
+    margin: 20px auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+    .signup-news h2 {
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .signup-news p {
+        font-size: 16px;
+        color: white;
+        margin-bottom: 10px;
+        text-decoration: underline;
+    }
+
+    .signup-news label {
+        color: white;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .signup-news input[type="email"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .signup-news button {
+        background-color: #006400;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .signup-news button:hover {
+            background-color: #004d00;
+        }
+
+/*MEDIA QUIERY för nyhetssidan av Emilia */
+
+@media (max-width: 769px) {
+    .header-picture {
+        width: 100%;
+        max-width: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .wrapper {
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    .news {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+        .news p {
+            padding: 0 1rem;
+        }
+
+    figure {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .side-menu {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@media (max-width: 430px) {
+    .news img {
+        width: 300px;
+        height: 200px;
+    }
+}
+
+/*SLUT PÅ SIGNUP-FORMULÄRET*/
+
+/*Slut på CSS koden för nyhetssidan*/

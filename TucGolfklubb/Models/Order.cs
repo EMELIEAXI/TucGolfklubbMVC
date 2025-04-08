@@ -14,7 +14,6 @@ namespace TucGolfklubb.Models
         public ApplicationUser? User { get; set; }
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
-        public ICollection<OrderItem>? OrderItems { get; set; }
         public decimal TotalPrice { get; set; }
 
         //Gene: Make order items non-nullable

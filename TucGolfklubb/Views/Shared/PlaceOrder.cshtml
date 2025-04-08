@@ -3,25 +3,70 @@
     Layout = null;
     ViewData["Title"] = "PlaceOrder";
 }
+<link rel="stylesheet" href="~/css/Varukorg.css" />
+<link rel="stylesheet" href="~/css/shop.css" />
+<header>
+    <h1>TUC Golfklubb Shop</h1>
+</header>
+<div class="header">
+    <h1>Välkommen till våra produkter</h1>
+    <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
 
-<h2>Fortsätt till betalning</h2>
+</div>
+<div class="Varukorg">
+@if (Model == null || Model.OrderItems == null || !Model.OrderItems.Any())
+{
+    <h1>Varukorg</h1>
+    <p>Ingen orderdata tillgänglig.</p>
+    <a href="@Url.Action("ProductShop", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
+}
+else
+{
+    <h2>Fortsätt till betalning</h2>
+    <ul>
+        @foreach (var item in Model.OrderItems)
+        {
+                @if (item.Product != null)
+                {
+                <li>@item.Quantity st - @item.Product.Name - @item.Price kr </li>
+                }
+                else
+                {
+                    <li>Produktinformation saknas</li> 
+                }
+        }
+    </ul>
 
-<ul>
-    @foreach (var item in Model.OrderItems)
-    {
-        <li>@item.Product.Name - @item.Quantity st - @item.Price kr</li>
-    }
-</ul>
-
-<h4>Total: @Model.TotalPrice.ToString("C")</h4>
-
-<form asp-controller="Orders" asp-action="Receipt" method="post">
-    <p>Välj betalningsmetod:</p>
-    @foreach (var method in Model.PaymentMethods)
-    {
-        <div>
-            <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method
-        </div>
-    }
-    <button type="submit" class="btn btn-success">Bekräfta order</button>
- </form>
+    <h4>Total: @Model.TotalPrice.ToString("C")</h4>
+    <div class="column-pay">
+        <form class="PaymentMethod" asp-controller="Orders" asp-action="Receipt" method="post">
+            <p style="float:left">Välj betalningsmetod:</p>
+            @if (Model.PaymentMethods != null && Model.PaymentMethods.Any())
+            {
+                @foreach (var method in Model.PaymentMethods)
+                {
+                <div class="PaymentMethod">
+                    <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method
+                </div>
+                }
+            }
+            else
+            {
+                <p>Ingen betalningsmetod tillgänglig</p>  <!-- Meddelande om betalningsmetoder inte finns -->
+            }
+        <button type="submit" class="btn btn-success">Bekräfta order</button>
+        </form>
+    </div>
+}
+</div>
+<footer class="shop-footer">
+    <div class="betalning">
+        <h2>Betalningsmetoder</h2>
+        <ul>
+            <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
+            <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
+            <li><img src="~/images/swish-logo.png" alt="Swish"></li>
+            <li><img src="~/images/visa.png" alt="Visa"></li>
+        </ul>
+    </div>
+</footer>

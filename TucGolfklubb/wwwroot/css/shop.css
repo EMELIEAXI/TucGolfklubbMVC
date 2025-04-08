@@ -9,6 +9,10 @@ body {
     font-size: 1.8em;
 }
 
+.OrderSummary {
+    margin:auto;
+}
+
 header {
     background: #222;
     color: white;

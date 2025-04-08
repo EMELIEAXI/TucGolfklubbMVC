@@ -1,0 +1,45 @@
+﻿body {
+    font-family: 'Montserrat', sans-serif;
+    margin-top:20px;
+    margin-left:20px;
+    padding-left:20px;
+}
+h2 {
+    font-size: xx-large;
+    width:200px;
+}
+th, td {
+    padding: 30px;
+}
+
+.PaymentMethod {
+    display:inline;
+}
+.btn-success {
+    background-color:dodgerblue;
+    padding:10px;
+    margin:10px;
+    border-radius:20px;
+    width:200px;
+}
+ul {
+    padding:20px;
+}
+li {
+    padding:20px;
+}
+.Varukorg {
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+}
+.column-pay {
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+}
+
+.Kvitto {
+    margin: auto;
+}
+

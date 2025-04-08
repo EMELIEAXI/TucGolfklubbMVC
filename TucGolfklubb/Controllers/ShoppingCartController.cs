@@ -1,4 +1,5 @@
 ﻿using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -21,7 +22,7 @@ namespace TucGolfklubb.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return null; // Hantera fallet om användaren inte är inloggad
+                return new ShoppingCart { UserId = "anonymous", OrderItems = new List<OrderItem>() }; // Skapar en tom varukorg för icke-inloggade användare
             }
 
             var cart = await _context.ShoppingCart
@@ -37,36 +38,51 @@ namespace TucGolfklubb.Controllers
 
             return cart;
         }
+        [HttpPost]
+        [Route("ShoppingCart/Index")]
         public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (userId == null)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-
-                var cart = await _context.ShoppingCart
-                    .Include(c => c.OrderItems)
-                    .ThenInclude(oi => oi.Product)
-                    .FirstOrDefaultAsync(c => c.UserId == userId);
-
-                return View(cart); // <---- Skickar varukorgen till vyn!
+                return RedirectToAction("Login", "Account");
             }
+
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            var model = new ProductShopViewModel
+            {
+                OrderItems = cart?.OrderItems.Select(oi => new OrderItem
+                {
+                    ProductId = oi.ProductId,
+                    ProductName = oi.Product?.Name,
+                    Quantity = oi.Quantity,
+                    Price = oi.Price
+                }).ToList() ?? new List<OrderItem>(),
+                OrderTotalPrice = cart?.OrderItems.Sum(oi => oi.Quantity * oi.Price) ?? 0
+            };
+
+            return View("_OrderSummary", model); // Ladda en vanlig vy istället för partial view här
+        }
 
         [HttpPost]
         [Route("ShoppingCart/AddToCart")]
+        [Authorize]
         public async Task<IActionResult> AddToCart(int productId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return RedirectToAction("Login", "Account"); // Om användaren inte är inloggad, skicka till login
+                return Unauthorized(); // Skickar 401 till klienten, AJAX kan hantera det
             }
 
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
-                return NotFound();
+                return RedirectToAction("ProductShop", "Shop");
             }
 
             // Kontrollera om användaren redan har en shopping cart
@@ -109,14 +125,30 @@ namespace TucGolfklubb.Controllers
             {
                 OrderItems = cart.OrderItems.Select(oi => new OrderItem
                 {
+                    ProductId = oi.ProductId,
                     ProductName = oi.Product?.Name,
                     Quantity = oi.Quantity,
                     Price = oi.Price
                 }).ToList() ?? new List<OrderItem>(),
                 OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
             };
+            Console.WriteLine("Antal items i varukorgen: " + updatedModel.OrderItems.Count);
+            return PartialView("_OrderSummary", updatedModel);
+        }
+        [HttpGet]
+        [Route("ShoppingCart/ItemCount")]
+        public async Task<IActionResult> ItemCount()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+                return Json(0);
 
-            return View("_OrderSummary", updatedModel); 
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            int count = cart?.OrderItems.Sum(oi => oi.Quantity) ?? 0;
+            return Json(count);
         }
 
         [HttpPost]
@@ -154,12 +186,11 @@ namespace TucGolfklubb.Controllers
                     OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Price * oi.Quantity)
                 };
 
-                return PartialView("_OrderSummary", updatedModel); 
+                return PartialView("_OrderSummary", updatedModel);
             }
 
-            return BadRequest(); // Eller något lämpligt fallback
+            return BadRequest();
         }
-
     }
     
 }

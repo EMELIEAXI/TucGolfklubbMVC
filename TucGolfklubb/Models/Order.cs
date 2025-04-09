@@ -23,8 +23,7 @@ namespace TucGolfklubb.Models
 
         //Gene: Add total amount as calculated property
         //public decimal TotalAmount => OrderItems.Sum(item => item.Quantity * item.UnitPrice);
-
-        [Column(TypeName = "decimal(18,2)")]
+        
         private decimal? _totalPrice;
         public decimal TotalPrice
         {

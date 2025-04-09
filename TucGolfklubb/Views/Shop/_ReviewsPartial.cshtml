@@ -8,14 +8,16 @@
         <form asp-controller="Review" asp-action="AddReview" method="post">
             <input type="hidden" name="productId" value="@Model.SelectedProduct.Id" />
             <textarea name="comment" placeholder="Skriv din recension här..." required></textarea>
-            <select name="rating">
-                <option value="1">1 Stjärna</option>
-                <option value="2">2 Stjärnor</option>
-                <option value="3">3 Stjärnor</option>
-                <option value="4">4 Stjärnor</option>
-                <option value="5">5 Stjärnor</option>
-            </select>
-            <button type="submit">Skicka</button>
+            <div class="review-row">
+                <select name="rating">
+                    <option value="1">1 Stjärna</option>
+                    <option value="2">2 Stjärnor</option>
+                    <option value="3">3 Stjärnor</option>
+                    <option value="4">4 Stjärnor</option>
+                    <option value="5">5 Stjärnor</option>
+                </select>
+                <button type="submit">Skicka</button>
+            </div>
         </form>
     }
     else

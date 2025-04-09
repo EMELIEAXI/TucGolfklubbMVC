@@ -12,7 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produkt Shop</title>
     <link rel="stylesheet" href="~/css/productshop.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/productshop-partials.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -53,28 +52,31 @@
                 @foreach (var product in Model.Products.Where(p => p.CategoryId == selectedCategory.Id))
                 {
                     <div class="item">
-                        <div class="item_image">
-                            <figure>
-                                <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
-                                <figcaption></figcaption>
-                            </figure>
-                        </div>
+                        <div class="item_left">
+                            <div class="item_image">
+                                <figure>
+                                    <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
+                                    <figcaption></figcaption>
+                                </figure>
+                            </div>
+                            <div class="item_basic">
+                                <h3>@product.Name</h3>
+                                <p>@product.Description</p>
+                            </div>
+                            <p class="item_price">Pris: <span>@product.Price.ToString("C")</span></p>
 
-                        <div class="item_info">
-                            <h3>@product.Name</h3>
-                            <p>@product.Description</p>
-                            <p class="text_right">Pris: <span>@product.Price.ToString("C")</span></p>
                             <div class="form">
                                 <form class="add-to-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
                                     <input type="hidden" name="productId" value="@product.Id" />
                                     <button type="submit" class="btn btn-primary">Lägg till i varukorg</button>
                                 </form>
                             </div>
+                        </div>
 
+                        <div class="item_right">
                             <div class="reviews-container">
                                 <div class="reviews-form">
-                                    <partial name="_ReviewsPartial" model="new ProductShopViewModel
-                                { SelectedProduct = product }" />
+                                    <partial name="_ReviewsPartial" model="new ProductShopViewModel { SelectedProduct = product }" />
                                 </div>
 
                                 <div class="reviews-list">
@@ -84,10 +86,15 @@
 
                                     <div id="reviews-@product.Id" class="review-box collapsed">
                                         <partial name="_ReviewListPartial" model="new ProductShopViewModel
-                                { SelectedProduct = product, Reviews = product.Reviews?.ToList() ?? new List<Review>() }" />
+                                    { SelectedProduct = product, Reviews = product.Reviews?.ToList() ?? new List<Review>() }" />
                                     </div>
                                 </div>
                             </div>
+                           @* <div class="regform">
+                                <fieldset id="orderSummaryContainer">
+                                    <partial name="_OrderSummary" model="Model" />
+                                </fieldset>
+                            </div>*@
                         </div>
                     </div>
                 }
@@ -97,11 +104,6 @@
         {
             <p>Inga kategorier tillgängliga.</p>
         }
-@*            <div class="regform">
-            <fieldset id="orderSummaryContainer">
-                <partial name="_OrderSummary" model="Model" />
-            </fieldset>
-            </div> *@ 
     </div>
 
     <footer class="shop-footer">

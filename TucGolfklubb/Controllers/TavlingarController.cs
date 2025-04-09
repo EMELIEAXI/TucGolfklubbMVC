@@ -8,5 +8,18 @@ namespace TucGolfklubb.Controllers
         {
             return View();
         }
+
+        public IActionResult Anmalan()
+        {
+            return View();
+        }
+        public IActionResult Kalender() 
+        {
+            return View();
+        }
+        public IActionResult resultat()
+        {
+            return View();
+        }
     }
 }

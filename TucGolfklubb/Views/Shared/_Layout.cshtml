@@ -9,6 +9,71 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TucGolfklubb.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            padding-top: 120px; /* Skjuter ner innehållet så det inte göms bakom nav */
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background-color: #444;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 15px 30px;
+            margin: 0;
+            list-style: none;
+            gap: 20px;
+        }
+
+            .menu li a {
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+            }
+
+        main {
+            min-height: 80vh;
+        }
+
+        ul.dropdown,
+        ul.dropdown-spela,
+        ul.dropdown-medlem,
+        ul.hamburger-dropdown {
+            background-color: rgba(0, 0, 0, 0.85); /* mörk bakgrund */
+            color: white;
+            padding: 15px;
+            margin: 0;
+            list-style: none;
+            border-radius: 5px;
+            z-index: 10000;
+            position: absolute;
+        }
+
+            ul.dropdown li a,
+            ul.dropdown-spela li a,
+            ul.dropdown-medlem li a,
+            ul.hamburger-dropdown li a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                padding: 8px 12px;
+            }
+
+                ul.dropdown li a:hover,
+                ul.dropdown-spela li a:hover,
+                ul.dropdown-medlem li a:hover,
+                ul.hamburger-dropdown li a:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+    </style>
+
 </head>
 <body>
     <header>
@@ -81,7 +146,7 @@
                             <li><a href="/Spela/Foretag">Företag</a></li>
                             <li><a href="/Spela">Gäst</a></li>
                             <li><a href="/Spela/Greenfee">Greenfee & Regler</a></li>
-                            <li id="four"><a href="/Grupprojekt-Golfklubb/kod-html/spela-golf/tavlingar-evenemang/tavlingar-evenemang.html">Tävlingar/Evenemang</a></li>
+                            <li id="four"><a href="Tavlingar">Tävlingar/Evenemang</a></li>
                         </ul>
                     </li>
                     <li>
@@ -100,12 +165,12 @@
                             <li><a href="~/Identity/Account/Login">Logga in</a></li>
                             <li><a href="/Identity/Account/Register?returnUrl=%2F">Bli medlem</a></li>
                             <li><a href="~/Identity/Account/Login">Förmåner</a></li>
-                            <li><a href="/Grupprojekt-Golfklubb/kod-html/medlem/bokning.html">Bokning</a></li>
+                            <li><a href="/Spela/Bokning">Bokning</a></li>
                         </ul>
                     </li>
                     <li><a href="/Kontakt">Kontakta oss</a></li>
-                    <li><a href="/Grupprojekt-Golfklubb/kod-html/restaurang.html" target="_blank">Restaurang</a></li>
-                    <li><a href="/Grupprojekt-Golfklubb/kod-html/shop-index.html" target="_blank">Shop</a></li>
+                    <li><a href="/Restaurang" target="_blank">Restaurang</a></li>
+                    <li><a href="/Shop" target="_blank">Shop</a></li>
 
                     <li><a href="/Forum">Forum</a></li>
 

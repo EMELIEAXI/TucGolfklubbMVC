@@ -30,6 +30,9 @@ namespace TucGolfklubb.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [Display(Name = "Full Name")]
+            public string? FullName { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string? PhoneNumber { get; set; }
@@ -46,11 +49,13 @@ namespace TucGolfklubb.Areas.Identity.Pages.Account.Manage
 
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var fullName = user.FullName;
 
             Username = userName ?? string.Empty;
 
             Input = new InputModel
             {
+                FullName = fullName,
                 PhoneNumber = phoneNumber,
                 ProfileImagePath = user.ProfileImagePath ?? string.Empty
             };
@@ -87,6 +92,12 @@ namespace TucGolfklubb.Areas.Identity.Pages.Account.Manage
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
                 }
+            }
+
+            if (Input.FullName != user.FullName)
+            {
+                user.FullName = Input.FullName;
+                await _userManager.UpdateAsync(user);
             }
 
             await _signInManager.RefreshSignInAsync(user);

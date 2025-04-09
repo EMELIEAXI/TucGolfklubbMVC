@@ -14,6 +14,6 @@
         public string? ProductName { get; set; }
 
         //Gene: Add this to store the price of the product at purchase time
-        public decimal UnitPrice { get; set; }
+        //public decimal UnitPrice { get; set; }
     }
 }

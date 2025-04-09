@@ -1,0 +1,326 @@
+﻿html {
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: "Roboto";
+}
+
+.header-medlem {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 460px;
+    object-fit: cover;
+    padding-top: 4.1rem;
+}
+
+.container-form-aside {
+    display: flex;
+    justify-content: space-between;
+}
+
+.booking-form {
+    border: 2px solid #000;
+    margin: 6rem;
+    padding: 4rem 4rem 2rem 4rem;
+    width: 60%;
+    border-radius: 10px;
+    background-color: #efefef;
+    font-family: "Roboto";
+}
+
+    .booking-form h2 {
+        font-size: 3rem;
+        padding-bottom: 2rem;
+        text-align: center;
+    }
+
+.booking-info {
+    flex-direction: row;
+    font-size: 1.2rem;
+    padding: 2rem 0 1rem 0;
+}
+
+    .booking-info select {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
+    .booking-info input {
+        padding-right: 1rem;
+        padding-left: 1rem;
+        font-family: "Roboto";
+    }
+
+.booking-form h4 {
+    padding: 1rem 0 1rem 0;
+}
+
+.opening-hours {
+    list-style-type: none;
+    padding-bottom: 1rem;
+    line-height: 1.4rem;
+}
+
+.booking-form p {
+    font-size: 1rem;
+}
+
+    .booking-form p:nth-of-type(2) {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        padding-top: 1.3rem;
+    }
+
+    .booking-form p a {
+        color: #000;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .booking-form p a:active {
+            color: #5e5e5e;
+        }
+
+.button-book {
+    background-color: #006400;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+}
+
+    .button-book:active {
+        background-color: #3b3b3b;
+    }
+
+.aside-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border: 2px solid #000;
+    margin: 6rem;
+    width: 15%;
+    border-radius: 10px;
+    background-color: #efefef;
+    font-family: "Roboto";
+}
+
+    .aside-info .aside-button {
+        padding: 0.8rem;
+        margin: 1rem;
+        background-color: #006400;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+.booking-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 6rem 6rem 6rem;
+}
+
+.table-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 0.6rem;
+    text-align: center;
+}
+
+th {
+    background-color: #006400;
+    color: white;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.available td:nth-child(3) {
+    background-color: #00dd0f;
+}
+
+.occupied td:nth-child(3) {
+    background-color: #e52424;
+}
+
+@media (max-width: 1024px) {
+
+    .container-form-aside {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-form, .aside-info {
+        width: 80%;
+        margin: 2rem;
+    }
+
+    .button-book {
+        max-width: 20%;
+    }
+
+    .table-title {
+        font-size: 2.5rem;
+    }
+
+    table {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding-top: 1.6rem;
+    }
+
+    .header-medlem {
+        height: 300px;
+    }
+
+    .container-form-aside {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-form, .aside-info {
+        width: 90%;
+        margin: 1.5rem;
+    }
+
+        .booking-form h2 {
+            font-size: 2.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+    .booking-info {
+        font-size: 1rem;
+    }
+
+    .button-book {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .aside-info .aside-button {
+        font-size: 0.9rem;
+        margin: 0.5rem;
+    }
+
+    .table-title {
+        font-size: 2rem;
+    }
+
+    .booking-table {
+        margin: 1rem;
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding-top: 1.6rem;
+    }
+
+    .header-medlem {
+        height: 200px;
+    }
+
+    .container-form-aside {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-form, .aside-info {
+        width: 95%;
+        margin: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+        .booking-form h2 {
+            font-size: 2rem;
+            padding-bottom: 1rem;
+        }
+
+    .booking-info {
+        font-size: 0.9rem;
+    }
+
+        .booking-info select, .booking-info input {
+            padding: 0.5rem;
+        }
+
+    .booking-form p, .booking-form h4, .booking-form label {
+        font-size: 0.9rem;
+    }
+
+    .button-book {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.9rem;
+    }
+
+    .aside-info .aside-button {
+        font-size: 0.8rem;
+        margin: 0.4rem;
+        padding: 0.6rem;
+    }
+
+    .table-title {
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 1rem 0;
+    }
+
+    .booking-table {
+        padding-right: 2rem;
+        border: none;
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 0.3rem;
+    }
+}

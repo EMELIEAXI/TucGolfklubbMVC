@@ -1,0 +1,117 @@
+﻿<link rel="stylesheet" href="/css/Medlem.css">
+<link rel="stylesheet" href="/css/bokning-style.css">
+
+
+<header>
+    <img src="/images/medlem-bokning-header.jpg" alt="Golf green" class="header-medlem">
+</header>
+
+<div class="container-form-aside">
+    <section class="booking-form">
+        <h2>Boka din golfrunda här!</h2>
+        <form class="booking-info">
+            <label for="players">Antal spelare:</label>
+            <select id="players" name="players">
+                <option value="one">1</option>
+                <option value="two">2</option>
+                <option value="three">3</option>
+                <option value="four">4</option>
+            </select> <br> <br>
+            <label for="date">Datum:</label>
+            <input type="date" name="when" id="date">
+        </form>
+        <h4>Bokningsinformation</h4>
+        <ul class="opening-hours">
+            <li>Öppettider:</li>
+            <li>Måndag - fredag 09:00 - 18:00</li>
+            <li>Helger 10:00 - 18:00</li>
+        </ul>
+        <p>Ni når oss på telefon +46 123 456 789 och <a href="#">info@golfklubb.se</a></p>
+        <p>Det krävs att du är inloggad för att boka.</p>
+        <input type="button" class="button-book" value="Boka">
+    </section>
+
+    <aside class="aside-info">
+        <a href="/kod-html/medlem/createnewmember.html" class="aside-button">Bli medlem</a>
+        <a href="/kod-html/Omoss/nyheter.html" class="aside-button">Nyheter</a>
+        <a href="/kod-html/bokning/greenfee-regler.html" class="aside-button">Regler</a>
+        <a href="/kod-html/bokning/greenfee-regler.html" class="aside-button">Greenfee</a>
+        <a href="/kod-html/Omoss/faciliteter.html" class="aside-button">Faciliteter</a>
+        <a href="/kod-html/Omoss/banorna.html" class="aside-button">Våra banor</a>
+    </aside>
+</div>
+
+<section class="booking-table">
+    <h2 class="table-title">Lediga golftider</h2>
+    <table class="booking-calendar">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Tid</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="available">
+                <td>2024-10-18</td>
+                <td>10:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-18</td>
+                <td>12:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="occupied">
+                <td>2024-10-18</td>
+                <td>14:00</td>
+                <td>Upptagen</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-18</td>
+                <td>16:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="occupied">
+                <td>2024-10-19</td>
+                <td>10:00</td>
+                <td>Upptagen</td>
+            </tr>
+            <tr class="occupied">
+                <td>2024-10-19</td>
+                <td>12:00</td>
+                <td>Upptagen</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-19</td>
+                <td>14:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="occupied">
+                <td>2024-10-19</td>
+                <td>16:00</td>
+                <td>Upptagen</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-20</td>
+                <td>10:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-20</td>
+                <td>12:00</td>
+                <td>Ledig</td>
+            </tr>
+            <tr class="occupied">
+                <td>2024-10-20</td>
+                <td>14:00</td>
+                <td>Upptagen</td>
+            </tr>
+            <tr class="available">
+                <td>2024-10-20</td>
+                <td>16:00</td>
+                <td>Ledig</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

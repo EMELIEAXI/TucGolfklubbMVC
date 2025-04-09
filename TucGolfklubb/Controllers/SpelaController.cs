@@ -18,5 +18,10 @@ namespace TucGolfklubb.Controllers
         {
             return View();
         }
+
+        public IActionResult Bokning()
+        {
+            return View();
+        }
     }
 }

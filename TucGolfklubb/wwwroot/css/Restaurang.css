@@ -1,0 +1,348 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+.NY-RESTURANG-HEADER-TEST {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+    .header img {
+        display: flex;
+        flex-direction: row;
+        width: 100px;
+        height: 100px;
+    }
+
+.header2 img {
+    width: 15%;
+    height: auto;
+}
+
+.Takeaway {
+    width: 30%;
+}
+
+.Kontakt {
+    width: 30%;
+}
+
+.Takeaway-och-kontakt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+@media (max-width: 800px) {
+    .Takeaway-och-kontakt {
+        flex-direction: column; /* Ändrar layouten till att stapla elementen vertikalt */
+        align-items: center; /* Centrerar elementen om det behövs */
+    }
+
+    .Kontakt img {
+        margin-top: 0;
+    }
+}
+
+.Takeaway img, .Kontakt img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0;
+    margin-top: 30px;
+}
+
+.kontaktaosstext {
+    border-bottom: solid 2px rgb(255, 255, 255);
+    border-top: 2px solid rgb(255, 255, 255);
+    margin-bottom: 200px;
+    color: white;
+    text-shadow: 2px gray;
+    box-shadow: 2px gray;
+    letter-spacing: 2px;
+}
+
+.backgound-meny {
+    background-image: url(/images/table-791167_1280.jpg);
+    width: 100%;
+    /* min-height: calc(100vh-100px); */
+    z-index: 1;
+    background-attachment: fixed;
+    object-fit: cover;
+    background-size: cover; /* Ser till att bilden täcker hela ytan */
+    background-repeat: no-repeat; /* Förhindrar att bilden upprepas */
+    background-position: center; /* Centrerar bilden */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+    input[type="submit"]:hover {
+        background-color: #218838;
+    }
+/*ÖPPETTIDER RESTAURANGEN*/
+.openinghours-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
+    width: fit-content;
+}
+
+.opening-hours {
+    background-color: #28a745;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    width: 20rem;
+    padding: 2rem;
+    border: 3px solid black;
+    border-radius: 10px;
+    text-align: center;
+    text-wrap: wrap;
+    font-weight: bold;
+    font-size: medium;
+}
+
+    .opening-hours p {
+        padding: 0.5rem;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+    }
+
+    .opening-hours h2 {
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.7);
+    }
+
+@media (max-width: 500px) {
+    .openinghours-wrapper {
+        display: flex;
+        flex: 1 1 50%;
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0;
+    }
+
+    .opening-hours {
+        width: fit-content;
+    }
+}
+
+/* RESTAURANGMENYN AV EMILIA */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-content {
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-transform: uppercase;
+    font-size: small;
+    border: 12px dotted white;
+    border-style: double;
+    border-radius: 30px;
+    /*display: flex;
+    flex-direction: column;*/
+    background-color: black;
+    color: white;
+    margin-bottom: 30px;
+}
+
+    .menu-content h1 {
+        text-align: center;
+        color: white;
+    }
+
+    .menu-content li {
+        padding: 4px;
+    }
+
+@media (max-width: 687px) {
+    .menu-wrapper {
+        width: auto;
+        height: auto;
+    }
+
+    .menu-content {
+        width: auto;
+        height: auto;
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 550px) {
+    .menu-wrapper {
+        width: auto;
+        height: auto;
+    }
+
+    .menu-content {
+        font-size: xx-small;
+        padding: 5rem 0 5rem 0;
+    }
+}
+/* SLUT RESTAURANGMENYN AV EMILIA */
+
+.footer {
+    background-color: #28a745;
+    color: #f4f4f4;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+/* MEDIA FÖR RESTURANG --------------------------*/
+@media screen and (max-width:800px) {
+    /*.Takeaway-och-kontakt {
+        display: flex;
+        flex-wrap: wrap;
+    } */
+    .Kontakt, .Takeaway {
+        margin: auto;
+        width: 50%;
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+        .Kontakt img, .Takeaway img {
+            margin: auto;
+            width: 100%;
+            margin-bottom: 10px;
+            height: 200px;
+        }
+
+    .form-container {
+        margin-bottom: 20px;
+    }
+
+    #kontaktaosstext {
+        margin-bottom: 10px;
+    }
+}
+
+
+
+@media screen and (max-width:768px) {
+    .header2 img {
+        display: none;
+    }
+
+    .Takeaway-och-kontakt {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .Kontakt, .Takeaway {
+        margin: auto;
+        width: 50%;
+        margin-bottom: 10px;
+        height: auto;
+    }
+
+        .Kontakt img, .Takeaway img {
+            margin: auto;
+            width: 100%;
+            height: 200px;
+        }
+
+    .form-container {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 600px ) {
+    .header2 img {
+        display: none;
+    }
+
+    .Takeaway-och-kontakt {
+        display: flex;
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .Kontakt, .Takeaway {
+        margin: auto;
+        width: 70%;
+        height: auto;
+    }
+
+        .Kontakt img, .Takeaway img {
+            margin: auto;
+            width: 100%;
+            height: 200px;
+        }
+
+    .form-container {
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,133 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="se-SV">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golfklubb</title>
+    <link rel="stylesheet" href="~/css/Restaurang.css">
+</head>
+<body>
+    <div class="backgound-meny">
+        <header>
+            <div class="NY-RESTURANG-HEADER-TEST">
+                <div class="header2">
+                    <img src="/images/eat-312431_1280.webp" alt="tecknade bestick med grön bakgrund">
+                </div>
+                <div class="header">
+                    <img src="/images/letter-146014_1280.webp" alt="bokstaven T">
+                    <img src="/images/letter-146015_1280.webp" alt="bokstaven U">
+                    <img src="/images/letter-146042_1280.webp" alt="bokstaven C">
+                </div>
+
+
+            </div>
+        </header>
+        <!-- <div class="backgound-meny"> -->
+        <div class="form-container">
+            <h1>Boka bord på vår restaurang</h1>
+
+            <form>
+                <label for="name">Ditt namn:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="date">Välj datum:</label><br>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <label for="time">Välj tid:</label><br>
+                <input type="time" id="time" name="time" required><br><br>
+
+                <label for="guests">Antal personer:</label><br>
+                <input type="number" id="guests" name="guests" min="1" max="10" required><br><br>
+
+                <input type="submit" value="Boka Bord">
+            </form>
+        </div>
+
+
+        <!-- Menyn -->
+        <section class="menu-wrapper">
+            <div class="menu-content">
+                <h2>Meny Tuc´s Restaurang</h2>
+                <h2>Frukost</h2>
+
+                <ul class="food-list">
+                    <li><b> Toast</b></li>
+                    <li>Ost...............................................................79 :-</li>
+                    <li>Ost och kalkon......................................79 :-</li>
+                    <li>Avokado och keso................................79 :-</li>
+                    <li>Salami och mozzarella.....................79 :-</li>
+
+                    <li><b> ÄGG</b></li>
+                    <li>Omelette................................................. 49 :-</li>
+                    <li>Stekt ägg med bacon.......................... 59 :-</li>
+                    <li>Äggröra med bacon............................ 69 :-</li>
+                    <li>English breakfast............................................. 99:-</li>
+                    <li>Swedish breakfast............................................. 99:-</li>
+                    <li>Youghurt med flingor.................................... 39 :-</li>
+                </ul>
+                <h2>Dagens Lunch</h2>
+                <ul class="food-list">
+                    <li>Tomatsoppa..................................................................................129:-</li>
+                    <li>Ceasarsallad..............................................................................149:-</li>
+                    <li>Italiensk sallad med serrano och mozzarella ........169:-</li>
+                    <li>Lasange..........................................................................................149:-</li>
+                    <li>Toast skagen...............................................................................149:-</li>
+                </ul>
+
+                <h2>Middag</h2>
+                <ul class="food-list">
+                    <li>Spaghetti bolognese...............................................................149:-</li>
+                    <li>Pasta scampi.................................................................................149:-</li>
+                    <li>Tortellini ricotta....................................................................149:-</li>
+                    <li>Smörstekt spättafilé..............................................................149:-</li>
+                    <li>Tucs fisksoppa.............................................................................189 :-</li>
+                    <li>Lax på grönsaksbädd...............................................................149:-</li>
+                    <li>Ryggbiff med rödvinsås och potatisgratäng.............149:-</li>
+                </ul>
+
+                <h2>Dessert</h2>
+                <ul class="food-list">
+                    <li>Chokladmousse med hallon..................................................89 :-</li>
+                    <li>Glass med maränger och chokladsås............................... 89 :-</li>
+                    <li>chokladtryffel........................................................................... 69:-</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Öppettider -->
+        <div class="openinghours-wrapper">
+            <div class="opening-hours">
+                <h2>Restaurangens öppettider:</h2>
+                <p>Måndag - Torsdag: kl 08 - 20</p>
+                <p>Fredag - Söndag: kl 09 - 22</p>
+            </div>
+        </div>
+        <div class="Takeaway-och-kontakt">
+
+            <div class="Takeaway">
+                <a href="/images/meny-takeaway.pdf"><img src="/images/hamburger-494706_1280.jpg" alt="Bild på hamburgare"></a>
+                <p class="kontaktaosstext"> BOKA TAKEAWAY | Telefon: +46 123 456 777</p>
+
+
+            </div>
+            <div class="Kontakt">
+                <a href="/Kontakt"><img src="/images/contact-us-2993109_1280.jpg" alt="hand som pekar på kontaktalternativ"> </a>
+                <p class="kontaktaosstext"> KONTAKTA OSS | RESTAURANG TUC | Telefon: +46 123 456 777 </p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <section class="footer">
+            <h3>
+                Välkomna in på en varm kopp kaffe, en lunch eller varför inte boka bord för en fin middag<br>
+                eller ta med dig god mat hem efter en lång golfrunda?<br>
+            </h3>
+            <hr>
+            <h3>Vi hjälper dig! Hör av dig</h3>
+        </section>
+    </footer>
+</body>
+</html>

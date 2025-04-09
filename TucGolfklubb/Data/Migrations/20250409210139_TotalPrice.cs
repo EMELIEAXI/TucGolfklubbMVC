@@ -5,18 +5,17 @@
 namespace TucGolfklubb.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AddPriceToOrderItem : Migration
+    public partial class TotalPrice : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<decimal>(
-            name: "Price",
-            table: "OrderItems",
+            name: "TotalPrice",
+            table: "Orders",
             type: "decimal(18,2)",
             nullable: false,
             defaultValue: 0m);
-
         }
 
         /// <inheritdoc />

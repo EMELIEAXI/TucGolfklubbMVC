@@ -23,7 +23,7 @@
                     <td>@order.Id</td>
                     <td>@order.User?.UserName</td>
                     <td>@order.OrderDate.ToShortDateString()</td>
-                    <td>@order.TotalAmount.ToString("0.00") kr</td>
+                    <td>@order.TotalPrice.ToString("0.00") kr</td>
                     <td>
                         <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-primary">📄 Detaljer</a>
                     </td>

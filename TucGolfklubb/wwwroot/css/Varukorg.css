@@ -1,0 +1,84 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin-top:20px;
+    margin-left:20px;
+    padding-left:20px;
+}
+h2 {
+    font-size: xx-large;
+    width:200px;
+}
+th, td {
+    padding: 15px;
+}
+
+.PaymentMethod {
+    display:inline;
+}
+.btn-success {
+    background-color:dodgerblue;
+    padding:10px;
+    margin:10px;
+    border-radius:20px;
+    width:200px;
+}
+
+ul {
+    padding: 15px;
+}
+
+li {
+    padding:15px;
+}
+.Varukorg {
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+
+}
+.column-pay {
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+}
+
+.Kvitto {
+    margin: auto;
+}
+.adress {
+    display:flex;
+    flex-direction:column;
+}
+
+.adress input {
+    width: 20rem;
+}
+
+/* Kvitto delen */
+
+.Kvitto {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: 10%;
+    padding:1em;
+}
+
+.table {
+    line-height: 5px;
+}
+
+footer.shop-footer {
+    margin-top: auto;
+    position:relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+

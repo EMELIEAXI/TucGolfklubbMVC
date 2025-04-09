@@ -11,6 +11,7 @@ namespace TucGolfklubb.Models
         public Product? SelectedProduct { get; set; }
         public List<Review>? Reviews { get; set; }
         public Review NewReview { get; set; } = new Review();
+        public double? AverageRating { get; set; }
 
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }

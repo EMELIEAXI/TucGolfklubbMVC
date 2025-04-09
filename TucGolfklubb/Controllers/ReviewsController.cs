@@ -4,6 +4,7 @@ using TucGolfklubb.Data;
 using TucGolfklubb.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis;
 
 namespace TucGolfklubb.Controllers
 {
@@ -22,10 +23,6 @@ namespace TucGolfklubb.Controllers
         [Authorize]
         public async Task<IActionResult> AddReview(int productId, string comment, int rating)
         {
-            Console.WriteLine($"Incoming productId: {productId}");
-            Console.WriteLine($"Comment: {comment}");
-            Console.WriteLine($"Rating: {rating}");
-
             if (string.IsNullOrWhiteSpace(comment) || rating < 1 || rating > 5)
             {
                 ModelState.AddModelError("", "Kommentar och betyg måste vara giltiga.");
@@ -35,7 +32,6 @@ namespace TucGolfklubb.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                Console.WriteLine("User not found!");
                 return RedirectToAction("Login", "Account");
             }
 
@@ -51,9 +47,33 @@ namespace TucGolfklubb.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine("Review saved successfully!");
+            return Redirect($"{Url.Action("ProductShop", "Shop", new { categoryId = productId })}#product-{productId}");
+        }
 
-            return RedirectToAction("ProductShop", "Shop", new { categoryId = productId });
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteReview(int reviewId)
+        {
+            var review = await _context.Reviews.Include(r => r.User).FirstOrDefaultAsync(r => r.Id == reviewId);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (review.UserId != user?.Id)
+            {
+                return Unauthorized();
+            }
+
+            int productId = review.ProductId;
+
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+
+            return Redirect($"{Url.Action("ProductShop", "Shop", new { categoryId = productId })}#product-{productId}");
         }
     }
 }

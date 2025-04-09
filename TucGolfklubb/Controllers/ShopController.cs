@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace TucGolfklubb.Controllers
 {
@@ -36,13 +38,21 @@ namespace TucGolfklubb.Controllers
                 selectedProduct = products.FirstOrDefault(p => p.Id == productId.Value);
             }
 
+            double? averageRating = null;
+
+            if (selectedProduct?.Reviews != null && selectedProduct.Reviews.Any())
+            {
+                averageRating = selectedProduct.Reviews.Average(r => r.Rating);
+            }
+
             var viewModel = new ProductShopViewModel
             {
                 Categories = categories,
                 Products = products,
                 SelectedCategoryId = categoryId,
                 SelectedProduct = selectedProduct,
-                Reviews = selectedProduct?.Reviews.ToList() ?? new List<Review>()
+                Reviews = selectedProduct?.Reviews.ToList() ?? new List<Review>(),
+                AverageRating = averageRating
             };
 
             return View(viewModel);

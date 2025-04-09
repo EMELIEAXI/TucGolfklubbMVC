@@ -1,5 +1,6 @@
 ﻿@model ProductShopViewModel
 @using System.Linq
+@using System.Security.Claims
 
 <div>
     <h3>Recensioner</h3>
@@ -7,10 +8,21 @@
     {
         @foreach (var review in Model.Reviews)
         {
-            <div>
-                <strong>@(review.User != null ? review.User.FullName : "Anonym")</strong> - @review.Date.ToShortDateString()
-                <p>Betyg: @review.Rating/5</p>
-                <p>@review.Comment</p>
+            <div class="review-container">
+                <div class="review-details">
+                    <strong>@(review.User != null ? review.User.FullName : "Anonym")</strong> - @review.Date.ToShortDateString()
+                    <p>Betyg: @review.Rating</p>
+                    <p>Kommentar:<br /> @review.Comment</p>
+                </div>
+
+                @if (review.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value)
+                {
+                    <form method="post" action="@Url.Action("DeleteReview", "Review")" class="delete-form">
+                        <input type="hidden" name="reviewId" value="@review.Id" />
+                        <button type="submit" class="btn btn-danger">Ta bort</button>
+                    </form>
+                }
+
                 <hr />
             </div>
         }

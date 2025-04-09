@@ -51,7 +51,7 @@
                 <h2>@selectedCategory.Name</h2>
                 @foreach (var product in Model.Products.Where(p => p.CategoryId == selectedCategory.Id))
                 {
-                    <div class="item">
+                    <div class="item" id="product-@product.Id">
                         <div class="item_left">
                             <div class="item_image">
                                 <figure>
@@ -63,7 +63,15 @@
                                 <h3>@product.Name</h3>
                                 <p>@product.Description</p>
                             </div>
-                            <p class="item_price">Pris: <span>@product.Price.ToString("C")</span></p>
+                            @{
+                                var averageRating = product.Reviews?.Any() == true
+                                ? product.Reviews.Average(r => r.Rating)
+                                : 0.0;
+                            }
+                            <p class="item_price">
+                                <span class="price-text">Pris: @product.Price.ToString("C")</span>
+                                <span class="rating-text">Betyg: @averageRating.ToString("F1")</span>
+                            </p>
 
                             <div class="form">
                                 <form class="add-to-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
@@ -121,8 +129,14 @@
     <script>
         function toggleReview(productId) {
             var element = document.getElementById("reviews-" + productId);
-            element.classList.toggle("expanded");
-            element.classList.toggle("collapsed");
+
+            if (element.classList.contains("collapsed")) {
+                element.classList.remove("collapsed");
+                element.classList.add("expanded");
+            } else {
+                element.classList.remove("expanded");
+                element.classList.add("collapsed");
+            }
         }
     </script>
 

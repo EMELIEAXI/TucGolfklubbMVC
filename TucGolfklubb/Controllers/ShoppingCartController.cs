@@ -38,7 +38,7 @@ namespace TucGolfklubb.Controllers
 
             return cart;
         }
-        [HttpPost]
+        [HttpGet]
         [Route("ShoppingCart/Index")]
         public async Task<IActionResult> Index()
         {

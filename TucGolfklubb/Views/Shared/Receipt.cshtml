@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = null;
+    ViewData["Title"] = "Receipt";
+}
+<link rel="stylesheet" href="~/css/Varukorg.css" />
+<link rel="stylesheet" href="~/css/shop.css" />
+
+<header>
+    <h1>TUC Golfklubb Shop</h1>
+</header>
+<div class="header">
+    <h1>Välkommen till våra produkter</h1>
+    <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
+
+</div>
+
+<div class="Kvitto">
+    <h2>Kvitto</h2>
+    <p>Datum: @Model.OrderDate.ToString("yyyy-MM-dd HH:mm")</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Antal</th>
+                <th>Pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.OrderItems != null)
+            {
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price.ToString("C")</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+    <h1>Total: @Model.TotalPrice.ToString("C")</h1>
+
+    <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
+</div>
+<footer class="shop-footer">
+    <div class="betalning">
+        <h2>Betalningsmetoder</h2>
+        <ul>
+            <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
+            <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
+            <li><img src="~/images/swish-logo.png" alt="Swish"></li>
+            <li><img src="~/images/visa.png" alt="Visa"></li>
+        </ul>
+    </div>
+</footer>

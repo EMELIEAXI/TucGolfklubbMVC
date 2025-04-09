@@ -1,53 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model TucGolfklubb.Models.ProductShopViewModel
+﻿@model TucGolfklubb.Models.ProductShopViewModel
 @{
-    ViewData["Title"] = "Checkout";
+    ViewData["Title"] = "_OrderSummary";
 }
-@if (Model == null)
-{
-    <h1>Varukorg</h1>
-    <p>Ingen orderdata tillgänglig.</p>
-    return; // Stoppar renderingen av resten av partial-vyn
-}
+<head>
+    <link rel="stylesheet" href="~/css/Varukorg.css" />
+    <link rel="stylesheet" href="~/css/shop.css" />
+</head>
+<header>
+    <h1>TUC Golfklubb Shop</h1>
+</header>
+<div class="header">
+    <h1>Välkommen till våra produkter</h1>
+    <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
 
-<div class="order-summary">
-
-    <h1>Produkter:</h1>
-    @if (Model != null)
+</div>
+<div id="orderSummaryContainer">
+    @if (Model.OrderItems == null || !Model.OrderItems.Any())
     {
-        <div class="order-summary">
-
-            @if (Model.OrderItems != null && Model.OrderItems.Any())
-            {
-                <ul>
-                    @foreach (var item in Model.OrderItems)
-                    {
-                        <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
-                    }
-                </ul>
-            }
-            else
-            {
-                <p>Det finns inga produkter i denna beställning.</p>
-            }
-        </div>
-        <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
+        <h1>Varukorg</h1>
+        <p>Ingen orderdata tillgänglig.</p>
     }
     else
     {
-        <p>Ingen orderdata tillgänglig.</p>
+        <h1>Produkter:</h1>
+        <ul>
+            @foreach (var item in Model.OrderItems)
+            {
+                <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
+                <form class="remove-from-cart-form" asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post" style="display:inline;">
+                    <input type="hidden" name="productId" value="@item.ProductId" />
+                    <button type="submit" class="btn btn-danger btn-sm">Ta bort</button>
+                </form>
+            }
+        </ul>
+        <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
     }
-
-    <form asp-action="PlaceOrder" method="post">
-        <button type="submit" class="btn btn-success">Bekräfta order</button>
+    <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
+        <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
     </form>
-</div>
-<div id="orderSummaryContainer"></div>
 
-<script>
-    $(document).ready(function() {
-        $("#orderSummaryContainer").load("/Order/GetOrderSummary");
-    });
-</script>
+</div>
+<footer class="shop-footer">
+    <div class="betalning">
+        <h2>Betalningsmetoder</h2>
+        <ul>
+            <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
+            <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
+            <li><img src="~/images/swish-logo.png" alt="Swish"></li>
+            <li><img src="~/images/visa.png" alt="Visa"></li>
+        </ul>
+    </div>
+</footer>  

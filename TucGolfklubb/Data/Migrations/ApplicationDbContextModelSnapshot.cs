@@ -459,9 +459,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Property<int?>("ShoppingCartId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");

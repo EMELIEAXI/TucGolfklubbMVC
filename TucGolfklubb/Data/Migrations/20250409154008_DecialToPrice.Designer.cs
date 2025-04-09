@@ -12,8 +12,8 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250409133808_Uppdatera dbcontext med decimal property för price")]
-    partial class Uppdateradbcontextmeddecimalpropertyförprice
+    [Migration("20250409154008_DecialToPrice")]
+    partial class DecialToPrice
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -448,7 +448,7 @@ namespace TucGolfklubb.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -461,9 +461,6 @@ namespace TucGolfklubb.Data.Migrations
 
                     b.Property<int?>("ShoppingCartId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2");
 
                     b.HasKey("Id");
 

@@ -12,8 +12,8 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250409133954_AddFullNameToUser")]
-    partial class AddFullNameToUser
+    [Migration("20250409153709_VetInteVad")]
+    partial class VetInteVad
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -461,9 +461,6 @@ namespace TucGolfklubb.Data.Migrations
 
                     b.Property<int?>("ShoppingCartId")
                         .HasColumnType("int");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

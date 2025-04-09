@@ -5,7 +5,7 @@
 namespace TucGolfklubb.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class LatillregelförpropertypriceiOrderOrderItemochProduct : Migration
+    public partial class DecialToPrice : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

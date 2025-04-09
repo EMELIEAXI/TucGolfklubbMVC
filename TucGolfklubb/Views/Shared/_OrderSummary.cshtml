@@ -20,6 +20,8 @@
     {
         <h1>Varukorg</h1>
         <p>Ingen orderdata tillgänglig.</p>
+
+        <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
     }
     else
     {
@@ -35,11 +37,12 @@
             }
         </ul>
         <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
-    }
-    <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
-        <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
-    </form>
+        <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
+            <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
+        </form>
 
+    }
+ 
 </div>
 <footer class="shop-footer">
     <div class="betalning">

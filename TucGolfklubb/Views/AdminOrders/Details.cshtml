@@ -25,8 +25,8 @@
             <tr>
                 <td>@item.Product?.Name</td>
                 <td>@item.Quantity</td>
-                <td>@item.UnitPrice.ToString("0.00") kr</td>
-                <td>@(item.Quantity * item.UnitPrice).ToString("0.00") kr</td>
+                <td>@item.Price.ToString("0.00") kr</td>
+                <td>@(item.Quantity * item.Price) kr</td>
             </tr>
         }
     </tbody>

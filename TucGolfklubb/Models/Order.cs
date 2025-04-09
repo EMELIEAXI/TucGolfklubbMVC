@@ -2,6 +2,7 @@
 using TucGolfklubb.Models;
 
 using Microsoft.Build.Framework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TucGolfklubb.Models
 {
@@ -23,10 +24,11 @@ namespace TucGolfklubb.Models
         //Gene: Add total amount as calculated property
         //public decimal TotalAmount => OrderItems.Sum(item => item.Quantity * item.UnitPrice);
 
+        [Column(TypeName = "decimal(18,2)")]
         private decimal? _totalPrice;
         public decimal TotalPrice
         {
-            get => _totalPrice ?? OrderItems.Sum(item => item.Quantity * item.UnitPrice);
+            get => _totalPrice ?? OrderItems.Sum(item => item.Quantity * item.Price);
             set => _totalPrice = value;
         }
     }

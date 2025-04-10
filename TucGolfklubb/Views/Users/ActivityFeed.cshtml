@@ -14,7 +14,10 @@ else
             <li class="list-group-item">
                 <strong>@activity.User?.UserName</strong> gjorde en
                 <span class="text-info">@activity.Type</span>:
-                @activity.Content <br />
+                <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@activity.ForumPostId">
+                    @activity.Content
+                </a>
+                <br />
                 <small class="text-muted">@activity.CreatedAt.ToString("g")</small>
             </li>
         }

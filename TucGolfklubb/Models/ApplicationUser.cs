@@ -9,5 +9,6 @@ namespace TucGolfklubb.Models
 
         public ICollection<UserFollow> Followers { get; set; } = new List<UserFollow>();
         public ICollection<UserFollow> Following { get; set; } = new List<UserFollow>();
+        public DateTime? LastActivityViewedAt { get; set; }
     }
 }

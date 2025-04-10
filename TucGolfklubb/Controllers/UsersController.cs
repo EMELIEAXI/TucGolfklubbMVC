@@ -32,7 +32,14 @@ namespace TucGolfklubb.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
-                IsFollowedByCurrentUser = isFollowing
+                FullName = user.FullName,
+                ProfileImagePath = user.ProfileImagePath,
+                IsFollowedByCurrentUser = isFollowing,
+                RecentActivities = await _context.Activities
+                    .Where(a => a.UserId == user.Id)
+                    .OrderByDescending(a => a.CreatedAt)
+                    .Take(10)
+                    .ToListAsync()
             };
 
             return View(viewModel);
@@ -40,7 +47,8 @@ namespace TucGolfklubb.Controllers
 
         public async Task<IActionResult> ActivityFeed()
         {
-            var currentUserId = _userManager.GetUserId(User);
+            var currentUser = await _userManager.GetUserAsync(User);
+            var currentUserId = currentUser?.Id;
 
             var followedUserIds = await _context.UserFollows
                 .Where(f => f.FollowerId == currentUserId)
@@ -53,6 +61,13 @@ namespace TucGolfklubb.Controllers
                 .OrderByDescending(a => a.CreatedAt)
                 .Take(50)
                 .ToListAsync();
+
+            // Null-safe update of LastActivityViewedAt
+            if (currentUser != null)
+            {
+                currentUser.LastActivityViewedAt = DateTime.Now;
+                await _userManager.UpdateAsync(currentUser);
+            }
 
             return View("ActivityFeed", activities);
         }

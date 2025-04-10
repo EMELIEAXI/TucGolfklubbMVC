@@ -21,8 +21,9 @@ namespace TucGolfklubb.Data
         public DbSet<ForumReply> Replies { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<ShoppingCart> ShoppingCart { get; set; } 
-
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
+        public DbSet<UserFollow> UserFollows { get; set; }
+        public DbSet<UserActivity> Activities { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -125,6 +126,18 @@ namespace TucGolfklubb.Data
                 .HasOne(r => r.ParentReply)
                 .WithMany(r => r.ChildReplies)
                 .HasForeignKey(r => r.ParentReplyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserFollow>()
+                .HasOne(uf => uf.Follower)
+                .WithMany(u => u.Following)
+                .HasForeignKey(uf => uf.FollowerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserFollow>()
+                .HasOne(uf => uf.Followee)
+                .WithMany(u => u.Followers)
+                .HasForeignKey(uf => uf.FolloweeId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

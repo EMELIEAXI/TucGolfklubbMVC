@@ -1,0 +1,23 @@
+﻿@model TucGolfklubb.Models.UserProfileViewModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+<h2>Profil: @(Model.UserName ?? "Okänd användare")</h2>
+
+@if (User.Identity != null && User.Identity.IsAuthenticated && UserManager.GetUserId(User) != Model.Id)
+{
+    if (Model.IsFollowedByCurrentUser)
+    {
+        <form asp-action="Unfollow" asp-controller="UserFollows" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-outline-secondary">Sluta följa</button>
+        </form>
+    }
+    else
+    {
+        <form asp-action="Follow" asp-controller="UserFollows" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary">Följ</button>
+        </form>
+    }
+}

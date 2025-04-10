@@ -223,6 +223,7 @@ namespace TucGolfklubb.Controllers
                     Quantity = oi.Quantity,
                     Price = oi.Price,
                     Product = oi.Product,
+                    ProductName = oi.Product?.Name,
                 }).ToList(),
             };
 

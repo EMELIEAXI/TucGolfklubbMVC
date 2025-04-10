@@ -75,6 +75,28 @@
 
 </head>
 <body>
+    @using Microsoft.AspNetCore.Identity
+    @inject UserManager<ApplicationUser> UserManager
+    @inject SignInManager<ApplicationUser> SignInManager
+    @inject TucGolfklubb.Data.ApplicationDbContext DbContext
+
+    @{
+        int newActivityCount = 0;
+
+        if (SignInManager.IsSignedIn(User))
+        {
+            var currentUser = await UserManager.GetUserAsync(User);
+            var lastViewed = currentUser?.LastActivityViewedAt ?? DateTime.MinValue;
+
+            newActivityCount = DbContext.Activities
+            .Where(a => a.CreatedAt > lastViewed &&
+            DbContext.UserFollows.Any(f =>
+            currentUser != null && f.FollowerId == currentUser.Id &&
+            f.FolloweeId == a.UserId))
+            .Count();
+        }
+    }
+
     <header>
         <div class="top-nav">
             <ul class="menu">
@@ -123,6 +145,18 @@
                 <li><a href="/Shop" target="_blank">Shop</a></li>
                 
                 <li><a href="/Forum">Forum</a></li>
+
+                <li><a href="/Users">Användare</a></li>
+
+                <li>
+                    <a href="/Users/ActivityFeed">
+                        <i class="bi bi-bell me-1"></i> Aktiviteter
+                        @if (newActivityCount > 0)
+                        {
+                            <span class="badge bg-danger rounded-pill ms-1">@newActivityCount</span>
+                        }
+                    </a>
+                </li>
                 
                 @if (User.IsInRole("Admin"))
                 {
@@ -172,6 +206,18 @@
                     <li><a href="/Shop" target="_blank">Shop</a></li>
 
                     <li><a href="/Forum">Forum</a></li>
+
+                    <li><a href="/Users">Användare</a></li>
+
+                    <li>
+                        <a href="/Users/ActivityFeed">
+                            <i class="bi bi-bell me-1"></i> Aktiviteter
+                            @if (newActivityCount > 0)
+                            {
+                                <span class="badge bg-danger rounded-pill ms-1">@newActivityCount</span>
+                            }
+                        </a>
+                    </li>
 
                     @if (User.IsInRole("Admin"))
                     {

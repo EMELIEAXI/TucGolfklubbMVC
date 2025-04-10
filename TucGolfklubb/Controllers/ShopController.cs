@@ -13,12 +13,7 @@ namespace TucGolfklubb.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> ProductShop(int? categoryId, int? productId)
+        public async Task<IActionResult> Index(int? categoryId, int? productId)
         {
             var categories = await _context.Categories.ToListAsync();
             var productsQuery = _context.Products

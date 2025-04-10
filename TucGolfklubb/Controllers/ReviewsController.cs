@@ -26,7 +26,7 @@ namespace TucGolfklubb.Controllers
             if (string.IsNullOrWhiteSpace(comment) || rating < 1 || rating > 5)
             {
                 ModelState.AddModelError("", "Kommentar och betyg måste vara giltiga.");
-                return RedirectToAction("ProductShop", "Shop", new { categoryId = productId });
+                return RedirectToAction("Index", "Shop", new { categoryId = productId });
             }
 
             var selectedProduct = await _context.Products.Include(p => p.Category)
@@ -34,7 +34,7 @@ namespace TucGolfklubb.Controllers
 
             if (selectedProduct == null)
             {
-                return RedirectToAction("ProductShop", "Shop", new { categoryId = 1 });
+                return RedirectToAction("Index", "Shop", new { categoryId = 1 });
             }
 
             var user = await _userManager.GetUserAsync(User);
@@ -55,7 +55,7 @@ namespace TucGolfklubb.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            var redirectUrl = Url.Action("ProductShop", "Shop", new { categoryId = selectedProduct.CategoryId });
+            var redirectUrl = Url.Action("Index", "Shop", new { categoryId = selectedProduct.CategoryId });
 
             return Redirect(redirectUrl + $"#product-{productId}");
         }
@@ -92,7 +92,7 @@ namespace TucGolfklubb.Controllers
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
 
-            var redirectUrl = Url.Action("ProductShop", "Shop", new { categoryId = categoryId.Value });
+            var redirectUrl = Url.Action("Index", "Shop", new { categoryId = categoryId.Value });
 
             return Redirect(redirectUrl + $"#product-{productId}");
         }

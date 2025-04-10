@@ -82,7 +82,7 @@ namespace TucGolfklubb.Controllers
             var product = await _context.Products.FindAsync(productId);
             if (product == null)
             {
-                return RedirectToAction("ProductShop", "Shop");
+                return RedirectToAction("Index", "Shop");
             }
 
             // Kontrollera om användaren redan har en shopping cart

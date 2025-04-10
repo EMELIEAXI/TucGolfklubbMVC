@@ -108,7 +108,7 @@ body {
     padding: 1rem;
     background-color: #f5f5f5;
     border-left: 1px solid #ddd;
-    height: 100%;
+    height: auto;
 }
 
 .item_image {
@@ -287,7 +287,16 @@ body {
 .review-details {
     flex: 1;
     margin: 10px 80px 20px 0;
+    line-height: 1.7;
 }
+
+    .review-details a {
+        text-decoration: none;
+    }
+
+        .review-details a:visited {
+            color: #000;
+        }
 
 .delete-form {
     position: absolute;
@@ -367,34 +376,46 @@ body {
         background-color: #218838;
     }
 
-footer {
-    padding: 20px;
-    margin-top: 30px;
-    width: 100%;
-    background-color: #222 !important;
+.footer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #222;
     color: #fff;
-    text-align: center;
+    padding: 40px 20px;
 }
 
-.betalning h2 {
-    font-size: 30px;
-    color: #fff;
+.footer-section {
+    margin: 10px;
 }
 
-.betalning ul {
-    padding: 0;
-}
-
-    .betalning ul li {
-        display: inline-block;
-        padding: 15px;
+    .footer-section h3 {
+        margin-bottom: 10px;
+        font-size: 1.2em;
+        color: #ddd;
     }
 
-.betalning img {
-    width: 60px;
-    height: 40px;
-    object-fit: contain;
+    .footer-section a {
+        color: #f4f4f4;
+        text-decoration: none;
+    }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
+
+    .payment-icons img {
+        width: 80px;
+        height: auto;
+        object-fit: contain;
+    }
 
 @media (max-width: 1260px) and (min-width: 1024px) {
     .item {
@@ -497,6 +518,29 @@ footer {
         width: 100%;
         padding: 10px;
     }
+
+    .footer {
+        padding: 20px 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+        .footer-section h3 {
+            font-size: 1em;
+        }
+
+    .payment-icons {
+        justify-content: center;
+    }
+
+        .payment-icons img {
+            width: 60px;
+        }
 }
 
 @media (max-width: 480px) {
@@ -541,5 +585,13 @@ footer {
     .reviews-container {
         width: 100%;
         padding: 10px;
+    }
+
+    .footer {
+        padding: 15px 5px;
+    }
+
+    .payment-icons img {
+        width: 50px;
     }
 }

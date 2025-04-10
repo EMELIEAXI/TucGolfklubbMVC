@@ -1,6 +1,8 @@
-﻿@{
+﻿@model TucGolfklubb.Models.ProductShopViewModel
+
+@{
     Layout = null;
-    ViewData["Title"] = "Shop";
+    ViewData["Title"] = "Shopping";
 }
 
 <!DOCTYPE html>
@@ -8,69 +10,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Golf Shop</title>
-    <link rel="stylesheet" href="~/css/shop.css" asp-append-version="true" />
+    <title>Produkt Shop</title>
+    <link rel="stylesheet" href="~/css/productshop.css" asp-append-version="true" />
 </head>
 
-
 <body>
-    <header>
+
+    <div class="top">
         <h1>TUC Golfklubb Shop</h1>
-    </header>
+    </div>
 
-
-    <main>
-        <div class="banner">
-            <h1>Välkommen till shoppen</h1>
-            <p class="welcome-text">
-                <strong>Välkommen till vår Online Golf Shop!</strong><br><br>
-                Vi är glada att du har hittat till oss. Här hittar du allt du behöver för att förbättra ditt golfspel, från de senaste klubborna till högkvalitativa golfbollar och tillbehör. Vår målsättning är att erbjuda dig de bästa produkterna och den bästa servicen för att göra din golfupplevelse ännu bättre.
-                <b>Du som är medlem får 10% rabatt på alla prudukter!</b><br><br>
-
-                <strong>Öppettider</strong><br>
-                Vi finns här för dig alla dagar i veckan:<br>
-                Måndag - Fredag: 09:00 - 18:00<br>
-                Lördag - Söndag: 10:00 - 18:00<br><br>
-
-                <div class="current-offers">
-                    <h2>Aktuella Erbjudanden</h2>
-                    <ul>
-                        <li><span class="offer-price">20% RABATT</span> på alla golfklubbor! Passa på att uppgradera din utrustning.</li>
-                        <li>Köp 3 paket golfbollar och få <span class="offer-price">1 GRATIS!</span></li>
-                        <li><span class="offer-price">REA!</span> Golfhandskar från endast <span class="offer-price">199 kr</span> (ord. pris 299 kr).</li>
-                    </ul>
-                </div><br><br>
-
-                <span>
-                    <strong>Kontakta oss</strong><br>
-                    Har du några frågor eller funderingar? Vi är här för att hjälpa dig,
-                    tveka inte att höra av dig.<br>
-                    E-post: <a href="mailto:info@golfklubb.se">info@golfklubb.se</a><br>
-                    Telefon: +46 123 456 789. <br> <br>
-
-                    <strong>Besök oss</strong><br>
-                    Du är alltid välkommen att besöka vår fysiska butik för att se vårt utbud och få personlig service:<br>
-                    Adress: Golfvägen 1, 123 45 Stockholm<br><br>
-
-                    Vi ser fram emot att hjälpa dig att hitta rätt utrustning för ditt golfspel. Välkommen till vår shop, och vi hoppas att du hittar allt du söker!
-                </span>
-
-                <a href="@Url.Action("ProductShop", "Shop")" class="shop-now-button">Till produkterna</a>
+    <div class="header">
+        <div class="Varukorg-ikon" style="display:flex; flex-direction:column;">
+            <a asp-controller="ShoppingCart" asp-action="Index" style="display:flex; flex-direction;">
+                <span style="float:right; color:white;">Visa Varukorg</span>
+                <img src="~/images/shopping-cart-728409_1280.webp" style="float:right; width:70px; align-items:center; margin-top:10px;" />
+            </a>
         </div>
-    </main>
+        
+        <h1>Välkommen till våra produkter</h1>
+        <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
+    </div>
 
+    <div class="navbar">
+        @foreach (var category in Model.Categories)
+        {
+            <a href="@Url.Action("Index", "Shop", new { categoryId = category.Id })">@category.Name</a>
+        }
+    </div>
 
+    <div class="main">
+        @{
+            var selectedCategory = Model.SelectedCategoryId != null
+            ? Model.Categories.FirstOrDefault(c => c.Id == Model.SelectedCategoryId)
+            : Model.Categories.FirstOrDefault();
+        }
 
-    <footer class="shop-footer">
-        <div class="betalning">
-            <h2>Betalningsmetoder</h2>
-            <ul>
-                <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
-                <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
-                <li><img src="~/images/swish-logo.png" alt="Swish"></li>
-                <li><img src="~/images/visa.png" alt="Visa"></li>
-            </ul>
-        </div>
-    </footer>
+        @if (selectedCategory != null)
+        {
+            <div class="products">
+                <h2>@selectedCategory.Name</h2>
+                @foreach (var product in Model.Products.Where(p => p.CategoryId == selectedCategory.Id))
+                {
+                    <div class="item" id="product-@product.Id">
+                        <div class="item_left">
+                            <div class="item_image">
+                                <figure>
+                                    <img src="~/images/@product.Image" alt="@product.Name" class="p-img">
+                                    <figcaption></figcaption>
+                                </figure>
+                            </div>
+                            <div class="item_basic">
+                                <h3>@product.Name</h3>
+                                <p>@product.Description</p>
+                            </div>
+                            @{
+                                var averageRating = product.Reviews?.Any() == true
+                                ? product.Reviews.Average(r => r.Rating)
+                                : 0.0;
+                            }
+                            <p class="item_price">
+                                <span class="price-text">Pris: @product.Price.ToString("C")</span>
+                                <span class="rating-text">Betyg: @averageRating.ToString("F1")</span>
+                            </p>
+
+                            <div class="form">
+                                <form class="add-to-cart-form" asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+                                    <input type="hidden" name="productId" value="@product.Id" />
+                                    <button type="submit" class="btn btn-primary">Lägg till i varukorg</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="item_right">
+                            <div class="reviews-container">
+                                <div class="reviews-form">
+                                    <partial name="_ReviewsPartial" model="new ProductShopViewModel { SelectedProduct = product }" />
+                                </div>
+
+                                <div class="reviews-list">
+                                    <button class="toggle-reviews" type="button" onclick="toggleReview('@product.Id')">
+                                        Visa recensioner (@(product.Reviews?.Count() ?? 0))
+                                    </button>
+
+                                    <div id="reviews-@product.Id" class="review-box collapsed">
+                                        <partial name="_ReviewListPartial" model="new ProductShopViewModel
+                                    { SelectedProduct = product, Reviews = product.Reviews?.ToList() ?? new List<Review>() }" />
+                                    </div>
+                                </div>
+                            </div>
+                           @* <div class="regform">
+                                <fieldset id="orderSummaryContainer">
+                                    <partial name="_OrderSummary" model="Model" />
+                                </fieldset>
+                            </div>*@
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>Inga kategorier tillgängliga.</p>
+        }
+    </div>
+
+    <partial name="_FooterPartial" />
+
+    <script>
+        function toggleReview(productId) {
+            var element = document.getElementById("reviews-" + productId);
+
+            if (element.classList.contains("collapsed")) {
+                element.classList.remove("collapsed");
+                element.classList.add("expanded");
+            } else {
+                element.classList.remove("expanded");
+                element.classList.add("collapsed");
+            }
+        }
+    </script>
+
 </body>
 </html>

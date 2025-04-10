@@ -10,9 +10,22 @@
         {
             <div class="review-container">
                 <div class="review-details">
-                    <strong>@(review.User != null ? review.User.FullName : "Anonym")</strong> - @review.Date.ToShortDateString()
+                    <strong>
+                        @if (review.User != null)
+                        {
+                            <a href="@Url.Action("Profile", "Users", new { id = review.UserId })">
+                                @review.User.FullName
+                            </a>
+                        }
+                        else
+                        {
+                            @:Anonym
+                        }
+                    </strong> - @review.Date.ToShortDateString()
+
                     <p>Betyg: @review.Rating</p>
-                    <p>Kommentar:<br /> @review.Comment</p>
+                    <p><b>Kommentar:</b><br /> @review.Comment</p> <br />
+                    <hr />
                 </div>
 
                 @if (review.UserId == User.FindFirst(ClaimTypes.NameIdentifier)?.Value)

@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TucGolfklubb.Controllers
 {
@@ -23,7 +21,6 @@ namespace TucGolfklubb.Controllers
         public async Task<IActionResult> ProductShop(int? categoryId, int? productId)
         {
             var categories = await _context.Categories.ToListAsync();
-
             var productsQuery = _context.Products
                 .Where(p => !categoryId.HasValue || p.CategoryId == categoryId.Value)
                 .Include(p => p.Reviews)
@@ -32,14 +29,12 @@ namespace TucGolfklubb.Controllers
             var products = await productsQuery.ToListAsync();
 
             Product? selectedProduct = null;
-
             if (productId.HasValue)
             {
                 selectedProduct = products.FirstOrDefault(p => p.Id == productId.Value);
             }
 
             double? averageRating = null;
-
             if (selectedProduct?.Reviews != null && selectedProduct.Reviews.Any())
             {
                 averageRating = selectedProduct.Reviews.Average(r => r.Rating);
@@ -57,6 +52,5 @@ namespace TucGolfklubb.Controllers
 
             return View(viewModel);
         }
-
     }
 }

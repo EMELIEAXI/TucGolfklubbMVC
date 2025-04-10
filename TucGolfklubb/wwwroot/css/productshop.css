@@ -13,7 +13,6 @@ html {
 body {
     font-family: 'Montserrat';
     background-color: #1c386f;
-    color: #fff;
     line-height: 1.6;
 }
 
@@ -39,6 +38,7 @@ body {
     color: #fff;
     font-size: 18px;
     margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
     .navbar a {
@@ -101,13 +101,13 @@ body {
     padding: 1rem;
     background-color: #f5f5f5;
     border-left: 1px solid #ddd;
+    height: 100%;
 }
 
 .item_image {
     flex: 1;
     position: relative;
     width: 100%;
-    overflow: hidden;
 }
 
     .item_image img {
@@ -124,6 +124,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
 }
 
     .item_basic h3 {
@@ -189,7 +190,6 @@ body {
 }
 
 .reviews-container, h4 {
-    font-family: "Montserrat";
     font-size: 18px;
     color: #333;
 }
@@ -202,7 +202,6 @@ body {
 .review-box {
     margin-top: 15px;
     padding: 10px;
-    font-family: "Montserrat";
     font-size: 15px;
     overflow-y: scroll;
     max-height: 0;
@@ -212,7 +211,7 @@ body {
 }
 
     .review-box.expanded {
-        max-height: 300px;
+        max-height: 500px;
         opacity: 1;
         pointer-events: auto;
         overflow-y: scroll;
@@ -227,12 +226,12 @@ body {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-family: "Montserrat";
     font-size: 16px;
+    font-family: 'Montserrat';
     margin-bottom: 10px;
     min-height: 100px;
     resize: vertical;
-    max-height: 400px;
+    max-height: 350px;
 }
 
 .review-row {
@@ -388,4 +387,152 @@ footer {
     width: 60px;
     height: 40px;
     object-fit: contain;
+}
+
+@media (max-width: 1260px) and (min-width: 1024px) {
+    .item {
+        flex-direction: column;
+    }
+
+    .item_left, .item_right {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .price-text {
+        padding-right: 13rem;
+    }
+
+    .form, .reviews-container form {
+        width: 100%;
+    }
+
+    .add-to-cart-form button, .reviews-container button {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .toggle-reviews {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main {
+        padding: 2rem 1rem;
+    }
+
+    .item {
+        flex-direction: column;
+        width: 100%;
+        max-width: none;
+    }
+
+    .item_left, .item_right {
+        padding: 1rem;
+    }
+
+    .price-text {
+        padding-right: 13rem;
+    }
+
+    .navbar {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .top h1 {
+        font-size: 1.2rem;
+    }
+
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+        .navbar a {
+            padding: 0.8rem;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+        }
+
+    .products {
+        gap: 1.5rem;
+    }
+
+    .item {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+    }
+
+    .item_left, .item_right {
+        padding: 1rem;
+    }
+
+    .price-text {
+        padding-right: 2rem;
+    }
+
+    .item_image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .reviews-container {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top {
+        font-size: 8px;
+        padding: 0.5rem;
+    }
+
+    .header {
+        padding: 1rem;
+    }
+
+    .main {
+        padding: 2rem 0.5rem;
+    }
+
+    .navbar {
+        font-size: 14px;
+    }
+
+    .products h2 {
+        font-size: 1.6rem;
+    }
+
+    .item {
+        width: 100%;
+    }
+
+    .item_left, .item_right {
+        padding: 1rem;
+    }
+
+    .price-text {
+        padding-right: 1rem;
+    }
+
+    .item_image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .reviews-container {
+        width: 100%;
+        padding: 10px;
+    }
 }

@@ -29,6 +29,14 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("ProductShop", "Shop", new { categoryId = productId });
             }
 
+            var selectedProduct = await _context.Products.Include(p => p.Category)
+                                                         .FirstOrDefaultAsync(p => p.Id == productId);
+
+            if (selectedProduct == null)
+            {
+                return RedirectToAction("ProductShop", "Shop", new { categoryId = 1 });
+            }
+
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -47,14 +55,19 @@ namespace TucGolfklubb.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            return Redirect($"{Url.Action("ProductShop", "Shop", new { categoryId = productId })}#product-{productId}");
+            var redirectUrl = Url.Action("ProductShop", "Shop", new { categoryId = selectedProduct.CategoryId });
+
+            return Redirect(redirectUrl + $"#product-{productId}");
         }
 
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> DeleteReview(int reviewId)
         {
-            var review = await _context.Reviews.Include(r => r.User).FirstOrDefaultAsync(r => r.Id == reviewId);
+            var review = await _context.Reviews.Include(r => r.User)
+                                               .Include(r => r.Product)
+                                               .ThenInclude(p => p.Category)
+                                               .FirstOrDefaultAsync(r => r.Id == reviewId);
 
             if (review == null)
             {
@@ -69,11 +82,19 @@ namespace TucGolfklubb.Controllers
             }
 
             int productId = review.ProductId;
+            int? categoryId = review.Product.CategoryId;
+
+            if (!categoryId.HasValue)
+            {
+                categoryId = 1;
+            }
 
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
 
-            return Redirect($"{Url.Action("ProductShop", "Shop", new { categoryId = productId })}#product-{productId}");
+            var redirectUrl = Url.Action("ProductShop", "Shop", new { categoryId = categoryId.Value });
+
+            return Redirect(redirectUrl + $"#product-{productId}");
         }
     }
 }

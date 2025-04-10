@@ -47,6 +47,19 @@ namespace TucGolfklubb.Controllers
                 _context.Replies.Add(reply);
                 await _context.SaveChangesAsync();
 
+                // Log activity
+                var activity = new UserActivity
+                {
+                    UserId = reply.UserId,
+                    Type = "Reply",
+                    Content = reply.Content.Length > 100 ? reply.Content.Substring(0, 100) + "..." : reply.Content,
+                    ForumPostId = reply.ForumPostId,
+                    CreatedAt = DateTime.Now
+                };
+
+                _context.Activities.Add(activity);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId }, fragment: $"reply-{reply.Id}");
             }
 

@@ -84,7 +84,20 @@ namespace TucGolfklubb.Controllers
                 forumPost.UserId = _userManager.GetUserId(User);
                 _context.Add(forumPost);
                 await _context.SaveChangesAsync();
-                // ✅ Redirect to ForumPost details (where reply form is available)
+
+                // Add activity log
+                var activity = new UserActivity
+                {
+                    UserId = forumPost.UserId,
+                    Type = "Post",
+                    Content = forumPost.Content.Length > 100 ? forumPost.Content.Substring(0, 100) + "..." : forumPost.Content,
+                    ForumPostId = forumPost.Id,
+                    CreatedAt = DateTime.Now
+                };
+
+                _context.Activities.Add(activity);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });
             }
             // Handle model validation errors: If validation fails, check if ForumId is provided or need to show a dropdown, re-display the form

@@ -4,7 +4,7 @@
     ViewData["Title"] = "PlaceOrder";
 }
 <link rel="stylesheet" href="~/css/Varukorg.css" />
-<link rel="stylesheet" href="~/css/shop.css" />
+<link rel="stylesheet" href="~/css/productshop.css" />
 <header>
     <h1>TUC Golfklubb Shop</h1>
 </header>
@@ -70,14 +70,4 @@
         </div>
     }
 </div>
-<footer class="shop-footer">
-    <div class="betalning">
-        <h2>Betalningsmetoder</h2>
-        <ul>
-            <li><img src="~/images/mastercard.jpg" alt="Mastercard"></li>
-            <li><img src="~/images/paypal.jpg" alt="PayPal"></li>
-            <li><img src="~/images/swish-logo.png" alt="Swish"></li>
-            <li><img src="~/images/visa.png" alt="Visa"></li>
-        </ul>
-    </div>
-</footer>
+<partial name="_FooterPartial" />

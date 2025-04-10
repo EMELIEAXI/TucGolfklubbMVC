@@ -5,10 +5,17 @@
     margin: 0;
     padding: 0;
 }
-
-html {
-    scroll-behavior: smooth;
+.Varukorg-ikon {
+    float:right;
 }
+    .Varukorg-ikon span {
+        margin-right: -70px;
+        margin-top:-10px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
 
 body {
     font-family: 'Montserrat';

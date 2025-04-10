@@ -36,10 +36,17 @@
                 </form>
             }
         </ul>
+        <a href="@Url.Action("ProductShop", "Shop")" class="btn btn-danger btn-sm">Beställ mer</a>
+
+        <br />
+
+        <br />
         <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
         <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
             <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
         </form>
+
+        
 
     }
  

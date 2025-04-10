@@ -550,3 +550,80 @@ html {
     flex-grow: 1;
     margin-top: 0.3rem;
 }
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 40px 20px;
+    color: #333;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    min-width: 220px;
+}
+
+.footer h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+.payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .payment-icons img {
+        height: 30px;
+        width: auto;
+    }
+/* Justera loggan i footern */
+.footer-logo img {
+    width: 100%;
+    max-width: 150px; 
+    height: auto;
+}
+
+
+/* Responsiv footer */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo img {
+        margin-bottom: 20px;
+    }
+
+    .footer-hours, .footer-links, .footer-social {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    
+    .footer-container-legal {
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    hr.line {
+        width: 100%;
+    }
+}
+

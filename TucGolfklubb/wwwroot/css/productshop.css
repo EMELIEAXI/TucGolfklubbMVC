@@ -5,17 +5,10 @@
     margin: 0;
     padding: 0;
 }
-.Varukorg-ikon {
-    float:right;
-}
-    .Varukorg-ikon span {
-        margin-right: -70px;
-        margin-top:-10px;
-    }
 
-    html {
-        scroll-behavior: smooth;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     font-family: 'Montserrat';
@@ -35,7 +28,39 @@ body {
     padding: 1.4rem;
     background-color: #1c386f;
     color: #fff;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.text-section {
     text-align: center;
+    flex-grow: 1;
+}
+
+.shopping-cart-icon {
+    position: relative;
+}
+
+.cart-item-count {
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
 }
 
 .navbar {
@@ -333,8 +358,6 @@ body {
 }
 
 #orderSummaryContainer {
-/*    width: 100%;
-    max-width: 450px;*/
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;

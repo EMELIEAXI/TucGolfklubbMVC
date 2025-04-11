@@ -22,7 +22,7 @@ namespace TucGolfklubb.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
             {
-                return new ShoppingCart { UserId = "anonymous", OrderItems = new List<OrderItem>() }; // Skapar en tom varukorg för icke-inloggade användare
+                return new ShoppingCart { UserId = "anonymous", OrderItems = new List<OrderItem>() };
             }
 
             var cart = await _context.ShoppingCart
@@ -65,7 +65,7 @@ namespace TucGolfklubb.Controllers
                 OrderTotalPrice = cart?.OrderItems.Sum(oi => oi.Quantity * oi.Price) ?? 0
             };
 
-            return View("_OrderSummary", model); // Ladda en vanlig vy istället för partial view här
+            return View("_OrderSummary", model);
         }
 
         [HttpPost]
@@ -75,34 +75,20 @@ namespace TucGolfklubb.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
-            {
-                return Unauthorized(); // Skickar 401 till klienten, AJAX kan hantera det
-            }
+                return Unauthorized();
 
-            var product = await _context.Products.FindAsync(productId);
+            var product = await _context.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == productId);
+
             if (product == null)
-            {
                 return RedirectToAction("Index", "Shop");
-            }
 
-            // Kontrollera om användaren redan har en shopping cart
             await GetShoppingCart();
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
-                .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
-            if (cart == null)
-            {
-                cart = new ShoppingCart
-                {
-                    UserId = userId,
-                    OrderItems = new List<OrderItem>()
-                };
-                _context.ShoppingCart.Add(cart);
-            }
-
-            // Kolla om produkten redan finns i varukorgen
             var existingItem = cart.OrderItems.FirstOrDefault(oi => oi.ProductId == productId);
             if (existingItem != null)
             {
@@ -120,21 +106,11 @@ namespace TucGolfklubb.Controllers
 
             await _context.SaveChangesAsync();
 
-            // Skapa en uppdaterad modell att skicka till vy
-            var updatedModel = new ProductShopViewModel
-            {
-                OrderItems = cart.OrderItems.Select(oi => new OrderItem
-                {
-                    ProductId = oi.ProductId,
-                    ProductName = oi.Product?.Name,
-                    Quantity = oi.Quantity,
-                    Price = oi.Price
-                }).ToList() ?? new List<OrderItem>(),
-                OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
-            };
-
-            return PartialView("_OrderSummary", updatedModel);
+            var redirectUrl = Url.Action("Index", "Shop", new { categoryId = product.CategoryId, productId = product.Id });
+            return Redirect(redirectUrl + $"#product-{product.Id}");
         }
+
+
         [HttpGet]
         [Route("ShoppingCart/ItemCount")]
         public async Task<IActionResult> ItemCount()
@@ -194,4 +170,3 @@ namespace TucGolfklubb.Controllers
     }
 
 }
-//hej

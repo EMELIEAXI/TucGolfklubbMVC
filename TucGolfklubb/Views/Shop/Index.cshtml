@@ -21,15 +21,20 @@
     </div>
 
     <div class="header">
-        <div class="Varukorg-ikon" style="display:flex; flex-direction:column;">
-            <a asp-controller="ShoppingCart" asp-action="Index" style="display:flex; flex-direction;">
-                <span style="float:right; color:white;">Visa Varukorg</span>
-                <img src="~/images/shopping-cart-728409_1280.webp" style="float:right; width:70px; align-items:center; margin-top:10px;" />
-            </a>
+        <div class="header-content">
+            <div class="text-section">
+                <h1>Välkommen till våra produkter</h1>
+                <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
+            </div>
+            <div class="shopping-cart-icon">
+                <a asp-controller="ShoppingCart" asp-action="Index">
+                    <img src="~/images/shop-shopping-cart.png" style="width:70px; margin-top:10px;" />
+                    <span class="cart-item-count">
+                        @ViewBag.CartItemCount
+                    </span>
+                </a>
+            </div>
         </div>
-
-        <h1>Välkommen till våra produkter</h1>
-        <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
     </div>
 
     <div class="navbar">

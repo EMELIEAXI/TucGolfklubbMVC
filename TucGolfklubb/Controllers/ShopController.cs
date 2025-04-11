@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using TucGolfklubb.Data;
 using TucGolfklubb.Models;
 
@@ -44,6 +45,12 @@ namespace TucGolfklubb.Controllers
                 Reviews = selectedProduct?.Reviews.ToList() ?? new List<Review>(),
                 AverageRating = averageRating
             };
+
+            var cart = await _context.ShoppingCart
+                .Include(c => c.OrderItems)
+                .FirstOrDefaultAsync(c => c.UserId == User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            ViewBag.CartItemCount = cart?.OrderItems.Sum(i => i.Quantity) ?? 0;
 
             return View(viewModel);
         }

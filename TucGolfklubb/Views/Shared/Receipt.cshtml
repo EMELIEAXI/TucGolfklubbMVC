@@ -46,6 +46,10 @@
 
     <h1>Total: @Model.TotalPrice.ToString("C")</h1>
 
-    <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
+    <p>Namn: @Model.FullName</p>
+    <p>Adress: @Model.Address, @Model.ZipCode @Model.City</p>
+    <p>Betalningsmetod: @Model.SelectedPaymentMethod</p>
+
+    <a href="@Url.Action("Index", "Shop")" class="btn btn-success">Tillbaka till startsidan</a>
 </div>
 <partial name="_FooterPartial" />

@@ -15,7 +15,7 @@
     <p>Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
 
 </div>
-<div class="Varukorg" id="orderSummaryContainer">
+<div class="Varukorg">
     @if (Model.OrderItems == null || !Model.OrderItems.Any())
     {
         <h1>Varukorg</h1>
@@ -43,7 +43,7 @@
         <br />
         <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
         <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
-            <button type="submit" class="btn btn-primary">Fortsätt till betlning </button>
+            <button type="submit" class="btn btn-success">Fortsätt till betlning </button>
         </form>
 
         
@@ -52,3 +52,5 @@
  
 </div>
 <partial name="_FooterPartial" />
+
+                @* *@

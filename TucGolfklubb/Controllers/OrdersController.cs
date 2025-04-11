@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -193,7 +195,12 @@ namespace TucGolfklubb.Controllers
 
         // Gå igenom Order och Visa produkterna där i
         [HttpPost]
-        public async Task<IActionResult> Receipt(string selectedPaymentMethod)
+        public async Task<IActionResult> Receipt(
+                string fullName,
+                string address,
+                string zipCode,
+                string city,
+                string selectedPaymentMethod)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -231,7 +238,21 @@ namespace TucGolfklubb.Controllers
             _context.ShoppingCart.Remove(cart);
             await _context.SaveChangesAsync();
 
-            return View("Receipt", order);
+            // Bygg kvitto-ViewModel med extra info från formuläret
+            var viewModel = new ReceiptViewModel
+            {
+                Id = order.Id,
+                OrderDate = order.OrderDate,
+                OrderItems = order.OrderItems,
+                TotalPrice = order.TotalPrice,
+                FullName = fullName,
+                Address = address,
+                ZipCode = zipCode,
+                City = city,
+                SelectedPaymentMethod = selectedPaymentMethod
+            };
+
+            return View("Receipt", viewModel);
 
         }
     }

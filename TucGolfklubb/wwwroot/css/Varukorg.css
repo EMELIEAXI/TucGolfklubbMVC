@@ -1,8 +1,11 @@
 body {
     font-family: 'Montserrat', sans-serif;
-    margin-top:20px;
-    margin-left:20px;
-    padding-left:20px;
+      margin-top: 20px;
+/*    margin-left:20px;
+    padding-left:20px;*/
+}
+h1 {
+    text-align:center;
 }
 h2 {
     font-size: xx-large;
@@ -14,13 +17,21 @@ th, td {
 
 .PaymentMethod {
     display:inline;
+    width: 90%;
+    margin-top: 30px;
+}
+.PaymentMethod p {
+    margin-top: 30px;
+}
+.Input {
+    width: 90%;
 }
 .btn-success {
     background-color:dodgerblue;
     padding:10px;
     margin:10px;
     border-radius:20px;
-    width:200px;
+    width:340px;
 }
 
 ul {
@@ -36,49 +47,67 @@ li {
     flex-direction:column;
     justify-content: center;
     align-items: center;
-
-}
-.column-pay {
-    display:flex;
-    flex-direction:column;
-    flex-wrap:wrap;
-}
-
-.Kvitto {
-    margin: auto;
-}
-.adress {
-    display:flex;
-    flex-direction:column;
+    background-color: white;
+    border-radius:5px;
+    width:400px;
+    margin-bottom:20px;
+    padding-top:20px;
+    padding: 5px;
 }
 
-.adress input {
-    width: 20rem;
+#orderSummaryContainer {
+    width:480px;
 }
+    .column-pay {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
 
-/* Kvitto delen */
+    .Kvitto a {
+        text-align: center;
+    }
 
-.Kvitto {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
-    margin: 10%;
-    padding:1em;
-}
+    .Kvitto h2 {
+        text-align: center;
+        margin: 5px;
+    }
 
-.table {
-    line-height: 5px;
-}
+    .adress {
+        display: flex;
+        flex-direction: column;
+    }
 
-footer.shop-footer {
-    margin-top: auto;
-    position:absolute;
-    bottom: 0;
-    width: 100%;
-}
+        .adress input {
+            width: 20rem;
+        }
+
+    /* Kvitto delen */
+
+    .Kvitto {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        padding: 1em;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        width: 70%;
+    }
+
+    .table {
+        line-height: 5px;
+    }
+
+    footer.shop-footer {
+        margin-top: auto;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 
 
 

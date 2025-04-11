@@ -309,8 +309,8 @@ body {
 }
 
 #orderSummaryContainer {
-    width: 100%;
-    max-width: 450px;
+/*    width: 100%;
+    max-width: 450px;*/
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;

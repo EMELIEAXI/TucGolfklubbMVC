@@ -28,6 +28,13 @@ namespace TucGolfklubb.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Enable cascade delete between Order and OrderItem
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(oi => oi.Order)       // OrderItem has one Order
+                .WithMany(o => o.OrderItems)  // Order has many OrderItems
+                .HasForeignKey(oi => oi.OrderId) // Foreign key property in OrderItem
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete
+
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable("Users", "TucUserMngt");
@@ -69,7 +76,7 @@ namespace TucGolfklubb.Data
                 .Property(oi => oi.Price)
                 .HasColumnType("decimal(18,2)");
 
-        modelBuilder.Entity<ForumPost>()
+            modelBuilder.Entity<ForumPost>()
                 .HasOne(fp => fp.User)
                 .WithMany()
                 .HasForeignKey(fp => fp.UserId)
@@ -139,6 +146,8 @@ namespace TucGolfklubb.Data
                 .WithMany(u => u.Followers)
                 .HasForeignKey(uf => uf.FolloweeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
         }
     }
 }

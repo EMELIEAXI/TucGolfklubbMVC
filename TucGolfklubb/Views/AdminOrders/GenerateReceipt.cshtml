@@ -1,0 +1,81 @@
+﻿@model TucGolfklubb.Models.Order
+
+@{
+    ViewData["Title"] = "Kvitto";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Keep your layout or set to null if you want a plain print version
+}
+
+<style>
+    .receipt {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 30px;
+        border: 1px solid #ccc;
+        font-family: 'Courier New', Courier, monospace;
+        background: #fff;
+    }
+
+        .receipt h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .receipt table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .receipt th, .receipt td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .receipt .total {
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: right;
+        }
+
+        .receipt .back-btn {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+        }
+</style>
+
+<div class="receipt">
+    <h2>Kvitto - Order #@Model.Id</h2>
+
+    <p><strong>Kund:</strong> @Model.User?.UserName</p>
+    <p><strong>Datum:</strong> @Model.OrderDate.ToShortDateString()</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Produkt</th>
+                <th>Antal</th>
+                <th>Pris</th>
+                <th>Summa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.Product?.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.ToString("0.00") kr</td>
+                    <td>@item.TotalPrice.ToString("0.00") kr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="total">Totalt: @Model.TotalPrice.ToString("0.00") kr</p>
+
+    <div class="back-btn">
+        <a href="@Url.Action("Index", "AdminOrders")" class="btn btn-primary">⬅️ Tillbaka till Orders</a>
+    </div>
+</div>

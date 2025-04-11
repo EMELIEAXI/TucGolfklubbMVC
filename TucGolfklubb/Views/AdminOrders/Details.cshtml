@@ -29,10 +29,34 @@
         {
             <tr>
                 <td>@item.Product?.Name</td>
-                <td>@item.Quantity</td>
+
+                <!-- Edit Quantity and Submit Form -->
+                <td>
+                    <form method="post" action="@Url.Action("EditOrderItem", "AdminOrders")" style="display:inline;">
+                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <input type="number" name="quantity" value="@item.Quantity" min="1" />
+                        <button type="submit" class="btn btn-warning">Redigera</button>
+                    </form>
+                </td>
+
                 <td>@item.Price.ToString("0.00") kr</td>
-                <td>@(item.Quantity * item.Price) kr</td>
+                <td>@item.TotalPrice.ToString("0.00") kr</td>
+
+                <!-- Delete Form -->
+                <td>
+                    <form method="post" action="@Url.Action("DeleteOrderItem", "AdminOrders")" style="display:inline;">
+                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger">Radera</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Display the updated total -->
+<h4>Total: <span>@Model.TotalPrice.ToString("0.00")</span> kr</h4>
+
+<!-- Back Button -->
+<a href="@Url.Action("Index", "AdminOrders")" class="btn btn-primary" style="margin-top: 20px;">Back to Orders</a>
+

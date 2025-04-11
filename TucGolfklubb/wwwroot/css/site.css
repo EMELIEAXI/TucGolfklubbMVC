@@ -345,7 +345,85 @@ p.callout {
             background-color: #004d00;
         }
 
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 40px 20px;
+    color: #333;
+    gap: 30px;
+}
 
+.footer-section {
+    flex: 1 1 200px;
+    min-width: 220px;
+}
+
+.footer h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+.payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+    .payment-icons img {
+        height: 30px;
+        width: auto;
+    }
+/* Justera loggan i footern */
+.footer-logo img {
+    width: 100%;
+    max-width: 150px; 
+    height: auto;
+}
+
+
+/* Responsiv footer */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo img {
+        margin-bottom: 20px;
+    }
+
+    .footer-hours, .footer-links, .footer-social {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    
+    .footer-container-legal {
+        flex-direction: column;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    hr.line {
+        width: 100%;
+    }
+}
+
+
+/*-------------------- FORUM --------------------*/
 /* Forum Page Wrapper */
 .forum-page {
     /*background-color: #eef3f9;*/
@@ -366,10 +444,10 @@ p.callout {
 
     /* background-color: #1d3f58;*/
     /*color: #eef3f9;*/
-.custom-dark-button:hover {
-    background-color: #537692;
-    color: #ffffff;
-}
+    .custom-dark-button:hover {
+        background-color: #537692;
+        color: #ffffff;
+    }
 
 .custom-secondary-button {
     background-color: #537692; /* steel blue */
@@ -378,10 +456,10 @@ p.callout {
     transition: background-color 0.3s ease;
 }
 
-.custom-secondary-button:hover {
-    background-color: #1d3f58; /* darker blue */
-    color: #ffffff;
-}
+    .custom-secondary-button:hover {
+        background-color: #1d3f58; /* darker blue */
+        color: #ffffff;
+    }
 
 /* Prevent layout shift caused by scrollbar */
 html {
@@ -396,9 +474,9 @@ html {
     transition: color 0.3s ease;
 }
 
-.forum-title-link:hover {
-    color: #537692 !important;
-}
+    .forum-title-link:hover {
+        color: #537692 !important;
+    }
 
 .custom-view-button {
     background-color: #6c8fa8;
@@ -408,10 +486,10 @@ html {
     font-weight: 600;
 }
 
-.custom-view-button:hover {
-    background-color: #537692;
-    color: #ffffff;
-}
+    .custom-view-button:hover {
+        background-color: #537692;
+        color: #ffffff;
+    }
 
 .btn-link-style {
     background: none;
@@ -425,9 +503,9 @@ html {
     transition: color 0.3s ease;
 }
 
-.btn-link-style:hover {
-    color: #537692;
-}
+    .btn-link-style:hover {
+        color: #537692;
+    }
 
 .forum-page a:visited {
     color: black;
@@ -463,13 +541,13 @@ html {
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-.forum-post-content-link:hover {
-    /* color: #537692 !important;*/
-    color: #537692 !important;
-    background-color: #c9d9e3 !important;
-    text-decoration: none;
-    cursor: pointer;
-}
+    .forum-post-content-link:hover {
+        /* color: #537692 !important;*/
+        color: #537692 !important;
+        background-color: #c9d9e3 !important;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 .reply-even {
     background-color: #eef3f9;
@@ -550,80 +628,41 @@ html {
     flex-grow: 1;
     margin-top: 0.3rem;
 }
-.footer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    background-color: #f8f8f8;
-    padding: 40px 20px;
-    color: #333;
-    gap: 30px;
+
+/*-------------------- END OF FORUM --------------------*/
+
+
+/*-------------------- ADMIN PANEL --------------------*/
+
+.table td {
+    padding: 10px; /* Adds padding to each cell */
 }
 
-.footer-section {
-    flex: 1 1 200px;
-    min-width: 220px;
+.btn {
+    padding: 6px 12px; /* Adds more padding to buttons for better readability */
+    font-size: 14px;
+    margin-right: 5px; /* Adds space between the buttons */
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-.footer h3 {
-    font-size: 1.3rem;
+/* Styling for the "Redigera" (Edit) button */
+.btn-warning {
+    background-color: #ffcc00;
+    color: black;
+}
+
+/* Styling for the "Radera" (Delete) button */
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Ensure buttons are aligned properly within each column */
+.table .btn {
+    display: inline-block;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.footer a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-    .footer a:hover {
-        text-decoration: underline;
-    }
-
-.payment-icons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-    .payment-icons img {
-        height: 30px;
-        width: auto;
-    }
-/* Justera loggan i footern */
-.footer-logo img {
-    width: 100%;
-    max-width: 150px; 
-    height: auto;
-}
-
-
-/* Responsiv footer */
-@media (max-width: 768px) {
-    .footer-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .footer-logo img {
-        margin-bottom: 20px;
-    }
-
-    .footer-hours, .footer-links, .footer-social {
-        text-align: center;
-        max-width: 100%;
-    }
-
-    
-    .footer-container-legal {
-        flex-direction: column;
-        justify-content: space-around;
-        width: 100%;
-    }
-
-    hr.line {
-        width: 100%;
-    }
-}
-
+/*-------------------- END OF ADMIN PANEL --------------------*/

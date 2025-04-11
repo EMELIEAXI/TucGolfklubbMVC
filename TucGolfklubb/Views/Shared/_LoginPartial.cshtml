@@ -4,7 +4,7 @@
 @inject UserManager<ApplicationUser> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
-    var fullName = user?.FullName ?? "Gäst";
+    var fullName = user?.FullName ?? "Admin";
 }
 <ul class="navbar-nav" style="display:flex; flex-direction:row;">
     @if (SignInManager.IsSignedIn(User))

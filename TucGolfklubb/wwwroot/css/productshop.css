@@ -168,7 +168,7 @@ body {
 }
 
 .add-to-cart-form input {
-    display: none;
+    display: block;
 }
 
 .add-to-cart-form button {
@@ -186,6 +186,30 @@ body {
     .add-to-cart-form button:hover {
         background-color: #218838;
     }
+
+.form-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    height: 50px;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 0.5rem;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.quantity-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
 
 .reviews-container {
     width: 450px;
@@ -270,7 +294,7 @@ body {
 }
 
     .reviews-container button:hover {
-        background-color: #4a89ff;
+        background-color: #0035d1;
     }
 
 .review-container {

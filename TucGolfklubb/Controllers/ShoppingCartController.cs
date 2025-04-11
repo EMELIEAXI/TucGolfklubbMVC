@@ -12,11 +12,11 @@ namespace TucGolfklubb.Controllers
     [Route("ShoppingCart")]
     public class ShoppingCartController : Controller
     {
-            private readonly ApplicationDbContext _context;
-            public ShoppingCartController(ApplicationDbContext context)
-            {
-                _context = context;
-            }
+        private readonly ApplicationDbContext _context;
+        public ShoppingCartController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public async Task<ShoppingCart> GetShoppingCart()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -71,7 +71,7 @@ namespace TucGolfklubb.Controllers
         [HttpPost]
         [Route("ShoppingCart/AddToCart")]
         [Authorize]
-        public async Task<IActionResult> AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null)
@@ -106,14 +106,14 @@ namespace TucGolfklubb.Controllers
             var existingItem = cart.OrderItems.FirstOrDefault(oi => oi.ProductId == productId);
             if (existingItem != null)
             {
-                existingItem.Quantity++; // Öka antal om produkten redan finns i varukorgen
+                existingItem.Quantity += quantity;
             }
             else
             {
                 cart.OrderItems.Add(new OrderItem
                 {
                     ProductId = product.Id,
-                    Quantity = 1,
+                    Quantity = quantity,
                     Price = product.Price
                 });
             }
@@ -132,7 +132,7 @@ namespace TucGolfklubb.Controllers
                 }).ToList() ?? new List<OrderItem>(),
                 OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Quantity * oi.Price)
             };
-           
+
             return PartialView("_OrderSummary", updatedModel);
         }
         [HttpGet]
@@ -192,6 +192,6 @@ namespace TucGolfklubb.Controllers
             return BadRequest();
         }
     }
-    
+
 }
 //hej

@@ -12,7 +12,7 @@
         <li class="nav-item">
             <a class="nav-link" style="color:white;" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej @fullName!</a>
         </li>
-        <p style="color:white; margin-top:10px;">|</p>
+        <li style="color:white; margin-top:10px;">|</li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link" style="color:white; text-decoration:none;">Logga ut</button>
@@ -25,7 +25,7 @@
                 <a class="button" asp-area="Identity" asp-page="/Account/Register" style="color:white; text-decoration:none;">Registrera</a>
             </li>
 
-                <p style="margin-top:10px;">|</p>
+                <li style="margin-top:10px;">|</li>
             <li class="nav-item" style="margin-top:10px; margin-left:10px;">
                 <a class="button" asp-area="Identity" asp-page="/Account/Login" style="color:white; text-decoration:none;">Logga in</a>
             </li>

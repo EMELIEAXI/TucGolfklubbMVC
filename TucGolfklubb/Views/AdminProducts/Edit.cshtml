@@ -11,8 +11,12 @@
 <div style="padding-top: 120px;">
     <h2>Redigera produkt</h2>
 
-    <form asp-action="Edit" method="post">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
+
+        <!-- 🔽 ADD THIS RIGHT HERE -->
+        <div asp-validation-summary="All" class="text-danger"></div>
+
 
         <div class="mb-3">
             <label asp-for="Name" class="form-label"></label>
@@ -44,6 +48,21 @@
                 <option value="">-- Välj kategori --</option>
             </select>
             <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <!-- Show current image -->
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <div class="mb-3">
+                <label>Nuvarande bild:</label><br />
+                <img src="/images/products/@Model.Image" alt="Produktbild" style="max-width: 150px;" />
+            </div>
+        }
+
+        <!-- Upload new image -->
+        <div class="mb-3">
+            <label for="imageFile" class="form-label">Byt produktbild</label>
+            <input type="file" name="imageFile" class="form-control" />
         </div>
 
         <button type="submit" class="btn btn-primary">💾 Spara ändringar</button>

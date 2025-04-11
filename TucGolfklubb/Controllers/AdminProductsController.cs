@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TucGolfklubb.Data;
@@ -30,10 +32,23 @@ namespace TucGolfklubb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<IActionResult> Create(Product product, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var fileName = Path.GetFileName(imageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    product.Image = fileName;
+                }
+
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -53,19 +68,33 @@ namespace TucGolfklubb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Product product)
+        public async Task<IActionResult> Edit(int id, IFormFile? imageFile)
         {
-            if (id != product.Id) return NotFound();
+            var productToUpdate = await _context.Products.FindAsync(id);
+            if (productToUpdate == null) return NotFound();
 
-            if (ModelState.IsValid)
+            if (await TryUpdateModelAsync(productToUpdate, "",
+                p => p.Name, p => p.Description, p => p.Price, p => p.Stock, p => p.CategoryId))
             {
-                _context.Update(product);
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var fileName = Path.GetFileName(imageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/images", fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    productToUpdate.Image = fileName;
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
             ViewBag.Categories = _context.Categories.ToList();
-            return View(product);
+            return View(productToUpdate);
         }
 
         public async Task<IActionResult> Delete(int id)

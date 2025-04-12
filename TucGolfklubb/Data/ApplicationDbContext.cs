@@ -123,6 +123,17 @@ namespace TucGolfklubb.Data
                 new Forum { Id = 1, Title = "Allmänt om golf", Description = "Diskussioner om allt möjligt relaterat till golf" }
             );
 
+            modelBuilder.Entity<ForumPost>().HasData(
+                new ForumPost
+                {
+                    Id = 1,
+                    Content = "Välkommen till forumet! Vad tycker ni om den nya golfbanan?",
+                    PostedAt = new DateTime(2024, 01, 01, 10, 00, 00),
+                    ForumId = 1,
+                    UserId = null // Can be null if User is optional
+                }
+            );
+
             modelBuilder.Entity<Review>()
                 .HasOne(r => r.User)
                 .WithMany()

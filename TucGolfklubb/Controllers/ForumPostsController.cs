@@ -85,7 +85,7 @@ namespace TucGolfklubb.Controllers
                 _context.Add(forumPost);
                 await _context.SaveChangesAsync();
 
-                // Add activity log
+                // Step 1: Create main activity log for the user
                 var activity = new UserActivity
                 {
                     UserId = forumPost.UserId,
@@ -94,13 +94,31 @@ namespace TucGolfklubb.Controllers
                     ForumPostId = forumPost.Id,
                     CreatedAt = DateTime.Now
                 };
-
                 _context.Activities.Add(activity);
+
+                // Step 2: Notify all followers of this user
+                var followers = await _context.UserFollows
+                    .Where(f => f.FolloweeId == forumPost.UserId)
+                    .Select(f => f.FollowerId)
+                    .ToListAsync();
+
+                foreach (var followerId in followers)
+                {
+                    _context.Activities.Add(new UserActivity
+                    {
+                        UserId = forumPost.UserId,
+                        Type = "Post",
+                        Content = forumPost.Content.Length > 100 ? forumPost.Content.Substring(0, 100) + "..." : forumPost.Content,
+                        ForumPostId = forumPost.Id,
+                        CreatedAt = DateTime.Now
+                    });
+                }
+
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });
             }
-            // Handle model validation errors: If validation fails, check if ForumId is provided or need to show a dropdown, re-display the form
+
             if (forumPost.ForumId != 0)
             {
                 ViewData["ForumId"] = forumPost.ForumId;
@@ -109,6 +127,7 @@ namespace TucGolfklubb.Controllers
             {
                 ViewData["ForumId"] = new SelectList(_context.Forums, "Id", "Title", forumPost.ForumId);
             }
+
             return View(forumPost);
         }
 

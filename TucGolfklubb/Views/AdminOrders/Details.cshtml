@@ -35,7 +35,7 @@
                     <form method="post" action="@Url.Action("EditOrderItem", "AdminOrders")" style="display:inline;">
                         <input type="hidden" name="itemId" value="@item.Id" />
                         <input type="number" name="quantity" value="@item.Quantity" min="1" />
-                        <button type="submit" class="btn btn-warning">Redigera</button>
+                        <button type="submit" class="btn btn-warning">Klicka här efter att ha ändrat antalet</button>
                     </form>
                 </td>
 
@@ -46,7 +46,7 @@
                 <td>
                     <form method="post" action="@Url.Action("DeleteOrderItem", "AdminOrders")" style="display:inline;">
                         <input type="hidden" name="itemId" value="@item.Id" />
-                        <button type="submit" class="btn btn-danger">Radera</button>
+                        <button type="submit" class="btn btn-danger">Klicka här om du vill ta bort hela raden</button>
                     </form>
                 </td>
             </tr>

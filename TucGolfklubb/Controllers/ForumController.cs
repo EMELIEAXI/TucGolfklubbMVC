@@ -73,6 +73,36 @@ namespace TucGolfklubb.Controllers
                 forum.UserId = _userManager.GetUserId(User);
                 _context.Add(forum);
                 await _context.SaveChangesAsync();
+
+                // Step 1: Log activity
+                var activity = new UserActivity
+                {
+                    UserId = forum.UserId,
+                    Type = "Forum",
+                    Content = $"Skapade forumet: {forum.Title}",
+                    CreatedAt = DateTime.Now
+                };
+                _context.Activities.Add(activity);
+
+                // Step 2: Notify followers
+                var followers = await _context.UserFollows
+                    .Where(f => f.FolloweeId == forum.UserId)
+                    .Select(f => f.FollowerId)
+                    .ToListAsync();
+
+                foreach (var followerId in followers)
+                {
+                    _context.Activities.Add(new UserActivity
+                    {
+                        UserId = forum.UserId,
+                        Type = "Forum",
+                        Content = $"Skapade forumet: {forum.Title}",
+                        CreatedAt = DateTime.Now
+                    });
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(forum);

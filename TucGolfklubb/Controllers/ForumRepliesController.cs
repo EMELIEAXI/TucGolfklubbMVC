@@ -19,21 +19,6 @@ namespace TucGolfklubb.Controllers
             _userManager = userManager;
         }
 
-        // This GET is no longer needed because reply form is inline
-        // GET: ForumReplies/Create
-        /*
-        public IActionResult Create(int forumPostId, int? parentReplyId)
-        {
-            var reply = new ForumReply
-            {
-                ForumPostId = forumPostId,
-                ParentReplyId = parentReplyId
-            };
-
-            return View(reply);
-        }
-        */
-
         // POST: ForumReplies/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -47,7 +32,7 @@ namespace TucGolfklubb.Controllers
                 _context.Replies.Add(reply);
                 await _context.SaveChangesAsync();
 
-                // Log activity
+                // Log activity (for the reply author)
                 var activity = new UserActivity
                 {
                     UserId = reply.UserId,
@@ -56,16 +41,34 @@ namespace TucGolfklubb.Controllers
                     ForumPostId = reply.ForumPostId,
                     CreatedAt = DateTime.Now
                 };
-
                 _context.Activities.Add(activity);
+
+                // Notify followers of the user who made the reply
+                var followers = await _context.UserFollows
+                    .Where(f => f.FolloweeId == reply.UserId)
+                    .Select(f => f.FollowerId)
+                    .ToListAsync();
+
+                foreach (var followerId in followers)
+                {
+                    // This creates a copy of the activity for each follower to display in their feed
+                    _context.Activities.Add(new UserActivity
+                    {
+                        UserId = reply.UserId, // the actor
+                        Type = "Reply",
+                        Content = reply.Content.Length > 100 ? reply.Content.Substring(0, 100) + "..." : reply.Content,
+                        ForumPostId = reply.ForumPostId,
+                        CreatedAt = DateTime.Now
+                        // Optionally include: TargetUserId = followerId (if your feed filters by this)
+                    });
+                }
+
+                // Save all at once
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId }, fragment: $"reply-{reply.Id}");
             }
 
-            //ViewBag.ForumPostId = reply.ForumPostId;
-            //ViewBag.ParentReplyId = reply.ParentReplyId;
-            //return View(reply);
 
             // If validation fails, go back to the forum post page
             return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });

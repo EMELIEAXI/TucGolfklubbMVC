@@ -9,7 +9,19 @@
     <h2 class="mb-1" style="color: #001b2e;">@Model.Forum?.Title</h2>
     <p class="text-muted mb-4">
         <em>
-            av <strong>@(Model.User?.UserName ?? "Okänd")</strong> |
+            @{
+                var name = Model.User?.FullName;
+
+                if (Model.User == null)
+                {
+                    name = "Okänd";
+                }
+                else if (Model.User.Email == "admin@golfklubb.se")
+                {
+                    name = "Admin";
+                }
+            }
+            av <strong>@name</strong> |
             publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
         </em>
     </p>

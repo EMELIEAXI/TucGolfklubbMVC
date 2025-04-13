@@ -39,6 +39,21 @@
                                 </a>
                             </h5>
                             <p class="card-text" style="color: #1d3f58;">@item.Description</p>
+                            @{
+                                var name = item.User?.FullName;
+
+                                if (item.User == null)
+                                {
+                                    name = "Okänd användare";
+                                }
+                                else if (item.User.Email == "admin@golfklubb.se")
+                                {
+                                    name = "Admin";
+                                }
+                            }
+                            <p class="text-muted small mb-0">
+                                Skapad av: <strong>@name</strong>
+                            </p>
                         </div>
                         @if (UserManager.GetUserId(User) == item.UserId)
                         {

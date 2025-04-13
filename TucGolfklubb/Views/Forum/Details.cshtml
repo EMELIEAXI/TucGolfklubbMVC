@@ -44,7 +44,19 @@
                             </a>
 
                             <p class="text-muted small mb-3">
-                                av <strong>@(post.User?.UserName ?? "Okänd användare")</strong> |
+                                @{
+                                    var name = post.User?.FullName;
+
+                                    if (post.User == null)
+                                    {
+                                        name = "Okänd användare";
+                                    }
+                                    else if (post.User.Email == "admin@golfklubb.se")
+                                    {
+                                        name = "Admin";
+                                    }
+                                }
+                                av <strong>@name</strong> |
                                 @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
                             </p>
 

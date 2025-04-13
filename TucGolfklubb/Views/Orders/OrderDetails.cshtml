@@ -1,0 +1,42 @@
+﻿@model TucGolfklubb.Models.Order
+
+@{
+    ViewData["Title"] = "Orderdetaljer";
+}
+
+<h2>Orderdetaljer - Order #@Model.Id</h2>
+
+<div>
+    <h3>Orderinformation</h3>
+    <p><strong>Orderdatum:</strong> @Model.OrderDate.ToString("g")</p>
+    <p><strong>Totalt pris:</strong> @String.Format("{0:C2}", Model.TotalPrice)</p>
+</div>
+
+<div>
+    <h3>Köpta produkter</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produktnamn</th>
+                <th>Antal</th>
+                <th>Pris</th>
+                <th>Totalt pris</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@String.Format("{0:C2}", item.Price)</td>
+                    <td>@String.Format("{0:C2}", item.Quantity * item.Price)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <a href="@Url.Action("ActivityFeed", "Users")">Tillbaka till aktivitetsflöde</a>
+</div>

@@ -22,12 +22,12 @@ else
                     if (activity.Type == "Review")
                     {
                         linkUrl = Url.Action("Index", "Shop") + $"#product-{activity.ProductId}";
-                        actionText = "skrev en recension for:";
+                        actionText = "skrev en recension för:";
                     }
                     else if (activity.Type == "Purchase")
                     {
-                        linkUrl = Url.Action("Details", "Orders", new { id = activity.OrderId }) ?? "#";
-                        actionText = "gjorde ett köp:";
+                        linkUrl = Url.Action("OrderDetails", "Orders", new { id = activity.OrderId }) ?? "#";
+                        actionText = "gjorde ett köp: "; // We'll display the Order ID as a link here
                     }
                     else if (activity.Type == "Post")
                     {
@@ -93,7 +93,12 @@ else
                     var productName = activity.Content.Replace("Skrev en recension för \"", "").Replace("\"", "");
                     <a href="@linkUrl">"@productName"</a>
                 }
-                else
+                else if (activity.Type == "Purchase")
+                {
+                    // Order ID as a clickable link
+                    <a href="@linkUrl">(Order #@activity.OrderId)</a>
+                }
+                else if (activity.Type != "Purchase") // No need for Content for Purchase activities
                 {
                     <a href="@linkUrl">@activity.Content</a>
                 }

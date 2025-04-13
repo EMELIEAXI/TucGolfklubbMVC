@@ -27,7 +27,9 @@ namespace TucGolfklubb.Controllers
         // GET: Forum
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Forums.ToListAsync());
+            return View(await _context.Forums
+                .Include(f => f.User) // Include the user so FullName is accessible
+                .ToListAsync());
         }
 
         // GET: Forum/Details/5

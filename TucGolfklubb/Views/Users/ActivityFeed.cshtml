@@ -40,8 +40,23 @@ else
                             replyAnchor = $"#reply-{reply.Id}";
                             postUrl += replyAnchor;
 
+
+
                             var parentReply = db.Replies.FirstOrDefault(r => r.Id == reply.ParentReplyId);
-                            targetUserName = parentReply?.User?.UserName ?? "användaren";
+
+                            // Get the display name for the user being replied to
+                            if (parentReply?.User == null)
+                            {
+                                targetUserName = "okänd användare";
+                            }
+                            else if ((parentReply.User.Email?.ToLower() ?? "") == "admin@golfklubb.se")
+                            {
+                                targetUserName = "Admin";
+                            }
+                            else
+                            {
+                                targetUserName = parentReply.User.FullName ?? parentReply.User.UserName ?? "användaren";
+                            }
 
                             if (parentReply?.ParentReplyId == null)
                             {
@@ -51,6 +66,8 @@ else
                             {
                                 actionText = $"svarade på {targetUserName}s svar:";
                             }
+
+
                         }
                         else
                         {
@@ -61,9 +78,21 @@ else
                     {
                         actionText = $"gjorde en {activity.Type.ToLower()}:";
                     }
+            
+                    var name = activity.User?.FullName;
+
+                    if (activity.User == null)
+                    {
+                        name = "Okänd användare";
+                    }
+                    else if ((activity.User.Email?.ToLower() ?? "") == "admin@golfklubb.se")
+                    {
+                        name = "Admin";
+                    }
                 }
 
-                <strong>@activity.User?.UserName</strong> @actionText
+
+                <strong>@name</strong> @actionText
                 <a href="@postUrl">
                     @activity.Content
                 </a>

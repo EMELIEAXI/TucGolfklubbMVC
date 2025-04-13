@@ -43,6 +43,13 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            // Check if the user is an admin and if FullName is blank, then set it to "Admin"
+            if (await _userManager.IsInRoleAsync(user, "Admin") && string.IsNullOrWhiteSpace(user.FullName))
+            {
+                user.FullName = "Admin";
+                await _userManager.UpdateAsync(user);
+            }
+
             var review = new Review
             {
                 ProductId = productId,

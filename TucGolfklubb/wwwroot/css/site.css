@@ -563,12 +563,17 @@ html {
     margin-left: 1rem;
 }
 
-/*.reply-thread-wrapper {
-    position: relative;
-    border-left: 4px solid #b3cde4;
-    padding-left: 1rem;
-    margin-left: 0.5rem;
-}*/
+
+/* Ensure no underline for the user name in forum replies */
+.reply-thread .reply-card .d-flex a {
+    text-decoration: none !important;  /* Removes the underline */
+}
+
+/* Optionally, add an underline on hover */
+.reply-thread .reply-card .d-flex a:hover {
+    text-decoration: underline !important; /* Adds underline on hover */
+    color: #537692 !important;  /* Optional: Customize hover color */
+}
 
 .reply-card {
     background-color: rgba(193, 212, 232, 0.5); /* #c1d4e8 with 70% opacity */
@@ -584,20 +589,7 @@ html {
     margin-bottom: 1rem;
 }
 
-/*
-.reply-thread-connector::before {
-    content: "";
-    position: absolute;
-    top: 0.75rem;
-    left: 0;
-    width: 12px;
-    height: calc(100% - 0.75rem);
-    border-left: 3px solid #537692;
-    border-bottom: 3px solid #537692;
-    border-radius: 0 0 0 10px;
-     top: 1.3rem; 
-}
-    */
+
 
 /* Align icon with vertical thread line */
 .connector-icon-wrapper {
@@ -630,6 +622,8 @@ html {
 }
 
 /*-------------------- END OF FORUM --------------------*/
+
+
 
 
 /*-------------------- ADMIN PANEL --------------------*/

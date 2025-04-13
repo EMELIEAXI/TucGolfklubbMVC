@@ -38,7 +38,17 @@
                         }
                     }
                     <strong style="color: #001b2e;">
-                        @name
+                        @if (Model.User != null)
+                        {
+                            <a href="@Url.Action("Profile", "Users", new { id = Model.User.Id })" style="text-decoration: none; color: #001b2e;" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';" target="_blank">
+                                @name
+                            </a>
+                        }
+                        else
+                        {
+                            @name
+                        }
+
                         @if (Model.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
                         {
                             <span class="text-muted small ms-1">(du)</span>

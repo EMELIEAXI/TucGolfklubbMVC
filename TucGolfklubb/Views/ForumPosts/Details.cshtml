@@ -10,28 +10,56 @@
     <p class="text-muted mb-4">
         <em>
             @{
-                var name = Model.User?.FullName;
+                string name = Model.User?.FullName ?? "Okänd användare";  // Default to "Okänd" if FullName is null
 
-                if (Model.User == null)
-                {
-                    name = "Okänd";
-                }
-                else if (Model.User.Email == "admin@golfklubb.se")
+                // Check if user is an admin
+                if (Model.User != null && Model.User.Email == "admin@golfklubb.se")
                 {
                     name = "Admin";
                 }
             }
-            av <strong>@name</strong> |
+
+            @if (Model.User != null)
+            {
+                @:av <a href="@Url.Action("Profile", "Users", new { id = Model.User.Id })" onmouseover="this.style.textDecoration='underline';" onmouseout="this.style.textDecoration='none';" target="_blank"><strong>@name</strong></a> |
+            }
+            else
+            {
+                @:av <strong>@name</strong> |
+            }
+
             publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+
         </em>
     </p>
 
     <!-- Main Post Card -->
     <div class="card shadow-sm mb-5 border-0">
         <div class="card-body" style="background-color: #b3cde4;">
-            <h5 class="card-title" style="color: #001b2e;">Inlägg</h5>
-            <p class="card-text" style="color: #1d3f58; font-size: 1.1rem; line-height: 1.6;">
-                @Model.Content
+            <h5 class="card-title" style="color: #001b2e;">
+            <span style="font-style: italic; font-weight: normal; font-size: 1.2rem;"></span>
+            <span style="font-size: 1.5rem;"> @Model.Content</span>
+        </h5>
+
+            <!-- Display the author and published date -->
+            <p class="text-muted" style="font-size: 0.9rem;">
+                @* Determine the author's name *@
+                @{
+                    string authorName = Model.User?.FullName ?? "Okänd användare";  // Default to "Okänd" if null
+                    if (Model.User != null && Model.User.Email == "admin@golfklubb.se")
+                    {
+                        authorName = "Admin";
+                    }
+                }
+                @if (Model.User != null)
+                {
+                    @:av <a href="@Url.Action("Profile", "Users", new { id = Model.User.Id })" target="_blank" style="text-decoration:none;"><strong>@authorName</strong></a>
+                }
+                else
+                {
+                    @:av <strong>@authorName</strong>
+                }
+                | publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
             </p>
         </div>
     </div>

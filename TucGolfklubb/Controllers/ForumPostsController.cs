@@ -164,7 +164,7 @@ namespace TucGolfklubb.Controllers
                     throw;
                 }
 
-                // ✅ Go back to the forum page
+                // Go back to the forum page
                 return RedirectToAction("Details", "Forum", new { id = formModel.ForumId });
             }
 

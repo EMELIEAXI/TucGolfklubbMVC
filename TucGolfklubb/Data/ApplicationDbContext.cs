@@ -24,6 +24,7 @@ namespace TucGolfklubb.Data
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<UserFollow> UserFollows { get; set; }
         public DbSet<UserActivity> Activities { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

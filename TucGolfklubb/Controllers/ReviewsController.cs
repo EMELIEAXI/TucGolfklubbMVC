@@ -55,10 +55,52 @@ namespace TucGolfklubb.Controllers
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
+
+            // Log activity + notify followers
+            review = await _context.Reviews
+                .Include(r => r.Product)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(r => r.Id == review.Id);
+
+            if (review == null)
+            {
+                return RedirectToAction("Index", "Shop", new { categoryId = selectedProduct.CategoryId });
+            }
+
+            var activity = new UserActivity
+            {
+                UserId = review.UserId,
+                Type = "Review",
+                Content = $"Skrev en recension för \"{review.Product?.Name}\"",
+                ProductId = review.ProductId,
+                CreatedAt = DateTime.Now
+            };
+            _context.Activities.Add(activity);
+
+            // Notify followers
+            var followers = await _context.UserFollows
+                .Where(f => f.FolloweeId == review.UserId)
+                .Select(f => f.FollowerId)
+                .ToListAsync();
+
+            foreach (var followerId in followers)
+            {
+                _context.Notifications.Add(new Notification
+                {
+                    UserId = followerId!,
+                    Message = $"{review.User?.FullName ?? "En medlem"} skrev en recension för \"{review.Product?.Name}\".",
+                    CreatedAt = DateTime.Now,
+                    IsRead = false
+                });
+            }
+
+            await _context.SaveChangesAsync();
+
             var redirectUrl = Url.Action("Index", "Shop", new { categoryId = selectedProduct.CategoryId });
 
             return Redirect(redirectUrl + $"#product-{productId}");
         }
+
 
         [HttpPost]
         [Authorize]

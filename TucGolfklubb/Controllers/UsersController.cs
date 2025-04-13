@@ -75,8 +75,40 @@ namespace TucGolfklubb.Controllers
         // Added Index() below
         public async Task<IActionResult> Index()
         {
+            var currentUserId = _userManager.GetUserId(User);
+
             var users = await _userManager.Users.ToListAsync();
-            return View(users);
+
+            var followedIds = await _context.UserFollows
+                .Where(f => f.FollowerId == currentUserId)
+                .Select(f => f.FolloweeId)
+                .ToListAsync();
+
+            var viewModels = new List<UserProfileViewModel>();
+
+            foreach (var user in users)
+            {
+                var isFollowed = followedIds.Contains(user.Id);
+
+                var activities = await _context.Activities
+                    .Where(a => a.UserId == user.Id)
+                    .OrderByDescending(a => a.CreatedAt)
+                    .Take(5)
+                    .ToListAsync();
+
+                viewModels.Add(new UserProfileViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    ProfileImagePath = user.ProfileImagePath,
+                    IsFollowedByCurrentUser = isFollowed,
+                    RecentActivities = activities
+                });
+            }
+
+            return View(viewModels); // now returns List<UserProfileViewModel>
         }
     }
 }

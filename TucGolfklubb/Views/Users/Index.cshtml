@@ -1,4 +1,4 @@
-﻿@model List<TucGolfklubb.Models.ApplicationUser>
+﻿@model List<UserProfileViewModel>
 
 @{
     ViewData["Title"] = "Användare";
@@ -10,26 +10,39 @@
     <ul class="list-group">
         @foreach (var user in Model)
         {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span>
-                    @{
-                        var name = user?.FullName;
+            <li class="list-group-item flex-column align-items-start">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span>
+                        @{
+                            var name = user?.FullName;
 
-                        if (user == null)
-                        {
-                            name = "Okänd användare";
+                            if (user == null)
+                            {
+                                name = "Okänd användare";
+                            }
+                            else if ((user.Email?.ToLower() ?? "") == "admin@golfklubb.se")
+                            {
+                                name = "Admin";
+                            }
                         }
-                        else if ((user.Email?.ToLower() ?? "") == "admin@golfklubb.se")
-                        {
-                            name = "Admin";
-                        }
+                        <strong>@name</strong>
+                    </span>
+
+                    @if (user != null)
+                    {
+                        <button class="btn btn-sm btn-primary" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse-@user.Id"
+                                aria-expanded="false" aria-controls="collapse-@user.Id">
+                            Visa 
+                        </button>
                     }
-                    <strong>@name</strong>
-                </span>
+                </div>
 
                 @if (user != null)
                 {
-                    <a asp-action="Profile" asp-route-id="@user.Id" class="btn btn-sm btn-primary">Visa profil</a>
+                    <div class="collapse w-100 mt-2" id="collapse-@user.Id">
+                        @await Html.PartialAsync("_UserProfilePartial", user)
+                    </div>
                 }
             </li>
         }

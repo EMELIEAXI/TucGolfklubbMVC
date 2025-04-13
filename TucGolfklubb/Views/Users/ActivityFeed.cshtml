@@ -14,60 +14,56 @@ else
         {
             <li class="list-group-item">
                 @{
-                    string actionText;
+                    string actionText = "";
                     string targetUserName = "";
-                    string replyAnchor = "";
-                    string postUrl = Url.Action("Details", "ForumPosts", new { id = activity.ForumPostId }) ?? "#";
+                    string linkUrl = "#";
 
-                    if (activity.Type == "Post")
+                    // Determine link based on activity type
+                    if (activity.Type == "Review")
                     {
+                        linkUrl = Url.Action("Index", "Shop") + $"#product-{activity.ProductId}";
+                        actionText = "skrev en recension for:";
+                    }
+                    else if (activity.Type == "Purchase")
+                    {
+                        linkUrl = Url.Action("Details", "Orders", new { id = activity.OrderId }) ?? "#";
+                        actionText = "gjorde ett köp:";
+                    }
+                    else if (activity.Type == "Post")
+                    {
+                        linkUrl = Url.Action("Details", "ForumPosts", new { id = activity.ForumPostId }) ?? "#";
                         actionText = "skrev ett inlägg:";
                     }
                     else if (activity.Type == "Comment")
                     {
+                        linkUrl = Url.Action("Details", "ForumPosts", new { id = activity.ForumPostId }) ?? "#";
                         actionText = "kommenterade ett inlägg:";
                     }
                     else if (activity.Type == "Forum")
                     {
                         actionText = "skapade ett forum:";
+                        linkUrl = "#";
                     }
                     else if (activity.Type == "Reply")
                     {
                         var reply = db.Replies.FirstOrDefault(r => r.Id == activity.ForumReplyId);
-
                         if (reply != null)
                         {
-                            replyAnchor = $"#reply-{reply.Id}";
-                            postUrl += replyAnchor;
-
-
+                            linkUrl = Url.Action("Details", "ForumPosts", new { id = reply.ForumPostId }) + $"#reply-{reply.Id}";
 
                             var parentReply = db.Replies.FirstOrDefault(r => r.Id == reply.ParentReplyId);
 
-                            // Get the display name for the user being replied to
                             if (parentReply?.User == null)
-                            {
                                 targetUserName = "okänd användare";
-                            }
                             else if ((parentReply.User.Email?.ToLower() ?? "") == "admin@golfklubb.se")
-                            {
                                 targetUserName = "Admin";
-                            }
                             else
-                            {
                                 targetUserName = parentReply.User.FullName ?? parentReply.User.UserName ?? "användaren";
-                            }
 
                             if (parentReply?.ParentReplyId == null)
-                            {
                                 actionText = $"svarade på {targetUserName}s kommentar:";
-                            }
                             else
-                            {
                                 actionText = $"svarade på {targetUserName}s svar:";
-                            }
-
-
                         }
                         else
                         {
@@ -78,9 +74,9 @@ else
                     {
                         actionText = $"gjorde en {activity.Type.ToLower()}:";
                     }
-            
-                    var name = activity.User?.FullName;
 
+                    // Display the actor's name (Admin, FullName, fallback)
+                    var name = activity.User?.FullName;
                     if (activity.User == null)
                     {
                         name = "Okänd användare";
@@ -91,11 +87,16 @@ else
                     }
                 }
 
-
                 <strong>@name</strong> @actionText
-                <a href="@postUrl">
-                    @activity.Content
-                </a>
+                @if (activity.Type == "Review")
+                {
+                    var productName = activity.Content.Replace("Skrev en recension för \"", "").Replace("\"", "");
+                    <a href="@linkUrl">"@productName"</a>
+                }
+                else
+                {
+                    <a href="@linkUrl">@activity.Content</a>
+                }
                 <br />
                 <small class="text-muted">@activity.CreatedAt.ToString("g")</small>
             </li>

@@ -39,6 +39,7 @@ namespace TucGolfklubb.Controllers
                     Type = reply.ParentReplyId == null ? "Comment" : "Reply",  // Differentiate!
                     Content = reply.Content.Length > 100 ? reply.Content.Substring(0, 100) + "..." : reply.Content,
                     ForumPostId = reply.ForumPostId,
+                    ForumReplyId = reply.Id,
                     CreatedAt = DateTime.Now
                 };
                 _context.Activities.Add(activity);

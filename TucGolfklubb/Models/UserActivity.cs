@@ -12,7 +12,7 @@ namespace TucGolfklubb.Models
         public string Type { get; set; } = string.Empty; // e.g. "Post", "Reply"
         public string Content { get; set; } = string.Empty; // snippet or title
         public int? ForumPostId { get; set; } // Link to original post (optional)
-
+        public int? ForumReplyId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

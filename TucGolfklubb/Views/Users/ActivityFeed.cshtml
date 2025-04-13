@@ -1,4 +1,5 @@
 ﻿@model List<TucGolfklubb.Models.UserActivity>
+@inject TucGolfklubb.Data.ApplicationDbContext db
 
 <h2>Aktivitetsflöde</h2>
 
@@ -13,14 +14,46 @@ else
         {
             <li class="list-group-item">
                 @{
-                    var actionText = activity.Type switch
+                    string actionText;
+
+                    if (activity.Type == "Post")
                     {
-                        "Post" => "skrev ett inlägg:",
-                        "Comment" => "kommenterade ett inlägg:",
-                        "Reply" => "svarade på en kommentar:",
-                        "Forum" => "skapade ett forum:",
-                        _ => $"gjorde en {activity.Type.ToLower()}:"
-                    };
+                        actionText = "skrev ett inlägg:";
+                    }
+                    else if (activity.Type == "Comment")
+                    {
+                        actionText = "kommenterade ett inlägg:";
+                    }
+                    else if (activity.Type == "Forum")
+                    {
+                        actionText = "skapade ett forum:";
+                    }
+                    else if (activity.Type == "Reply")
+                    {
+                        var reply = db.Replies.FirstOrDefault(r => r.Id == activity.ForumReplyId);
+
+                        if (reply != null && reply.ParentReplyId != null)
+                        {
+                            var parentReply = db.Replies.FirstOrDefault(r => r.Id == reply.ParentReplyId);
+
+                            if (parentReply?.ParentReplyId == null)
+                            {
+                                actionText = "svarade på en kommentar:"; // reply to a comment
+                            }
+                            else
+                            {
+                                actionText = "svarade på ett svar:"; // reply to a reply
+                            }
+                        }
+                        else
+                        {
+                            actionText = "svarade på en kommentar:"; // fallback if null
+                        }
+                    }
+                    else
+                    {
+                        actionText = $"gjorde en {activity.Type.ToLower()}:";
+                    }
                 }
 
                 <strong>@activity.User?.UserName</strong> @actionText

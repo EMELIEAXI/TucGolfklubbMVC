@@ -15,6 +15,9 @@ else
             <li class="list-group-item">
                 @{
                     string actionText;
+                    string targetUserName = "";
+                    string replyAnchor = "";
+                    string postUrl = Url.Action("Details", "ForumPosts", new { id = activity.ForumPostId }) ?? "#";
 
                     if (activity.Type == "Post")
                     {
@@ -32,22 +35,26 @@ else
                     {
                         var reply = db.Replies.FirstOrDefault(r => r.Id == activity.ForumReplyId);
 
-                        if (reply != null && reply.ParentReplyId != null)
+                        if (reply != null)
                         {
+                            replyAnchor = $"#reply-{reply.Id}";
+                            postUrl += replyAnchor;
+
                             var parentReply = db.Replies.FirstOrDefault(r => r.Id == reply.ParentReplyId);
+                            targetUserName = parentReply?.User?.UserName ?? "användaren";
 
                             if (parentReply?.ParentReplyId == null)
                             {
-                                actionText = "svarade på en kommentar:"; // reply to a comment
+                                actionText = $"svarade på {targetUserName}s kommentar:";
                             }
                             else
                             {
-                                actionText = "svarade på ett svar:"; // reply to a reply
+                                actionText = $"svarade på {targetUserName}s svar:";
                             }
                         }
                         else
                         {
-                            actionText = "svarade på en kommentar:"; // fallback if null
+                            actionText = "svarade:";
                         }
                     }
                     else
@@ -57,7 +64,7 @@ else
                 }
 
                 <strong>@activity.User?.UserName</strong> @actionText
-                <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@activity.ForumPostId">
+                <a href="@postUrl">
                     @activity.Content
                 </a>
                 <br />

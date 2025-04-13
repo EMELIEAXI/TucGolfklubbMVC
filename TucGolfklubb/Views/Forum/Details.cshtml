@@ -46,7 +46,6 @@
                             <p class="text-muted small mb-3">
                                 @{
                                     var name = post.User?.FullName;
-
                                     if (post.User == null)
                                     {
                                         name = "Okänd användare";
@@ -56,8 +55,15 @@
                                         name = "Admin";
                                     }
                                 }
-                                av <strong>@name</strong> |
-                                @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
+                                @if (post.User != null)
+                                {
+                                    @:av <a href="@Url.Action("Profile", "Users", new { id = post.User.Id })" target="_blank" style="text-decoration:none;"><strong>@name</strong></a>
+                                }
+                                else
+                                {
+                                    @:av <strong>@name</strong>
+                                }
+                                | @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
                             </p>
 
                             <div class="d-flex justify-content-between align-items-center">

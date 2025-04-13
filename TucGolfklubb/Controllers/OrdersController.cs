@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,12 @@ namespace TucGolfklubb.Controllers
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Orders
@@ -237,6 +240,44 @@ namespace TucGolfklubb.Controllers
             _context.Orders.Add(order);
             _context.ShoppingCart.Remove(cart);
             await _context.SaveChangesAsync();
+
+
+            // Log Purchase Activity + Notify Followers
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                // Log activity
+                var activity = new UserActivity
+                {
+                    UserId = user.Id,
+                    Type = "Purchase",
+                    Content = $"Köpte produkter (Order #{order.Id})",
+                    OrderId = order.Id,
+                    CreatedAt = DateTime.Now
+                };
+                _context.Activities.Add(activity);
+
+                // Notify followers
+                var followers = await _context.UserFollows
+                    .Where(f => f.FolloweeId == user.Id)
+                    .Select(f => f.FollowerId)
+                    .ToListAsync();
+
+                foreach (var followerId in followers)
+                {
+                    _context.Notifications.Add(new Notification
+                    {
+                        UserId = followerId!,
+                        Message = $"{user.FullName ?? user.UserName} gjorde ett köp (Order #{order.Id}).",
+                        CreatedAt = DateTime.Now,
+                        IsRead = false
+                    });
+                }
+
+                await _context.SaveChangesAsync(); // Save activity + notifications
+            }
+
 
             // Bygg kvitto-ViewModel med extra info från formuläret
             var viewModel = new ReceiptViewModel

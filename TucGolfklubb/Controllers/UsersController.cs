@@ -56,7 +56,7 @@ namespace TucGolfklubb.Controllers
                 .ToListAsync();
 
             var activities = await _context.Activities
-                .Where(a => followedUserIds.Contains(a.UserId!))
+                .Where(a => followedUserIds.Contains(a.UserId!) && a.UserId != currentUserId)
                 .Include(a => a.User)
                 .OrderByDescending(a => a.CreatedAt)
                 .Take(50)

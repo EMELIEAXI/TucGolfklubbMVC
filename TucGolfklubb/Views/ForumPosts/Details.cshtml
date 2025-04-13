@@ -53,17 +53,18 @@
     @if (User?.Identity != null && User.Identity.IsAuthenticated)
     {
         <div class="reply-form-box bg-light px-4 py-4 rounded-3 shadow-sm mb-5" style="background-color: #eef3f9;">
-            @using (Html.BeginForm("CreateReply", "ForumPosts", FormMethod.Post))
+            @using (Html.BeginForm("Create", "ForumReplies", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                @Html.Hidden("forumPostId", Model.Id)
+                @Html.Hidden("ForumPostId", Model.Id)
+                @Html.Hidden("ParentReplyId", null) <!-- this marks it as a top-level comment -->
 
                 <div class="mb-3">
-                    <textarea name="replyContent"
+                    <textarea name="Content"
                               class="form-control border border-2 border-light rounded-3 shadow-sm"
                               style="resize: vertical; color: #001b2e; background-color: white;"
                               rows="5"
-                              placeholder="Skriv din kommentar här..."></textarea>
+                              placeholder="Skriv din kommentar här..." required></textarea>
                 </div>
 
                 <button type="submit"

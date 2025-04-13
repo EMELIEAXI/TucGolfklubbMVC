@@ -32,38 +32,17 @@ namespace TucGolfklubb.Controllers
                 _context.Replies.Add(reply);
                 await _context.SaveChangesAsync();
 
-                // Log activity (for the reply author)
+                // Log activity (only once)
                 var activity = new UserActivity
                 {
                     UserId = reply.UserId,
-                    Type = "Reply",
+                    Type = reply.ParentReplyId == null ? "Comment" : "Reply",  // Differentiate!
                     Content = reply.Content.Length > 100 ? reply.Content.Substring(0, 100) + "..." : reply.Content,
                     ForumPostId = reply.ForumPostId,
                     CreatedAt = DateTime.Now
                 };
                 _context.Activities.Add(activity);
 
-                // Notify followers of the user who made the reply
-                var followers = await _context.UserFollows
-                    .Where(f => f.FolloweeId == reply.UserId)
-                    .Select(f => f.FollowerId)
-                    .ToListAsync();
-
-                foreach (var followerId in followers)
-                {
-                    // This creates a copy of the activity for each follower to display in their feed
-                    _context.Activities.Add(new UserActivity
-                    {
-                        UserId = reply.UserId, // the actor
-                        Type = "Reply",
-                        Content = reply.Content.Length > 100 ? reply.Content.Substring(0, 100) + "..." : reply.Content,
-                        ForumPostId = reply.ForumPostId,
-                        CreatedAt = DateTime.Now
-                        // Optionally include: TargetUserId = followerId (if your feed filters by this)
-                    });
-                }
-
-                // Save all at once
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId }, fragment: $"reply-{reply.Id}");

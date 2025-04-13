@@ -12,8 +12,18 @@ else
         @foreach (var activity in Model)
         {
             <li class="list-group-item">
-                <strong>@activity.User?.UserName</strong> gjorde en
-                <span class="text-info">@activity.Type</span>:
+                @{
+                    var actionText = activity.Type switch
+                    {
+                        "Post" => "skrev ett inlägg:",
+                        "Comment" => "kommenterade ett inlägg:",
+                        "Reply" => "svarade på en kommentar:",
+                        "Forum" => "skapade ett forum:",
+                        _ => $"gjorde en {activity.Type.ToLower()}:"
+                    };
+                }
+
+                <strong>@activity.User?.UserName</strong> @actionText
                 <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@activity.ForumPostId">
                     @activity.Content
                 </a>

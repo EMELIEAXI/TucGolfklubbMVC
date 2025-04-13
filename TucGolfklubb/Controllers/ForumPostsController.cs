@@ -96,24 +96,6 @@ namespace TucGolfklubb.Controllers
                 };
                 _context.Activities.Add(activity);
 
-                // Step 2: Notify all followers of this user
-                var followers = await _context.UserFollows
-                    .Where(f => f.FolloweeId == forumPost.UserId)
-                    .Select(f => f.FollowerId)
-                    .ToListAsync();
-
-                foreach (var followerId in followers)
-                {
-                    _context.Activities.Add(new UserActivity
-                    {
-                        UserId = forumPost.UserId,
-                        Type = "Post",
-                        Content = forumPost.Content.Length > 100 ? forumPost.Content.Substring(0, 100) + "..." : forumPost.Content,
-                        ForumPostId = forumPost.Id,
-                        CreatedAt = DateTime.Now
-                    });
-                }
-
                 await _context.SaveChangesAsync();
 
                 return RedirectToAction("Details", "Forum", new { id = forumPost.ForumId });

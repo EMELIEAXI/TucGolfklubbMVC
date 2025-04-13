@@ -121,7 +121,13 @@ namespace TucGolfklubb.Data
             );
 
             modelBuilder.Entity<Forum>().HasData(
-                new Forum { Id = 1, Title = "Allmänt om golf", Description = "Diskussioner om allt möjligt relaterat till golf" }
+                new Forum
+                {
+                    Id = 1,
+                    Title = "Allmänt om golf",
+                    Description = "Diskussioner om allt möjligt relaterat till golf",
+                    PostedAt = new DateTime(2024, 1, 1, 10, 0, 0)  // Static published date
+                }
             );
 
             modelBuilder.Entity<ForumPost>().HasData(

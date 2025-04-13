@@ -22,7 +22,7 @@ namespace TucGolfklubb.Models
         // Navigation property back to the ForumPost
         public ForumPost? ForumPost { get; set; }
 
-        // ✅ NEW: Self-referencing for threaded replies
+        // NEW: Self-referencing for threaded replies
         public int? ParentReplyId { get; set; } // nullable parent reply ID
         public ForumReply? ParentReply { get; set; } // the parent reply object
         public ICollection<ForumReply> ChildReplies { get; set; } = new List<ForumReply>(); // nested replies

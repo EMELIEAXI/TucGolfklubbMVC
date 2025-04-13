@@ -8,5 +8,7 @@
         public string? UserId { get; set; }
         public ApplicationUser? User { get; set; } 
         public ICollection<ForumPost> Posts { get; set; } = new List<ForumPost>();
+        public DateTime PostedAt { get; set; } = DateTime.Now;
+
     }
 }

@@ -39,9 +39,10 @@
                                 </a>
                             </h5>
                             <p class="card-text" style="color: #1d3f58;">@item.Description</p>
+
+
                             @{
                                 var name = item.User?.FullName;
-
                                 if (item.User == null)
                                 {
                                     name = "Okänd användare";
@@ -52,12 +53,25 @@
                                 }
                             }
                             <p class="text-muted small mb-0">
-                                Skapad av: <strong>@name</strong>
+                                av:
+                                @if (item.User != null)
+                                {
+                                    <a href='@Url.Action("Profile", "Users", new { id = item.User.Id })' target="_blank" style="text-decoration:none;">
+                                        <strong>@name</strong>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <strong>@name</strong>
+                                }
+                                | @item.PostedAt.ToString("yyyy-MM-dd HH:mm")
                             </p>
+
+
                         </div>
-                        @if (UserManager.GetUserId(User) == item.UserId)
+                        @if (item.UserId != null && UserManager.GetUserId(User) == item.UserId)
                         {
-                            <div class="card-footer bg-white text-end border-top-0">
+                            <div class="card-footer text-end border-top-0" style="background-color: #f3f7fb;">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-link-style">Ändra</a>
                                 <span class="mx-1 text-muted">|</span>
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-link-style text-danger">Radera</a>

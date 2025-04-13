@@ -28,7 +28,7 @@
                 @:av <strong>@name</strong> |
             }
 
-            publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+            @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
 
         </em>
     </p>
@@ -59,7 +59,7 @@
                 {
                     @:av <strong>@authorName</strong>
                 }
-                | publicerat @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
+                | @Model.PostedAt.ToString("yyyy-MM-dd HH:mm")
             </p>
         </div>
     </div>

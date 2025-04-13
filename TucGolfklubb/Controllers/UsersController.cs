@@ -69,7 +69,7 @@ namespace TucGolfklubb.Controllers
                 await _userManager.UpdateAsync(currentUser);
             }
 
-            return View("ActivityFeed", activities);
+            return View("ActivityFeed", activities); // No need to modify activity content here
         }
 
         // Added Index() below

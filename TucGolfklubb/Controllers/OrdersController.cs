@@ -49,6 +49,25 @@ namespace TucGolfklubb.Controllers
             return View(order);
         }
 
+
+        // GET: Orders/OrderDetails/5
+        public async Task<IActionResult> OrderDetails(int id)
+        {
+            // Retrieve the order along with its items
+            var order = await _context.Orders
+                .Include(o => o.OrderItems) // Include the order items to display the purchased products
+                .ThenInclude(oi => oi.Product) // Include the product details for each item
+                .FirstOrDefaultAsync(o => o.Id == id);
+
+            if (order == null)
+            {
+                return NotFound(); // Return a 404 if the order is not found
+            }
+
+            return View(order); // Pass the order details to the view
+        }
+
+
         // GET: Orders/Create
         public IActionResult Create()
         {

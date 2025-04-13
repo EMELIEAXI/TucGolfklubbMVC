@@ -130,7 +130,7 @@ namespace TucGolfklubb.Data
                     Content = "Välkommen till forumet! Vad tycker ni om den nya golfbanan?",
                     PostedAt = new DateTime(2024, 01, 01, 10, 00, 00),
                     ForumId = 1,
-                    UserId = null // Can be null if User is optional
+                    //UserId = null // Can be null if User is optional
                 }
             );
 

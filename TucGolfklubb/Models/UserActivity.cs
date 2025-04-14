@@ -13,6 +13,7 @@ namespace TucGolfklubb.Models
         public string Content { get; set; } = string.Empty; // snippet or title
         public int? ForumPostId { get; set; } // Link to original post (optional)
         public int? ForumReplyId { get; set; }
+        public int? ForumId { get; set; }
         public int? ProductId { get; set; }      // For reviews
         public int? OrderId { get; set; }        // For purchases
         public DateTime CreatedAt { get; set; } = DateTime.Now;

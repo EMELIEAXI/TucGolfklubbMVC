@@ -41,10 +41,15 @@
                                     linkUrl = Url.Action("Details", "ForumPosts", new { id = activity.ForumPostId }) ?? "#";
                                     actionText = "kommenterade ett inlägg:";
                                 }
-                                else if (activity.Type == "Forum")
+                                if (activity.Type == "Forum")
                                 {
+                                    var userName = activity.User?.FullName ?? "Okänd användare";  
+                                    var forumName = activity.Content; 
+
+                                    linkUrl = Url.Action("Index", "Forum", new { id = activity.ForumId }) ?? "#"; // Ensure you are using the correct ForumId here
+
+                                 
                                     actionText = "skapade ett forum:";
-                                    linkUrl = "#";
                                 }
                                 else if (activity.Type == "Reply")
                                 {
@@ -62,8 +67,8 @@
                                             targetUserName = parentReply.User.FullName ?? parentReply.User.UserName ?? "användaren";
 
                                         actionText = parentReply?.ParentReplyId == null
-                                        ? $"svarade på {targetUserName}s kommentar:"
-                                        : $"svarade på {targetUserName}s svar:";
+                                        ? $"svarade på <strong>{targetUserName}</strong>s kommentar:"
+                                        : $"svarade på <strong>{targetUserName}</strong>s svar:";
                                     }
                                     else
                                     {
@@ -87,7 +92,12 @@
                             }
 
                             <p class="mb-1" style="color: #001b2e;">
-                                <strong>@name</strong> @actionText
+                                <strong>@name</strong> @Html.Raw(actionText)
+                                @if (activity.Type == "Forum")
+                                {
+                                    var forumName = activity.Content;
+                                    <a href="@linkUrl" class="text-decoration-none"></a>
+                                }
                                 @if (activity.Type == "Review")
                                 {
                                     var productName = activity.Content.Replace("Skrev en recension för \"", "").Replace("\"", "");
@@ -98,6 +108,18 @@
                                     <a href="@linkUrl" class="text-decoration-none">(Order #@activity.OrderId)</a>
                                 }
                                 else if (activity.Type != "Purchase")
+                                {
+                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                }
+                                else if (activity.Type == "Post")
+                                {
+                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                }
+                                else if (activity.Type == "Comment")
+                                {
+                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                }
+                                else if (activity.Type == "Reply")
                                 {
                                     <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
                                 }

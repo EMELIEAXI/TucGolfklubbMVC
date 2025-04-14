@@ -667,6 +667,195 @@ a.text-decoration-none:hover {
     margin-bottom: 10px;
 }
 
+/* Table Styles */
+.table th, .table td {
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.table th {
+    min-width: 10px; 
+}
+
+.table td {
+    min-width: 5px; 
+}
+
+.table .form-control {
+    width: 80px; 
+}
+
+.table .btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+}
+
+/* Extra wide column for Antal */
+.table .quantity-column {
+    min-width: 250px; 
+}
+
+
+.table .quantity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .table .quantity-container input {
+        width: 80px;
+        margin-right: 10px; 
+    }
+
+    .table .quantity-container button {
+        padding: 8px 12px;
+    }
+
+/* Responsive Adjustments */
+@media only screen and (max-width: 767px) {
+
+    .table th, .table td {
+        padding: 0.5rem;
+    }
+
+    .table .quantity-container input {
+        width: 60px; 
+    }
+
+    .table .btn {
+        font-size: 0.75rem; 
+    }
+
+    .table .quantity-column {
+        min-width: 100px;
+    }
+
+ 
+    .table-responsive {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
+    }
+
+
+    .table th, .table td {
+        font-size: 0.85rem;
+    }
+}
+
+/* For very small screens (up to 480px) */
+@media only screen and (max-width: 480px) {
+
+    .table th, .table td {
+        font-size: 0.75rem;
+    }
+
+   
+    .table .quantity-container {
+        flex-direction: column;
+    }
+
+        .table .quantity-container input {
+            margin-bottom: 10px; 
+        }
+}
+
+/* Receipt Styles */
+.receipt {
+    max-width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    font-family: 'Courier New', Courier, monospace;
+    background: #fff;
+    margin-top: 150px;
+}
+
+    .receipt h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.5em; 
+    }
+
+    .receipt table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    .receipt th, .receipt td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .receipt .total {
+        font-weight: bold;
+        font-size: 1.2em;
+        text-align: right;
+    }
+
+    .receipt .back-btn {
+        margin-top: 20px;
+        display: block;
+        text-align: center;
+    }
+
+/* Responsive styles */
+@media only screen and (max-width: 767px) {
+    .receipt {
+        padding: 15px;
+        margin: 50px auto;
+        margin-top: 150px;
+    }
+
+        .receipt h2 {
+            font-size: 1.3em; 
+        }
+
+        .receipt th, .receipt td {
+            font-size: 0.9em;
+            padding: 6px; 
+        }
+
+        .receipt .total {
+            font-size: 1em; 
+        }
+
+       
+        .receipt table {
+            -webkit-overflow-scrolling: touch;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .receipt .back-btn a {
+            font-size: 0.9em; 
+            padding: 8px 14px; 
+        }
+}
+
+/* For very small screens (up to 480px) */
+@media only screen and (max-width: 480px) {
+    .receipt h2 {
+        font-size: 1.2em; 
+    }
+
+    .receipt .total {
+        font-size: 0.9em; 
+    }
+
+    .receipt th, .receipt td {
+        font-size: 0.8em; 
+        padding: 4px; 
+    }
+
+    .receipt .back-btn a {
+        font-size: 0.8em; 
+    }
+}
+
+
+
 /*-------------------- END OF ADMIN PANEL --------------------*/
 @media (max-width: 768px) {
     .hamburger-dropdown .navbar-nav {

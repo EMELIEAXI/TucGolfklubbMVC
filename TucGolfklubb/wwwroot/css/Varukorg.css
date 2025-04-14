@@ -1,3 +1,10 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
 body {
     font-family: 'Montserrat', sans-serif;
       margin-top: 20px;
@@ -103,12 +110,46 @@ li {
         line-height: 5px;
     }
 
-    footer.shop-footer {
-        margin-top: auto;
-        position: absolute;
-        bottom: 0;
+footer.shop-footer {
+    margin-top: auto;
+    width: 100%;
+    position: relative;
+    background-color: #111;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.wrapper-cart-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.cart-main-content {
+    flex: 1;
+}
+@media (max-width: 600px) {
+    .Varukorg,
+    .Kvitto,
+    #orderSummaryContainer {
+        width: 90% !important;
+    }
+
+    .btn-success {
+        width: 90% !important;
+    }
+
+    .adress input {
+        width: 100% !important;
+    }
+
+    .PaymentMethod {
         width: 100%;
     }
+}
+
+
 
 
 

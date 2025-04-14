@@ -3,75 +3,97 @@
     Layout = null;
     ViewData["Title"] = "PlaceOrder";
 }
-<link rel="stylesheet" href="~/css/Varukorg.css" />
-<link rel="stylesheet" href="~/css/productshop.css" />
-<header>
-    <h1>TUC Golfklubb Shop</h1>
-</header>
-<div class="header">
-    <h1>Välkommen till våra produkter</h1>
-    <p style="display:flex; justify-content:center; text-align:center;">Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
 
-</div>
-<div class="Varukorg" id=" orderSummaryContainer">
-    @if (Model == null || Model.OrderItems == null || !Model.OrderItems.Any())
-    {
-        <h1>Varukorg</h1>
-        <p>Ingen orderdata tillgänglig.</p>
-        <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
-    }
-    else
-    {
-        <h2>Fortsätt till betalning</h2>
-        <ul>
-            @foreach (var item in Model.OrderItems)
-            {
-                @if (item.Product != null)
-                {
-                    <li>@item.Quantity st - @item.Product.Name - @item.Price kr </li>
-                }
-                else
-                {
-                    <li>Produktinformation saknas</li>
-                }
-            }
-        </ul>
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Varukorg.css" />
+    <link rel="stylesheet" href="~/css/productshop.css" />
+</head>
 
-        <h4>Total: @Model.TotalPrice.ToString("C")</h4>
+<body>
+    <div class="wrapper-cart-page">
+        <main class="cart-main-content">
+            <header>
+                <h1>TUC Golfklubb Shop</h1>
+            </header>
 
-        <form class="PaymentMethod" asp-controller="Orders" asp-action="Receipt" method="post">
-            <label><strong>För och Efternamn:</strong></label><br />
-            <input type="text" name="FullName" class="Input" required /><br />
-
-            <label><strong>Adress:</strong></label><br />
-            <input type="text" name="Address" class="Input" required /><br />
-
-            <label><strong>PostNummer:</strong></label><br />
-            <input type="text" name="ZipCode" class="Input" required /><br />
-
-            <label><strong>Ort:</strong></label><br />
-            <input type="text" name="City" class="Input" required /><br />
-
-            <div class="column-pay">
-            
-                <p style="float:left">Välj betalningsmetod:</p><br />
-                @if (Model.PaymentMethods != null && Model.PaymentMethods.Any())
-                {
-                    @foreach (var method in Model.PaymentMethods)
-                    {
-                        <div class="PaymentMethod2">
-                            <input type="radio" name="selectedPaymentMethod" value="@method" required /> @method<br />
-                        </div>
-                    }
-                }
-                else
-                {
-                    <p>Ingen betalningsmetod tillgänglig</p>  <!-- Meddelande om betalningsmetoder inte finns -->
-                }
-                <button type="submit" class="btn btn-success">Bekräfta order</button>
-            
+            <div class="header">
+                <h1>Välkommen till våra produkter</h1>
+                <p style="display:flex; justify-content:center; text-align:center;">
+                    Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>
+                    Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!
+                </p>
             </div>
-        </form>
-    }
-</div>
-<partial name="_FooterPartial" />
+
+            <div class="Varukorg" id="orderSummaryContainer">
+                @if (Model == null || Model.OrderItems == null || !Model.OrderItems.Any())
+                {
+                    <h1>Varukorg</h1>
+                    <p>Ingen orderdata tillgänglig.</p>
+                    <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
+                }
+                else
+                {
+                    <h2>Fortsätt till betalning</h2>
+                    <ul>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            @if (item.Product != null)
+                            {
+                                <li>@item.Quantity st - @item.Product.Name - @item.Price kr</li>
+                            }
+                            else
+                            {
+                                <li>Produktinformation saknas</li>
+                            }
+                        }
+                    </ul>
+
+                    <h4>Total: @Model.TotalPrice.ToString("C")</h4>
+
+                    <form class="PaymentMethod" asp-controller="Orders" asp-action="Receipt" method="post">
+                        <label><strong>För och Efternamn:</strong></label><br />
+                        <input type="text" name="FullName" class="Input" required /><br />
+
+                        <label><strong>Adress:</strong></label><br />
+                        <input type="text" name="Address" class="Input" required /><br />
+
+                        <label><strong>PostNummer:</strong></label><br />
+                        <input type="text" name="ZipCode" class="Input" required /><br />
+
+                        <label><strong>Ort:</strong></label><br />
+                        <input type="text" name="City" class="Input" required /><br />
+
+                        <div class="column-pay">
+                            <p style="text-align:left;">Välj betalningsmetod:</p><br />
+                            @if (Model.PaymentMethods != null && Model.PaymentMethods.Any())
+                            {
+                                @foreach (var method in Model.PaymentMethods)
+                                {
+                                    <div class="PaymentMethod2">
+                                        <input type="radio" name="selectedPaymentMethod" value="@method" required />
+                                        @method<br />
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>Ingen betalningsmetod tillgänglig</p>
+                            }
+
+                            <button type="submit" class="btn btn-success">Bekräfta order</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </main>
+
+        <footer class="shop-footer">
+            <partial name="_FooterPartial" />
+        </footer>
+    </div>
+</body>
+</html>

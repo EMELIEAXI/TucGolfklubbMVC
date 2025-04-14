@@ -3,52 +3,66 @@
     Layout = null;
     ViewData["Title"] = "_OrderSummary";
 }
+
+<!DOCTYPE html>
+<html lang="sv">
 <head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/Varukorg.css" />
     <link rel="stylesheet" href="~/css/productshop.css" />
 </head>
-<header>
-    <h1>TUC Golfklubb Shop</h1>
-</header>
-<div class="header">
-    <h1>Välkommen till våra produkter</h1>
-    <p style="display:flex; justify-content:center; text-align:center;">Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!</p>
 
-</div>
-<div class="Varukorg">
-    @if (Model.OrderItems == null || !Model.OrderItems.Any())
-    {
-        <h1>Varukorg</h1>
-        <p>Ingen orderdata tillgänglig.</p>
+<body>
+    <div class="wrapper-cart-page">
+        <main class="cart-main-content">
+            <header>
+                <h1>TUC Golfklubb Shop</h1>
+            </header>
 
-        <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
-    }
-    else
-    {
-        <h1>Produkter:</h1>
-        <ul>
-            @foreach (var item in Model.OrderItems)
-            {
-                <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
-                <form class="remove-from-cart-form" asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post" style="display:inline;">
-                    <input type="hidden" name="productId" value="@item.ProductId" />
-                    <button type="submit" class="btn btn-danger btn-sm">Ta bort</button>
-                </form>
-            }
-        </ul>
-        <a href="@Url.Action("Index", "Shop")" class="btn btn-danger btn-sm">Beställ mer</a>
+            <div class="header">
+                <h1>Välkommen till våra produkter</h1>
+                <p style="display:flex; justify-content:center; text-align:center;">
+                    Nu kan du handla allt du behöver för ditt golfspel från bekvämligheten av ditt hem. <br>
+                    Vår webbplats erbjuder ett brett utbud av golfprodukter till fantastiska priser!
+                </p>
+            </div>
 
-        <br />
+            <div class="Varukorg">
+                @if (Model.OrderItems == null || !Model.OrderItems.Any())
+                {
+                    <h1>Varukorg</h1>
+                    <p>Ingen orderdata tillgänglig.</p>
+                    <a href="@Url.Action("Index", "Shop")" class="btn btn-primary">Tillbaka till startsidan</a>
+                }
+                else
+                {
+                    <h1>Produkter:</h1>
+                    <ul>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <li>@item.ProductName - @item.Quantity st - @item.Price kr</li>
+                            <form class="remove-from-cart-form" asp-controller="ShoppingCart" asp-action="RemoveFromCart" method="post" style="display:inline;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn btn-danger btn-sm">Ta bort</button>
+                            </form>
+                        }
+                    </ul>
+                    <a href="@Url.Action("Index", "Shop")" class="btn btn-danger btn-sm">Beställ mer</a>
+                    <br />
 
-        <br />
-        <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
-        <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
-            <button type="submit" class="btn btn-success">Fortsätt till betlning </button>
-        </form>
+                    <br />
+                    <h4>Total: @Model.OrderTotalPrice.ToString("C")</h4>
+                    <form asp-controller="Orders" asp-action="PlaceOrder" method="post">
+                        <button type="submit" class="btn btn-success">Fortsätt till betalning</button>
+                    </form>
+                }
+            </div>
+        </main>
 
-        
-
-    }
- 
-</div>
-<partial name="_FooterPartial" />
+        <footer class="shop-footer">
+            <partial name="_FooterPartial" />
+        </footer>
+    </div>
+</body>
+</html>

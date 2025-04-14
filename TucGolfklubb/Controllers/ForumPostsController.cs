@@ -204,10 +204,10 @@ namespace TucGolfklubb.Controllers
 
             int forumId = forumPost.ForumId; // Save this before deleting
 
-            _context.ForumPosts.Remove(forumPost);
+            forumPost.IsDeleted = true;
             await _context.SaveChangesAsync();
 
-            // ✅ Redirect back to the inlägg list for that forum
+            // Redirect back to the inlägg list for that forum
             return RedirectToAction("Details", "Forum", new { id = forumId });
         }
 

@@ -26,5 +26,6 @@ namespace TucGolfklubb.Models
         public int? ParentReplyId { get; set; } // nullable parent reply ID
         public ForumReply? ParentReply { get; set; } // the parent reply object
         public ICollection<ForumReply> ChildReplies { get; set; } = new List<ForumReply>(); // nested replies
+        public bool IsDeleted { get; set; } = false;
     }
 }

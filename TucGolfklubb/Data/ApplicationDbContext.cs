@@ -150,8 +150,7 @@ namespace TucGolfklubb.Data
             modelBuilder.Entity<ForumReply>()
                 .HasOne(r => r.ParentReply)
                 .WithMany(r => r.ChildReplies)
-                .HasForeignKey(r => r.ParentReplyId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(r => r.ParentReplyId);
 
             modelBuilder.Entity<UserFollow>()
                 .HasOne(uf => uf.Follower)

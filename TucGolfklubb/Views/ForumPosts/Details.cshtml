@@ -36,10 +36,17 @@
     <!-- Main Post Card -->
     <div class="card shadow-sm mb-5 border-0">
         <div class="card-body" style="background-color: #b3cde4;">
-            <h5 class="card-title" style="color: #001b2e;">
-            <span style="font-style: italic; font-weight: normal; font-size: 1.2rem;"></span>
-            <span style="font-size: 1.5rem;"> @Model.Content</span>
-        </h5>
+            @if (Model.IsDeleted)
+            {
+                <p class="fst-italic text-muted" style="font-size: 1.2rem;">Detta inlägg har tagits bort.</p>
+            }
+            else
+            {
+                <h5 class="card-title" style="color: #001b2e;">
+                    <span style="font-style: italic; font-weight: normal; font-size: 1.2rem;">Inlägg:</span>
+                    <span style="font-size: 1.5rem;"> @Model.Content</span>
+                </h5>
+            }
 
             <!-- Display the author and published date -->
             <p class="text-muted" style="font-size: 0.9rem;">

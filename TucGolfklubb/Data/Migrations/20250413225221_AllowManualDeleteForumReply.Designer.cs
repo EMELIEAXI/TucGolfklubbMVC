@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TucGolfklubb.Data;
 
@@ -11,9 +12,11 @@ using TucGolfklubb.Data;
 namespace TucGolfklubb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250413225221_AllowManualDeleteForumReply")]
+    partial class AllowManualDeleteForumReply
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,9 +327,6 @@ namespace TucGolfklubb.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("PostedAt")
                         .HasColumnType("datetime2");
 
@@ -348,7 +348,6 @@ namespace TucGolfklubb.Data.Migrations
                         {
                             Id = 1,
                             Description = "Diskussioner om allt möjligt relaterat till golf",
-                            IsDeleted = false,
                             PostedAt = new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Allmänt om golf"
                         });
@@ -368,9 +367,6 @@ namespace TucGolfklubb.Data.Migrations
 
                     b.Property<int>("ForumId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("PostedAt")
                         .HasColumnType("datetime2");
@@ -392,7 +388,6 @@ namespace TucGolfklubb.Data.Migrations
                             Id = 1,
                             Content = "Välkommen till forumet! Vad tycker ni om den nya golfbanan?",
                             ForumId = 1,
-                            IsDeleted = false,
                             PostedAt = new DateTime(2024, 1, 1, 10, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -411,9 +406,6 @@ namespace TucGolfklubb.Data.Migrations
 
                     b.Property<int>("ForumPostId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<int?>("ParentReplyId")
                         .HasColumnType("int");

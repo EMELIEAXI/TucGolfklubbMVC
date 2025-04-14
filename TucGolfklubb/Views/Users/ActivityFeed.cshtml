@@ -1,12 +1,6 @@
 ﻿@model List<TucGolfklubb.Models.UserActivity>
 @inject TucGolfklubb.Data.ApplicationDbContext db
 
-<style>
-    body {
-        padding-top: 80px;
-    }
-</style>
-
 <div class="container forum-page">
     <h2 class="mb-4" style="color: #001b2e;">Aktivitetsflöde</h2>
 
@@ -115,4 +109,12 @@
             }
         </div>
     }
+
+    @if (!string.IsNullOrEmpty(ViewData["PreviousPageUrl"]?.ToString()))
+    {
+        <div class="d-flex justify-content-center mt-3">
+            <a href="@ViewData["PreviousPageUrl"]" class="btn btn-sm custom-dark-button">Tillbaka till föregående sida</a>
+        </div>
+    }
+
 </div>

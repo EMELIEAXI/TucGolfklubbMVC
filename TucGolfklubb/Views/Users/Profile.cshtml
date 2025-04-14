@@ -56,13 +56,14 @@
             </ul>
         }
 
-        <!-- Back Button at the bottom -->
-        @if (!string.IsNullOrEmpty(Model.PreviousPageUrl))
-        {
-            <div class="d-flex justify-content-center mt-3">
-                <a href="@Model.PreviousPageUrl" class="btn btn-sm custom-dark-button">Tillbaka</a>
-            </div>
-        }
+        <!-- Buttons (Back and Back to Users) -->
+        <div class="d-flex justify-content-start gap-2 mt-3">
+            @if (!string.IsNullOrEmpty(Model.PreviousPageUrl))
+            {
+                <a href="@Model.PreviousPageUrl" class="btn btn-sm custom-dark-button">Tillbaka till föregående sida</a>
+            }
 
+            <a href="/Users/Index" class="btn btn-sm custom-dark-button">Tillbaka till Användare</a>
+        </div>
     </div>
 </div>

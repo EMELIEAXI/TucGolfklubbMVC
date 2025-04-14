@@ -430,7 +430,7 @@ p.callout {
     background-color: #f3f7fb; /* slightly lighter than before */
     padding: 1.5rem;
     border-radius: 10px;
-    padding-top: 120px; /* pushes content down below navbar */
+    padding-top: 160px; /* pushes content down below navbar */
 }
 
 /* Button Styles */

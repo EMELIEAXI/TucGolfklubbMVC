@@ -7,9 +7,8 @@
         <div class="d-flex align-items-center mb-3">
             <img src="@(!string.IsNullOrEmpty(Model.ProfileImagePath) ? Model.ProfileImagePath : "/images/default-user.png")"
                  alt="Profilbild"
-                 class="rounded-circle me-4"
-                 style="width: 100px; height: 100px; object-fit: cover;" />
-
+                 class="rounded-circle me-3"
+                 style="width: 80px; height: 80px; object-fit: cover; border: 2px solid #1d3f58;" />
             <div>
                 <h3 style="color: #001b2e;">@(Model.FullName ?? Model.UserName)</h3>
 

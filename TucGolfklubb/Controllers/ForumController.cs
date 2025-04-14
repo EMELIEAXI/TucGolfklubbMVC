@@ -81,7 +81,7 @@ namespace TucGolfklubb.Controllers
                 {
                     UserId = forum.UserId,
                     Type = "Forum",
-                    Content = $"Skapade forumet: {forum.Title}",
+                    Content = forum.Title.Length > 100 ? forum.Title.Substring(0, 100) + "..." : forum.Title,
                     CreatedAt = DateTime.Now
                 };
                 _context.Activities.Add(activity);

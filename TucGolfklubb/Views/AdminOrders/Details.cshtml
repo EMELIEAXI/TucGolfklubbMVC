@@ -2,54 +2,6 @@
 @{
     ViewData["Title"] = "Orderdetaljer";
 }
-<style>
-    body {
-        padding-top: 80px;
-    }
-
-    .table th, .table td {
-        padding: 1.2rem;
-        text-align: center;
-    }
-
-    .table th {
-        min-width: 200px; /* Set a minimum width for header columns */
-    }
-
-    .table td {
-        min-width: 150px; /* Set a minimum width for data columns */
-    }
-
-    .table .form-control {
-        width: 80px; /* Ensure input fields are not too wide */
-    }
-
-    .table .btn {
-        padding: 8px 12px;
-        font-size: 0.85rem;
-    }
-
-    /* Extra wide column for Antal */
-    .table .quantity-column {
-        min-width: 250px; /* Make the Antal column extra wide */
-    }
-
-    /* Adjust input and button layout to make them appear horizontally in the same line */
-    .table .quantity-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-        .table .quantity-container input {
-            width: 80px; /* Set width for the input field */
-            margin-right: 10px; /* Add space between input and button */
-        }
-
-        .table .quantity-container button {
-            padding: 8px 12px;
-        }
-</style>
 
 <div class="container forum-page">
     <h2 class="mb-4" style="color: #001b2e;">Order #@Model.Id</h2>
@@ -60,47 +12,49 @@
         <p><strong>Totalt:</strong> @Model.TotalPrice.ToString("0.00") kr</p>
 
         <h4>Produkter:</h4>
-        <table class="table table-bordered table-responsive">
-            <thead>
-                <tr>
-                    <th>Produkt</th>
-                    <th>Antal</th>
-                    <th>Pris</th>
-                    <th>Summa</th>
-                    <th>Åtgärder</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.OrderItems)
-                {
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>@item.Product?.Name</td>
-
-                        <!-- Edit Quantity and Submit Form -->
-                        <td class="quantity-column">
-                            <div class="quantity-container">
-                                <form method="post" action="@Url.Action("EditOrderItem", "AdminOrders")" style="display:inline;">
-                                    <input type="hidden" name="itemId" value="@item.Id" />
-                                    <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control form-control-sm" />
-                                    <button type="submit" class="btn btn-warning btn-sm">Uppdatera antal</button>
-                                </form>
-                            </div>
-                        </td>
-
-                        <td>@item.Price.ToString("0.00") kr</td>
-                        <td>@item.TotalPrice.ToString("0.00") kr</td>
-
-                        <!-- Delete Form -->
-                        <td>
-                            <form method="post" action="@Url.Action("DeleteOrderItem", "AdminOrders")" style="display:inline;">
-                                <input type="hidden" name="itemId" value="@item.Id" />
-                                <button type="submit" class="btn btn-danger btn-sm">Ta bort rad</button>
-                            </form>
-                        </td>
+                        <th>Produkt</th>
+                        <th>Antal</th>
+                        <th>Pris</th>
+                        <th>Summa</th>
+                        <th>Åtgärder</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td>@item.Product?.Name</td>
+
+                            <!-- Edit Quantity and Submit Form -->
+                            <td class="quantity-column">
+                                <div class="quantity-container">
+                                    <form method="post" action="@Url.Action("EditOrderItem", "AdminOrders")" style="display:inline;">
+                                        <input type="hidden" name="itemId" value="@item.Id" />
+                                        <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control form-control-sm" />
+                                        <button type="submit" class="btn btn-warning btn-sm">Uppdatera antal</button>
+                                    </form>
+                                </div>
+                            </td>
+
+                            <td>@item.Price.ToString("0.00") kr</td>
+                            <td>@item.TotalPrice.ToString("0.00") kr</td>
+
+                            <!-- Delete Form -->
+                            <td>
+                                <form method="post" action="@Url.Action("DeleteOrderItem", "AdminOrders")" style="display:inline;">
+                                    <input type="hidden" name="itemId" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Ta bort rad</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
         <!-- Display the updated total -->
         <h4>Total: <span>@Model.TotalPrice.ToString("0.00")</span> kr</h4>

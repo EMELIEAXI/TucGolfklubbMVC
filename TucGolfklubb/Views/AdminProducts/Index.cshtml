@@ -1,15 +1,4 @@
-﻿@model IEnumerable<TucGolfklubb.Models.Product>
-@{
-    ViewData["Title"] = "Produkter";
-}
-
-<style>
-    body {
-        padding-top: 40px;
-    }
-</style>
-
-<div class="container forum-page">
+﻿<div class="container forum-page">
     <h2 class="mb-4" style="color: #001b2e;">Produkter</h2>
 
     <!-- Add Product Button -->
@@ -24,12 +13,12 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="col-lg-2">Namn</th>
-                            <th class="col-lg-3">Beskrivning</th>
-                            <th class="col-lg-2">Pris</th>
-                            <th class="col-lg-1">Lager</th>
-                            <th class="col-lg-2">Kategori</th>
-                            <th class="col-lg-2">Åtgärder</th>
+                            <th class="col-2">Namn</th> <!-- Adjusted width for Name -->
+                            <th class="col-2">Beskrivning</th> <!-- Adjusted width for Description -->
+                            <th class="col-2">Pris</th> <!-- Adjusted width for Price -->
+                            <th class="col-1">Lager</th> <!-- Adjusted width for Stock -->
+                            <th class="col-2">Kategori</th> <!-- Adjusted width for Category -->
+                            <th class="col-3">Åtgärder</th> <!-- Adjusted width for Actions -->
                         </tr>
                     </thead>
                     <tbody>
@@ -42,8 +31,11 @@
                                 <td>@item.Stock</td>
                                 <td>@item.Category?.Name</td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Redigera</a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Radera</a>
+                                    <!-- Action Buttons for Edit and Delete -->
+                                    <div class="d-block">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary w-100 mb-2">✏️ Redigera</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger w-100">❌ Radera</a>
+                                    </div>
                                 </td>
                             </tr>
                         }

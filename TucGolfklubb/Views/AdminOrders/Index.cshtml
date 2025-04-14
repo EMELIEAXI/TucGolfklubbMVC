@@ -1,53 +1,45 @@
-﻿@model IEnumerable<TucGolfklubb.Models.Order>
-@{
-    ViewData["Title"] = "Ordrar";
-}
-<style>
-    body {
-        padding-top: 80px;
-    }
-</style>
-
-<div class="container forum-page">
+﻿<div class="container forum-page">
     <h2 class="mb-4" style="color: #001b2e;">Ordrar</h2>
 
     <!-- Orders Table -->
     <div class="card shadow-sm p-4">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Beställnings-ID</th>
-                    <th>Kund</th>
-                    <th>Datum</th>
-                    <th>Totalt</th>
-                    <th>Åtgärder</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var order in Model)
-                {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@order.Id</td>
-                        <td>@order.User?.UserName</td>
-                        <td>@order.OrderDate.ToShortDateString()</td>
-                        <td>@order.TotalPrice.ToString("0.00") kr</td>
-                        <td>
-                            <!-- Details Button -->
-                            <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm custom-dark-button shadow-sm">✏️ Redigera</a>
-
-                            <!-- Receipt (Kvitto) Button -->
-                            <a asp-action="GenerateReceipt" asp-route-id="@order.Id" class="btn btn-sm custom-secondary-button shadow-sm" style="margin-left: 5px;">🧾 Kvitto</a>
-
-                            <!-- Delete (Radera) Button -->
-                            <form method="post" action="@Url.Action("DeleteOrder", "AdminOrders")" style="display:inline; margin-left: 5px;">
-                                <input type="hidden" name="id" value="@order.Id" />
-                                <button type="submit" class="btn btn-sm btn-danger shadow-sm">❌ Radera</button>
-                            </form>
-                        </td>
+                        <th class="col-3 col-sm-2 col-md-2">Beställnings-ID</th>
+                        <th class="col-3 col-sm-3 col-md-3">Kund</th>
+                        <th class="col-4 col-sm-3 col-md-3">Epost</th>
+                        <th class="col-3 col-sm-2 col-md-2">Datum</th>
+                        <th class="col-3 col-sm-2 col-md-2">Totalt</th>
+                        <th class="col-4 col-sm-2 col-md-2">Åtgärder</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.User?.FullName</td>
+                            <td>@order.User?.Email</td>
+                            <td>@order.OrderDate.ToShortDateString()</td>
+                            <td>@order.TotalPrice.ToString("0.00") kr</td>
+                            <td>
+                                <!-- Action Buttons for Edit, Receipt, and Delete -->
+                                <div class="d-flex flex-column align-items-center">
+                                    <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm custom-dark-button shadow-sm mb-2" style="border-radius: 8px; padding: 10px 15px; font-size: 14px; width: 160px;">✏️ Redigera</a>
+                                    <a asp-action="GenerateReceipt" asp-route-id="@order.Id" class="btn btn-sm custom-secondary-button shadow-sm mb-2" style="border-radius: 8px; padding: 10px 15px; font-size: 14px; width: 160px;">🧾 Kvitto</a>
+                                    <form method="post" action="@Url.Action("DeleteOrder", "AdminOrders")" style="display:inline;">
+                                        <input type="hidden" name="id" value="@order.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger shadow-sm" style="border-radius: 8px; padding: 10px 15px; font-size: 14px; width: 160px;">❌ Radera</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
 
         <!-- Back Button -->
         <div class="text-end mt-4">

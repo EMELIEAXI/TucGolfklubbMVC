@@ -96,32 +96,32 @@
                                 @if (activity.Type == "Forum")
                                 {
                                     var forumName = activity.Content;
-                                    <a href="@linkUrl" class="text-decoration-none"></a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank"></a>
                                 }
                                 @if (activity.Type == "Review")
                                 {
                                     var productName = activity.Content.Replace("Skrev en recension för \"", "").Replace("\"", "");
-                                    <a href="@linkUrl" class="text-decoration-none">@productName</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">@productName</a>
                                 }
                                 else if (activity.Type == "Purchase")
                                 {
-                                    <a href="@linkUrl" class="text-decoration-none">(Order #@activity.OrderId)</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">(Order #@activity.OrderId)</a>
                                 }
                                 else if (activity.Type != "Purchase")
                                 {
-                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">@activity.Content</a>
                                 }
                                 else if (activity.Type == "Post")
                                 {
-                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">@activity.Content</a>
                                 }
                                 else if (activity.Type == "Comment")
                                 {
-                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">@activity.Content</a>
                                 }
                                 else if (activity.Type == "Reply")
                                 {
-                                    <a href="@linkUrl" class="text-decoration-none">@activity.Content</a>
+                                    <a href="@linkUrl" class="text-decoration-none" target="_blank">@activity.Content</a>
                                 }
                             </p>
                             <small class="text-muted">@activity.CreatedAt.ToString("yyyy-MM-dd HH:mm")</small>

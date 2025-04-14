@@ -15,5 +15,6 @@
 
         // Added navigation property for replies
         public ICollection<ForumReply> Replies { get; set; } = new List<ForumReply>();
+        public bool IsDeleted { get; set; } = false;
     }
 }

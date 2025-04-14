@@ -181,7 +181,8 @@ namespace TucGolfklubb.Controllers
             var forum = await _context.Forums.FindAsync(id);
             if (forum != null)
             {
-                _context.Forums.Remove(forum);
+                forum.IsDeleted = true;
+                await _context.SaveChangesAsync();
             }
 
             await _context.SaveChangesAsync();

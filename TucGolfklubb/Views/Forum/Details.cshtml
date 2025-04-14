@@ -5,6 +5,7 @@
 @{
     ViewData["Title"] = "Forumdetaljer";
 }
+
 <style>
     body {
         padding-top: 140px;
@@ -25,7 +26,6 @@
     <p class="mb-4" style="color: #1d3f58;">@Model.Description</p>
 
     <hr class="mb-4" />
-
     <h4 class="mb-3" style="color: #001b2e;">Inlägg</h4>
 
     @if (Model.Posts != null && Model.Posts.Any())
@@ -36,53 +36,54 @@
                 <div class="col">
                     <div class="card shadow-sm border-0 rounded-3">
                         <div class="card-body" style="background-color: #b3cde4;">
+                            @if (post.IsDeleted)
+                            {
+                                <p class="fst-italic text-muted mb-0">Detta inlägg har tagits bort.</p>
+                            }
+                            else
+                            {
+                                var name = post.User?.FullName ?? "Okänd användare";
+                                if (post.User?.Email == "admin@golfklubb.se")
+                                {
+                                    name = "Admin";
+                                }
 
-                            <!-- Clickable content -->
-                            <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id"
-                               class="d-block mb-3 forum-post-content-link">
-                                @post.Content
-                            </a>
+                                <a asp-controller="ForumPosts" asp-action="Details" asp-route-id="@post.Id"
+                                   class="d-block mb-3 forum-post-content-link">
+                                    @post.Content
+                                </a>
 
-                            <p class="text-muted small mb-3">
-                                @{
-                                    var name = post.User?.FullName;
-                                    if (post.User == null)
+                                <p class="text-muted small mb-0">
+                                    av:
+                                    @if (post.User != null)
                                     {
-                                        name = "Okänd användare";
+                                        <a href='@Url.Action("Profile", "Users", new { id = post.User.Id })'
+                                           target="_blank" style="text-decoration:none;">
+                                            <strong>@name</strong>
+                                        </a>
                                     }
-                                    else if (post.User.Email == "admin@golfklubb.se")
+                                    else
                                     {
-                                        name = "Admin";
+                                        <strong>@name</strong>
                                     }
-                                }
-                                @if (post.User != null)
-                                {
-                                    @:av <a href="@Url.Action("Profile", "Users", new { id = post.User.Id })" target="_blank" style="text-decoration:none;"><strong>@name</strong></a>
-                                }
-                                else
-                                {
-                                    @:av <strong>@name</strong>
-                                }
-                                | @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
-                            </p>
+                                    | @post.PostedAt.ToString("yyyy-MM-dd HH:mm")
+                                </p>
+                            }
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                @if (User.Identity?.IsAuthenticated == true && User.Identity.Name == post.User?.UserName)
-                                {
-                                    <div class="d-flex gap-2 align-items-center">
-                                        <a asp-controller="ForumPosts" asp-action="Edit" asp-route-id="@post.Id"
-                                           class="btn btn-sm btn-link-style">Ändra</a>
-                                        <span class="mx-1 text-muted">|</span>
-                                        <a asp-controller="ForumPosts" asp-action="Delete" asp-route-id="@post.Id"
-                                           class="btn btn-sm btn-link-style text-danger">Radera</a>
-                                    </div>
-                                }
-                            </div>
                         </div>
+
+                        @if (!post.IsDeleted && User.Identity?.IsAuthenticated == true && User.Identity.Name == post.User?.UserName)
+                        {
+                            <div class="card-footer text-end border-top-0" style="background-color: transparent;">
+                                <a asp-controller="ForumPosts" asp-action="Edit" asp-route-id="@post.Id"
+                                   class="btn btn-sm btn-link-style">Ändra</a>
+                                <span class="mx-1 text-muted">|</span>
+                                <a asp-controller="ForumPosts" asp-action="Delete" asp-route-id="@post.Id"
+                                   class="btn btn-sm btn-link-style text-danger">Radera</a>
+                            </div>
+                        }
                     </div>
                 </div>
-
-                
             }
         </div>
     }
@@ -104,5 +105,3 @@
         <a asp-action="Index" class="btn custom-secondary-button shadow-sm">← Tillbaka till forum</a>
     </div>
 </div>
-
-

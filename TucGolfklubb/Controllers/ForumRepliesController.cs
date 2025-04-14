@@ -107,7 +107,7 @@ namespace TucGolfklubb.Controllers
             if (reply == null || reply.UserId != _userManager.GetUserId(User))
                 return Forbid();
 
-            _context.Replies.Remove(reply);
+            reply.IsDeleted = true;
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Details", "ForumPosts", new { id = reply.ForumPostId });

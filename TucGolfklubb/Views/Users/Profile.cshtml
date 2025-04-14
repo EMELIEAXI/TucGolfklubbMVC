@@ -55,5 +55,14 @@
                 }
             </ul>
         }
+
+        <!-- Back Button at the bottom -->
+        @if (!string.IsNullOrEmpty(Model.PreviousPageUrl))
+        {
+            <div class="d-flex justify-content-center mt-3">
+                <a href="@Model.PreviousPageUrl" class="btn btn-sm custom-dark-button">Tillbaka</a>
+            </div>
+        }
+
     </div>
 </div>

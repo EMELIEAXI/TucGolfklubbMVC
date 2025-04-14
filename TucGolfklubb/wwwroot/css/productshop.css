@@ -38,6 +38,7 @@ body {
     margin: 0 auto;
 }
 
+
 .text-section {
     text-align: center;
     flex-grow: 1;
@@ -430,6 +431,7 @@ body {
     background-color: #222;
     color: #fff;
     padding: 40px 20px;
+    position: absolute;
 }
 
 .footer-section {

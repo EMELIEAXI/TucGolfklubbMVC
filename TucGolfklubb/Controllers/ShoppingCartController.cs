@@ -66,7 +66,7 @@ namespace TucGolfklubb.Controllers
                 OrderTotalPrice = cart?.OrderItems.Sum(oi => oi.Quantity * oi.Price) ?? 0
             };
 
-            return View("_OrderSummary", model);
+            return View("~/Views/Shop/AddToCart.cshtml", model);
         }
 
         [HttpPost]
@@ -163,7 +163,7 @@ namespace TucGolfklubb.Controllers
                     OrderTotalPrice = cart.OrderItems.Sum(oi => oi.Price * oi.Quantity)
                 };
 
-                return PartialView("_OrderSummary", updatedModel);
+                return View("~/Views/Shop/AddToCart.cshtml", updatedModel);
             }
 
             return BadRequest();

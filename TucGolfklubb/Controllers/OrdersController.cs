@@ -212,7 +212,7 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("Index", "ShoppingCart");
             }
 
-                return View(viewModel);
+                return View("~/Views/Shop/PlaceOrder.cshtml", viewModel);
             }
 
         // Gå igenom Order och Visa produkterna där i
@@ -312,7 +312,7 @@ namespace TucGolfklubb.Controllers
                 SelectedPaymentMethod = selectedPaymentMethod
             };
 
-            return View("Receipt", viewModel);
+            return View("~/Views/Shop/Receipt.cshtml", viewModel);
 
         }
     }

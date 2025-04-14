@@ -65,6 +65,12 @@ namespace TucGolfklubb.Controllers
                 .Take(50)
                 .ToListAsync();
 
+            // Capture the referer URL (previous page URL)
+            var referer = Request.Headers["Referer"].ToString();
+
+            // Pass the referer URL to the view
+            ViewData["PreviousPageUrl"] = referer;
+
             // Null-safe update of LastActivityViewedAt
             if (currentUser != null)
             {

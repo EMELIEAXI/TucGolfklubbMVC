@@ -4,44 +4,49 @@
 }
 <style>
     body {
-        padding-top: 140px;
+        padding-top: 60px;
     }
 </style>
 
-<div style="padding-top: 120px;">
-    <h2>Redigera produkt</h2>
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">Redigera produkt</h2>
 
+    <!-- Form to edit product -->
     <form asp-action="Edit" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
 
-        <!-- 🔽 ADD THIS RIGHT HERE -->
-        <div asp-validation-summary="All" class="text-danger"></div>
+        <!-- Validation summary -->
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-
+        <!-- Product Name -->
         <div class="mb-3">
-            <label asp-for="Name" class="form-label"></label>
+            <label asp-for="Name" class="form-label">Produkt Namn</label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
+        <!-- Product Description -->
         <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" class="form-control"></textarea>
+            <label asp-for="Description" class="form-label">Beskrivning</label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
+        <!-- Product Price -->
         <div class="mb-3">
-            <label asp-for="Price" class="form-label"></label>
+            <label asp-for="Price" class="form-label">Pris</label>
             <input asp-for="Price" class="form-control" type="number" step="0.01" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
+        <!-- Product Stock -->
         <div class="mb-3">
-            <label asp-for="Stock" class="form-label"></label>
+            <label asp-for="Stock" class="form-label">Lager</label>
             <input asp-for="Stock" class="form-control" type="number" />
             <span asp-validation-for="Stock" class="text-danger"></span>
         </div>
 
+        <!-- Category Selection -->
         <div class="mb-3">
             <label asp-for="CategoryId" class="form-label">Kategori</label>
             <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Name"))">
@@ -50,22 +55,25 @@
             <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
 
-        <!-- Show current image -->
+        <!-- Current Product Image -->
         @if (!string.IsNullOrEmpty(Model.Image))
         {
             <div class="mb-3">
-                <label>Nuvarande bild:</label><br />
+                <label class="form-label">Nuvarande bild</label><br />
                 <img src="/images/@Model.Image" alt="Produktbild" style="max-width: 150px;" />
             </div>
         }
 
-        <!-- Upload new image -->
+        <!-- Upload New Image -->
         <div class="mb-3">
             <label for="imageFile" class="form-label">Byt produktbild</label>
             <input type="file" name="imageFile" class="form-control" />
         </div>
 
-        <button type="submit" class="btn btn-primary">💾 Spara ändringar</button>
-        <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+        <!-- Submit and Cancel Buttons -->
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn custom-dark-button shadow-sm">💾 Spara ändringar</button>
+            <a asp-action="Index" class="btn custom-secondary-button shadow-sm">Avbryt</a>
+        </div>
     </form>
 </div>

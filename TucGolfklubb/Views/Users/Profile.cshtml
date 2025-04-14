@@ -2,46 +2,45 @@
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="container mt-5 pt-4">
-    <div class="card shadow p-4">
-        <div class="d-flex align-items-center">
-            <div class="me-4">
-                <img src="@(!string.IsNullOrEmpty(Model.ProfileImagePath) ? Model.ProfileImagePath : "/images/default-user.png")"
-                     alt="Profilbild"
-                     class="rounded-circle"
-                     style="width: 120px; height: 120px; object-fit: cover;" />
-            </div>
+<div class="container forum-page">
+    <div class="card border-0 shadow-sm p-4" style="background-color: #b3cde4;">
+        <div class="d-flex align-items-center mb-3">
+            <img src="@(!string.IsNullOrEmpty(Model.ProfileImagePath) ? Model.ProfileImagePath : "/images/default-user.png")"
+                 alt="Profilbild"
+                 class="rounded-circle me-4"
+                 style="width: 100px; height: 100px; object-fit: cover;" />
+
             <div>
-                <h3>@(Model.FullName ?? Model.UserName)</h3>
+                <h3 style="color: #001b2e;">@(Model.FullName ?? Model.UserName)</h3>
+
+                @if (User.Identity != null && User.Identity.IsAuthenticated && UserManager.GetUserId(User) != Model.Id)
+                {
+                    <div class="mt-2">
+                        @if (Model.IsFollowedByCurrentUser)
+                        {
+                            <form asp-action="Unfollow" asp-controller="UserFollows" method="post">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-sm custom-dark-button">Sluta följa</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="Follow" asp-controller="UserFollows" method="post">
+                                <input type="hidden" name="id" value="@Model.Id" />
+                                <button type="submit" class="btn btn-sm custom-dark-button">Följ</button>
+                            </form>
+                        }
+                    </div>
+                }
             </div>
         </div>
 
-        @if (User.Identity != null && User.Identity.IsAuthenticated && UserManager.GetUserId(User) != Model.Id)
-        {
-            <div class="mt-3">
-                @if (Model.IsFollowedByCurrentUser)
-                {
-                    <form asp-action="Unfollow" asp-controller="UserFollows" method="post">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        <button type="submit" class="btn btn-outline-secondary">Sluta följa</button>
-                    </form>
-                }
-                else
-                {
-                    <form asp-action="Follow" asp-controller="UserFollows" method="post">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        <button type="submit" class="btn btn-primary">Följ</button>
-                    </form>
-                }
-            </div>
-        }
-
         <hr />
 
-        <h5>Senaste aktivitet</h5>
+        <h5 style="color: #001b2e;">Senaste aktivitet</h5>
         @if (Model.RecentActivities == null || !Model.RecentActivities.Any())
         {
-            <p>Inga aktiviteter ännu.</p>
+            <p class="text-muted">Inga aktiviteter ännu.</p>
         }
         else
         {
@@ -49,7 +48,7 @@
                 @foreach (var activity in Model.RecentActivities)
                 {
                     <li class="list-group-item">
-                        Gjorde en <span class="text-info">@activity.Type</span>: @activity.Content
+                        Gjorde en <span style="color: #1d3f58;">@activity.Type</span>: @activity.Content
                         <br />
                         <small class="text-muted">@activity.CreatedAt.ToString("g")</small>
                     </li>

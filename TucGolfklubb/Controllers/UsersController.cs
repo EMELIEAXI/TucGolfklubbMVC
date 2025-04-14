@@ -28,6 +28,8 @@ namespace TucGolfklubb.Controllers
             var isFollowing = await _context.UserFollows
                 .AnyAsync(f => f.FollowerId == currentUserId && f.FolloweeId == id);
 
+            var referer = Request.Headers["Referer"].ToString();
+
             var viewModel = new UserProfileViewModel
             {
                 Id = user.Id,
@@ -39,7 +41,8 @@ namespace TucGolfklubb.Controllers
                     .Where(a => a.UserId == user.Id)
                     .OrderByDescending(a => a.CreatedAt)
                     .Take(10)
-                    .ToListAsync()
+                    .ToListAsync(),
+                    PreviousPageUrl = referer
             };
 
             return View(viewModel);

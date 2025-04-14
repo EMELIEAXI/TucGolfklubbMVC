@@ -180,7 +180,7 @@ namespace TucGolfklubb.Controllers
         }
 
 
-        //Flytta order från ShoppingCart till Order
+        //Flytta order från ShoppingCart till vy där man bekräftar ordern
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
@@ -189,16 +189,18 @@ namespace TucGolfklubb.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
+            //Hämta det som ligger i Shoppingcart
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
                 .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
-
+            //Kontrollera null
             if (cart == null || !cart.OrderItems.Any())
             {
                 return RedirectToAction("Index", "ShoppingCart");
             }
+
+            //Skapa en viewModel utifrån ProductShopsModellen
 
             var viewModel = new ProductShopViewModel
             {
@@ -212,11 +214,14 @@ namespace TucGolfklubb.Controllers
                 return RedirectToAction("Index", "ShoppingCart");
             }
 
+            //Returnera en ny vy och eftersom den inte ligger i "Orders" som Controllen heter så använder jag hela sökvägen.
                 return View("~/Views/Shop/PlaceOrder.cshtml", viewModel);
             }
 
-        // Gå igenom Order och Visa produkterna där i
+        // Flytta från ShoppingCarttabellen till Ordertabellen
         [HttpPost]
+
+        //Hämta det som användaren fyllde i som uppgifter för leverans
         public async Task<IActionResult> Receipt(
                 string fullName,
                 string address,
@@ -229,18 +234,19 @@ namespace TucGolfklubb.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-
+            //Hämta det som ligger i Shoppingcart inklusive OrderItems och produkter
             var cart = await _context.ShoppingCart
                 .Include(c => c.OrderItems)
                 .ThenInclude(oi => oi.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
+            // Kontrollera om kundvagnen är tom
             if (cart == null || !cart.OrderItems.Any())
             {
                 return RedirectToAction("Index", "ShoppingCart");
             }
 
-            // Skapa en order
+            // Skapa en order baserat på innehållet i kundvagnen
             var order = new Order
             {
                 UserId = userId,
@@ -256,8 +262,11 @@ namespace TucGolfklubb.Controllers
                 }).ToList(),
             };
 
+            //Lägg till i Ordestabellen
             _context.Orders.Add(order);
+            //Ta bort från ShoppingCarttabellen
             _context.ShoppingCart.Remove(cart);
+            //Spara ändringar
             await _context.SaveChangesAsync();
 
 
@@ -311,7 +320,7 @@ namespace TucGolfklubb.Controllers
                 City = city,
                 SelectedPaymentMethod = selectedPaymentMethod
             };
-
+            //Returnera en ny vy och eftersom den inte ligger i "Orders" som Controllen heter så använder jag hela sökvägen.
             return View("~/Views/Shop/Receipt.cshtml", viewModel);
 
         }

@@ -4,51 +4,54 @@
 }
 <style>
     body {
-        padding-top: 140px;
+        padding-top: 80px;
     }
 </style>
 
+<div class="container forum-page">
+    <h2 class="mb-4" style="color: #001b2e;">Ordrar</h2>
 
-
-<div style="padding-top: 120px;">
-    <h2>Ordrar</h2>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Beställnings-ID</th>
-                <th>Kund</th>
-                <th>Datum</th>
-                <th>Totalt</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model)
-            {
+    <!-- Orders Table -->
+    <div class="card shadow-sm p-4">
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@order.Id</td>
-                    <td>@order.User?.UserName</td>
-                    <td>@order.OrderDate.ToShortDateString()</td>
-                    <td>@order.TotalPrice.ToString("0.00") kr</td>
-                    <td>
-                        <!-- Details Button -->
-                        <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-primary">✏️ Redigera</a>
-                    
-                        <!-- Kvitto (Receipt) Button -->
-                        <a asp-action="GenerateReceipt" asp-route-id="@order.Id" class="btn btn-sm btn-success" style="margin-left: 5px;">🧾 Kvitto</a>
-
-                        <!-- Radera (Delete) Button -->
-                        <form method="post" action="@Url.Action("DeleteOrder", "AdminOrders")" style="display:inline; margin-left: 5px;">
-                            <input type="hidden" name="id" value="@order.Id" />
-                            <button type="submit" class="btn btn-sm btn-danger">❌ Radera</button>
-                        </form>
-                    </td>
+                    <th>Beställnings-ID</th>
+                    <th>Kund</th>
+                    <th>Datum</th>
+                    <th>Totalt</th>
+                    <th>Åtgärder</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <div class="text-end mt-4">
-        <a href="/Admin" class="btn btn-secondary">⬅️ Tillbaka till Adminpanel</a>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.User?.UserName</td>
+                        <td>@order.OrderDate.ToShortDateString()</td>
+                        <td>@order.TotalPrice.ToString("0.00") kr</td>
+                        <td>
+                            <!-- Details Button -->
+                            <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm custom-dark-button shadow-sm">✏️ Redigera</a>
+
+                            <!-- Receipt (Kvitto) Button -->
+                            <a asp-action="GenerateReceipt" asp-route-id="@order.Id" class="btn btn-sm custom-secondary-button shadow-sm" style="margin-left: 5px;">🧾 Kvitto</a>
+
+                            <!-- Delete (Radera) Button -->
+                            <form method="post" action="@Url.Action("DeleteOrder", "AdminOrders")" style="display:inline; margin-left: 5px;">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="btn btn-sm btn-danger shadow-sm">❌ Radera</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Back Button -->
+        <div class="text-end mt-4">
+            <a href="/Admin" class="btn custom-secondary-button shadow-sm">⬅️ Tillbaka till Adminpanel</a>
+        </div>
     </div>
 </div>

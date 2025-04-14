@@ -4,39 +4,105 @@
     ViewData["Title"] = "Orderdetaljer";
 }
 
-<h2>Orderdetaljer - Order #@Model.Id</h2>
+<style>
+    body {
+        padding-top: 140px;
+    }
 
-<div>
-    <h3>Orderinformation</h3>
-    <p><strong>Orderdatum:</strong> @Model.OrderDate.ToString("g")</p>
-    <p><strong>Totalt pris:</strong> @String.Format("{0:C2}", Model.TotalPrice)</p>
-</div>
+    .order-details-container {
+        padding: 30px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-<div>
-    <h3>Köpta produkter</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Produktnamn</th>
-                <th>Antal</th>
-                <th>Pris</th>
-                <th>Totalt pris</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.OrderItems)
-            {
+        .order-details-container h2 {
+            color: #001b2e;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+
+        .order-details-container h3 {
+            color: #537692;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .order-details-container p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+    .table th, .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table th {
+        background-color: #1d3f58;
+        color: white;
+        padding: 10px;
+    }
+
+    .table td {
+        background-color: #f3f7fb;
+        padding: 10px;
+    }
+
+    .table {
+        margin-top: 20px;
+    }
+
+    .btn-return {
+        margin-top: 20px;
+        background-color: #537692;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-return:hover {
+            background-color: #1d3f58;
+        }
+</style>
+
+<div class="order-details-container">
+    <h2>Orderdetaljer - Order #@Model.Id</h2>
+
+    <div>
+        <h3>Orderinformation</h3>
+        <p><strong>Orderdatum:</strong> @Model.OrderDate.ToString("g")</p>
+        <p><strong>Totalt pris:</strong> @String.Format("{0:C2}", Model.TotalPrice)</p>
+    </div>
+
+    <div>
+        <h3>Köpta produkter</h3>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.Quantity</td>
-                    <td>@String.Format("{0:C2}", item.Price)</td>
-                    <td>@String.Format("{0:C2}", item.Quantity * item.Price)</td>
+                    <th>Produktnamn</th>
+                    <th>Antal</th>
+                    <th>Pris</th>
+                    <th>Totalt pris</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Quantity</td>
+                        <td>@String.Format("{0:C2}", item.Price)</td>
+                        <td>@String.Format("{0:C2}", item.Quantity * item.Price)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<div>
-    <a href="@Url.Action("ActivityFeed", "Users")">Tillbaka till aktivitetsflöde</a>
+    <div>
+        <a href="@Url.Action("ActivityFeed", "Users")" class="btn-return">⬅️ Tillbaka till aktivitetsflöde</a>
+    </div>
 </div>

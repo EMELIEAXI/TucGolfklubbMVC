@@ -8,7 +8,7 @@
         public string? Email { get; set; }
         public string? ProfileImagePath { get; set; }
         public bool IsFollowedByCurrentUser { get; set; }
-
         public List<UserActivity>? RecentActivities { get; set; }
+        public string? PreviousPageUrl { get; set; }
     }
 }

@@ -1,13 +1,6 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-
 body {
-    font-family: 'Montserrat', sans-serif;
-      margin-top: 20px;
+    margin-top: 20px;
+    height: 100%;
 }
 h1 {
     text-align:center;
@@ -63,9 +56,6 @@ li {
     padding: 5px;
 }
 
-#orderSummaryContainer {
-    width:480px;
-}
     .column-pay {
         display: flex;
         flex-direction: column;
@@ -92,33 +82,23 @@ li {
 
     /* Kvitto delen */
 
-    .Kvitto {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        padding: 1em;
-        margin: auto;
-        background-color: white;
-        border-radius: 5px;
-        width: 70%;
-    }
+.Kvitto {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 1em;
+    margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    width: 70%;
+}
 
     .table {
         line-height: 5px;
     }
-
-footer.shop-footer {
-    margin-top: auto;
-    width: 100%;
-    position: relative;
-    background-color: #111;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
-}
 
 .wrapper-cart-page {
     display: flex;
@@ -129,6 +109,7 @@ footer.shop-footer {
 .cart-main-content {
     flex: 1;
 }
+
 @media (max-width: 600px) {
     .Varukorg,
     .Kvitto,
@@ -148,8 +129,3 @@ footer.shop-footer {
         width: 100%;
     }
 }
-
-
-
-
-

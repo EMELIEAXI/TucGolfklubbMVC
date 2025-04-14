@@ -603,17 +603,17 @@ html {
 
 
 
-/* Icon sits over the thread line */
+
 .user-icon-threaded {
     font-size: 1.6rem;
     color: #1d3f58;
     z-index: 1;
-    background-color: #f3f7fb; /* match your page background to cut through the line */
+    background-color: #f3f7fb; 
     padding: 0.2rem;
     border-radius: 50%;
 }
 
-/* Line extends downward from icon */
+
 .thread-line-downward {
     width: 2px;
     background-color: #537692;
@@ -660,3 +660,28 @@ html {
 }
 
 /*-------------------- END OF ADMIN PANEL --------------------*/
+@media (max-width: 768px) {
+    .hamburger-dropdown .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start;
+        width: 100%;
+        padding-left: 0;
+    }
+
+        .hamburger-dropdown .navbar-nav .nav-item {
+            margin: 2px 0;
+        }
+
+        .hamburger-dropdown .navbar-nav li {
+            width: 100%;
+        }
+
+        .hamburger-dropdown .navbar-nav .nav-link,
+        .hamburger-dropdown .navbar-nav .button {
+            display: block;
+            width: 100%;
+            color: white;
+            text-align: left;
+            padding-left: 10px;
+        }
+}
